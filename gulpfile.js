@@ -58,8 +58,8 @@ const path = require('path');
 const chalk = require('chalk');
 const moment = require('moment'); // require
 const notifier = require('node-notifier');
-const uuidv4 = require('uuid/v4'); // <== NOW DEPRECATED!
-uuidv4();
+// const uuidv4 = require('uuid/v4'); // <== NOW DEPRECATED!
+// uuidv4();
 
 const {SECRET_KEY, SITE} = require('./storeland-uploader-config.json');
 
@@ -210,7 +210,82 @@ function uploadFile(event, cb){
 	})
 	.catch(err => console.error(err));
 }
+function downloadFiles(done) {
+	const FILES_PATH = './files';
+	let params = new URLSearchParams();
+	params.append('secret_key', SECRET_KEY);
+
+	fetch(`${SITE}/api/v1/site_files/get_list`, {
+		method: 'post',
+		body:    params,
+		timeout: 5000,
+	})
+	.then(res => res.json())
+	.then(json => {
+		if(json.status === `ok`) {
+		  console.log(`Загружен список всех файлов ✔️`);  
+		  
+		  if (!fs.existsSync(FILES_PATH)){
+			  fs.mkdirSync(FILES_PATH);
+		  }			
+		  const filesArray = json.data.map((item)=>{
+			  return {
+				file_id: item['file_id']['value'],
+				file_name: item['file_name']['value'],
+			  }
+		  });
+		  return filesArray;
+
+		} else if (json.status == `error`) {
+		  console.log(`Ошибка загрузки ⛔`);                         
+		}
+	})
+	.then(array =>{
+		console.log(`Всего файлов ${array.length}`);
+		const arrLength = array.length;
+		let count = 1;
+		const getFile = (arr) => {
+			if(!arr.length){
+				console.log(`Всего скачано файлов ${count} из ${arrLength}`)
+				done();
+				return;
+			}
+			const {file_id, file_name} = arr.shift();
+			
+			let params = new URLSearchParams();
+			params.append('secret_key', SECRET_KEY);
+			
+			fetch(`${SITE}/api/v1/site_files/get/${file_id}`, {
+				method: 'post',
+				body:    params,
+				timeout: 5000,
+			})
+			.then(res => res.json())
+			.then(json => {		
+				if(json.status === `ok`) {						
+					return json;
+				}	
+			})
+			.then(json => {
+				fs.writeFile(`${FILES_PATH}/${json['data']['file_name'].value}`, json['data']['file_content'].value, 'base64', function(err) {
+					if(err){
+						console.log(err);
+					}
+
+					console.log(`Скачан файл ${file_name}. Всего ${count} из ${arrLength}`);
+					getFile(array);						
+					count++;
+				});
+			})
+			.catch(console.log)	
+
+		}
+		getFile(array);
+	})
+}
+
 exports.browsersync = browsersync;
+exports.download    = parallel(checkConfig,downloadFiles);
 exports.assets      = series(cleanimg, styles, scripts, images);
 exports.styles      = styles;
 exports.scripts     = scripts;
