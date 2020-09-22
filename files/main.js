@@ -729,6 +729,24 @@ $(function(){
     form.trigger('submit');
     return (false);
   })
+  //Main button hover effects
+  $(".add-cart")
+  .on("mouseenter", function(e) {
+    var parentOffset = $(this).offset(),
+      relX = e.pageX - parentOffset.left,
+      relY = e.pageY - parentOffset.top;
+    $(this)
+      .find(".hover-anim")
+      .css({ top: relY, left: relX });
+  })
+  .on("mouseout", function(e) {
+    var parentOffset = $(this).offset(),
+      relX = e.pageX - parentOffset.left,
+      relY = e.pageY - parentOffset.top;
+    $(this)
+      .find(".hover-anim")
+      .css({ top: relY, left: relX });
+  });
   // Слайдер в подвале
   $('#footer .block.collapse .title').on('click', function(){
     if(getClientWidth() <= 991){
@@ -2462,7 +2480,7 @@ function indexPage() {
   (function(element){
     $element = $(element);
 		itemNav = $('.item-nav', $element);
-		itemContent = $('.products-container', $element);
+    itemContent = $('.products-container', $element);    
 		itemNav.click(function(){
       var $this = $(this);
       var navPosition = $this.position().left
@@ -2474,7 +2492,8 @@ function indexPage() {
 			itemContent.hide()
       $(itemActive, $element).fadeIn()
       $element.find('.nav-splitter').css({'left': navPosition + 'px', 'width': navWidth})
-		});
+    });
+    $element.find('.nav-splitter').css('width', itemNav.first().outerWidth())
 	})('#producttabs');
 
   // Клик по табам в блоке новости

@@ -717,12 +717,14 @@
     {% IF index_page_goods_empty=0 || index_page_new_goods_empty=0 || index_page_favorites_goods_empty=0 %}
     <div id="producttabs">
       <div class="container">
-        <ul class="pdt-nav">
-          {% IFNOT index_page_goods_empty %}<li class="item-nav tab-nav-actived" data-href="pdt-best"><span>На главной</span></li>{% ENDIF %}
-          {% IFNOT index_page_new_goods_empty %}<li class="item-nav {% IF index_page_goods_empty=1 %}tab-nav-actived{% ENDIF %}" data-href="pdt-new"><span>Новинки</span></li>{% ENDIF %}
-          {% IFNOT index_page_favorites_goods_empty %}<li class="item-nav {% IF index_page_goods_empty=1 && index_page_new_goods_empty=1 %}tab-nav-actived{% ENDIF %}" data-href="pdt-sale"><span>Хиты продаж</span></li>{% ENDIF %}
-          <span class="nav-splitter"></span>
-        </ul>   
+        <div class="pdt-nav">
+          <ul class="pdt-nav-wrap">          
+            {% IFNOT index_page_goods_empty %}<li class="item-nav tab-nav-actived" data-href="pdt-best"><span>На главной</span></li>{% ENDIF %}
+            {% IFNOT index_page_new_goods_empty %}<li class="item-nav {% IF index_page_goods_empty=1 %}tab-nav-actived{% ENDIF %}" data-href="pdt-new"><span>Новинки</span></li>{% ENDIF %}
+            {% IFNOT index_page_favorites_goods_empty %}<li class="item-nav {% IF index_page_goods_empty=1 && index_page_new_goods_empty=1 %}tab-nav-actived{% ENDIF %}" data-href="pdt-sale"><span>Хиты продаж</span></li>{% ENDIF %}
+            <span class="nav-splitter"></span>
+          </ul>
+        </div>
         <div class="pdt-container row">
           <!-- Товары на главной -->
           {% IFNOT index_page_goods_empty %}
@@ -893,7 +895,7 @@
                               {% IF index_page_goods.MIN_REST_VALUE=0 %}
                                 <div class="empty" title="Нет в наличии" data-tooltip="Нет в наличии">Нет в наличии</div>
                               {% ELSE %}
-                                <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
+                                <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}"><span class="hover-anim"></span><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
                                 <a class="add-cart quick" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}"><span>Купить в 1 клик</span></a>
                               {% ENDIF %}
                               <!-- /END Добавление товара в корзину -->
@@ -2120,7 +2122,7 @@
   }
 
   .cart-fly__button:not(._clicked) .count {
-    background-image: linear-gradient(160.47deg,#fe6260 11.94%,#fc9758 85.71%);
+    background: #f65e64;
   }
 
   .cart-fly__button._clicked .count {
@@ -2135,7 +2137,7 @@
     font-size: 18px;
   }
   a.cart-fly__button._cart._clicked {
-    background-image: linear-gradient(160.47deg,#fe6260 11.94%,#fc9758 85.71%);
+    background: #f65e64;
   }
   a.cart-fly__button {
     display: block;
