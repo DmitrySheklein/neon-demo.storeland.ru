@@ -53,7 +53,7 @@
             <div class="image">
               <!-- Если изображения товара нет -->
               {% IF goods_mod_info.GOODS_IMAGE_EMPTY %}
-                <img src="{ASSETS_IMAGES_PATH}no-photo-icon.png?design=techno" />
+                <img src="{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon" />
               <!-- Если же изображение есть подгрузим изображение и галлерею изображений товара -->
               {% ELSE %}
                 <a href="{goods_mod_info.GOODS_MOD_URL}" title="Перейти к странице &laquo;{goods_mod_info.GOODS_NAME}&raquo;"><img alt="{goods_mod_info.GOODS_NAME}" class="CompareGoodsImageMain{goods_mod_info.GOODS_MOD_ID} goods-image-icon" rel="{goods_mod_info.GOODS_IMAGE_ID}" src="{goods_mod_info.GOODS_IMAGE_ICON}" /></a> 

@@ -2461,16 +2461,19 @@ function indexPage() {
   // Товары на главной
   (function(element){
     $element = $(element);
-		itemNav = $('.item-nav',$element);
-		itemContent = $('.products-container',$element);
+		itemNav = $('.item-nav', $element);
+		itemContent = $('.products-container', $element);
 		itemNav.click(function(){
-			var $this = $(this);
+      var $this = $(this);
+      var navPosition = $this.position().left
+      var navWidth = $this.outerWidth();
 			if($this.hasClass('tab-nav-actived')) return false;
 			itemNav.removeClass('tab-nav-actived');
 			$this.addClass('tab-nav-actived');
 			var itemActive = '.' + $this.data('href');
 			itemContent.hide()
-			$(itemActive, $element).fadeIn()
+      $(itemActive, $element).fadeIn()
+      $element.find('.nav-splitter').css({'left': navPosition + 'px', 'width': navWidth})
 		});
 	})('#producttabs');
 

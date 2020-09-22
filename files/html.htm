@@ -8,8 +8,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="format-detection" content="telephone=no"><!--если вы где-нибудь на странице указали номер телефона в html-коде и не указали в хедере, то смартфон распознает его как телефонный номер и попытается набрать его по клику. -->
-  <link rel="icon" href="{ASSETS_IMAGES_PATH}favicon.ico?design=techno" type="image/x-icon" />
-  <link rel="shortcut icon" href="{ASSETS_IMAGES_PATH}favicon.ico?design=techno" type="image/x-icon" />
+  <link rel="icon" href="{ASSETS_IMAGES_PATH}favicon.ico?design=neon" type="image/x-icon" />
+  <link rel="shortcut icon" href="{ASSETS_IMAGES_PATH}favicon.ico?design=neon" type="image/x-icon" />
   
 	<meta property="og:title" content="{PAGE_TITLE}">
 	<meta property="og:image" content="{% IF MOD_LNAME=goods %}{GOODS_IMAGE_MEDIUM}{% ELSE %}{ASSETS_IMAGES_PATH}logo.png{% ENDIF %}">
@@ -30,86 +30,7 @@
   
   <!-- Стили магазина -->
   <link rel="stylesheet" href="{ASSETS_STYLES_PATH}forall.css" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="{ASSETS_STYLES_PATH}main.css?design=techno">
-  <!-- Скрипты магазина -->
-  <script  src="{ASSETS_JS_PATH}forall.js"></script>
-  <script  src="{ASSETS_JS_PATH}main.js?design=techno"></script>
-  {% IF user_agent_ie %}
-  <script>
-    // Picture element HTML5 shiv
-    document.createElement( "picture" );
-  </script>  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js" async></script>
-  {% ENDIF %}  
-  <!-- В случае их возникновения JS ошибок, отображаем их владельцу магазина для возможности отладки. Покупатели сообщений о JS ошибках не видят -->
-  {% IF JAVASCRIPT_BUG_HUNTING_URL %}
-    <script src="{JAVASCRIPT_BUG_HUNTING_URL}"></script>
-  {% ENDIF %}
-  <!-- Если отключен JS -->
-  <script >$(function () { $('.wrapper').removeClass('nojs'); });</script>
-  <!-- ВНИМАНИЕ! Если Вы удалите код ниже, то это повлияет на работу вашего сайта. Пожалуйста ничего не удаляйте без консультации у специалистов. -->
-  <!-- Скрипты страниц с сайдбаром-->
-  {% IF MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare %}
-  <script>
-    // Запуск основных скриптов для страниц Каталога
-    $(function () { catalogFunctions(); });
-    $(function () { accordion(); });
-  </script>
-  {% ENDIF %}
-  <!-- Скрипты для страницы Сравнение -->
-  {% IF MOD_LNAME = compare %}
-  <script >
-    // Запуск основных скриптов для страницы Сравнение
-    $(function () { comparePage(); });
-  </script>
-  {% ENDIF %}
-  <!-- Скрипты для страницы Товар -->
-  {% IF MOD_LNAME = goods %}
-  <script >
-    // Запуск основных скриптов для страницы Товар
-    $(function () { goodspage(); });
-    $(function () { goodsImage(); });
-    // Инициализируем табы на странице
-    $(function () { initTabs(); });
-  </script>
-  {% ENDIF %}
-  <!-- Скрипты для главной -->
-  {% IF index_page %}
-  <script >
-    // Запуск основных скриптов для главной страницы
-    $(function () { indexPage(); });
-  </script>
-  {% ENDIF %}
-  <script >
-    // Анимация перед загружаемым слайдером
-    $(window).on('load', function () {
-      preloadHide();
-    });
-    //Модальное окно уведомления при отправке сообщения
-    {% IF FORM_NOTICE %}
-      function generate(type) {
-        new Noty({
-          text: '<div class="noty_content">{FORM_NOTICE | nl2br}</div>',
-          type: '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}'
-        }).show()        
-      }
-      $(function () { generate(); });
-    {% ENDIF %}
-  </script>
-  <!-- /END Конец основных скриптов которые лучше не удалять -->
-  <!-- Сообщение для инвалидов -->
-  <style>
-    .nojs .preloader{animation:fadeOut 0.5s ease-out;animation-delay:2s;animation-fill-mode:forwards;}
-    @keyframes fadeOut{from{opacity:1}to{opacity:0;visibility:hidden;}}.fadeOut{animation-name:fadeOut}
-  </style>
-  <!-- /END Сообщение для инвалидов -->
-  <!-- Обратный звонок в шапке -->
-  <script>
-  $(function(){
-    $("#header-callback, #header-feedback").fancybox();    
-  })
-  </script>
-  <!-- /END Обратный звонок в шапке -->  
+  <link rel="stylesheet" type="text/css" href="{ASSETS_STYLES_PATH}main.css?design=neon"> 
 </head>
 <body>
   <div class="wrapper {% IF index_page %}index{% ENDIF %} nojs">
@@ -208,7 +129,7 @@
   									<span class="fal fa-user"></span>
   									<span>Вход</span>
         				</a>
-        				<div id="fancybox-login" style="display:none">
+        				<div id="fancybox-login" class="fancybox-login" style="display:none">
                   <div class="fancybox-header">
                     <strong class="title">Постоянным покупателям</strong>                     
                   </div>
@@ -378,7 +299,7 @@
   								    Перезвоните мне
   								  </span>
 								  </a>
-                  <div id="fancybox-callback" style="display:none">
+                  <div id="fancybox-callback" class="fancybox-callback" style="display:none">
                     <div class="fancybox-header">
                       <strong class="title">Обратный звонок</strong>                   
                     </div>
@@ -442,7 +363,7 @@
                           <li class="item" {% IF favorites_goods.index > 10 %}style="display:none;"{% ENDIF %} data-id="{favorites_goods.ID}">
                             <a data-href="{FAVORITES_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{favorites_goods.MIN_PRICE_NOW_ID}" class="remove item-remove" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"></a>
                             <a href="{favorites_goods.URL}" title="{favorites_goods.NAME}" class="product-image">
-                              <img src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=techno{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" alt="{favorites_goods.NAME}" class="goods-image-icon">
+                              <img src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" alt="{favorites_goods.NAME}" class="goods-image-icon">
                             </a>
                             <div class="product-details">
                               <p class="product-name"><a href="{favorites_goods.URL}" title="{favorites_goods.NAME}">{favorites_goods.NAME}</a></p>
@@ -484,7 +405,7 @@
                           <li class="item" {% IF compare_goods.index > 10 %}style="display:none;"{% ENDIF %} data-id="{compare_goods.ID}">
                             <a data-href="{COMPARE_DELETE_URL}?id={compare_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{compare_goods.MIN_PRICE_NOW_ID}" class="remove item-remove" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"></a>
                             <a href="{compare_goods.URL}" title="{compare_goods.NAME}" class="product-image">
-                              <img src="{% IF compare_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=techno{% ELSE %}{compare_goods.IMAGE_ICON}{% ENDIF %}" alt="{compare_goods.NAME}" class="goods-image-icon">
+                              <img src="{% IF compare_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{compare_goods.IMAGE_ICON}{% ENDIF %}" alt="{compare_goods.NAME}" class="goods-image-icon">
                             </a>
                             <div class="product-details">
                               <p class="product-name"><a href="{compare_goods.URL}" title="{compare_goods.NAME}">{compare_goods.NAME}</a></p>
@@ -524,7 +445,7 @@
                           <li class="item">
                             <a data-href="{cart_items.ORDER_LINE_DELETE_URL}" data-count="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" class="remove item-remove" onclick="removeFromCart($(this))"></a>
                             <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="product-image">
-                              <img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=techno{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon">
+                              <img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon">
                             </a>
                             <div class="product-details">
                               <div class="product-name"><a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}">{cart_items.GOODS_NAME}</a></div>
@@ -776,7 +697,7 @@
                 <div class="item">
                   <div class="cat-image">
                     <a href="{catalog_full.URL}" title="Перейти к категории &laquo;{catalog_full.NAME}&raquo;">
-                      <img class="goods-cat-image-medium lozad" data-src="{% IFNOT catalog_full.IMAGE_MEDIUM %}{ASSETS_IMAGES_PATH}no-photo-medium.png?design=techno{% ELSE %}{catalog_full.IMAGE_MEDIUM}{% ENDIF %}">  
+                      <img class="goods-cat-image-medium lozad" data-src="{% IFNOT catalog_full.IMAGE_MEDIUM %}{ASSETS_IMAGES_PATH}no-photo-medium.png?design=neon{% ELSE %}{catalog_full.IMAGE_MEDIUM}{% ENDIF %}">  
                     </a>
                   </div>
                   <div class="cat-name" title="Перейти к категории &laquo;{catalog_full.NAME}&raquo;">
@@ -800,6 +721,7 @@
           {% IFNOT index_page_goods_empty %}<li class="item-nav tab-nav-actived" data-href="pdt-best"><span>На главной</span></li>{% ENDIF %}
           {% IFNOT index_page_new_goods_empty %}<li class="item-nav {% IF index_page_goods_empty=1 %}tab-nav-actived{% ENDIF %}" data-href="pdt-new"><span>Новинки</span></li>{% ENDIF %}
           {% IFNOT index_page_favorites_goods_empty %}<li class="item-nav {% IF index_page_goods_empty=1 && index_page_new_goods_empty=1 %}tab-nav-actived{% ENDIF %}" data-href="pdt-sale"><span>Хиты продаж</span></li>{% ENDIF %}
+          <span class="nav-splitter"></span>
         </ul>   
         <div class="pdt-container row">
           <!-- Товары на главной -->
@@ -835,7 +757,7 @@
                                   data-action-add-title="Добавить &laquo;{index_page_goods.NAME}&raquo; в избранное"
                                   data-action-delete-title="Убрать &laquo;{index_page_goods.NAME}&raquo; из избранного"
                                   data-prodname="{index_page_goods.NAME}"
-                                  data-prodimage="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                  data-prodimage="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                   data-produrl="{index_page_goods.URL}"
                                   data-id="{index_page_goods.ID}"
                                   data-mod-id="{index_page_goods.MIN_PRICE_NOW_ID}" 
@@ -855,7 +777,7 @@
                                   data-action-add-title="Добавить &laquo;{index_page_goods.NAME}&raquo; в избранное"
                                   data-action-delete-title="Убрать &laquo;{index_page_goods.NAME}&raquo; из избранного"
                                   data-prodname="{index_page_goods.NAME}"
-                                  data-prodimage="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                  data-prodimage="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                   data-produrl="{index_page_goods.URL}"
                                   data-id="{index_page_goods.ID}"
                                   data-mod-id="{index_page_goods.MIN_PRICE_NOW_ID}" 
@@ -879,7 +801,7 @@
                                     data-action-add-title="Добавить &laquo;{index_page_goods.NAME}&raquo; в список сравнения с другими товарами"
                                     data-action-delete-title="Убрать &laquo;{index_page_goods.NAME}&raquo; из списка сравнения с другими товарами"
                                     data-prodname="{index_page_goods.NAME}"
-                                    data-prodimage="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                    data-prodimage="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                     data-produrl="{index_page_goods.URL}"
                                     data-id="{index_page_goods.ID}"
                                     data-mod-id="{index_page_goods.MIN_PRICE_NOW_ID}"
@@ -899,7 +821,7 @@
                                     data-action-add-title="Добавить &laquo;{index_page_goods.NAME}&raquo; в список сравнения с другими товарами" 
                                     data-action-delete-title="Убрать &laquo;{index_page_goods.NAME}&raquo; из списка сравнения с другими товарами" 
                                     data-prodname="{index_page_goods.NAME}"
-                                    data-prodimage="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                    data-prodimage="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                     data-produrl="{index_page_goods.URL}"
                                     data-id="{index_page_goods.ID}"
                                     data-mod-id="{index_page_goods.MIN_PRICE_NOW_ID}"
@@ -916,7 +838,7 @@
                               <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                          
                             </div>
                             <a href="{index_page_goods.URL_MIN_PRICE_NOW | url_amp}"  class="product-img">
-                              <img class="goods-image-small  lozad" data-src="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_goods.NAME}" title="{index_page_goods.NAME}"  itemprop="image">
+                              <img class="goods-image-small  lozad" data-src="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_goods.NAME}" title="{index_page_goods.NAME}"  itemprop="image">
                             </a>
                             {% IF index_page_goods.IS_NEW %}
                               <span class="ico-new">Новинка</span>
@@ -1021,7 +943,7 @@
                                     data-action-add-title="Добавить &laquo;{index_page_new_goods.NAME}&raquo; в избранное"
                                     data-action-delete-title="Убрать &laquo;{index_page_new_goods.NAME}&raquo; из избранного"
                                     data-prodname="{index_page_new_goods.NAME}"
-                                    data-prodimage="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                    data-prodimage="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                     data-produrl="{index_page_new_goods.URL}"
                                     data-id="{index_page_new_goods.ID}"
                                     data-mod-id="{index_page_new_goods.MIN_PRICE_NOW_ID}" 
@@ -1041,7 +963,7 @@
                                     data-action-add-title="Добавить &laquo;{index_page_new_goods.NAME}&raquo; в избранное"
                                     data-action-delete-title="Убрать &laquo;{index_page_new_goods.NAME}&raquo; из избранного"
                                     data-prodname="{index_page_new_goods.NAME}"
-                                    data-prodimage="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                    data-prodimage="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                     data-produrl="{index_page_new_goods.URL}"
                                     data-id="{index_page_new_goods.ID}"
                                     data-mod-id="{index_page_new_goods.MIN_PRICE_NOW_ID}" 
@@ -1065,7 +987,7 @@
                                       data-action-add-title="Добавить &laquo;{index_page_new_goods.NAME}&raquo; в список сравнения с другими товарами"
                                       data-action-delete-title="Убрать &laquo;{index_page_new_goods.NAME}&raquo; из списка сравнения с другими товарами"
                                       data-prodname="{index_page_new_goods.NAME}"
-                                      data-prodimage="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                      data-prodimage="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                       data-produrl="{index_page_new_goods.URL}"
                                       data-id="{index_page_new_goods.ID}"
                                       data-mod-id="{index_page_new_goods.MIN_PRICE_NOW_ID}"
@@ -1085,7 +1007,7 @@
                                       data-action-add-title="Добавить &laquo;{index_page_new_goods.NAME}&raquo; в список сравнения с другими товарами" 
                                       data-action-delete-title="Убрать &laquo;{index_page_new_goods.NAME}&raquo; из списка сравнения с другими товарами" 
                                       data-prodname="{index_page_new_goods.NAME}"
-                                      data-prodimage="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                      data-prodimage="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                       data-produrl="{index_page_new_goods.URL}"
                                       data-id="{index_page_new_goods.ID}"
                                       data-mod-id="{index_page_new_goods.MIN_PRICE_NOW_ID}"
@@ -1102,7 +1024,7 @@
                                 <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                          
                             </div>
                             <a href="{index_page_new_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_new_goods.NAME}" class="product-img">
-                              <img class="goods-image-small lozad" data-src="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_new_goods.NAME}" title="{index_page_new_goods.NAME}"  itemprop="image">
+                              <img class="goods-image-small lozad" data-src="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_new_goods.NAME}" title="{index_page_new_goods.NAME}"  itemprop="image">
                             </a>
                             {% IF index_page_new_goods.IS_NEW %}
                               <span class="ico-new">Новинка</span>
@@ -1207,7 +1129,7 @@
                                     data-action-add-title="Добавить &laquo;{index_page_favorites_goods.NAME}&raquo; в избранное"
                                     data-action-delete-title="Убрать &laquo;{index_page_favorites_goods.NAME}&raquo; из избранного"
                                     data-prodname="{index_page_favorites_goods.NAME}"
-                                    data-prodimage="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                    data-prodimage="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                     data-produrl="{index_page_favorites_goods.URL}"
                                     data-id="{index_page_favorites_goods.ID}"
                                     data-mod-id="{index_page_favorites_goods.MIN_PRICE_NOW_ID}" 
@@ -1227,7 +1149,7 @@
                                     data-action-add-title="Добавить &laquo;{index_page_favorites_goods.NAME}&raquo; в избранное"
                                     data-action-delete-title="Убрать &laquo;{index_page_favorites_goods.NAME}&raquo; из избранного"
                                     data-prodname="{index_page_favorites_goods.NAME}"
-                                    data-prodimage="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                    data-prodimage="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                     data-produrl="{index_page_favorites_goods.URL}"
                                     data-id="{index_page_favorites_goods.ID}"
                                     data-mod-id="{index_page_favorites_goods.MIN_PRICE_NOW_ID}" 
@@ -1251,7 +1173,7 @@
                                       data-action-add-title="Добавить &laquo;{index_page_favorites_goods.NAME}&raquo; в список сравнения с другими товарами"
                                       data-action-delete-title="Убрать &laquo;{index_page_favorites_goods.NAME}&raquo; из списка сравнения с другими товарами"
                                       data-prodname="{index_page_favorites_goods.NAME}"
-                                      data-prodimage="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                      data-prodimage="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                       data-produrl="{index_page_favorites_goods.URL}"
                                       data-id="{index_page_favorites_goods.ID}"
                                       data-mod-id="{index_page_favorites_goods.MIN_PRICE_NOW_ID}"
@@ -1271,7 +1193,7 @@
                                       data-action-add-title="Добавить &laquo;{index_page_favorites_goods.NAME}&raquo; в список сравнения с другими товарами" 
                                       data-action-delete-title="Убрать &laquo;{index_page_favorites_goods.NAME}&raquo; из списка сравнения с другими товарами" 
                                       data-prodname="{index_page_favorites_goods.NAME}"
-                                      data-prodimage="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                                      data-prodimage="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}"
                                       data-produrl="{index_page_favorites_goods.URL}"
                                       data-id="{index_page_favorites_goods.ID}"
                                       data-mod-id="{index_page_favorites_goods.MIN_PRICE_NOW_ID}"
@@ -1288,7 +1210,7 @@
                                 <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                          
                             </div>
                             <a href="{index_page_favorites_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_favorites_goods.NAME}" class="product-img">
-                              <img class="goods-image-small lozad" data-src="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_favorites_goods.NAME}" title="{index_page_favorites_goods.NAME}"  itemprop="image">
+                              <img class="goods-image-small lozad" data-src="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_favorites_goods.NAME}" title="{index_page_favorites_goods.NAME}"  itemprop="image">
                             </a>
                             {% IF index_page_favorites_goods.IS_NEW %}
                               <span class="ico-new">Новинка</span>
@@ -1365,90 +1287,7 @@
     </div>
     {% ENDIF %}
     <!-- /END Товары на главной, Новинки, Хиты -->      
-    
-<script>
-$(function(){
-  $('.products-grid .item').on('mouseleave', function(){
-    $(this).find('.total-sum').hide()
-  })
-  $('.qty-plus, .qty-minus').click(function(){
-    var $productInner = $(this).closest('.item-inner');
-  	var qtyInputVal = $(this).parent().find('.quantity').val();
-    var priceVal = $productInner.find('.price:not(.old-price)').attr('content');
-  	var newPrice = qtyInputVal * priceVal;
-  	
-  	if(!$productInner.find('.total-sum').length){
-  	  var $totalSumDiv = $('<div>').addClass('total-sum').text('' + priceVal).data('total-sum', priceVal);
-    	$productInner.find('.actions').append($totalSumDiv.hide())
-  	}
-  	console.log(qtyInputVal, priceVal)
-  	
-  	
-  	if(newPrice != priceVal) {
-  	  $productInner.parent().addClass('_qty')
-  		$productInner.find('.total-sum').show().removeClass('_hide');
-  		
-  		var startNum = $productInner.find('.total-sum').data('total-sum');
-  		var finishNum = newPrice;
-  		var $blockText = $productInner.find('.total-sum');
-  		var durationTime = 1000;
-  		animateNum({
-  		  startNum,
-  		  finishNum,
-  		  $blockText,
-  		  durationTime
-  		}, function(val){
-  		  $blockText.text('Итого: ' + addSpaces(String(Math.ceil(val))) + ' руб.');
-  		})
-  		$productInner.find('.total-sum').data('total-sum', newPrice)
-  		//.text('Итого: ' + addSpaces(String(newPrice)) + ' руб.')
-  	} else {
-  		$productInner.find('.total-sum').hide().addClass('_hide')
-  		$productInner.find('.total-sum').data('total-sum', newPrice)
-  		$productInner.parent().removeClass('_qty')
-  	}
-  })  
-  function animateNum(option, callBack) {
-      var startNum = option.startNum,
-          finishNum = option.finishNum,
-          $blockText = option.$blockText,
-          durationTime = option.duration || 500 ;
-      // Получаем начальное число startNum
-      $({ numberValue: startNum }).animate({ numberValue: finishNum }, {
-          duration: durationTime, // Скорость анимации, где 500 = 0,5 одной секунды, то есть 500 миллисекунд
-          easing: "linear",
-          step: function (val) {
-            if(callBack){
-              callBack(val)
-            } else {
-              $blockText.text(Math.ceil(val)); // Блок, где необходимо сделать анимацию
-            }
-          }
-      });
-  }  
-})
-</script>
-<style>
-  .total-sum {
-    font-size: 14px;
-    font-weight: 700;
-    position: absolute;
-    top: 100%;
-    padding: 15px 0;
-    visibility: hidden;
-    opacity: 0;
-    transition: all .3s ease;
-    transition-delay: 0.2s;
-  }
-  .products-container .products-grid .item:hover .total-sum{
-    visibility: visible;
-    opacity: 1;
-  }
-  .products-container .products-grid .item._qty:hover:before {
-    bottom: -28px;
-  }
-</style>
-    
+   
     <!-- Баннеры -->
     <div id="banners" style="display:none">
       <div class="container">
@@ -1909,7 +1748,7 @@ $(function(){
                   <meta itemprop="description" content="{% IF recently_viewed_goods.DESCRIPTION_SHORT %}{recently_viewed_goods.DESCRIPTION_SHORT}{% ELSE %}Описание отсутствует{% ENDIF %}">
                   <div class="product-image">
                     <a href="{recently_viewed_goods.URL_MIN_PRICE_NOW | url_amp}" title="{recently_viewed_goods.NAME}" itemprop="url">
-                      <img data-src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{recently_viewed_goods.IMAGE_ICON}{% ENDIF %}" class="goods-image-icon lozad" alt="{recently_viewed_goods.NAME}" title="{recently_viewed_goods.NAME}"  itemprop="image">
+                      <img data-src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{recently_viewed_goods.IMAGE_ICON}{% ENDIF %}" class="goods-image-icon lozad" alt="{recently_viewed_goods.NAME}" title="{recently_viewed_goods.NAME}"  itemprop="image">
                     </a>
                   </div>
                   <div class="product-info">
@@ -2095,62 +1934,145 @@ $(function(){
   
   <!-- Overlay -->
   <div class="overlay"></div>  
-  
-  <div class="cart-fly _loaded">
-      <div class="cart-fly_wrapper">
-          <input type="hidden" name="total_price" value="17 700 руб.">
-          <input type="hidden" name="total_discount_price" value="17 700 руб.">
-          <input type="hidden" name="total_count" value="2">
-          <input type="hidden" name="delay_count" value="0">
-          <div class="cart-fly__buttons">
-              <a href="/cart" title="Корзина" class="cart-fly__button _cart _clicked">          
-                  <div class="cart-fly__button-icon _cart">
-                      <i class="fal fa-shopping-cart"></i>
-                      <div class="count">
-                          <span>
-                              <span class="num">
-                                  <span>2</span>
-                              </span>
-                          </span>
-                      </div>
-                  </div>
-              </a>
-              <a href="/compare" title="Сравнение" class="cart-fly__button _compare">          
-                  <div class="cart-fly__button-icon _cart">
-                      <i class="fal fa-signal"></i>
-                      <div class="count">
-                          <span>
-                              <span class="num">
-                                  <span>1</span>
-                              </span>
-                          </span>
-                      </div>
-                  </div>
-              </a>
-              <a href="/wishlist" title="Избранное" class="cart-fly__button _favorites">          
-                  <div class="cart-fly__button-icon _cart">
-                      <i class="fal fa-heart"></i>
-                      <div class="count">
-                          <span>
-                              <span class="num">
-                                  <span>0</span>
-                              </span>
-                          </span>
-                      </div>
-                  </div>
-              </a>
-          </div>
-      </div>
-  </div>  
+
+  <!-- Скрипты магазина -->
+  <script  src="{ASSETS_JS_PATH}forall.js"></script>
+  <script  src="{ASSETS_JS_PATH}main.js?design=neon"></script>
+  <script  src="{ASSETS_JS_PATH}smart-search.js?design=neon"></script>
+  {% IF user_agent_ie %}
+  <script>
+    // Picture element HTML5 shiv
+    document.createElement( "picture" );
+  </script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js" async></script>
+  {% ENDIF %}  
+  <!-- В случае их возникновения JS ошибок, отображаем их владельцу магазина для возможности отладки. Покупатели сообщений о JS ошибках не видят -->
+  {% IF JAVASCRIPT_BUG_HUNTING_URL %}
+    <script src="{JAVASCRIPT_BUG_HUNTING_URL}"></script>
+  {% ENDIF %}
+  <!-- Если отключен JS -->
+  <script >$(function () { $('.wrapper').removeClass('nojs'); });</script>
+  <!-- ВНИМАНИЕ! Если Вы удалите код ниже, то это повлияет на работу вашего сайта. Пожалуйста ничего не удаляйте без консультации у специалистов. -->
+  <!-- Скрипты страниц с сайдбаром-->
+  {% IF MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare %}
+  <script>
+    // Запуск основных скриптов для страниц Каталога
+    $(function () { catalogFunctions(); });
+    $(function () { accordion(); });
+  </script>
+  {% ENDIF %}
+  <!-- Скрипты для страницы Сравнение -->
+  {% IF MOD_LNAME = compare %}
+  <script >
+    // Запуск основных скриптов для страницы Сравнение
+    $(function () { comparePage(); });
+  </script>
+  {% ENDIF %}
+  <!-- Скрипты для страницы Товар -->
+  {% IF MOD_LNAME = goods %}
+  <script >
+    // Запуск основных скриптов для страницы Товар
+    $(function () { goodspage(); });
+    $(function () { goodsImage(); });
+    // Инициализируем табы на странице
+    $(function () { initTabs(); });
+  </script>
+  {% ENDIF %}
+  <!-- Скрипты для главной -->
+  {% IF index_page %}
+  <script >
+    // Запуск основных скриптов для главной страницы
+    $(function () { indexPage(); });
+  </script>
+  {% ENDIF %}
+  <script >
+    // Анимация перед загружаемым слайдером
+    $(window).on('load', function () {
+      preloadHide();
+    });
+    //Модальное окно уведомления при отправке сообщения
+    {% IF FORM_NOTICE %}
+      function generate(type) {
+        new Noty({
+          text: '<div class="noty_content">{FORM_NOTICE | nl2br}</div>',
+          type: '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}'
+        }).show()        
+      }
+      $(function () { generate(); });
+    {% ENDIF %}
+  </script>
+  <!-- /END Конец основных скриптов которые лучше не удалять -->
+  <!-- Сообщение для инвалидов -->
   <style>
-.cart-fly {
+    .nojs .preloader{animation:fadeOut 0.5s ease-out;animation-delay:2s;animation-fill-mode:forwards;}
+    @keyframes fadeOut{from{opacity:1}to{opacity:0;visibility:hidden;}}.fadeOut{animation-name:fadeOut}
+  </style>
+  <!-- /END Сообщение для инвалидов -->
+  <!-- Обратный звонок в шапке -->
+  <script>
+  $(function(){
+    $("#header-callback, #header-feedback").fancybox();    
+  })
+  </script>
+  <!-- /END Обратный звонок в шапке --> 
+
+
+    
+  <div class="cart-fly _loaded">
+    <div class="cart-fly_wrapper">
+        <input type="hidden" name="total_price" value="17 700 руб.">
+        <input type="hidden" name="total_discount_price" value="17 700 руб.">
+        <input type="hidden" name="total_count" value="2">
+        <input type="hidden" name="delay_count" value="0">
+        <div class="cart-fly__buttons">
+            <a href="/cart" title="Корзина" class="cart-fly__button _cart _clicked">          
+                <div class="cart-fly__button-icon _cart">
+                    <i class="fal fa-shopping-cart"></i>
+                    <div class="count">
+                        <span>
+                            <span class="num">
+                                <span>2</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </a>
+            <a href="/compare" title="Сравнение" class="cart-fly__button _compare">          
+                <div class="cart-fly__button-icon _cart">
+                    <i class="fal fa-signal"></i>
+                    <div class="count">
+                        <span>
+                            <span class="num">
+                                <span>1</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </a>
+            <a href="/wishlist" title="Избранное" class="cart-fly__button _favorites">          
+                <div class="cart-fly__button-icon _cart">
+                    <i class="fal fa-heart"></i>
+                    <div class="count">
+                        <span>
+                            <span class="num">
+                                <span>0</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>  
+  <style>
+  .cart-fly {
     background: #fff;
     box-shadow: rgba(44,44,44,.4) 0 6px 18px;
     -moz-box-shadow: rgba(44,44,44,.4) 0 6px 18px;
     -webkit-box-shadow: rgba(44,44,44,.4) 0 6px 18px;
     min-height: 283px;
-}
-.cart-fly {
+  }
+  .cart-fly {
     position: fixed;
     right: 0;
     z-index: 2;
@@ -2161,8 +2083,8 @@ $(function(){
     z-index: 1046;
     width: 800px;
     right: -800px;
-}
-.cart-fly__buttons {
+  }
+  .cart-fly__buttons {
     position: absolute;
     width: 58px;
     left: -58px;
@@ -2173,8 +2095,8 @@ $(function(){
     background: #424f60;
     /* background: #f0f0f0; */
     overflow: hidden;
-}
-.cart-fly__buttons .count {
+  }
+  .cart-fly__buttons .count {
     text-align: center;
     opacity: 1;
     font-size: 12px;
@@ -2192,37 +2114,123 @@ $(function(){
     border-radius: 20px;
     line-height: 20px;
     margin: auto;
-}
-a.cart-fly__button:not(._clicked) {
+  }
+  a.cart-fly__button:not(._clicked) {
     border-bottom: 1px solid #ccc;
-}
+  }
 
-.cart-fly__button:not(._clicked) .count {
+  .cart-fly__button:not(._clicked) .count {
     background-image: linear-gradient(160.47deg,#fe6260 11.94%,#fc9758 85.71%);
-}
+  }
 
-.cart-fly__button._clicked .count {
+  .cart-fly__button._clicked .count {
     background: #424f60;
-}
-.cart-fly__button-icon i {
+  }
+  .cart-fly__button-icon i {
     color: #fff;
     display: block;
     padding: 15px 15px 10px;
     margin: auto;
     text-align: center;
     font-size: 18px;
-}
-a.cart-fly__button._cart._clicked {
+  }
+  a.cart-fly__button._cart._clicked {
     background-image: linear-gradient(160.47deg,#fe6260 11.94%,#fc9758 85.71%);
-}
-a.cart-fly__button {
+  }
+  a.cart-fly__button {
     display: block;
     padding-bottom: 5px;
-}
-.cart-fly__buttons._clicked .count {
+  }
+  .cart-fly__buttons._clicked .count {
     background: #424f60;
-}      
+  }      
   </style>
+
+  
+  <script>
+  $(function(){
+    $('.products-grid .item').on('mouseleave', function(){
+      $(this).find('.total-sum').hide()
+    })
+    $('.qty-plus, .qty-minus').click(function(){
+      var $productInner = $(this).closest('.item-inner');
+      var qtyInputVal = $(this).parent().find('.quantity').val();
+      var priceVal = $productInner.find('.price:not(.old-price)').attr('content');
+      var newPrice = qtyInputVal * priceVal;
+      
+      if(!$productInner.find('.total-sum').length){
+        var $totalSumDiv = $('<div>').addClass('total-sum').text('' + priceVal).data('total-sum', priceVal);
+        $productInner.find('.actions').append($totalSumDiv.hide())
+      }
+      console.log(qtyInputVal, priceVal)
+      
+      
+      if(newPrice != priceVal) {
+        $productInner.parent().addClass('_qty')
+        $productInner.find('.total-sum').show().removeClass('_hide');
+        
+        var startNum = $productInner.find('.total-sum').data('total-sum');
+        var finishNum = newPrice;
+        var $blockText = $productInner.find('.total-sum');
+        var durationTime = 1000;
+        animateNum({
+          startNum,
+          finishNum,
+          $blockText,
+          durationTime
+        }, function(val){
+          $blockText.text('Итого: ' + addSpaces(String(Math.ceil(val))) + ' руб.');
+        })
+        $productInner.find('.total-sum').data('total-sum', newPrice)
+        //.text('Итого: ' + addSpaces(String(newPrice)) + ' руб.')
+      } else {
+        $productInner.find('.total-sum').hide().addClass('_hide')
+        $productInner.find('.total-sum').data('total-sum', newPrice)
+        $productInner.parent().removeClass('_qty')
+      }
+    })  
+    function animateNum(option, callBack) {
+        var startNum = option.startNum,
+            finishNum = option.finishNum,
+            $blockText = option.$blockText,
+            durationTime = option.duration || 500 ;
+        // Получаем начальное число startNum
+        $({ numberValue: startNum }).animate({ numberValue: finishNum }, {
+            duration: durationTime, // Скорость анимации, где 500 = 0,5 одной секунды, то есть 500 миллисекунд
+            easing: "linear",
+            step: function (val) {
+              if(callBack){
+                callBack(val)
+              } else {
+                $blockText.text(Math.ceil(val)); // Блок, где необходимо сделать анимацию
+              }
+            }
+        });
+    }  
+  })
+  </script>
+
+  <style>
+    .total-sum {
+      font-size: 14px;
+      font-weight: 700;
+      position: absolute;
+      top: 100%;
+      padding: 15px 0;
+      visibility: hidden;
+      opacity: 0;
+      transition: all .3s ease;
+      transition-delay: 0.2s;
+    }
+    .products-container .products-grid .item:hover .total-sum{
+      visibility: visible;
+      opacity: 1;
+    }
+    .products-container .products-grid .item._qty:hover:before {
+      bottom: -28px;
+    }
+  </style>
+
   <!-- Debug -->
   <div class="container">
     <!--{print_r}-->

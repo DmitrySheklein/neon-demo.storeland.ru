@@ -1,15 +1,4 @@
 <div class="cart-info">
-  {% IF FORM_NOTICE %}
-    <div class="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>
-    <script>
-      $(function () {
-        new Noty({
-          text: '<div class="noty_content">{FORM_NOTICE | nl2br}</div>',
-          type: '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}'
-        }).show()         
-      });      
-    </script>
-  {% ENDIF %}
   <div id="empty-cart" class="empty-cart _cart-page" style="{% IFNOT cart_count_empty %}display:none{% ENDIF %}">
      <div class="empty-cart__content">
        <h3 class="empty-cart__title">Ваша корзина пуста</h3>
@@ -44,7 +33,7 @@
                   <div class="cart__table-row" data-id="{cart_items.GOODS_MOD_ID}">
                     <div class="cart__table-item -photo">
                         <a href="{cart_items.GOODS_URL}">
-                            <img class="cart__photo goods-image-other" src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=techno{% ELSE %}{cart_items.GOODS_IMAGE_OTHER}{% ENDIF %}">
+                            <img class="cart__photo goods-image-other" src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{cart_items.GOODS_IMAGE_OTHER}{% ENDIF %}">
                         </a>
                     </div> 
                     <div class="cart__table-item -name"> 
