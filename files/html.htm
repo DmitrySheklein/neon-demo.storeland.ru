@@ -840,8 +840,17 @@
                               {% ENDIF %}
                               <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                          
                             </div>
-                            <a href="{index_page_goods.URL_MIN_PRICE_NOW | url_amp}"  class="product-img">
-                              <img class="goods-image-small  lozad" data-src="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_goods.NAME}" title="{index_page_goods.NAME}"  itemprop="image">
+                            <a href="{index_page_goods.URL_MIN_PRICE_NOW | url_amp}"  class="product-img mouseHoverImgCarousel">
+                              {% IF index_page_goods.IMAGE_EMPTY %}
+                              <img class="lozad" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=assorti" alt="{index_page_goods.NAME}" title="{index_page_goods.NAME}"  itemprop="image">
+                              {% ELSE %}
+                                <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{index_page_goods.IMAGE_MEDIUM}" alt="{index_page_goods.NAME}" title="{index_page_goods.NAME}"  itemprop="image">
+                                {% FOR images %}
+                                  {% IF index_page_goods.IMAGE_MEDIUM != index_page_goods.images.MEDIUM %}
+                                  <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{index_page_goods.images.MEDIUM}" alt="{index_page_goods.NAME}" title="{index_page_goods.NAME}"  itemprop="image">
+                                  {% ENDIF %}
+                                {% ENDFOR %}
+                              {% ENDIF %}
                             </a>
                             {% IF index_page_goods.IS_NEW %}
                               <span class="ico-new">Новинка</span>
@@ -893,11 +902,15 @@
                                 </div>
                               </div>
                               <!-- Добавление товара в корзину -->
-                              {% IF index_page_goods.MIN_REST_VALUE=0 %}
-                                <div class="empty" title="Нет в наличии" data-tooltip="Нет в наличии">Нет в наличии</div>
+                              {% IF index_page_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}
+                                <div class="empty" title="Нет в наличии" data-tooltip="Нет в наличии"><span>Нет в наличии</span></div>
                               {% ELSE %}
-                                <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span><i class="hover-anim"></i></a>
-                                <a class="add-cart quick" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}"><span>Купить в 1 клик</span></a>
+                                {% IF index_page_goods.COUNT_MODIFICATION > 1 %}
+                                  <a class="quickviewmod button" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{index_page_goods.URL_MIN_PRICE_NOW}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
+                                {% ELSE %}                                                     
+                                  <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
+                                  <a class="add-cart quick" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}"><span>Купить в 1 клик</span></a>
+                                {% ENDIF %}
                               {% ENDIF %}
                               <!-- /END Добавление товара в корзину -->
                             </div>
@@ -1026,8 +1039,17 @@
                                 {% ENDIF %}
                                 <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                          
                             </div>
-                            <a href="{index_page_new_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_new_goods.NAME}" class="product-img">
-                              <img class="goods-image-small lozad" data-src="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_new_goods.NAME}" title="{index_page_new_goods.NAME}"  itemprop="image">
+                            <a href="{index_page_new_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_new_goods.NAME}" class="product-img mouseHoverImgCarousel">
+                              {% IF index_page_new_goods.IMAGE_EMPTY %}
+                                <img class="lozad" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=assorti" alt="{index_page_new_goods.NAME}" title="{index_page_new_goods.NAME}"  itemprop="image">
+                              {% ELSE %}
+                                <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{index_page_new_goods.IMAGE_MEDIUM}" alt="{index_page_new_goods.NAME}" title="{index_page_new_goods.NAME}"  itemprop="image">
+                                {% FOR images %}
+                                  {% IF index_page_new_goods.IMAGE_MEDIUM != index_page_new_goods.images.MEDIUM %}
+                                  <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{index_page_new_goods.images.MEDIUM}" alt="{index_page_new_goods.NAME}" title="{index_page_new_goods.NAME}"  itemprop="image">
+                                  {% ENDIF %}
+                                {% ENDFOR %}
+                              {% ENDIF %}
                             </a>
                             {% IF index_page_new_goods.IS_NEW %}
                               <span class="ico-new">Новинка</span>
@@ -1078,14 +1100,18 @@
                                   <a href="javascript:void(0)" class="qty-minus unselectable" title="Уменьшить"><i class="fal fa-minus"></i></a>
                                 </div>
                               </div>
-                              <!-- Добавление товара в корзину -->
-                              {% IF index_page_new_goods.MIN_REST_VALUE=0 %}
-                                <div class="empty" title="Нет в наличии" data-tooltip="Нет в наличии"><span>Нет в наличии</span></div>
-                              {% ELSE %}
-                                <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_new_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_new_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span><i class="hover-anim"></i></a>
+                             <!-- Добавление товара в корзину -->
+                             {% IF index_page_new_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}
+                              <div class="empty" title="Нет в наличии" data-tooltip="Нет в наличии"><span>Нет в наличии</span></div>
+                             {% ELSE %}
+                              {% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}
+                                <a class="quickviewmod button" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{index_page_new_goods.URL_MIN_PRICE_NOW}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
+                              {% ELSE %}                                                     
+                                <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_new_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_new_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
                                 <a class="add-cart quick" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_new_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_new_goods.MIN_PRICE_NOW_ID}"><span>Купить в 1 клик</span></a>
                               {% ENDIF %}
-                              <!-- /END Добавление товара в корзину -->
+                             {% ENDIF %}
+                             <!-- /END Добавление товара в корзину -->
                             </div>
                           </div>
                         </form>
@@ -1212,8 +1238,17 @@
                                 {% ENDIF %}
                                 <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                          
                             </div>
-                            <a href="{index_page_favorites_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_favorites_goods.NAME}" class="product-img">
-                              <img class="goods-image-small lozad" data-src="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_favorites_goods.NAME}" title="{index_page_favorites_goods.NAME}"  itemprop="image">
+                            <a href="{index_page_favorites_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_favorites_goods.NAME}" class="product-img mouseHoverImgCarousel">
+                              {% IF index_page_favorites_goods.IMAGE_EMPTY %}
+                                <img class="lozad" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=assorti" alt="{index_page_favorites_goods.NAME}" title="{index_page_favorites_goods.NAME}"  itemprop="image">
+                              {% ELSE %}
+                                <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{index_page_favorites_goods.IMAGE_MEDIUM}" alt="{index_page_favorites_goods.NAME}" title="{index_page_favorites_goods.NAME}"  itemprop="image">
+                                {% FOR images %}
+                                  {% IF index_page_favorites_goods.IMAGE_MEDIUM != index_page_favorites_goods.images.MEDIUM %}
+                                  <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{index_page_favorites_goods.images.MEDIUM}" alt="{index_page_favorites_goods.NAME}" title="{index_page_favorites_goods.NAME}"  itemprop="image">
+                                  {% ENDIF %}
+                                {% ENDFOR %}
+                              {% ENDIF %}
                             </a>
                             {% IF index_page_favorites_goods.IS_NEW %}
                               <span class="ico-new">Новинка</span>
@@ -1264,14 +1299,18 @@
                                   <a href="javascript:void(0)" class="qty-minus unselectable" title="Уменьшить"><i class="fal fa-minus"></i></a>
                                 </div>
                               </div>
-                              <!-- Добавление товара в корзину -->
-                              {% IF index_page_favorites_goods.MIN_REST_VALUE=0 %}
-                                <div class="empty" title="Нет в наличии" data-tooltip="Нет в наличии"><span>Нет в наличии</span></div>
-                              {% ELSE %}
-                                <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_favorites_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span><i class="hover-anim"></i></a>
+                             <!-- Добавление товара в корзину -->
+                             {% IF index_page_favorites_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}
+                              <div class="empty" title="Нет в наличии" data-tooltip="Нет в наличии"><span>Нет в наличии</span></div>
+                             {% ELSE %}
+                              {% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}
+                                <a class="quickviewmod button" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{index_page_favorites_goods.URL_MIN_PRICE_NOW}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
+                              {% ELSE %}                                                     
+                                <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_favorites_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
                                 <a class="add-cart quick" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_favorites_goods.MIN_PRICE_NOW_ID}"><span>Купить в 1 клик</span></a>
                               {% ENDIF %}
-                              <!-- /END Добавление товара в корзину -->
+                             {% ENDIF %}
+                             <!-- /END Добавление товара в корзину -->
                             </div>
                           </div>
                         </form>
@@ -1287,7 +1326,7 @@
           {% ENDIF %}
           <!-- Акция -->
           {% IFNOT index_page_sale_goods_empty %}
-          <div class="pdt-sale products-container index {% IF index_page_goods_empty=1 && index_page_new_goods_empty=1 %}tab-content-actived{% ENDIF %}">
+          <div class="pdt-sale products-container index {% IF index_page_goods_empty=1 && index_page_new_goods_empty=1 && index_page_favorites_goods_empty=1 %}tab-content-actived{% ENDIF %}">
             <div class="container">
               <div class="row">
                 <div class="col-xs-12">
@@ -1398,8 +1437,17 @@
                                 {% ENDIF %}
                                 <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                          
                             </div>
-                            <a href="{index_page_sale_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_sale_goods.NAME}" class="product-img">
-                              <img class="goods-image-small lozad" data-src="{% IF index_page_sale_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{index_page_sale_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_sale_goods.NAME}" title="{index_page_sale_goods.NAME}"  itemprop="image">
+                            <a href="{index_page_sale_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_sale_goods.NAME}" class="product-img mouseHoverImgCarousel">
+                              {% IF index_page_sale_goods.IMAGE_EMPTY %}
+                              <img class="lozad" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=assorti" alt="{index_page_sale_goods.NAME}" title="{index_page_sale_goods.NAME}"  itemprop="image">
+                              {% ELSE %}
+                                <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{index_page_sale_goods.IMAGE_MEDIUM}" alt="{index_page_sale_goods.NAME}" title="{index_page_sale_goods.NAME}"  itemprop="image">
+                                {% FOR images %}
+                                  {% IF index_page_sale_goods.IMAGE_MEDIUM != index_page_sale_goods.images.MEDIUM %}
+                                  <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{index_page_sale_goods.images.MEDIUM}" alt="{index_page_sale_goods.NAME}" title="{index_page_sale_goods.NAME}"  itemprop="image">
+                                  {% ENDIF %}
+                                {% ENDFOR %}
+                              {% ENDIF %}
                             </a>
                             {% IF index_page_sale_goods.IS_NEW %}
                               <span class="ico-new">Новинка</span>
@@ -1450,14 +1498,18 @@
                                   <a href="javascript:void(0)" class="qty-minus unselectable" title="Уменьшить"><i class="fal fa-minus"></i></a>
                                 </div>
                               </div>
-                              <!-- Добавление товара в корзину -->
-                              {% IF index_page_sale_goods.MIN_REST_VALUE=0 %}
-                                <div class="empty" title="Нет в наличии" data-tooltip="Нет в наличии"><span>Нет в наличии</span></div>
-                              {% ELSE %}
-                                <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_sale_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_sale_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span><i class="hover-anim"></i></a>
+                             <!-- Добавление товара в корзину -->
+                             {% IF index_page_sale_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}
+                              <div class="empty" title="Нет в наличии" data-tooltip="Нет в наличии"><span>Нет в наличии</span></div>
+                             {% ELSE %}
+                              {% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}
+                                <a class="quickviewmod button" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{index_page_sale_goods.URL_MIN_PRICE_NOW}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
+                              {% ELSE %}                                                     
+                                <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_sale_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_sale_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
                                 <a class="add-cart quick" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_sale_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_sale_goods.MIN_PRICE_NOW_ID}"><span>Купить в 1 клик</span></a>
                               {% ENDIF %}
-                              <!-- /END Добавление товара в корзину -->
+                             {% ENDIF %}
+                             <!-- /END Добавление товара в корзину -->
                             </div>
                           </div>
                         </form>

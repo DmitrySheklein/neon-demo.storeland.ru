@@ -1,6 +1,6 @@
 <div id="cart-layer">
   <div class="cart-ajax">
-    {% IF FORM_NOTICE %}<h4 class="title {% IF FORM_NOTICE_IS_GOOD %}good{% ELSE %}bad{% ENDIF %}">{FORM_NOTICE}</h4>{% ENDIF %}
+    {% IF FORM_NOTICE %}<h4 class="notify title {% IF FORM_NOTICE_IS_GOOD %}good{% ELSE %}bad{% ENDIF %}">{FORM_NOTICE}</h4>{% ENDIF %}
     {% FOR cart_items %}
       {% IF cart_items.GOODS_MOD_ID = FORM_GOODS_MOD_ID %}
       <div class="cart-product">

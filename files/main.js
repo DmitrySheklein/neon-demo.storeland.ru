@@ -4,6 +4,10 @@
 $(function(){
   lozad().observe();
 })
+// Hover карусель изображений
+$(function(){
+  $(".mouseHoverImgCarousel").HoverMouseCarousel();
+})
 // Fancybox default
 $.fancybox.defaults.lang = "ru";
 $.fancybox.defaults.i18n = {
@@ -716,7 +720,11 @@ $(function(){
   $('.callbackredirect').val(document.location.href);
     
   // Добавление товара в корзину
-  $('.wrapper').on('click', '.add-cart', function() {
+  $(document).on('click', '.add-cart', function() {
+    var $btn  = $(this);
+    $btn.addClass('_loading')
+    $btn.find('span').html('<i class="fal fa-spinner fa-spin"></i>')    
+
     var form = $(this).closest('form');
     if ($(this).hasClass('quick')) {
       form.attr('rel', 'quick');
@@ -730,7 +738,8 @@ $(function(){
     return (false);
   })
   //Main button hover effects
-  $(".add-cart")
+  $(".add-cart, .button")
+  .append('<i class="hover-anim"></i>')
   .on("mouseenter", function(e) {
     var parentOffset = $(this).offset(),
       relX = e.pageX - parentOffset.left,
@@ -758,8 +767,7 @@ $(function(){
 
 // Добавление товара в корзину
 function AddCart() {
-  $('.goodsDataForm, .goodsToCartFromCompareForm, .goodsListForm').submit(function() {
-    
+  $('.goodsDataForm, .goodsToCartFromCompareForm, .goodsListForm').off('submit').on('submit', function() {    
     // Выносим функции из шаблонов
     if ($(this).attr('rel') === 'quick') {
       quickOrder(this);
@@ -792,7 +800,25 @@ function AddCart() {
         url: formBlock.attr('action'),
         data: formData,
         success: function(data) {
-          $.fancybox.open(data);
+          var $btn = $('.add-cart._loading').removeClass('_loading').find('span').html("В корзину");
+
+          var msg = $(data).find('.notify').html();
+          var type = $(data).find('.notify').hasClass('good') ? 'success' : 'error'
+          new Noty({
+            text: msg,
+            type: type,
+            layout: "bottomRight",
+            timeout: "2000",
+            animation: {
+                    open: 'animated bounceInRight', 
+                    close: 'animated bounceOutRight'
+            }                       
+          }).show();
+          $btn.removeClass('_added').find('span').html('Купить')
+
+          // Обновляем данные корзины
+          $('.header .cart .count').html($(data).filter('#newCartCount').html());
+          $('.header .cart .dropdown').html($(data).filter('#newCartData').html());
         }
       });
     return false;
@@ -801,7 +827,7 @@ function AddCart() {
 // Добавление в сравнение и избранное
 function Addto() {
   // Добавление/удаление товара на сравнение/избранное через ajax
-  $('.add-compare').click(function(){
+  $('.add-compare').off('click').on('click', function(){
     // Объект ссылки, по которой кликнули
     var 
       a = $(this)
@@ -940,7 +966,7 @@ function Addto() {
   });
 
   // Добавление/удаление товара на сравнение/избранное через ajax
-  $('.add-wishlist').click(function(){
+  $('.add-wishlist').off('click').on('click', function(){
     // Объект ссылки, по которой кликнули
     var 
       a = $(this)
@@ -1087,12 +1113,12 @@ function Addto() {
 function OrderScripts(){
 $(function(){
   // Форма регистрации нового пользователя, при оформлении заказа
-  $('.OrderShowPass').click(function(){
+  $('.OrderShowPass').on('click',function(){
     ChangePasswordFieldType(this, $('#contactPassWord'));
     return false;
   });
   // При оформлении заказа дадим возможность зарегистрироваться пользователю
-  $('#contactWantRegister').click(function(){
+  $('#contactWantRegister').on('click',function(){
     if($(this).prop("checked")) {
       $('.contactRegisterNeedElement').show();
       $('#contactEmail, #contactPassWord').addClass('required');
@@ -1132,7 +1158,7 @@ $(function(){
     });
   });
   // Действия при выборе зоны внутри варианта доставки на этапе оформления заказа
-  $('.deliveryZoneRadio').click(function(){
+  $('.deliveryZoneRadio').on('click',function(){
     var id = $(this).attr('deliveryid'),
     price = $(this).next().find('.num').text()
     ,oldPrice = $('tbody[rel='+ id +']').find('.pricefield').find('.num');
@@ -1173,7 +1199,7 @@ $(function(){
 
   });
   
-  $('.deliveryRadio').click(function(){  
+  $('.deliveryRadio').on('click',function(){  
     var ID = $('input[name="form[delivery][id]"]:checked').val();  
     $('.quick_order_payment').hide();
     $('.quick_order_payment[rel="' + ID + '"]').show();
@@ -1523,7 +1549,91 @@ function quickViewShow(href, atempt) {
     });
   }
 }
+// Функция Быстрого просмотра товара c модификацией
+function quickViewMod() {
+  // Действие при нажатии на кнопку в корзину товара c модификацией
+  $(document).ready(function() {
+    $(document).on('click', 'a.quickviewmod', function() {
+      var href = $(this).attr('href');
+      href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
+      quickViewShowMod(href);
+      return false;
+    });
+  });
+}
+// Быстрый просмотр товара с модификацией
+function quickViewShowMod(href, atempt) {
+  // Если массив с подгруженными заранее карточками товара для быстрого просмотра ещё не создан - создадим его.
+  if(typeof(document.quickviewPreload) == 'undefined') {
+    document.quickviewPreload = [];
+  }  
+  // Если данные по быстрому просмотру уже подгружены
+  if (typeof(document.quickviewPreload[href]) != 'undefined') {
+    // Если мы в режиме загрузки страницы и ждём результата от другой функции, то тоже подождём, когда тот контент загрузится и будет доступен в этом массиве.
+    if (1 == document.quickviewPreload[href]) {
+      // Если попытки ещё не указывались, ставим 0 - первая попытка
+      if (typeof(atempt) == 'undefined') {
+        atempt = 0;
+        // Иначе прибавляем счётчик попыток
+      } else {
+        atempt += 1;
+        // Если больше 500 попыток, то уже прошло 25 секунд и похоже, что быстрый просмотр не подгрузится, отменяем информацию о том, что контент загружен
+        if (atempt > 500) {
+          delete document.quickviewPreload[href];
+          // TODO сделать вывод красивой таблички
+          alert('Не удалось загрузить страницу товара. Пожалуйста, повторите попытку позже.');
+          return true;
+        }
+      }
+      // Запустим функцию быстрого просмотра через 5 сотых секунды, вероятно запрошендная страница товара уже подгрузится.
+      setTimeout('quickViewShowMod("' + href + '", ' + atempt + ')', 50);
+      return true;
+    } else {
+      $.fancybox.close();
+      var productShopContent = $(document.quickviewPreload[href]).find('.product-shop').length;
 
+      $.fancybox.open(document.quickviewPreload[href] , {
+        padding: 0,
+        autoSize: true,
+        maxWidth: 500,
+        wrapCSS: (!productShopContent) ? 'quickView' : '',
+        afterShow: function() {
+          // Обновление доступности модификаций
+          MainFunctions();
+          AddCart();
+          quantity();
+
+          $('.fancybox-inner .product-view').addClass('modification');
+          $('.fancybox-inner .product-view .product-shop').removeClass('col-lg-5 col-md-6');
+          $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-3');
+        }
+      });
+    }
+  } else {
+    $.get(href, function(content) {
+      $.fancybox.close();
+      var productShopContent = $(document.quickviewPreload[href]).find('.product-shop').length;
+      $.fancybox({
+        padding: 0,
+        autoSize: true,
+        maxWidth: 500,
+        wrapCSS: (!productShopContent) ? 'quickView' : '',
+        content: $(content).getColumnContent(),
+        beforeShow: function() {
+          // Обновление доступности модификаций
+          MainFunctions();
+          AddCart();
+          quantity();
+          $('.product-img-box .product-image .general-img').find('a').attr('href', 'javascript:void(0)');
+
+          $('.fancybox-inner .product-view').addClass('modification');
+          $('.fancybox-inner .product-view .product-shop').removeClass('col-lg-5 col-md-6');
+          $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-3');
+        }
+      });
+    });
+  }
+}
 // Функция быстрого оформления заказа в корзине
 function startOrder1(){  
   var globalOrder = $('#globalOrder');
@@ -2709,6 +2819,7 @@ $(function(){
   OpenMenu();
   ppModal();
   viewed();
+  quickViewMod()
 });
 
 // Запуск основных функций для разных разрешений экрана
