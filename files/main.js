@@ -2496,6 +2496,8 @@ function indexPage() {
     $element.find('.nav-splitter').css('width', itemNav.first().outerWidth())
 	})('#producttabs');
 
+  // 
+  $('#news .tabs-headerList').find('.nav-splitter').css('width', $('#news .tabs-headerList .tabs-headerItem').first().outerWidth())
   // Клик по табам в блоке новости
   $('#news .tabs-headerList').on('click', '.tabs-headerLink', function(event){
     event.preventDefault()
@@ -2509,7 +2511,9 @@ function indexPage() {
     };
 
     preloadShow($('#news .tabs-body .preloader'));
- 
+    
+    var $splitter = $link.closest('.tabs-headerList').find('.nav-splitter');
+    $splitter.css('width', $link.outerWidth()).css('left', $link.position().left)
     $parent.addClass('active').siblings().removeClass('active')
     $('#news .tabs-body .tabs-content').removeClass('active').filter('[id="' + tabId +'"]').addClass('active');
     
