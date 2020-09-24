@@ -37,7 +37,7 @@ $.fancybox.defaults.buttons = [
 */ 
 Noty.overrideDefaults({
   layout: "bottomRight",
-  theme: 'sunset',
+  theme: 'metroui',
   timeout: "3000",
   killer: true,
   progressBar: true,
@@ -804,16 +804,22 @@ function AddCart() {
 
           var msg = $(data).find('.notify').html();
           var type = $(data).find('.notify').hasClass('good') ? 'success' : 'error'
-          new Noty({
-            text: msg,
-            type: type,
-            layout: "bottomRight",
-            timeout: "2000",
-            animation: {
-                    open: 'animated bounceInRight', 
-                    close: 'animated bounceOutRight'
-            }                       
-          }).show();
+          var iconTemplate = ('success' == type) ? '<i class="fal fa-check"></i>' : '<i class="fal fa-times"></i>';
+          // Если есть функция, которая отображает сообщения пользователю
+          if(typeof(Noty) == "function") {
+            new Noty({
+              text: '<div class="noty__content">'+ iconTemplate + '<div class="noty__content-text">' + msg + '</div>' +'</div>',
+              type: type,
+              layout: "bottomRight",
+              timeout: "2000",
+              animation: {
+                  open: 'animated fadeInRight', 
+                  close: 'animated fadeOutRight',
+                  easing: 'swing',
+                  speed: 500                  
+              }              
+            }).show();
+          }
           $btn.removeClass('_added').find('span').html('Купить')
 
           // Обновляем данные корзины
@@ -945,16 +951,19 @@ function Addto() {
           
           var msgType = ('ok' == data.status) ? 'success' : 'error';
           var message = ('ok' == data.status) ? data.message.replace('сравнения', '<a href="/compare" class="underline">сравнения</a>') : data.message;
+          var iconTemplate = ('ok' == data.status) ? '<i class="fal fa-check"></i>' : '<i class="fal fa-times"></i>';
           // Если есть функция, которая отображает сообщения пользователю
           if(typeof(Noty) == "function") {
             new Noty({
-              text: message,
+              text: '<div class="noty__content">'+ iconTemplate + '<div class="noty__content-text">' + message + '</div>' +'</div>',
               type: msgType,
               layout: "bottomRight",
               timeout: "2000",
               animation: {
-                  open: 'animated bounceInRight', 
-                  close: 'animated bounceOutRight'
+                  open: 'animated fadeInRight', 
+                  close: 'animated fadeOutRight',
+                  easing: 'swing',
+                  speed: 500                  
               }              
             }).show();                
           }
@@ -1088,18 +1097,21 @@ function Addto() {
           
           var msgType = ('ok' == data.status) ? 'success' : 'error';
           var message = ('ok' == data.status) ? data.message.replace('избранное', '<a href="/user/favorites" class="underline">избранное</a>') : data.message;
+          var iconTemplate = ('ok' == data.status) ? '<i class="fal fa-check"></i>' : '<i class="fal fa-times"></i>';
           // Если есть функция, которая отображает сообщения пользователю
           if(typeof(Noty) == "function") {
-            new Noty({
-              text: message,
-              type: msgType,
-              layout: "bottomRight",
-              timeout: "2000",
-              animation: {
-                  open: 'animated bounceInRight', 
-                  close: 'animated bounceOutRight'
-              }               
-            }).show();                
+              new Noty({
+                text: '<div class="noty__content">'+ iconTemplate + '<div class="noty__content-text">' + message + '</div>' +'</div>',
+                type: msgType,
+                layout: "bottomRight",
+                timeout: "2000",
+                animation: {
+                    open: 'animated fadeInRight', 
+                    close: 'animated fadeOutRight',
+                    easing: 'swing',
+                    speed: 500                  
+                }              
+              }).show();                
           }
           
         }
@@ -2316,9 +2328,9 @@ $(function(){
 	// fade in #back-top
 	$(window).scroll(function () {
 		if ($(this).scrollTop() > 100) {
-			$('#back-top').fadeIn();
+			$('#back-top').addClass('_bordered').fadeIn('fast').prev().removeClass('_bordered');
 		} else {
-			$('#back-top').fadeOut();
+			$('#back-top').removeClass('_bordered').fadeOut('fast').prev().addClass('_bordered');
 		}
 	});
 	// scroll body to 0px on click
@@ -2930,18 +2942,6 @@ $(function(){
   $('.header-search .header-searchLink, .header-search .search-close, .header-search .search-overlay').click(function(e){
     e.preventDefault()
     $('.header-search .search').toggleClass('_active')
-  })
-})
-// Логин в шапке
-$(function(){
-  $(".header-login .header-loginLink").fancybox({
-      wrapCSS: 'fancybox-login',
-      padding: 0,
-      maxWidth: 500, 
-      width: '100%',
-      autoHeight: true,
-  		openMethod: 'fadescaleIn',
-  		closeMethod: 'fadescaleOut',      
   })
 })
 // Файл в форме контактов
