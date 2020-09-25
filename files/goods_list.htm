@@ -4,19 +4,28 @@
 {% IF IS_FULL_CATALOG && nested_categories_list_empty=0 || goods_empty=1 && nested_categories_list_empty=0 && goods_filters_empty=1 %}
   <!-- Блок навигации по категориям, вложенным в текущую категорию -->
   {% IF NESTED_CATEGORIES_LIST_LEVEL > 0 %} <!-- Для отображения нового вида категорий с подкатегориями, в условии замените 0 на 1 -->
-  <div class="categories {% IF index_page %}index{% ENDIF %}">
-    {% FOR nested_categories_list %}
-      <div class="item">
-        <div class="cat-image">
-          <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
-            <img class="goods-cat-image-medium lozad" data-src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-medium.png?design=neon{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">  
-          </a>
-        </div>
-        <div class="cat-name" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
-          <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">{nested_categories_list.NAME}</a>
-        </div>        
-      </div>
-    {% ENDFOR %}
+  <div class="{% IF index_page %}block-bg{% ENDIF %}">
+  {% IF index_page %}
+  <!-- Заголовок страницы -->
+  <div id="page-title" class="index-catalog">
+  <div class="block-title"><h1 class="title">{PAGE_TITLE}</h1></div>
+  </div>
+  <!-- /END Заголовок страницы -->
+  {% ENDIF %}
+  <div class="categories">
+  {% FOR nested_categories_list %}
+           <div class="item">
+           <div class="cat-name" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
+                   <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">{nested_categories_list.NAME}</a>
+           </div>
+           <div class="cat-image">
+                   <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
+                   <img class="goods-cat-image-medium lozad" data-src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-medium.png?design=techno{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">
+                   </a>
+           </div>
+           </div>
+  {% ENDFOR %}
+  </div>
   </div>
   {% ELSE %}
   <!-- Блок навигации по категориям с подкатегориями -->

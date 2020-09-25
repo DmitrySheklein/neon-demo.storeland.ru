@@ -274,7 +274,7 @@
         <!-- Цена товара -->
         <div class="price-box f-fix" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
           <!-- информация для поисковика о наличии товара -->
-          <meta itemprop="availability" content="{% IF GOODS_MOD_REST_VALUE>0 %}in_stock{% ELSE %}out_of_stock{% ENDIF %}">
+          <meta itemprop="availability" content="{% IF GOODS_MOD_REST_VALUE>0 %}http://schema.org/InStock{%ELSE %}http://schema.org/OutOfStock{% ENDIF %}">
           <!-- информация для поисковика о валюте товара -->
           <meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}"/>
           {% IF GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT>GOODS_MOD_PRICE_NOW %}
@@ -391,7 +391,7 @@
                             data-action-is-add="0"
                             data-action-add-url="{FAVORITES_ADD_URL}"
                             data-action-delete-url="{FAVORITES_DELETE_URL}"
-                            data-action-add-title="Добавить &laquo;{related_goods.NAME}&raquo; в избранное"
+                            data-action-add-title="Добавить в избранное"
                             data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из избранного"
                             data-prodname="{related_goods.NAME}"
                             data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
@@ -411,7 +411,7 @@
                             data-action-is-add="1"
                             data-action-add-url="{FAVORITES_ADD_URL}"
                             data-action-delete-url="{FAVORITES_DELETE_URL}"
-                            data-action-add-title="Добавить &laquo;{related_goods.NAME}&raquo; в избранное"
+                            data-action-add-title="Добавить в избранное"
                             data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из избранного"
                             data-prodname="{related_goods.NAME}"
                             data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
@@ -435,8 +435,8 @@
                               data-action-is-add="0" 
                               data-action-add-url="{COMPARE_ADD_URL}"
                               data-action-delete-url="{COMPARE_DELETE_URL}"
-                              data-action-add-title="Добавить &laquo;{related_goods.NAME}&raquo; в список сравнения с другими товарами"
-                              data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из списка сравнения с другими товарами"
+                              data-action-add-title="Добавить в сравнение"
+                              data-action-delete-title="Убрать из сравнения"
                               data-prodname="{related_goods.NAME}"
                               data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
                               data-produrl="{related_goods.URL}"
@@ -455,8 +455,8 @@
                               data-action-is-add="1" 
                               data-action-add-url="{COMPARE_ADD_URL}" 
                               data-action-delete-url="{COMPARE_DELETE_URL}" 
-                              data-action-add-title="Добавить &laquo;{related_goods.NAME}&raquo; в список сравнения с другими товарами" 
-                              data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из списка сравнения с другими товарами" 
+                              data-action-add-title="Добавить в сравнение" 
+                              data-action-delete-title="Убрать из сравнения" 
                               data-prodname="{related_goods.NAME}"
                               data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
                               data-produrl="{related_goods.URL}"
@@ -466,7 +466,7 @@
                               data-add-tooltip="В Сравнение"
                               data-del-tooltip="Убрать из сравнения"
                               data-tooltip="В Сравнение"
-                              title="Добавить &laquo;{related_goods.NAME}&raquo; в список сравнения с другими товарами" 
+                              title="Добавить в сравнение" 
                               href="{COMPARE_ADD_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;from={related_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
                               rel="nofollow"
                             ><i class="fal fa-signal"></i></a>

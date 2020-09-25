@@ -1410,7 +1410,7 @@ function quickOrder(formSelector) {
         content : data,
         // При изменении размера окна изменяем размер окна оформления заказа
         onUpdate  : function(){
-          ppModal();
+          
           return false;
         }
 			}); 
@@ -1708,7 +1708,7 @@ function startOrder1(){
       OrderScripts();
       coupons();
       address();
-      ppModal();
+      
       $('#closeOrder, #closeOrderTab').off('click').on('click',function() {
         // Если таб уже активен выходим
         if($(this).hasClass('title-tab') && !$(this).hasClass('disabled')){ 
@@ -2567,16 +2567,25 @@ function validCallBackF(){
 // Разделение поле адрес на Улица, Дом, Квартира
 function address(){
   $('#quickform .button').click(function(){
-    if($('#quickDeliveryAddressStreet').val() !='' || $('#quickDeliveryAddressHome').val() !='' || $('#quickDeliveryAddressFlat').val() !=''){
-      if ( $('#quickDeliveryAddress').val().match( /(.*)(улица)+(.*)/i ) ) {
-        $('#quickDeliveryAddress').val(null);
-      }
-      $('#quickDeliveryAddress').val('Улица: ' + $('#quickDeliveryAddressStreet').val() + ', Дом/Корпус: ' + $('#quickDeliveryAddressHome').val() + ', Квартира: ' + $('#quickDeliveryAddressFlat').val());
-      $(this).submit();
-      return false;
-    }
+  var $quickDeliveryAddress = $('#quickDeliveryAddress'),
+           quickDeliveryAddressStreetValue = $('#quickDeliveryAddressStreet').val(),
+           quickDeliveryAddressHomeValue = $('#quickDeliveryAddressHome').val(),
+           quickDeliveryAddressFlatValue = $('#quickDeliveryAddressFlat').val();
+  
+  if(!$quickDeliveryAddress.length){
+           return;
+  }
+  
+  if(quickDeliveryAddressStreetValue !='' || quickDeliveryAddressHomeValue !='' || quickDeliveryAddressFlatValue !=''){
+           if ($quickDeliveryAddress.val().match( /(.*)(улица)+(.*)/i )) {
+           $quickDeliveryAddress.val(null);
+           }
+           $quickDeliveryAddress.val('Улица: ' + quickDeliveryAddressStreetValue + ', Дом/Корпус: ' + quickDeliveryAddressHomeValue + ', Квартира: ' + quickDeliveryAddressFlatValue);
+           $(this).submit();
+           return false;
+  }
   });
-}
+  }
 
 // Функции для главной страницы
 function indexPage() {
@@ -2643,7 +2652,6 @@ function indexPage() {
   })
   // Слайдер новостей (все новости без группировки)
   $("#news .all.owl-carousel").owlCarousel({
-    items: 4,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -2662,12 +2670,11 @@ function indexPage() {
       0:{items:1},
       768:{items:1},
       992:{items:3},
-      1199:{items:4}
+      1199:{items: 5}
     }
   });
   // Слайдер новостей (группы)
   $("#news .owl-carousel").owlCarousel({
-    items: 4,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -2691,7 +2698,7 @@ function indexPage() {
       0:{items:1},
       768:{items:1},
       992:{items:3},
-      1199:{items:4}
+      1199:{items:5}
     }
   });
 
@@ -2714,23 +2721,32 @@ function preloadShow(currentPreloader) {
 
 // Адаптивное меню и каталог
 function OpenMenu() {
-  // Иконки в мобильной версии
-  function headerIcons() {
-    $('.header-icons').on('click', '.header-iconsItem', function(evt){
-      var $icon = $(this);
-      var id = $icon.attr('data-target');
-      var $icons = $icon.siblings();
-      
-      $icons.each(function(index, icon){
-        var id = $(icon).attr('data-target');
-        
-        $(icon).removeClass('active');
-        $(id).slideUp()
-      })
-      
-      $icon.toggleClass('active')
-      $(id).slideToggle()
+// Иконки в мобильной версии
+function headerIcons() {
+  $('.header-icons').on('click', '.header-iconsItem', function(evt){
+    var $icon = $(this);
+    var id = $icon.attr('data-target');
+    var $icons = $icon.siblings();
+  
+    $icons.each(function(index, icon){
+    var id = $(icon).attr('data-target');
+  
+    $(icon).removeClass('active');
+    $(id).slideUp()
     })
+  
+    $icon.toggleClass('active')
+    $(id).slideToggle()
+  })
+  
+  $(document).on('click', function(e){
+    if(getClientWidth() <= 991){
+    if(!$(e.target).parents('.header-top,._header-mobile').length && !$(e.target).hasClass('_header-mobile')) {
+      $('._header-mobile').slideUp();
+      $('.header-iconsItem').removeClass('active');
+    }
+    }
+  })
   }
   headerIcons();
   
@@ -2828,8 +2844,7 @@ $(function(){
   Addto();
   address();
   quantity();
-  OpenMenu();
-  ppModal();
+  OpenMenu();  
   viewed();
   quickViewMod()
 });
@@ -2847,19 +2862,6 @@ $(function(){
   });
 });
 
-// Политика конфиденциальности в модальном окне
-function ppModal() {
-  $(".pp a").click(function(event){
-    event.preventDefault();
-    var data = $("#fancybox-pp").html();
-    $.fancybox({
-      autoSize: true,
-      maxWidth: 700,
-      padding: 15,
-      content: data
-    });
-  });
-}
 // Модальное окно
 $(function(){
   function modal() {

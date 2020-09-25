@@ -94,6 +94,12 @@
           <td class="cell2">{ORDER_DELIVERY_TRACKING_NUMBER | nl2br}</td>
         </tr>
       {% ENDIF %}
+      {% FOR order_extra_fields %}
+      <tr>
+          <td class="cell1"><span>{order_extra_fields.NAME}:</span></td>
+          <td class="cell2">{order_extra_fields.VALUE | nl2br}</td>
+      </tr>
+      {% ENDFOR %}      
     </tbody>
     
     <!-- Методы методы оплаты онлайн -->

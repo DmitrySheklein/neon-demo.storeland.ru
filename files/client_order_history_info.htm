@@ -67,6 +67,12 @@
       <td class="cell1"><label>Комментарий:</label></td>
       <td class="cell2">{CLIENT_ORDER_COMMENT}</td>
     </tr>
+    {% FOR order_extra_fields %}
+    <tr>
+      <td class="cell1"><label>{order_extra_fields.NAME}:</label></td>
+      <td class="cell2">{order_extra_fields.VALUE | nl2br}</td>
+    </tr>
+    {% ENDFOR %}    
     <tr {% IFNOT CLIENT_ORDER_TRACKING_NUMBER %}class="hide"{% ENDIF %}>
       <td class="cell1"><label>Номер отслеживания:</label></td>
       <td class="cell2">{CLIENT_ORDER_TRACKING_NUMBER | nl2br}</td>

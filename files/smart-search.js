@@ -221,7 +221,7 @@ $(function() {
         }
       });
     }else{
-      console.log('hide')
+      // console.log('hide')
       $("#search-result").removeClass('_active').hide();
     }
   }
