@@ -77,10 +77,10 @@ body.compensate-for-scrollbar{overflow:hidden}.fancybox-active{height:auto}.fanc
 }
 /* jQuery.Rating Plugin CSS - http://www.fyneworks.com/jquery/star-rating/ */
 .ratings {font-size: 11px;line-height: 1.25;margin: 3px 0;height: 14px;}
-.rating-box {display: inline-block;position: relative;vertical-align: middle;width: 95px;height: 14px;font-size: 0;line-height: 0;text-indent: -999em;overflow: hidden;}
-.rating-box:before {display: block;font-family: "FontAwesome";content: "\f005\20\f005\20\f005\20\f005\20\f005";width: 95px;height: 14px;line-height: 14px;font-size: 14px;color: rgba(0, 0, 0, 0);}
-.rating-box .rating {position: absolute;float: left;height: 14px;left: 0;top: 0;overflow: hidden;}
-.rating-box .rating:before {display: block;font-family: "FontAwesome";content: "\f005\20\f005\20\f005\20\f005\20\f005";width: 95px;height: 14px;line-height: 14px;font-size: 14px;color: #1569bc;}
+.rating-box {display: inline-block;position: relative;vertical-align: middle;width: 35px;height: 14px;overflow: hidden;}
+.rating-box:before {display: block;font-family: "FontAwesome";content: "\f005\20\f005\20\f005\20\f005\20\f005";width: 14px;height: 14px;line-height: 14px;font-size: 14px;color: rgb(255 196 56);}
+.rating-box .rating {position: absolute;float: left;height: 14px;left: 18px;top: 0;overflow: hidden;}
+.rating-box .rating:before {display: none;font-family: "FontAwesome";content: "\f005\20\f005\20\f005\20\f005\20\f005";width: 95px;height: 14px;line-height: 14px;font-size: 14px;color: rgb(0 0 0 / 0);}
 .rating-cancel, .star-rating {display:block;float:left;width:16px;height:14px;text-indent:-999em;cursor:pointer;background:transparent;overflow:hidden}
 .rating-cancel, .rating-cancel a {background:url('{FORALL_STYLES_PATH}jquery-ui-stars/4.11/delete.gif') no-repeat 0 -16px}
 .star-rating, .star-rating a {background:url('{ASSETS_IMAGES_PATH}bkg_rating.png?design=tourism') repeat-x scroll 0 100% transparent}

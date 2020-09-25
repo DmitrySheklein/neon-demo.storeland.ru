@@ -872,7 +872,9 @@
                                     <meta itemprop="bestRating" content = "10">
                                     <meta itemprop="ratingValue" content = "{index_page_goods.OPINION_RATING_VALUE}">
                                     <meta itemprop="reviewCount" content = "{index_page_goods.OPINION_RATING_CNT_ALL}">
-                                    <div class="rating" style="width:{index_page_goods.OPINION_RATING_VALUE}0%" alt="{index_page_goods.OPINION_RATING_VALUE}" title="Рейтинг товара"></div>
+                                    <div class="rating">
+                                      <span>{index_page_goods.OPINION_RATING_VALUE | divide("2")}/5</span>
+                                    </div>                                    
                                   </span>
                                   {% ELSE %}
                                     <div class="rating" style="width:0%"  title="Рейтинг не определён"></div>
@@ -2296,7 +2298,25 @@
   }      
   </style>
 
+<!-- Development -->
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<script>
+  (function () {
+    return;
+    tippy('.add-compare', {
+          theme: 'material',
+          content(reference) {
+            console.log(reference.classList.contains('added'))
+            if(reference.classList.contains('added')){
+                return 'Удалить из сравнения';
+            } else { return 'Добавить в сравнение'}
+            
+          }
+      });      
+  })()
 
+</script>
   <!-- Debug -->
   <div class="container">
     <!--{print_r}-->
