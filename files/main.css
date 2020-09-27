@@ -1,5 +1,5 @@
 html {font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-font-smoothing:antialiased;}
-body {position: relative;font-family: 'Open Sans', sans-serif;font-size: 16px;line-height: 1.2;font-weight: 400;background-color: #fff;color: #000;overflow-x: hidden;margin:0;padding:0;}
+body {position: relative;font-family: 'Montserrat', sans-serif;font-size: 16px;line-height: 1.2;font-weight: 400;background-color: #fff;color: #000;overflow-x: hidden;margin:0;padding:0;}
 
 *, *:before, *:after {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
 .wrapper {overflow: hidden;}
@@ -81,7 +81,7 @@ select.input {-webkit-appearance: menulist;cursor: pointer;}
 .checkbox-hidden:checked + .checkbox-name:after,.checkbox-hidden[checked=checked] + .checkbox-name:after {content: '\f00c';font: normal normal normal 12px/1 FontAwesome;color: #fff;opacity: 1;visibility: visible;-webkit-transform: translateY(0);transform: translateY(0);}
 .checkbox-hidden:disabled + .checkbox-name {color: #b1bfc8;cursor: default}
 /* Заголовки */
-h1, h2, h3, h4, h5, h6 {text-rendering: optimizelegibility;line-height:1.3;margin:0;padding:0;font-family: 'Open Sans',Arial, sans-serif;font-weight: 400;color: #2e2e2e;}
+h1, h2, h3, h4, h5, h6 {text-rendering: optimizelegibility;line-height:1.3;margin:0;padding:0;font-family: 'Montserrat',Arial, sans-serif;font-weight: 400;color: #2e2e2e;}
 h1 {font-size: 36px;}
 h2 {font-size: 30px;}
 h3 {font-size: 24px;}
@@ -211,7 +211,7 @@ label.invalidInput {color: #E80636;font-size: 90%;}
   padding: 0;
 }
 .fancybox-header {position: relative;min-width: 420px;padding: 30px;padding-right: 70px;background-position: center;background-color: #fff;text-align: left;border-bottom: 2px solid #fe6260;}
-.fancybox-header .title {font-size: 25px;font-weight: 500;font-family: 'Open Sans',Arial, sans-serif;}
+.fancybox-header .title {font-size: 25px;font-weight: 500;font-family: 'Montserrat',Arial, sans-serif;}
 .fancybox-body {position: relative;padding: 30px}
 /* Политика конф-ти */
 .modal {
@@ -228,16 +228,16 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 
 
 /*** Цена ****/
-.price {display: inline-block;vertical-align: middle;position:relative;font-size: 18px;font-weight: 700;font-family: 'Open Sans',Arial,sans-serif;color: #2e2e2e;line-height: 22px;}
+.price {display: inline-block;vertical-align: middle;position:relative;font-size: 18px;font-weight: 700;font-family: 'Montserrat',Arial,sans-serif;color: #2e2e2e;line-height: 22px;}
 .price > span:after {display: inline-block;font-family: "FontAwesome";font-weight: 600;font-size: 14px;line-height: 1.1;margin-left: 0px;}
 .price > span {position: relative;z-index: 1}
 
-.old-price, .old-price .price, .price.old-price {display: inline-block;vertical-align: middle;margin:0;font-size: 13px;font-weight: 400;font-family: 'Open Sans', sans-serif;color: #888;text-decoration: line-through;background: none;}
+.old-price, .old-price .price, .price.old-price {display: inline-block;vertical-align: middle;margin:0;font-size: 13px;font-weight: 400;font-family: 'Montserrat', sans-serif;color: #888;text-decoration: line-through;background: none;}
 .old-price > span:after, .old-price .price > span:after, .price.old-price > span:after {font-size: 13px;font-weight: 400;text-decoration: line-through;}
 .old-price:after,.old-price:before {display:none}
 
 /* .price.RUB > span:after, .RUB .price:after {content: "\f158";} */
-.price.RUB > span:after, .RUB .price:after {content: "руб.";    font-family: 'Open Sans',Arial,sans-serif;}
+.price.RUB > span:after, .RUB .price:after {content: "руб.";    font-family: 'Montserrat',Arial,sans-serif;}
 .price.RUB span + span, .RUB .price span + span {display: none;}
 
 /*** Капс ***/
@@ -946,7 +946,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 #producttabs .pdt-nav {display: flex;}
 #producttabs .pdt-nav-wrap {position: relative;margin-bottom: 20px;width: auto;text-align: left;padding: 0;list-style: none;height: 50px;background-color: #f0f0f0;border-radius: 25px;display: flex;align-items: center;}
 #producttabs .pdt-nav li {position: relative;z-index: 2;display: inline-block;margin-right: 0;cursor: pointer;position: relative;user-select: none;border-radius: 25px;height: 44px;line-height: 44px;transition: .3s color;padding: 0 25px;white-space: nowrap;}
-#producttabs .pdt-nav li span {display: inline-block;position: relative;font-size: 20px;color: #1d2029;padding-bottom: 0;font-family: 'Open Sans',Arial, sans-serif;font-weight: 700;transition: all .3s ease;}
+#producttabs .pdt-nav li span {display: inline-block;position: relative;font-size: 20px;color: #1d2029;padding-bottom: 0;font-family: 'Montserrat',Arial, sans-serif;font-weight: 700;transition: all .3s ease;}
 #producttabs .pdt-nav li span:hover {color: #fe6260;}
 #producttabs .pdt-nav li:hover, #producttabs .pdt-nav li.tab-nav-actived {cursor: pointer;font-weight: 500;}
 #producttabs .pdt-nav li:hover span {color: #fe6260;}
@@ -1087,7 +1087,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .products-grid .item .product-shop {display:flex;flex-direction: column;flex-grow:1;}
 .products-grid .item .product-shop .actions {margin-top:auto}
 .products-grid .item.empty .product-shop .actions .empty {display: inline-block;vertical-align: middle;width: 100%;height: 34px;line-height: 34px;text-align: center;padding: 0 17px;font-size: 14px;color: #2e2e2e;background-color: #f3f3f5;cursor: default;    border-radius: 25px;}
-.products-grid .item.empty .product-shop .actions .qty-wrap {display: none;}
+/* .products-grid .item.empty .product-shop .actions .qty-wrap {display: none;} */
 /** Товары списком **/
 .products-list {margin: 0;padding: 0;list-style: none;list-style-position: inside;}
 .products-list .item:after {content: '';display: block;width: 1px;height: calc(100% - 1px);position: absolute;z-index: 1;right: 0;top: 0;background: #fff}
@@ -1115,7 +1115,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .products-list .item .product-ico.added,.products-list .item .product-ico:hover {color: #fe6260}
 .products-list .item .product-ico.added {border-color: #fe6260;}
 .products-list .item.empty .product-shop .actions .empty {display: inline-block;vertical-align: middle;height: 36px;line-height: 36px;padding: 0 17px;font-size: 14px;color: #333;background-color: #fff;border: 1px solid #dce4e9;cursor: default;}
-.products-list .item.empty .product-shop .actions .qty-wrap {display: none;}
+/* .products-list .item.empty .product-shop .actions .qty-wrap {display: none;} */
 /* Кнопки В корзину, избранное, сравнение, быстрый просмотр */
 .product-shop .actions .quickviewmod {flex-grow:1;    overflow: hidden;  position: relative;  z-index: 2;border: 2px solid transparent;}
 .product-shop .actions .quickviewmod span {color: #fff;    transition: all .5s ease-in-out;}
@@ -1124,7 +1124,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .product-shop .actions .add-cart .fal {vertical-align: middle;margin-right: 5px;font-size: 16px;}
 .product-shop .actions .add-cart .fal.fa-spinner {margin-right: 0;}
 .product-shop .actions .add-cart .fal.fa-shopping-cart {display: none;}
-.actions .qty-wrap {display: none;position: relative;width: 84px;margin: 0;vertical-align: middle;text-align: center;margin-right:5px;background: #f3f3f5;border-radius:25px;}
+.actions .qty-wrap {position: relative;width: 84px;margin: 0;vertical-align: middle;text-align: center;margin-right:5px;background: #f3f3f5;border-radius:25px;}
 .catalog .product-shop .actions .qty-wrap {margin-bottom: 0px;}
 .actions input.quantity {display: inline-block;vertical-align: middle;width: 35px;height: 34px;margin: 0;color: #21293c;border-radius: 0;font-size: 16px;text-align: center;padding: 3px;background: transparent;border: 0;}
 .actions .qty-set {display: block;vertical-align: middle;}
