@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="maps col-md-8 col-xs-12">
-      <iframe src="https://api-maps.yandex.ru/frame/v1/-/CZRYYCOw" width="100%" height="400" frameborder="0"></iframe>
+      <iframe class="lozad" data-src="https://api-maps.yandex.ru/frame/v1/-/CZRYYCOw" width="100%" height="400" frameborder="0"></iframe>
     </div>
     {% IFNOT FORM_SEND_OK %}
     <div class="col-xs-12 first">
@@ -61,8 +61,8 @@
               </div>
               <div class="fields file">
                 <label>Прикрепить файл</label>
-                <label for="feedback_file" class="button _outline"> Выберите файл </label>
-                <button id="clear-file" type="button" style="display:none" title="Очистить"><i class="fal fa-times"></i></button>
+                <label for="feedback_file" class="button _outline file-label-button"> Выберите файл </label>
+                <button id="clear-file" class="clear-file" type="button" style="display:none" title="Очистить"><i class="fal fa-times"></i></button>
                 <input style="display:none" id="feedback_file" type="file" name="form[assets_file]"  class="input">
               </div>
             </div>

@@ -2652,6 +2652,7 @@ function indexPage() {
   })
   // Слайдер новостей (все новости без группировки)
   $("#news .all.owl-carousel").owlCarousel({
+    margin: 10,
     loop: false,
     rewind: true,
     lazyLoad: true,

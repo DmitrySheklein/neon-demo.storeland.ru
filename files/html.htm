@@ -208,7 +208,9 @@
               <!-- Каталог -->
               <div class="header-catalog">
                 <span class="header-catalogBtn unselectable">
-                  <span>Каталог товаров</span>
+                  <span class="header-catalogIcon fal fa-bars"></span>
+                  <span>Все категории</span>
+                  <span class="header-catalogBtnArrow fal fa-angle-down "></span>
                 </span>
                 <ul class="header-catalogMenu unstyled">
                       <li class="header-catalogMenuTitle">
@@ -579,6 +581,7 @@
     {% IF index_page %}
     <!-- Слайдшоу-->
     <div id="slideshow">
+      <div class="container">
         <div class="preloader"><span class="content-loading"></span></div>
         <div class="slider owl-carousel">
           <!-- Слайд 1 -->
@@ -618,6 +621,7 @@
           <!-- /Слайд 3 -->
   
         </div>
+      </div>
     </div>
     <!-- /Слайдшоу-->   
 
@@ -685,7 +689,7 @@
             <h3 class="section-title">
               Популярные категории
             </h3>
-            <a href="/catalog" class="section-link">
+            <a href="/catalog" class="section-link button">
                Весь каталог
             </a>
           </div>
@@ -718,7 +722,7 @@
     
     <!-- Товары на главной, Новинки, Хиты -->
     {% IF index_page_goods_empty=0 || index_page_new_goods_empty=0 || index_page_favorites_goods_empty=0  || index_page_sale_goods_empty=0 %}
-    <div id="producttabs">
+    <div id="producttabs" class="section">
       <div class="container">
         <div class="pdt-nav">
           <ul class="pdt-nav-wrap">
@@ -734,8 +738,8 @@
           {% IFNOT index_page_goods_empty %}
           <div class="pdt-index products-container index tab-content-actived">
             <div class="container">
-              <div class="row">
-                <div class="col-xs-12">
+              <div class="">
+                <div class="">
                 <div class="content">
                   <div class="block-title">
                     <h2 class="title">Товары на главной</h2>
@@ -743,7 +747,7 @@
                   <!--<div class="preloader"><span class="content-loading"></span></div>-->
                   <div class="products-grid">
                     {% FOR index_page_goods %}
-                    <div class="item {% IF index_page_goods.MIN_REST_VALUE=0 %}empty{% ENDIF %}">
+                    <div class="item {% IF index_page_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}empty{% ENDIF %}{% IF index_page_goods.COUNT_MODIFICATION > 1 %} _with-mod{% ENDIF %}">
                       <div class="item-inner" itemscope itemtype="https://schema.org/Product">
                         <form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product-form-{index_page_goods.MIN_PRICE_NOW_ID} goodsListForm">
                           <input type="hidden" name="hash" value="{HASH}" />
@@ -935,8 +939,8 @@
           {% IFNOT index_page_new_goods_empty %}
           <div class="pdt-new products-container index {% IF index_page_goods_empty=1 %}tab-content-actived{% ENDIF %}">
             <div class="container">
-              <div class="row">
-                <div class="col-xs-12">
+              <div class="">
+                <div class="">
                 <div class="content">
                   <div class="block-title">
                     <h2 class="title">Новинки</h2>
@@ -944,7 +948,7 @@
                   <!--<div class="preloader"><span class="content-loading"></span></div>-->
                   <div class="products-grid">
                     {% FOR index_page_new_goods %}
-                    <div class="item {% IF index_page_new_goods.MIN_REST_VALUE=0 %}empty{% ENDIF %}">
+                    <div class="item {% IF index_page_new_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}empty{% ENDIF %}{% IF index_page_new_goods.COUNT_MODIFICATION > 1 %} _with-mod{% ENDIF %}">
                       <div class="item-inner" itemscope itemtype="https://schema.org/Product">
                         <form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product-form-{index_page_new_goods.MIN_PRICE_NOW_ID} goodsListForm">
                           <input type="hidden" name="hash" value="{HASH}" />
@@ -1073,7 +1077,9 @@
                                     <meta itemprop="bestRating" content = "10">
                                     <meta itemprop="ratingValue" content = "{index_page_new_goods.OPINION_RATING_VALUE}">
                                     <meta itemprop="reviewCount" content = "{index_page_new_goods.OPINION_RATING_CNT_ALL}">
-                                    <div class="rating" style="width:{index_page_new_goods.OPINION_RATING_VALUE}0%" alt="{index_page_new_goods.OPINION_RATING_VALUE}" title="Рейтинг товара"></div>
+                                    <div class="rating">
+                                      <span>{index_page_new_goods.OPINION_RATING_VALUE | divide("2")}/5</span>
+                                    </div>   
                                   </span>
                                   {% ELSE %}
                                     <div class="rating" style="width:0%"  title="Рейтинг не определён"></div>
@@ -1134,8 +1140,8 @@
           {% IFNOT index_page_favorites_goods_empty %}
           <div class="pdt-best products-container index {% IF index_page_goods_empty=1 && index_page_new_goods_empty=1 %}tab-content-actived{% ENDIF %}">
             <div class="container">
-              <div class="row">
-                <div class="col-xs-12">
+              <div class="">
+                <div class="">
                 <div class="content">
                   <div class="block-title">
                     <h2 class="title">Хиты</h2>
@@ -1143,7 +1149,7 @@
                   <!--<div class="preloader"><span class="content-loading"></span></div>-->
                   <div class="products-grid">
                     {% FOR index_page_favorites_goods %}
-                    <div class="item {% IF index_page_favorites_goods.MIN_REST_VALUE=0 %}empty{% ENDIF %}">
+                    <div class="item {% IF index_page_favorites_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}empty{% ENDIF %}{% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %} _with-mod{% ENDIF %}">
                       <div class="item-inner" itemscope itemtype="https://schema.org/Product">
                         <form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product-form-{index_page_favorites_goods.MIN_PRICE_NOW_ID} goodsListForm">
                           <input type="hidden" name="hash" value="{HASH}" />
@@ -1272,7 +1278,9 @@
                                     <meta itemprop="bestRating" content = "10">
                                     <meta itemprop="ratingValue" content = "{index_page_favorites_goods.OPINION_RATING_VALUE}">
                                     <meta itemprop="reviewCount" content = "{index_page_favorites_goods.OPINION_RATING_CNT_ALL}">
-                                    <div class="rating" style="width:{index_page_favorites_goods.OPINION_RATING_VALUE}0%" alt="{index_page_favorites_goods.OPINION_RATING_VALUE}" title="Рейтинг товара"></div>
+                                    <div class="rating">
+                                      <span>{index_page_favorites_goods.OPINION_RATING_VALUE | divide("2")}/5</span>
+                                    </div>   
                                   </span>
                                   {% ELSE %}
                                     <div class="rating" style="width:0%"  title="Рейтинг не определён"></div>
@@ -1333,8 +1341,8 @@
           {% IFNOT index_page_sale_goods_empty %}
           <div class="pdt-sale products-container index {% IF index_page_goods_empty=1 && index_page_new_goods_empty=1 && index_page_favorites_goods_empty=1 %}tab-content-actived{% ENDIF %}">
             <div class="container">
-              <div class="row">
-                <div class="col-xs-12">
+              <div class="">
+                <div class="">
                 <div class="content">
                   <div class="block-title">
                     <h2 class="title">Акция</h2>
@@ -1342,7 +1350,7 @@
                   <!--<div class="preloader"><span class="content-loading"></span></div>-->
                   <div class="products-grid">
                     {% FOR index_page_sale_goods %}
-                    <div class="item {% IF index_page_sale_goods.MIN_REST_VALUE=0 %}empty{% ENDIF %}">
+                    <div class="item {% IF index_page_sale_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}empty{% ENDIF %}{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %} _with-mod{% ENDIF %}">
                       <div class="item-inner" itemscope itemtype="https://schema.org/Product">
                         <form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product-form-{index_page_sale_goods.MIN_PRICE_NOW_ID} goodsListForm">
                           <input type="hidden" name="hash" value="{HASH}" />
@@ -1471,7 +1479,9 @@
                                     <meta itemprop="bestRating" content = "10">
                                     <meta itemprop="ratingValue" content = "{index_page_sale_goods.OPINION_RATING_VALUE}">
                                     <meta itemprop="reviewCount" content = "{index_page_sale_goods.OPINION_RATING_CNT_ALL}">
-                                    <div class="rating" style="width:{index_page_sale_goods.OPINION_RATING_VALUE}0%" alt="{index_page_sale_goods.OPINION_RATING_VALUE}" title="Рейтинг товара"></div>
+                                    <div class="rating">
+                                      <span>{index_page_sale_goods.OPINION_RATING_VALUE | divide("2")}/5</span>
+                                    </div>   
                                   </span>
                                   {% ELSE %}
                                     <div class="rating" style="width:0%"  title="Рейтинг не определён"></div>
@@ -1543,7 +1553,7 @@
           <div class="block-bg">
           <div class="row no-gutters">
             <!-- Левый блок -->
-            {% IF MOD_LNAME = goods || MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare %}
+            {% IF MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare %}
             <div class="col-md-3 col-xs-12 col-left">
               <div class="page-sidebar">
               <!-- Меню пользователя ЛК -->
@@ -1682,7 +1692,7 @@
               </div>
             </div>
             {% ENDIF %}
-            <div class="{% IF MOD_LNAME = goods || MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare%}col-md-9 col-xs-12 col-right{% ELSE %}col-xs-12{% ENDIF %}">
+            <div class="{% IFMOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare%}col-md-9 col-xs-12 col-right{% ELSE %}col-xs-12{% ENDIF %}">
               <div class="page-content {% IF MOD_LNAME = catalog || MOD_LNAME = search || MOD_LNAME =  discount %}no-padding {% ENDIF %} clearfix">
               <!-- Заголовок страницы -->
               <div id="page-title">
@@ -1978,16 +1988,16 @@
             </div>
           </div>
           <div class="block col-lg-3 col-md-4 col-sm-12 col-xs-12">
-            <div class="title"><span>Контакты</span></div>
+            <!-- <div class="title"><span>Контакты</span></div> -->
             <div class="block-contact" itemscope itemtype="https://schema.org/Organization">
               <meta itemprop="name" content="{SETTINGS_STORE_ORG_NAME}"/>
               {% IF SETTINGS_STORE_PHONE_NUMBER1 %}<div itemprop="telephone"><i class="fal fa-phone"></i><p><b>Телефон</b><br><a href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}{SETTINGS_STORE_PHONE_CITY_CODE1}{SETTINGS_STORE_PHONE_NUMBER1}">{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}</a></p></div>{% ENDIF %}
               {% IF SETTINGS_STORE_PHONE_NUMBER2 %}<div itemprop="telephone"><i class="fal fa-phone"></i><p><b>Телефон</b><br><a href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}{SETTINGS_STORE_PHONE_CITY_CODE2}{SETTINGS_STORE_PHONE_NUMBER2}">{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}</a></p></div>{% ENDIF %}
               {% IF SETTINGS_STORE_PHONE_NUMBER3 %}<div itemprop="faxNumber"><i class="fal fa-fax" aria-hidden="true"></i><p><b>Факс</b><br><a href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}{SETTINGS_STORE_PHONE_CITY_CODE3}{SETTINGS_STORE_PHONE_NUMBER3}">{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}</a></p></div>{% ENDIF %}
-              {% IF SETTINGS_STORE_WORK_TIME %}<div><i class="fal fa-clock"></i><p>{SETTINGS_STORE_WORK_TIME}</p></div>{% ENDIF %}
-              {% IF SETTINGS_STORE_EMAIL_MAIN %}<div itemprop="email"><i class="fal fa-envelope"></i><p><b>Email</b><br><a href="mailto:{SETTINGS_STORE_EMAIL_MAIN}">{SETTINGS_STORE_EMAIL_MAIN}</a></p></div>{% ENDIF %}
               {% IF SETTINGS_STORE_SKYPE %}<div><i class="fab fa-skype"></i><p><b>Skype</b><br><a href="skype:{SETTINGS_STORE_SKYPE}?call">{SETTINGS_STORE_SKYPE}</a></p></div>{% ENDIF %}
-              {% IF SETTINGS_STORE_REGION %}<div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="addressLocality"><i class="fal fa-compass"></i><p><b>Наш адрес</b><br>{SETTINGS_STORE_REGION}</p></span></div>{% ENDIF %}
+              {% IF SETTINGS_STORE_WORK_TIME %}<div></i><p>{SETTINGS_STORE_WORK_TIME | htmlspecialchars_decode}</p></div>{% ENDIF %}
+              {% IF SETTINGS_STORE_EMAIL_MAIN %}<div itemprop="email"><a href="mailto:{SETTINGS_STORE_EMAIL_MAIN}">{SETTINGS_STORE_EMAIL_MAIN}</a></p></div>{% ENDIF %}
+              {% IF SETTINGS_STORE_REGION %}<div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="addressLocality"><span><i class="fal fa-compass"></i><b>Наш адрес</b></span><p>{SETTINGS_STORE_REGION}</p></span></div>{% ENDIF %}
             </div>
           </div>          
         </div>
@@ -2190,7 +2200,7 @@
                     </div>
                 </div>
             </a>
-            <a href="/wishlist" title="Избранное" class="cart-fly__button _favorites">          
+            <a href="/wishlist" title="Избранное" class="cart-fly__button _favorites _bordered">          
                 <div class="cart-fly__button-icon _cart">
                     <i class="fal fa-heart"></i>
                     <div class="count">
@@ -2233,6 +2243,7 @@
     left: -58px;
     top: 0;
     overflow: hidden;
+    box-shadow: 0 5px 40px rgba(61,77,95,.25);
   }
   .cart-fly__buttons .count {
     text-align: center;
