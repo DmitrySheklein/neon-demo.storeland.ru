@@ -228,7 +228,7 @@
                                 <a href="{catalog_full.URL}" class="{% IF catalog_full.LEVEL = 0 %}header-catalogLink {% ENDIF %}{% IF catalog_full.LEVEL = 1 %}header-subcatalogTitle {% ENDIF %}{% IF catalog_full.LEVEL >= 2 %}header-subcatalogLink {% ENDIF %}{% IF catalog_full.CURRENT %} active{% ENDIF %}" title="{catalog_full.NAME}" itemprop="url">
                                   {catalog_full.NAME}
                                   {% IF catalog_full.ISSET_VISIBLE_SUB &&  catalog_full.LEVEL = 0 %}<span class="header-arrow header-catalogArrow fal fa-angle-down {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}active{% ENDIF %}"></span>{% ENDIF %}
-                                  {% IF catalog_full.ISSET_VISIBLE_SUB &&  catalog_full.LEVEL != 0 %}<span class="header-arrow header-secondArrow  fal fa-caret-right {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}active{% ENDIF %}"></span>{% ENDIF %}
+                                  {% IF catalog_full.ISSET_VISIBLE_SUB &&  catalog_full.LEVEL != 0 %}<span class="header-arrow header-secondArrow  fal fa-angle-down {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}active{% ENDIF %}"></span>{% ENDIF %}
                                 </a>
                           {% IF catalog_full.ISSET_SUB=0 %}
                           </li>
@@ -353,89 +353,6 @@
   						
   						<!-- Инструменты -->
   						<div class="header-tools">
-  						  <!-- Избранное -->
-                <div class="header-toolsCol">
-                  <div class="favorites {% IF MOD_LNAME = user && ACT = favorites %}page{% ENDIF %}">
-                    <a class="header-toolsLink title" href="{%IF CLIENT_IS_LOGIN%}{USER_FAVORITES_URL}{%ELSE%}{USER_REGISTER_URL}{%ENDIF%}" title="Перейти к Избранному">
-                  		<span class="header-toolsIcon _favorite">
-                  		  <i class="fal fa-heart" aria-hidden="true"></i>
-                  		  <span class="header-toolsCounter count" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT}</span>
-                  		</span>
-                      <span class="header-toolsName title">Избранное</span>
-                    </a>                    
-                    <div class="dropdown">
-                      <div id="favorites-items">
-                        {% IF favorites_goods_empty %}
-                          <div class="empty">Ваш список Избранного пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> после <a href="{USER_REGISTER_URL}" title="Перейти к авторизации">авторизации</a>.</div>
-                          <ul class="favorites-items-list"></ul>
-                        {% ELSE %}
-                          <div class="empty" style="display:none">Ваш список Избранного пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> после <a href="{USER_REGISTER_URL}" title="Перейти к авторизации">авторизации</a>.</div>
-                          <ul class="favorites-items-list">
-                          {% FOR favorites_goods %}
-                          <li class="item" {% IF favorites_goods.index > 10 %}style="display:none;"{% ENDIF %} data-id="{favorites_goods.ID}">
-                            <a data-href="{FAVORITES_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{favorites_goods.MIN_PRICE_NOW_ID}" class="remove item-remove" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"></a>
-                            <a href="{favorites_goods.URL}" title="{favorites_goods.NAME}" class="product-image">
-                              <img src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" alt="{favorites_goods.NAME}" class="goods-image-icon">
-                            </a>
-                            <div class="product-details">
-                              <p class="product-name"><a href="{favorites_goods.URL}" title="{favorites_goods.NAME}">{favorites_goods.NAME}</a></p>
-                              <span class="price {CURRENCY_CHAR_CODE}" data-price="{favorites_goods.MIN_PRICE_NOW}">{favorites_goods.MIN_PRICE_NOW | money_format}</span>
-                              <a href="#" class="dataid">{favorites_goods.ID}</a>
-                            </div>
-                          </li>
-                          {% ENDFOR %}
-                          </ul>
-                        {% ENDIF %}
-                        <div class="actions" {% IF favorites_goods_empty %}style="display:none"{% ENDIF %}>
-                          <a data-href="{FAVORITES_RESET_URL}" onclick="removeFromFavoritesAll($(this))" class="button _dropdown" title="Очистить список избранного">Очистить</a>
-                          <a href="{FAVORITES_URL}" class="button" title="Перейти к избранному">Избранное</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>                  
-                </div>
-                <!-- Сравнение -->
-                <div class="header-toolsCol">
-                  {% IF TARIFF_FEATURE_GOODS_COMPARE && SETTINGS_COMPARE_DISABLE=0 %}
-                  <div class="compare {% IF MOD_LNAME = compare %}page{% ENDIF %}">
-                    <a  href="{COMPARE_URL}" title="Перейти к Сравнению" class="header-toolsLink title">
-                      <span class="header-toolsIcon _compare">
-                        <i class="fal fa-signal"></i>
-                        <span class="header-toolsCounter count" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span>
-                      </span>
-                      <span class="header-toolsName title">Сравнение</span>
-                    </a>
-                    <div class="dropdown">
-                      <div id="compare-items">
-                        {% IF compare_list_empty %}
-                          <div class="empty">Ваш список сравнения пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> и сравнивать их между собой.</div>
-                          <ul class="compare-items-list"></ul>
-                        {% ELSE %}
-                          <div class="empty" style="display:none">Ваш список сравнения пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> и сравнивать их между собой.</div>
-                          <ul class="compare-items-list">
-                          {% FOR compare_goods %}
-                          <li class="item" {% IF compare_goods.index > 10 %}style="display:none;"{% ENDIF %} data-id="{compare_goods.ID}">
-                            <a data-href="{COMPARE_DELETE_URL}?id={compare_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{compare_goods.MIN_PRICE_NOW_ID}" class="remove item-remove" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"></a>
-                            <a href="{compare_goods.URL}" title="{compare_goods.NAME}" class="product-image">
-                              <img src="{% IF compare_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{compare_goods.IMAGE_ICON}{% ENDIF %}" alt="{compare_goods.NAME}" class="goods-image-icon">
-                            </a>
-                            <div class="product-details">
-                              <p class="product-name"><a href="{compare_goods.URL}" title="{compare_goods.NAME}">{compare_goods.NAME}</a></p>
-                              <span class="price {CURRENCY_CHAR_CODE}" data-price="{compare_goods.MIN_PRICE_NOW}">{compare_goods.MIN_PRICE_NOW | money_format}</span>
-                            </div>
-                          </li>
-                          {% ENDFOR %}
-                          </ul>
-                        {% ENDIF %}
-                        <div class="actions" {% IF compare_list_empty %}style="display:none"{% ENDIF %}>
-                          <a data-href="{COMPARE_RESET_URL}" onclick="removeFromCompareAll($(this))"  class="button _dropdown" title="Очистить список сравнения">Очистить</a>
-                          <a href="{COMPARE_URL}" class="button" title="Перейти к Сравнению">Сравнение</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {% ENDIF %}                  
-                </div>
                 <!-- Корзина -->                
                 <div class="header-toolsCol">
                   <div class="cart {% IF MOD_LNAME = cart %}page{% ENDIF %}">
@@ -482,6 +399,94 @@
                     </div>
                   </div>                  
                 </div>
+                <!-- Сравнение -->
+                <div class="header-toolsCol">
+                  {% IF TARIFF_FEATURE_GOODS_COMPARE && SETTINGS_COMPARE_DISABLE=0 %}
+                  <div class="compare {% IF MOD_LNAME = compare %}page{% ENDIF %}">
+                    <a  href="{COMPARE_URL}" title="Перейти к Сравнению" class="header-toolsLink title">
+                      <span class="header-toolsIcon _compare">
+                        <i class="fal fa-signal"></i>
+                        <span class="header-toolsCounter count" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span>
+                      </span>
+                      <span class="header-toolsName title">Сравнение</span>
+                    </a>
+                    <div class="dropdown">
+                      <div id="compare-items">
+                        {% IF compare_list_empty %}
+                          <div class="empty">Ваш список сравнения пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> и сравнивать их между собой.</div>
+                          <ul class="compare-items-list"></ul>
+                        {% ELSE %}
+                          <div class="empty" style="display:none">Ваш список сравнения пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> и сравнивать их между собой.</div>
+                          <ul class="compare-items-list">
+                          {% FOR compare_goods %}
+                          <li class="item" {% IF compare_goods.index > 10 %}style="display:none;"{% ENDIF %} data-id="{compare_goods.ID}">
+                            <a data-href="{COMPARE_DELETE_URL}?id={compare_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{compare_goods.MIN_PRICE_NOW_ID}" class="remove item-remove" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"></a>
+                            <a href="{compare_goods.URL}" title="{compare_goods.NAME}" class="product-image">
+                              <img src="{% IF compare_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{compare_goods.IMAGE_ICON}{% ENDIF %}" alt="{compare_goods.NAME}" class="goods-image-icon">
+                            </a>
+                            <div class="product-details">
+                              <p class="product-name"><a href="{compare_goods.URL}" title="{compare_goods.NAME}">{compare_goods.NAME}</a></p>
+                              <span class="price {CURRENCY_CHAR_CODE}" data-price="{compare_goods.MIN_PRICE_NOW}">{compare_goods.MIN_PRICE_NOW | money_format}</span>
+                            </div>
+                          </li>
+                          {% ENDFOR %}
+                          </ul>
+                        {% ENDIF %}
+                        <div class="actions" {% IF compare_list_empty %}style="display:none"{% ENDIF %}>
+                          <a data-href="{COMPARE_RESET_URL}" onclick="removeFromCompareAll($(this))"  class="button _dropdown" title="Очистить список сравнения">Очистить</a>
+                          <a href="{COMPARE_URL}" class="button" title="Перейти к Сравнению">Сравнение</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% ENDIF %}                  
+                </div>                                
+  						  <!-- Избранное -->
+                <div class="header-toolsCol _favorite _bordered">
+                  <div class="favorites {% IF MOD_LNAME = user && ACT = favorites %}page{% ENDIF %}">
+                    <a class="header-toolsLink title" href="{%IF CLIENT_IS_LOGIN%}{USER_FAVORITES_URL}{%ELSE%}{USER_REGISTER_URL}{%ENDIF%}" title="Перейти к Избранному">
+                  		<span class="header-toolsIcon _favorite">
+                  		  <i class="fal fa-heart" aria-hidden="true"></i>
+                  		  <span class="header-toolsCounter count" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT}</span>
+                  		</span>
+                      <span class="header-toolsName title">Избранное</span>
+                    </a>                    
+                    <div class="dropdown">
+                      <div id="favorites-items">
+                        {% IF favorites_goods_empty %}
+                          <div class="empty">Ваш список Избранного пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> после <a href="{USER_REGISTER_URL}" title="Перейти к авторизации">авторизации</a>.</div>
+                          <ul class="favorites-items-list"></ul>
+                        {% ELSE %}
+                          <div class="empty" style="display:none">Ваш список Избранного пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> после <a href="{USER_REGISTER_URL}" title="Перейти к авторизации">авторизации</a>.</div>
+                          <ul class="favorites-items-list">
+                          {% FOR favorites_goods %}
+                          <li class="item" {% IF favorites_goods.index > 10 %}style="display:none;"{% ENDIF %} data-id="{favorites_goods.ID}">
+                            <a data-href="{FAVORITES_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{favorites_goods.MIN_PRICE_NOW_ID}" class="remove item-remove" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"></a>
+                            <a href="{favorites_goods.URL}" title="{favorites_goods.NAME}" class="product-image">
+                              <img src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" alt="{favorites_goods.NAME}" class="goods-image-icon">
+                            </a>
+                            <div class="product-details">
+                              <p class="product-name"><a href="{favorites_goods.URL}" title="{favorites_goods.NAME}">{favorites_goods.NAME}</a></p>
+                              <span class="price {CURRENCY_CHAR_CODE}" data-price="{favorites_goods.MIN_PRICE_NOW}">{favorites_goods.MIN_PRICE_NOW | money_format}</span>
+                              <a href="#" class="dataid">{favorites_goods.ID}</a>
+                            </div>
+                          </li>
+                          {% ENDFOR %}
+                          </ul>
+                        {% ENDIF %}
+                        <div class="actions" {% IF favorites_goods_empty %}style="display:none"{% ENDIF %}>
+                          <a data-href="{FAVORITES_RESET_URL}" onclick="removeFromFavoritesAll($(this))" class="button _dropdown" title="Очистить список избранного">Очистить</a>
+                          <a href="{FAVORITES_URL}" class="button" title="Перейти к избранному">Избранное</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>                  
+                </div>
+                <!-- Кнопка Наверх -->
+                <a class="header-toolsCol _back-top _bordered" href="#"  id="back-top" >
+                  <i class="fal fa-angle-up" aria-hidden="true"></i>  
+                </a>  
+                <!-- /END Кнопка Наверх -->
                 
   						</div>
   						<!-- /Инструменты -->
@@ -582,7 +587,7 @@
     <!-- Слайдшоу-->
     <div id="slideshow">
       <div class="container">
-        <div class="preloader"><span class="content-loading"></span></div>
+        <!-- <div class="preloader"><span class="content-loading"></span></div> -->
         <div class="slider owl-carousel">
           <!-- Слайд 1 -->
           <div class="item">
@@ -628,9 +633,8 @@
     <!-- Преимущества -->
     <div id="features" class="section">
       <div class="container">
-        <div class="features-list">
-          <div class="row">
-            <a class="col-md-3 col-sm-6 col-xs-6 main-featuresItem" href="#" >
+        <div class="features-list owl-carousel owl-theme">
+            <a class="main-featuresItem" href="#" >
               <div class="main-featuresInner">
                 <div class="main-featuresIcon">
                   <i class="fal fa-lock" aria-hidden="true"></i>
@@ -641,7 +645,7 @@
                 </div>
               </div>
             </a>
-            <a class="col-md-3 col-sm-6 col-xs-6 main-featuresItem" href="#" >
+            <a class="main-featuresItem" href="#" >
               <div class="main-featuresInner">
                 <div class="main-featuresIcon">
                   <i class="fal fa-truck" aria-hidden="true"></i>
@@ -652,7 +656,7 @@
                 </div>                
               </div>
             </a>
-            <a class="col-md-3 col-sm-6 col-xs-6 main-featuresItem" href="#" >
+            <a class="main-featuresItem" href="#" >
               <div class="main-featuresInner">
                 <div class="main-featuresIcon">
                   <i class="fal fa-sync" aria-hidden="true"></i>
@@ -663,7 +667,7 @@
                 </div>                
               </div>
             </a>
-            <a class="col-md-3 col-sm-6 col-xs-6 main-featuresItem" href="#" >
+            <a class="main-featuresItem" href="#" >
               <div class="main-featuresInner">
                 <div class="main-featuresIcon">
                   <i class="fal fa-phone" aria-hidden="true"></i>
@@ -674,7 +678,6 @@
                 </div>                
               </div>
             </a>
-          </div>
         </div>
       </div>
     </div>
@@ -693,7 +696,7 @@
                Весь каталог
             </a>
           </div>
-          <div class="categories index">
+          <div class="categories index owl-carousel owl-theme">
             {% FOR catalog_full%}
             {% IFNOT catalog_full.HIDE %}
                 <!-- Если нужны конкретные категории  -->
@@ -1814,7 +1817,7 @@
                     {% FOR news_list_shop %}
                       <div class="item">
                         <div class="post-content">
-                          <img class="news-image  lozad" data-src="{% IF news_list_shop.IMG %}{news_list_shop.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}">
+                          <a class="news-image-wrap" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;"><img class="news-image  owl-lazy" data-src="{% IF news_list_shop.IMG %}{news_list_shop.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
                           <div class="title"><a href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;">{news_list_shop.TITLE}</a></div>
                           {% IF news_list_shop.SHOW_TIME %}<div class="date">{news_list_shop.TIME | date("d")}.{news_list_shop.TIME | date("m")}.{news_list_shop.TIME | date("Y")}</div>{% ENDIF %}
                           <a href="{news_list_shop.URL}" class="button button2 small" >Подробнее</a>
@@ -1834,7 +1837,7 @@
                     {% FOR news_list_articles %}
                       <div class="item">
                         <div class="post-content">
-                          <img class="news-image lozad" data-src="{% IF news_list_articles.IMG %}{news_list_articles.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}">
+                          <a class="news-image-wrap" href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;"><img class="news-image owl-lazy" data-src="{% IF news_list_articles.IMG %}{news_list_articles.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
                           <div class="title"><a href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;">{news_list_articles.TITLE}</a></div>
                           {% IF news_list_articles.SHOW_TIME %}<div class="date">{news_list_articles.TIME | date("d")}.{news_list_articles.TIME | date("m")}.{news_list_articles.TIME | date("Y")}</div>{% ENDIF %}
                           <a href="{news_list_articles.URL}" class="button button2 small" >Подробнее</a>
@@ -1854,7 +1857,7 @@
                     {% FOR news_list_mass_media %}
                       <div class="item">
                         <div class="post-content">
-                          <img class="news-image lozad" data-src="{% IF news_list_mass_media.IMG %}{news_list_mass_media.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}">
+                          <a class="news-image-wrap" href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;"><img class="news-image owl-lazy" data-src="{% IF news_list_mass_media.IMG %}{news_list_mass_media.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
                           <div class="title"><a href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;">{news_list_mass_media.TITLE}</a></div>
                           {% IF news_list_mass_media.SHOW_TIME %}<div class="date">{news_list_mass_media.TIME | date("d")}.{news_list_mass_media.TIME | date("m")}.{news_list_mass_media.TIME | date("Y")}</div>{% ENDIF %}
                           <a href="{news_list_mass_media.URL}" class="button button2 small" >Подробнее</a>
@@ -1881,7 +1884,7 @@
                 {% FOR news_list_all %}
                   <div class="item">
                     <div class="post-content">
-                      <img class="news-image lozad" data-src="{% IF news_list_all.IMG %}{news_list_all.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}">
+                      <a class="news-image-wrap" href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;"><img class="news-image owl-lazy" data-src="{% IF news_list_all.IMG %}{news_list_all.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
                       {% IF news_list_all.SHOW_TIME %}<div class="date">{news_list_all.TIME | date("d")}.{news_list_all.TIME | date("m")}.{news_list_all.TIME | date("Y")}</div>{% ENDIF %}
                       <div class="title"><a href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;">{news_list_all.TITLE}</a></div>
                       <div class="description"><p>{news_list_all.TEXT_SHORT}</p></div> 
@@ -1914,7 +1917,7 @@
                   <meta itemprop="description" content="{% IF recently_viewed_goods.DESCRIPTION_SHORT %}{recently_viewed_goods.DESCRIPTION_SHORT}{% ELSE %}Описание отсутствует{% ENDIF %}">
                   <div class="product-image">
                     <a href="{recently_viewed_goods.URL_MIN_PRICE_NOW | url_amp}" title="{recently_viewed_goods.NAME}" itemprop="url">
-                      <img data-src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{recently_viewed_goods.IMAGE_ICON}{% ENDIF %}" class="goods-image-icon lozad" alt="{recently_viewed_goods.NAME}" title="{recently_viewed_goods.NAME}"  itemprop="image">
+                      <img src="{ASSETS_IMAGES_PATH}loader-min.gif" data-src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{recently_viewed_goods.IMAGE_ICON}{% ENDIF %}" class="goods-image-icon lozad" alt="{recently_viewed_goods.NAME}" title="{recently_viewed_goods.NAME}"  itemprop="image">
                     </a>
                   </div>
                   <div class="product-info">
@@ -2087,9 +2090,9 @@
   <div class="overlay"></div>  
 
   <!-- Скрипты магазина -->
-  <script  src="{ASSETS_JS_PATH}forall.js"></script>
-  <script  src="{ASSETS_JS_PATH}main.js?design=neon"></script>
-  <script  src="{ASSETS_JS_PATH}smart-search.js?design=neon"></script>
+  <script src="{ASSETS_JS_PATH}forall.js"></script>
+  <script src="{ASSETS_JS_PATH}main.js?design=neon"></script>
+  <script src="{ASSETS_JS_PATH}smart-search.js?design=neon"></script>
   {% IF user_agent_ie %}
   <script>
     // Picture element HTML5 shiv
@@ -2158,156 +2161,7 @@
     .nojs .preloader{animation:fadeOut 0.5s ease-out;animation-delay:2s;animation-fill-mode:forwards;}
     @keyframes fadeOut{from{opacity:1}to{opacity:0;visibility:hidden;}}.fadeOut{animation-name:fadeOut}
   </style>
-  <!-- /END Сообщение для инвалидов -->
-  <!-- Обратный звонок в шапке -->
-  <script>
-  $(function(){
-    $("#header-callback, #header-feedback").fancybox();    
-  })
-  </script>
-  <!-- /END Обратный звонок в шапке --> 
-
-
-    
-  <div class="cart-fly _loaded">
-    <div class="cart-fly_wrapper">
-        <input type="hidden" name="total_price" value="17 700 руб.">
-        <input type="hidden" name="total_discount_price" value="17 700 руб.">
-        <input type="hidden" name="total_count" value="2">
-        <input type="hidden" name="delay_count" value="0">
-        <div class="cart-fly__buttons">
-            <a href="/cart" title="Корзина" class="cart-fly__button _cart _clicked">          
-                <div class="cart-fly__button-icon _cart">
-                    <i class="fal fa-shopping-cart"></i>
-                    <div class="count">
-                        <span>
-                            <span class="num">
-                                <span>2</span>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </a>
-            <a href="/compare" title="Сравнение" class="cart-fly__button _compare">          
-                <div class="cart-fly__button-icon _cart">
-                    <i class="fal fa-signal"></i>
-                    <div class="count">
-                        <span>
-                            <span class="num">
-                                <span>1</span>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </a>
-            <a href="/wishlist" title="Избранное" class="cart-fly__button _favorites _bordered">          
-                <div class="cart-fly__button-icon _cart">
-                    <i class="fal fa-heart"></i>
-                    <div class="count">
-                        <span>
-                            <span class="num">
-                                <span>0</span>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </a>
-            <!-- Кнопка Наверх -->
-            <a href="#"  id="back-top" class="cart-fly__button _back-top">
-              <i class="fal fa-angle-up" aria-hidden="true"></i>  
-            </a>  
-            <!-- /END Кнопка Наверх -->           
-        </div>
-    </div>
-</div>  
-  <style>
-  .cart-fly {
-    background: #fff;
-    box-shadow: rgba(44,44,44,.4) 0 6px 18px;
-    -moz-box-shadow: rgba(44,44,44,.4) 0 6px 18px;
-    -webkit-box-shadow: rgba(44,44,44,.4) 0 6px 18px;
-    min-height: 283px;
-  }
-  .cart-fly {
-    position: fixed;
-    right: 0;
-    z-index: 2;
-    top: 178px;
-    z-index: 1046;
-    width: 800px;
-    right: -800px;
-  }
-  .cart-fly__buttons {
-    position: absolute;
-    width: 58px;
-    left: -58px;
-    top: 0;
-    overflow: hidden;
-    box-shadow: 0 5px 40px rgba(61,77,95,.25);
-  }
-  .cart-fly__buttons .count {
-    text-align: center;
-    opacity: 1;
-    font-size: 12px;
-    line-height: 13px;
-    background: #424f60;
-    color: #fff;
-    border-radius: 100%;
-    width: 20px;
-    background: #e3e3e3;
-    display: block;
-    height: 20px;
-    vertical-align: middle;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-    line-height: 20px;
-    margin: auto;
-  }
-  .cart-fly__button {    
-    background: #424f60;
-  }
-  .cart-fly__button:first-child {
-    border-top-left-radius: 5px;
-  }
-  .cart-fly__button._favorites._bordered {
-    border-bottom-left-radius: 5px;
-  }
-  .cart-fly__button._back-top._bordered {
-    border-bottom-left-radius: 5px;
-  }
-  .cart-fly__button:not(:first-child) {
-    border-top: 1px solid #ccc;
-  }
-
-  .cart-fly__button:not(._clicked) .count {
-    /* background-image: linear-gradient(160.47deg,#fe6260 11.94%,#fc9758 85.71%); */
-    background: #f65e64;
-  }
-
-  .cart-fly__button._clicked .count {
-    background: #424f60;
-  }
-  .cart-fly__button-icon i {
-    color: #fff;
-    display: block;
-    padding: 15px 15px 10px;
-    margin: auto;
-    text-align: center;
-    font-size: 18px;
-  }
-  a.cart-fly__button._cart._clicked {
-    /* background-image: linear-gradient(160.47deg,#fe6260 11.94%,#fc9758 85.71%); */
-    background: #f65e64;
-  }
-  a.cart-fly__button {
-    display: block;
-    padding-bottom: 5px;
-  }
-  .cart-fly__buttons._clicked .count {
-    background: #424f60;
-  }      
-  </style>
+  <!-- /END Сообщение для инвалидов --> 
 
 <!-- Development -->
 <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
@@ -2327,6 +2181,31 @@
       });      
   })()
 
+</script>
+<script>
+  $(function () {
+    $(document).on('click', function (e) {
+      var $this  = $(e.target)
+      if(!$this.closest('.header-tools').length){
+          console.log($this);
+         $('.header-tools').removeClass('_active').find('.header-toolsCol').removeClass('_active')
+        }
+    })
+    $('.header-toolsLink').on('click', function(e){
+      e.preventDefault();
+      if($(this).hasClass('_active')) {
+        $('.header .header-tools').removeClass('_active');
+        $(this).removeClass('_active')
+        return
+      }
+      $(this).addClass('_active')
+      $('.header .header-tools').addClass('_active')
+      $('.header-tools').find('.dropdown').removeClass('_active')
+      $(this).parent().find('.dropdown').toggleClass('_active')
+      $('.header-tools').find('.header-toolsCol').removeClass('_active')
+      $(this).closest('.header-toolsCol').toggleClass('_active')
+    })
+  })
 </script>
   <!-- Debug -->
   <div class="container">

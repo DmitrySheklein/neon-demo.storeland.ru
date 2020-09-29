@@ -1564,7 +1564,7 @@ function quickViewShow(href, atempt) {
 // Функция Быстрого просмотра товара c модификацией
 function quickViewMod() {
   // Действие при нажатии на кнопку в корзину товара c модификацией
-  $(document).ready(function() {
+  $(function() {
     $(document).on('click', 'a.quickviewmod', function() {
       var href = $(this).attr('href');
       href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
@@ -2328,9 +2328,9 @@ $(function(){
 	// fade in #back-top
 	$(window).scroll(function () {
 		if ($(this).scrollTop() > 100) {
-			$('#back-top').addClass('_bordered').fadeIn('fast').prev().removeClass('_bordered');
+			$('#back-top').addClass('_bordered').show().prev().removeClass('_bordered');
 		} else {
-			$('#back-top').removeClass('_bordered').fadeOut('fast').prev().addClass('_bordered');
+			$('#back-top').removeClass('_bordered').hide().prev().addClass('_bordered');
 		}
 	});
 	// scroll body to 0px on click
@@ -2607,6 +2607,49 @@ function indexPage() {
     touchDrag: true,
     pullDrag: true
   });
+  // Преимущества
+  $("#features .features-list").owlCarousel({
+    items: 4,
+    loop: false,
+    rewind: true,
+    lazyLoad: false,
+    nav: false,
+    dots: false,
+    autoplay: false,
+    smartSpeed: 500,
+    touchDrag: true,
+    pullDrag: true,
+    responsiveClass: true,
+    responsiveRefreshRate: 100,
+    responsive: {
+      0:{items:1},
+      320:{items:1,margin: 5},
+      480:{items:2,margin: 10},
+      991:{items:3,margin: 10},
+      1200:{items:4,margin: 30,mouseDrag: false}
+    }
+  });  
+  // Категории на главной
+  $("#categories-index .categories").owlCarousel({
+    loop: false,
+    rewind: true,
+    lazyLoad: false,
+    nav: false,
+    dots: false,
+    autoplay: false,
+    smartSpeed: 500,
+    touchDrag: true,
+    pullDrag: true,
+    responsiveClass: true,
+    responsiveRefreshRate: 100,
+    responsive: {
+      0:{items:1},
+      320:{items:1,margin: 5},
+      480:{items:2,margin: 10},
+      991:{items:3,margin: 10},
+      1200:{items:5,margin: 10,mouseDrag: false}
+    }
+  });  
   // Товары на главной
   (function(element){
     $element = $(element);
@@ -2669,13 +2712,14 @@ function indexPage() {
     responsiveClass:true,
     responsive:{
       0:{items:1},
-      768:{items:1},
+      768:{items:2},
       992:{items:3},
       1199:{items: 5}
     }
   });
   // Слайдер новостей (группы)
   $("#news .owl-carousel").owlCarousel({
+    margin: 10,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -2697,7 +2741,7 @@ function indexPage() {
     responsiveClass:true,
     responsive:{
       0:{items:1},
-      768:{items:1},
+      768:{items:2},
       992:{items:3},
       1199:{items:5}
     }
