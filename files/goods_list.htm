@@ -14,16 +14,18 @@
   {% ENDIF %}
   <div class="categories">
   {% FOR nested_categories_list %}
-           <div class="item">
-           <div class="cat-name" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
-                   <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">{nested_categories_list.NAME}</a>
-           </div>
-           <div class="cat-image">
-                   <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
-                   <img class="goods-cat-image-medium lozad" data-src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-medium.png?design=techno{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">
-                   </a>
-           </div>
-           </div>
+    <div class="item">
+      <div class="item-inner">
+        <div class="cat-name" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
+          <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">{nested_categories_list.NAME}</a>
+        </div>
+        <div class="cat-image">
+        <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
+        <img class="goods-cat-image-medium lozad" data-src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-medium.png?design=techno{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">
+        </a>
+        </div>
+      </div>
+    </div>
   {% ENDFOR %}
   </div>
   </div>
@@ -111,13 +113,15 @@
     <div class="categories clear">
       {% FOR nested_categories_list %}
         <div class="item">
-          <div class="cat-name" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
-            <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">{nested_categories_list.NAME}</a>
-          </div>
-          <div class="cat-image">
-            <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
-              <img class="goods-cat-image-medium lozad" data-src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">  
-            </a>
+          <div class="item-inner">
+            <div class="cat-name" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
+              <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">{nested_categories_list.NAME}</a>
+            </div>
+            <div class="cat-image">
+              <a href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
+                <img class="goods-cat-image-medium lozad" data-src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">  
+              </a>
+            </div>
           </div>
         </div>
       {% ENDFOR %}

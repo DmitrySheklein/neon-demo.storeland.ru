@@ -75,6 +75,40 @@
 
         <div class="container">
             <div class="header-top-wrapper">
+              <!-- Меню -->
+              <div class="header-sections _header-mobile" id="headerNav">
+                <ul class="header-sectionsList">
+                  {% FOR menu %}
+                    {% FOR header %}
+                      {% FOR links %}
+                      
+                        {% IF menu.header.links.index < 6 %}
+                        <li class="header-sectionsItem  {% IF menu.header.links.SELECTED %}active{%ENDIF%}"><a class="header-sectionsLink" href="{menu.header.links.URL}"  {% IF menu.header.links.TITLE %}title="{menu.header.links.TITLE}"{% ENDIF %} itemprop="url"><span>{menu.header.links.NAME}</span></a></li>
+                        {% ENDIF %}
+                        
+                      {% ENDFOR %}
+                    {% ENDFOR %}
+                  {% ENDFOR %}
+                  
+                  
+                  <li class="header-sectionsItem" {% FOR menu %}{% FOR header %}{% FOR links %}{% IF menu.header.links.index = 6 %}style="display:block"{% ENDIF %}{% ENDFOR %}{% ENDFOR %}{% ENDFOR %}>
+                    <a class="header-sectionsLink" href="{menu.header.links.URL}">...</a>
+                    <ul class="" style="display:none">                    
+                    {% FOR menu %}
+                      {% FOR header %}
+                        {% FOR links %}
+                              {% IF menu.header.links.index >= 6 %}
+                              <!--<li>{menu.header.links.index}</li>-->
+                              <li class="header-sectionsIte  {% IF menu.header.links.SELECTED %}active{%ENDIF%}"><a class="header-sectionsLink" href="{menu.header.links.URL}"  {% IF menu.header.links.TITLE %}title="{menu.header.links.TITLE}"{% ENDIF %} itemprop="url"><span>{menu.header.links.NAME}</span></a></li>
+                              {% ENDIF %}     
+                        {% ENDFOR %}
+                      {% ENDFOR %}
+                    {% ENDFOR %}
+                  </ul>                    
+                  </li>
+                </ul>
+            </div>
+
             <!-- Навигация -->
             <ul class="header-nav unstyled">
                 {% IF SETTINGS_STORE_EMAIL_MAIN %}
@@ -209,8 +243,8 @@
               <div class="header-catalog">
                 <span class="header-catalogBtn unselectable">
                   <span class="header-catalogIcon fal fa-bars"></span>
-                  <span>Все категории</span>
-                  <span class="header-catalogBtnArrow fal fa-angle-down "></span>
+                  <span class="header-catalogName">Все категории</span>
+                  <!-- <span class="header-catalogBtnArrow fal fa-angle-down "></span> -->
                 </span>
                 <ul class="header-catalogMenu unstyled">
                       <li class="header-catalogMenuTitle">
@@ -249,40 +283,18 @@
                 </ul>
               </div>
               <!-- /Каталог -->							
-							
-              <!-- Меню -->
-              <div class="header-sections _header-mobile" id="headerNav">
-                  <ul class="header-sectionsList">
-                    {% FOR menu %}
-                      {% FOR header %}
-                        {% FOR links %}
-                        
-                          {% IF menu.header.links.index < 6 %}
-                          <li class="header-sectionsItem  {% IF menu.header.links.SELECTED %}active{%ENDIF%}"><a class="header-sectionsLink" href="{menu.header.links.URL}"  {% IF menu.header.links.TITLE %}title="{menu.header.links.TITLE}"{% ENDIF %} itemprop="url"><span>{menu.header.links.NAME}</span></a></li>
-                          {% ENDIF %}
-                          
-                        {% ENDFOR %}
-                      {% ENDFOR %}
-                    {% ENDFOR %}
-                    
-                    
-                    <li class="header-sectionsItem" {% FOR menu %}{% FOR header %}{% FOR links %}{% IF menu.header.links.index = 6 %}style="display:block"{% ENDIF %}{% ENDFOR %}{% ENDFOR %}{% ENDFOR %}>
-                      <a class="header-sectionsLink" href="{menu.header.links.URL}">...</a>
-                      <ul class="" style="display:none">                    
-                      {% FOR menu %}
-                        {% FOR header %}
-                          {% FOR links %}
-                                {% IF menu.header.links.index >= 6 %}
-                                <!--<li>{menu.header.links.index}</li>-->
-                                <li class="header-sectionsIte  {% IF menu.header.links.SELECTED %}active{%ENDIF%}"><a class="header-sectionsLink" href="{menu.header.links.URL}"  {% IF menu.header.links.TITLE %}title="{menu.header.links.TITLE}"{% ENDIF %} itemprop="url"><span>{menu.header.links.NAME}</span></a></li>
-                                {% ENDIF %}     
-                          {% ENDFOR %}
-                        {% ENDFOR %}
-                      {% ENDFOR %}
-                    </ul>                    
-                    </li>
-                  </ul>
-              </div>							
+              
+              <!-- Соц. сети -->
+              <div class="social-links _header">
+                <a style="display:none" class="facebook" href="https://www.facebook.com/" title="FaceBook.com" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i><span>Фейсбук</span></a>
+                <a style="display:none" class="twitter" href="https://twitter.com/" title="Twitter.com" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i><span>twitter</span></a>
+                <a style="display:none" class="whatsapp" href="https://whatsapp.com/" title="Whatsapp.com" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>whatsapp</span></a>
+                <a class="vk" href="https://vk.com/" title="VK.com" target="_blank"><i class="fab fa-vk" aria-hidden="true"></i><span>ВКонтакте</span></a>
+                <a class="viber" href="https://viber.com/" title="Viber.com" target="_blank"><i class="fab fa-viber" aria-hidden="true"></i><span>Viber</span></a>
+                <a class="odnoklassniki" href="https://ok.ru/" title="Odnoklassniki" target="_blank"><i class="fab fa-odnoklassniki" aria-hidden="true"></i><span>Odnoklassniki</span></a>
+                <a class="instagram" href="https://instagram.com/" title="Instagram.com" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i><span>Instagram</span></a>
+                <a class="youtube" href="https://youtube.com/" title="YouTube.com" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i><span>Youtube</span></a>
+              </div>              
 
               <!-- Контакты  -->
               <div class="header-contacts _header-mobile" id="headerPhone">
@@ -1554,7 +1566,7 @@
       <div id="main">
         <div class="container">
           <div class="block-bg">
-          <div class="row no-gutters">
+          <div class="row">
             <!-- Левый блок -->
             {% IF MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare %}
             <div class="col-md-3 col-xs-12 col-left">
