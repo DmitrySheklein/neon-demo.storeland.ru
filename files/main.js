@@ -737,7 +737,7 @@ $(function(){
     form.trigger('submit');
     return (false);
   })
-  //Main button hover effects
+  // Hover эффект на кнопках
   $(".add-cart, .button")
   .append('<i class="hover-anim"></i>')
   .on("mouseenter", function(e) {
@@ -761,7 +761,36 @@ $(function(){
     if(getClientWidth() <= 991){
       $(this).toggleClass('active').next('.block-content').slideToggle();
     }
-  })    
+  })
+  // Раскрытие корзины на сайте
+  $(function () {
+    $(document).on('click', function (e) {
+      var $this  = $(e.target)
+      if(!$this.closest('.header-tools').length){
+          console.log($this);
+          console.error('no-object')
+         $('.header-tools').removeClass('_active').find('.header-toolsCol').removeClass('_active')
+        }
+    })
+    $('.header-toolsLink').on('click', function(e){
+      e.preventDefault();
+      if($(this).hasClass('_active')) {
+        $('.header .header-tools').removeClass('_active');
+        $(this).removeClass('_active')
+        return
+      }
+      $('.header .header-tools').addClass('_active')
+
+      $('.header-tools').find('.header-toolsLink').removeClass('_active')
+      $(this).addClass('_active')
+
+      $('.header-tools').find('.dropdown').removeClass('_active')
+      $(this).parent().find('.dropdown').addClass('_active')
+
+      $('.header-tools').find('.header-toolsCol').removeClass('_active')
+      $(this).closest('.header-toolsCol').addClass('_active')
+    })
+  })  
 });
 }
 

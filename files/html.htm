@@ -354,7 +354,7 @@
   						<!-- Инструменты -->
   						<div class="header-tools">
                 <!-- Корзина -->                
-                <div class="header-toolsCol">
+                <div class="header-toolsCol {% IF MOD_LNAME = cart %}_page{% ENDIF %}">
                   <div class="cart {% IF MOD_LNAME = cart %}page{% ENDIF %}">
                     <a href="{CART_URL}" title="Перейти в Корзину" class="header-toolsLink title">
                       <span class="header-toolsIcon _cart">
@@ -364,7 +364,7 @@
                       <span class="header-toolsName title">Корзина</span>
                     </a>
                     <div class="dropdown">
-                      <div class="cart-content">
+                      <div class="cart-content dropdown-content">
                         <div class="empty hide">Корзина покупок пуста.<br/> Вы можете выбрать товар из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a>.</div>
                         {% IF cart_count_empty %}
                         <div class="empty">Корзина покупок пуста.<br/> Вы можете выбрать товар из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a>.</div>
@@ -400,7 +400,7 @@
                   </div>                  
                 </div>
                 <!-- Сравнение -->
-                <div class="header-toolsCol">
+                <div class="header-toolsCol {% IF MOD_LNAME = compare %}_page{% ENDIF %}">
                   {% IF TARIFF_FEATURE_GOODS_COMPARE && SETTINGS_COMPARE_DISABLE=0 %}
                   <div class="compare {% IF MOD_LNAME = compare %}page{% ENDIF %}">
                     <a  href="{COMPARE_URL}" title="Перейти к Сравнению" class="header-toolsLink title">
@@ -411,7 +411,7 @@
                       <span class="header-toolsName title">Сравнение</span>
                     </a>
                     <div class="dropdown">
-                      <div id="compare-items">
+                      <div id="compare-items" class="dropdown-content">
                         {% IF compare_list_empty %}
                           <div class="empty">Ваш список сравнения пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> и сравнивать их между собой.</div>
                           <ul class="compare-items-list"></ul>
@@ -442,7 +442,7 @@
                   {% ENDIF %}                  
                 </div>                                
   						  <!-- Избранное -->
-                <div class="header-toolsCol _favorite _bordered">
+                <div class="header-toolsCol _favorite _bordered {% IF MOD_LNAME = user && ACT = favorites %}_page{% ENDIF %}">
                   <div class="favorites {% IF MOD_LNAME = user && ACT = favorites %}page{% ENDIF %}">
                     <a class="header-toolsLink title" href="{%IF CLIENT_IS_LOGIN%}{USER_FAVORITES_URL}{%ELSE%}{USER_REGISTER_URL}{%ENDIF%}" title="Перейти к Избранному">
                   		<span class="header-toolsIcon _favorite">
@@ -452,7 +452,7 @@
                       <span class="header-toolsName title">Избранное</span>
                     </a>                    
                     <div class="dropdown">
-                      <div id="favorites-items">
+                      <div id="favorites-items" class="dropdown-content">
                         {% IF favorites_goods_empty %}
                           <div class="empty">Ваш список Избранного пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> после <a href="{USER_REGISTER_URL}" title="Перейти к авторизации">авторизации</a>.</div>
                           <ul class="favorites-items-list"></ul>
@@ -2181,31 +2181,6 @@
       });      
   })()
 
-</script>
-<script>
-  $(function () {
-    $(document).on('click', function (e) {
-      var $this  = $(e.target)
-      if(!$this.closest('.header-tools').length){
-          console.log($this);
-         $('.header-tools').removeClass('_active').find('.header-toolsCol').removeClass('_active')
-        }
-    })
-    $('.header-toolsLink').on('click', function(e){
-      e.preventDefault();
-      if($(this).hasClass('_active')) {
-        $('.header .header-tools').removeClass('_active');
-        $(this).removeClass('_active')
-        return
-      }
-      $(this).addClass('_active')
-      $('.header .header-tools').addClass('_active')
-      $('.header-tools').find('.dropdown').removeClass('_active')
-      $(this).parent().find('.dropdown').toggleClass('_active')
-      $('.header-tools').find('.header-toolsCol').removeClass('_active')
-      $(this).closest('.header-toolsCol').toggleClass('_active')
-    })
-  })
 </script>
   <!-- Debug -->
   <div class="container">
