@@ -541,6 +541,8 @@ function viewed(){
 }
 // Функции для каталога 
 function catalogFunctions(){
+  // Стилизация селектов
+  $('.selectBox').styler()
 
   // Фильтр по ценам
   var
