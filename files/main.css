@@ -998,7 +998,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 #footer .links {padding: 0;}
 #footer .links li {display: block;position: relative;line-height: 20px;}
 #footer .links li + li {margin-top: 10px;}
-#footer .links a {display:block;color: #999;font-size: 14px;}
+#footer .links a {display:block;font-size: 14px;}
 #footer .links a:hover {color: #21293c;}
 /* Обратный звонок */
 #footer .callbackForm .callback-input {position: relative;margin-bottom: 15px;}
@@ -1041,7 +1041,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 #payment .payment-ico {display: inline-block;vertical-align: middle;width: 32px;margin: 5px;cursor: pointer;}
 /* Соц. сети */
 .social-links {text-align: center; margin-top: 15px;margin-bottom: 15px;}
-.social-links a {display: block;line-height: 32px;font-size: 14px;margin-right: 0;text-align: left;text-indent: 0;color: #999;}
+.social-links a {display: block;line-height: 32px;font-size: 14px;margin-right: 0;text-align: left;text-indent: 0;}
 .social-links a:last-child {margin-right: 0;}
 .social-links a:hover {color:#21293c;}
 .social-links a:hover i {color: #21293c;}

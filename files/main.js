@@ -769,9 +769,7 @@ $(function(){
     $(document).on('click', function (e) {
       var $this  = $(e.target)
       if(!$this.closest('.header-tools').length){
-          console.log($this);
-          console.error('no-object')
-         $('.header-tools').removeClass('_active').find('.header-toolsCol').removeClass('_active')
+         $('.header-tools, .header-toolsCol, .header-toolsLink').removeClass('_active')
         }
     })
     $('.header-toolsLink').on('click', function(e){
