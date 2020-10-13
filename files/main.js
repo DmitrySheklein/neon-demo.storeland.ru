@@ -701,6 +701,7 @@ function catalogFunctions(){
         AddCart();
         quickView();
         quantity();
+        $(".mouseHoverImgCarousel").HoverMouseCarousel();
       }
     });
   });  

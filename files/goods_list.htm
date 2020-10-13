@@ -305,7 +305,7 @@
         </div>
       {% ELSE %}
         <!-- Вывод товаров Списком -->
-        <ul class="products-list">
+        <div class="products-list">
           {% FOR goods %}
           <div class="item {% IF goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}empty{% ENDIF %}{% IF goods.COUNT_MODIFICATION > 1 %} _with-mod{% ENDIF %}">
             <div class="item-inner" itemscope itemtype="https://schema.org/Product">
@@ -407,16 +407,11 @@
                     {% ENDIF %}
                     <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                          
                   </div>
-                  <a href="{goods.URL_MIN_PRICE_NOW | url_amp}"  class="product-img mouseHoverImgCarousel">
+                  <a href="{goods.URL_MIN_PRICE_NOW | url_amp}"  class="product-img">
                     {% IF goods.IMAGE_EMPTY %}
                     <img class="lozad" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=assorti" alt="{goods.NAME}" title="{goods.NAME}"  itemprop="image">
                     {% ELSE %}
                       <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{goods.IMAGE_MEDIUM}" alt="{goods.NAME}" title="{goods.NAME}"  itemprop="image">
-                      {% FOR images %}
-                        {% IF goods.IMAGE_MEDIUM != goods.images.MEDIUM %}
-                        <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{goods.images.MEDIUM}" alt="{goods.NAME}" title="{goods.NAME}"  itemprop="image">
-                        {% ENDIF %}
-                      {% ENDFOR %}
                     {% ENDIF %}
                   </a>
                   {% IF goods.IS_NEW %}
@@ -488,7 +483,7 @@
             </div>
           </div>
           {% ENDFOR %}
-        </ul>
+        </div>
       {% ENDIF %}
       </div>
     </div>

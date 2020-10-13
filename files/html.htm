@@ -713,7 +713,7 @@
             {% IFNOT catalog_full.HIDE %}
                 <!-- Если нужны конкретные категории  -->
                 <!-- {% IF catalog_full.NAME = Техника || catalog_full.NAME = Обувь %} -->
-                {% IF catalog_full.LEVEL = 0 %}
+                {% IF catalog_full.LEVEL = 0  && catalog_full.index < 6 %}
                 <div class="item">
                   <div class="item-inner">
                     <div class="cat-image">
