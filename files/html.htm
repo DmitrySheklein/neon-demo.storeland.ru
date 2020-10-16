@@ -2180,15 +2180,15 @@
 <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
 <script>
   (function () {
-    return;
-    tippy('.add-compare', {
+    // return;
+    tippy('.add-compare, .add-wishlist', {
           theme: 'material',
-          content(reference) {
-            console.log(reference.classList.contains('added'))
-            if(reference.classList.contains('added')){
-                return 'Удалить из сравнения';
-            } else { return 'Добавить в сравнение'}
-            
+          onShow(instance) {
+            var $link = $(instance.reference);
+            $link.removeAttr('title')
+            var title = $link.hasClass('added') ? $link.data('del-tooltip') : $link.data('add-tooltip');
+            console.log(`show`, title);
+            instance.setContent(title)
           }
       });      
   })()
