@@ -59,7 +59,7 @@
           <!-- Сортировать по: (Поле сортировки товаров по умолчанию) -->
           <div class="sort-by">
             <label>Сортировать по:</label>
-            <select name="goods_search_field_id" class="selectBox" title="Название сортировки" onchange="this.form.submit();">
+            <select name="goods_search_field_id" class="selectBox" title="Сортировать по:" onchange="this.form.submit();">
               {% FOR goods_order_fields %}
                 <option value="{goods_order_fields.ID}" {% IF goods_order_fields.SELECTED %}selected="selected"{% ENDIF %}>{goods_order_fields.NAME}</option>
               {% ENDFOR %}
@@ -414,38 +414,46 @@
                       <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{goods.IMAGE_MEDIUM}" alt="{goods.NAME}" title="{goods.NAME}"  itemprop="image">
                     {% ENDIF %}
                   </a>
-                  {% IF goods.IS_NEW %}
-                    <span class="ico-new">Новинка</span>
-                  {% ELSEIF goods.IS_TOP %}
-                    <span class="ico-best">Хит</span>
-                  {% ENDIF %}
-                  {% IF goods.MAX_DISCOUNT %}
-                    <span class="ico-sale">Акция</span>
-                  {% ENDIF %}
-                  <div class="ratings" {% IFNOT goods.OPINION_RATING_VALUE %} style="display:none"{% ENDIF %}>
-                    <a href="{goods.URL | url_amp}" title="Перейти к отзывам">
-                      <div class="rating-box">
-                        {% IF goods.OPINION_RATING_VALUE %}
-                        <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                          <meta itemprop="worstRating" content = "1">
-                          <meta itemprop="bestRating" content = "10">
-                          <meta itemprop="ratingValue" content = "{goods.OPINION_RATING_VALUE}">
-                          <meta itemprop="reviewCount" content = "{goods.OPINION_RATING_CNT_ALL}">
-                          <div class="rating">
-                            <span>{goods.OPINION_RATING_VALUE | divide("2")}/5</span>
-                          </div>                                    
-                        </span>
-                        {% ELSE %}
-                          <div class="rating" style="width:0%"  title="Рейтинг не определён"></div>
-                        {% ENDIF %}
-                      </div>
-                    </a>
-                  </div>
                 </div>
                 <div class="product-shop">
                   <meta itemprop="name" content="{goods.NAME}">
                   <meta itemprop="description" content="{% IF goods.DESCRIPTION_SHORT %}{goods.DESCRIPTION_SHORT}{% ELSE %}Описание отсутствует{% ENDIF %}">
-                  <div class="product-name"><a href="{goods.URL_MIN_PRICE_NOW | url_amp}" title="{goods.NAME}" itemprop="url">{goods.NAME}</a></div>
+                  <div class="product-name">
+                    <a href="{goods.URL_MIN_PRICE_NOW | url_amp}" title="{goods.NAME}" itemprop="url">{goods.NAME}</a>
+
+                    {% IF goods.IS_NEW || goods.IS_TOP || goods.MAX_DISCOUNT || goods.OPINION_RATING_VALUE %}
+                    <div class="product-name-content">
+                      {% IF goods.IS_NEW %}
+                        <span class="ico-new">Новинка</span>
+                      {% ELSEIF goods.IS_TOP %}
+                        <span class="ico-best">Хит</span>
+                      {% ENDIF %}
+                      {% IF goods.MAX_DISCOUNT %}
+                        <span class="ico-sale">Акция</span>
+                      {% ENDIF %}                      
+                      <div class="ratings" {% IFNOT goods.OPINION_RATING_VALUE %} style="display:none"{% ENDIF %}>
+                        <a href="{goods.URL | url_amp}" title="Перейти к отзывам">
+                          <div class="rating-box">
+                            {% IF goods.OPINION_RATING_VALUE %}
+                            <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                              <meta itemprop="worstRating" content = "1">
+                              <meta itemprop="bestRating" content = "10">
+                              <meta itemprop="ratingValue" content = "{goods.OPINION_RATING_VALUE}">
+                              <meta itemprop="reviewCount" content = "{goods.OPINION_RATING_CNT_ALL}">
+                              <div class="rating">
+                                <span>{goods.OPINION_RATING_VALUE | divide("2")}/5</span>
+                              </div>                                    
+                            </span>
+                            {% ELSE %}
+                              <div class="rating" style="width:0%"  title="Рейтинг не определён"></div>
+                            {% ENDIF %}
+                          </div>
+                        </a>
+                      </div>                    
+                    </div>
+                    {% ENDIF %}  
+                    
+                  </div>
                   <div class="price-box" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}"/>
                       {% IF goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>goods.MIN_PRICE_NOW %}
@@ -540,7 +548,7 @@
           <!-- Сортировать по: (Поле сортировки товаров по умолчанию) -->
           <div class="sort-by">
             <label>Сортировать по:</label>
-            <select name="goods_search_field_id" class="selectBox" title="Название сортировки" onchange="this.form.submit();">
+            <select name="goods_search_field_id" class="selectBox" title="Сортировать по:" onchange="this.form.submit();">
               {% FOR goods_order_fields %}
                 <option value="{goods_order_fields.ID}" {% IF goods_order_fields.SELECTED %}selected="selected"{% ENDIF %}>{goods_order_fields.NAME}</option>
               {% ENDFOR %}

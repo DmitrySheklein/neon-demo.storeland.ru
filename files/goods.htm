@@ -175,7 +175,7 @@
         <!-- /END Следующий и Предыдущий товар -->        
       </div>
       <!-- Изображение товара -->
-      <div class="product-img-box col-md-4 col-sm-12 col-xs-12">
+      <div class="product-img-box col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="product-image">
           <div class="general-img">
             <a href="{GOODS_IMAGE_LARGE}" id="zoom1" title="Увеличить {GOODS_NAME}">
@@ -213,63 +213,7 @@
           {% ENDIF %}
         </div><!-- END другие изображение товара -->
       </div>
-      <!-- Основная информация о товаре -->
-      <div class="product-shop col-lg-5 col-md-4 col-xs-12">
-        <!-- Краткое описание -->
-        {% IF GOODS_DESCRIPTION_SHORT %}
-        <div class="short-description f-fix">
-          <p itemprop="description">{GOODS_DESCRIPTION_SHORT}</p>
-          {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}
-          <a href="#tab_1" class="short-description-link pseudo-link scroll-link" data-href="{GOODS_URL}">Перейти к описанию</a>
-          {% ENDIF %}
-        </div>
-        {% ENDIF %}
-        
-        
-        {% IFNOT goods_features_empty %}
-        <table class="table-features-min">
-          <tbody>
-            {% FOR goods_features %}
-              <tr>
-                <td class="cell1"><span class="features-name">{goods_features.NAME}</span></td>
-                <td class="cell2">{goods_features.VALUE}</td>
-              </tr>
-              
-              {% IF goods_features.index >= 6 %}
-              <tr>
-                <td><a href="#tab_2" class="short-description-link pseudo-link scroll-link" data-href="{GOODS_URL}">Все характеристики</a></td>
-              </tr>
-              {break}
-              {% ENDIF %}
-            {% ENDFOR %}
-          </tbody>
-        </table>   
-        {% ENDIF %}
-        
-        <div class="custom-block clearfix">
-          <div class="item col-md-4 col-sm-4 col-sms-4 col-smb-12">
-            <i class="fal fa-truck"></i>
-            <div class="text-area">Бесплатная<br> Доставка</div>
-          </div>
-          <div class="item col-md-4 col-sm-4 col-sms-4 col-smb-12">
-            <i class="fal fa-sync"></i>
-            <div class="text-area">Гарантия<br>Возврата</div>
-          </div>
-          <div class="item col-md-4 col-sm-4 col-sms-4 col-smb-12">
-            <i class="fal fa-life-ring"></i>
-            <div class="text-area">Онлайн<br>Поддержка</div>
-          </div>
-        </div>
-        <!-- Блок информации по акции действующей на товар, если таковая есть -->
-        {% IF GOODS_MOD_MAX_DISCOUNT_ID %}
-          <div class="goodsDataMainDiscountBlock f-fix" content="{GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date("Y-m-d")}">
-            <i class="fal fa-percent"></i>
-            <span>Товар участвует в акции <strong class="br">&laquo;{GOODS_MOD_MAX_DISCOUNT_CAMPAIGN_NAME}&raquo;.</strong></span><br />
-            <span>До {GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date} скидка <strong>{GOODS_MOD_MAX_DISCOUNT}%</strong></span>
-          </div>
-        {% ENDIF %}
-      </div>
-      <div class="product-order col-lg-3 col-md-4 col-xs-12">
+      <div class="product-order col-lg-6 col-md-6 col-xs-12">
         <div class="product-order-inner clearfix">
         <!-- Цена товара -->
         <div class="price-box f-fix" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
@@ -347,7 +291,7 @@
                   <a href="javascript:void(0)" class="qty-minus unselectable" title="Уменьшить"><i class="fal fa-minus"></i></a>
                 </div>
               </div>
-              <button type="submit" class="add-cart button" title="Положить &laquo;{GOODS_NAME}&raquo; в корзину"><i class="fal fa-shopping-cart" aria-hidden="true"></i> В корзину</button>
+              <button type="submit" class="add-cart button" title="Положить &laquo;{GOODS_NAME}&raquo; в корзину">В корзину</button>
               <button type="submit" class="add-cart quick button button2" title="Положить &laquo;{GOODS_NAME}&raquo; в корзину">Купить в 1 клик</button>
               <a href="{GOODS_URL}" class="button button2 more" title="Подробнее">Подробнее</a>
             </div>
@@ -355,6 +299,46 @@
           </div>
         </form>          
         </div>
+        <!-- Краткое описание -->
+        {% IF GOODS_DESCRIPTION_SHORT %}
+        <div class="short-description f-fix">
+          <p itemprop="description">{GOODS_DESCRIPTION_SHORT}</p>
+          {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}
+          <a href="#tab_1" class="short-description-link pseudo-link scroll-link" data-href="{GOODS_URL}">Перейти к описанию</a>
+          {% ENDIF %}
+        </div>
+        {% ENDIF %}   
+
+        
+        
+        {% IFNOT goods_features_empty %}
+        <table class="table-features-min">
+          <tbody>
+            {% FOR goods_features %}
+              <tr>
+                <td class="cell1"><span class="features-name">{goods_features.NAME}</span></td>
+                <td class="cell2">{goods_features.VALUE}</td>
+              </tr>
+              
+              {% IF goods_features.index >= 6 %}
+              <tr>
+                <td><a href="#tab_2" class="short-description-link pseudo-link scroll-link" data-href="{GOODS_URL}">Все характеристики</a></td>
+              </tr>
+              {break}
+              {% ENDIF %}
+            {% ENDFOR %}
+          </tbody>
+        </table>   
+        {% ENDIF %}
+
+        <!-- Блок информации по акции действующей на товар, если таковая есть -->
+        {% IF GOODS_MOD_MAX_DISCOUNT_ID %}
+          <div class="goodsDataMainDiscountBlock f-fix" content="{GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date("Y-m-d")}">
+            <i class="fal fa-percent"></i>
+            <span>Товар участвует в акции <strong class="br">&laquo;{GOODS_MOD_MAX_DISCOUNT_CAMPAIGN_NAME}&raquo;.</strong></span><br />
+            <span>До {GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date} скидка <strong>{GOODS_MOD_MAX_DISCOUNT}%</strong></span>
+          </div>
+        {% ENDIF %}             
       </div>
     </div>
     </div>
@@ -556,12 +540,15 @@
     <div class="row">
       <div class="tabs-content col-xs-12">
         <div class="tabs-wrap block-bg">
-          <ul class="tabs">
-            {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}<li><a href="javascript:tabSwitch(1);" id="tab_1" class="active">Описание</a></li>{% ENDIF %}
-            {% IFNOT goods_features_empty %}<li><a href="javascript:tabSwitch(2);" id="tab_2">Характеристики</a></li>{% ENDIF %}
-            {% IFNOT goods_delivery_empty %}<li><a href="javascript:tabSwitch(3);" id="tab_3">Доставка</a></li>{% ENDIF %}
-            {% IF TARIFF_FEATURE_GOODS_OPINION && SETTINGS_OPINION_DISABLE=0 %}<li><a href="javascript:tabSwitch(4);" id="tab_4">Отзывы ({GOODS_OPINION_RATING_CNT_ALL})</a></li>{% ENDIF %}
-          </ul>
+          <div class="tabs">
+            <ul class="tabs-inner">
+              {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}<li class="tabs-item"><a href="javascript:tabSwitch(1);" id="tab_1" class="active">Описание</a></li>{% ENDIF %}
+              {% IFNOT goods_features_empty %}<li class="tabs-item"><a href="javascript:tabSwitch(2);" id="tab_2">Характеристики</a></li>{% ENDIF %}
+              {% IFNOT goods_delivery_empty %}<li class="tabs-item"><a href="javascript:tabSwitch(3);" id="tab_3">Доставка</a></li>{% ENDIF %}
+              {% IF TARIFF_FEATURE_GOODS_OPINION && SETTINGS_OPINION_DISABLE=0 %}<li class="tabs-item"><a href="javascript:tabSwitch(4);" id="tab_4">Отзывы ({GOODS_OPINION_RATING_CNT_ALL})</a></li>{% ENDIF %}
+              <li class="nav-splitter"></li>
+            </ul>
+          </div>
           <!-- Описание -->
           {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}
             <div id="content_1" class="tab-content active">

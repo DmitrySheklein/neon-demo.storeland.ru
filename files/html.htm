@@ -2181,14 +2181,16 @@
 <script>
   (function () {
     // return;
-    tippy('.add-compare, .add-wishlist', {
+    
+    tippy('.selectBox', {
           theme: 'material',
           onShow(instance) {
             var $link = $(instance.reference);
-            $link.removeAttr('title')
-            var title = $link.hasClass('added') ? $link.data('del-tooltip') : $link.data('add-tooltip');
-            console.log(`show`, title);
-            instance.setContent(title)
+            var titleName = $link.attr('title');
+            $link.removeAttr('title');
+            $link.attr('data-title', titleName);
+            instance.setContent($link.attr('data-title'))
+            console.log(titleName);
           }
       });      
   })()

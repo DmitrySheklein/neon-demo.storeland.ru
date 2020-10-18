@@ -35,7 +35,7 @@
           <!-- Сортировать по: (Поле сортировки товаров по умолчанию) -->
           <div class="sort-by">
             <label>Сортировать по:</label>
-            <select name="goods_search_field_id" class="selectBox" title="Название сортировки" onchange="this.form.submit();">
+            <select name="goods_search_field_id" class="selectBox" title="Сортировать по:" onchange="this.form.submit();">
               {% FOR goods_order_fields %}
                 <option value="{goods_order_fields.ID}" {% IF goods_order_fields.SELECTED %}selected="selected"{% ENDIF %}>{goods_order_fields.NAME}</option>
               {% ENDFOR %}
@@ -442,7 +442,7 @@
           <!-- Сортировать по: (Поле сортировки товаров по умолчанию) -->
           <div class="sort-by">
             <label>Сортировать по:</label>
-            <select name="goods_search_field_id" class="selectBox" title="Название сортировки" onchange="this.form.submit();">
+            <select name="goods_search_field_id" class="selectBox" title="Сортировать по:" onchange="this.form.submit();">
               {% FOR goods_order_fields %}
                 <option value="{goods_order_fields.ID}" {% IF goods_order_fields.SELECTED %}selected="selected"{% ENDIF %}>{goods_order_fields.NAME}</option>
               {% ENDFOR %}

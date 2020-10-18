@@ -539,10 +539,40 @@ function viewed(){
     }
   });  
 }
+function tippyViewBtn() {
+  $(function () {
+    tippy('.view-mode-btn', {
+      theme: 'material',
+      onShow(instance) {
+        var $link = $(instance.reference);
+        var titleName = $link.attr('title');
+        $link.removeAttr('title');
+        $link.attr('data-title', titleName);
+        instance.setContent($link.attr('data-title'));
+      }
+    });     
+  }) 
+}
 // Функции для каталога 
 function catalogFunctions(){
   // Стилизация селектов
   $('.selectBox').styler()
+
+  // Tippy
+  tippyViewBtn();
+  $(function () {
+    tippy('.selectBox', {
+      theme: 'material',
+      onShow(instance) {
+        var $link = $(instance.reference);
+        var titleName = $link.attr('title');
+        $link.removeAttr('title');
+        $link.attr('data-title', titleName);
+        instance.setContent($link.attr('data-title'));
+      }
+    });     
+  })  
+
 
   // Фильтр по ценам
   var
@@ -702,10 +732,37 @@ function catalogFunctions(){
         quickView();
         quantity();
         $(".mouseHoverImgCarousel").HoverMouseCarousel();
+        tippyViewBtn();
+        hoverAnimBtn();
       }
     });
   });  
   
+}
+// Hover эффект на кнопках
+function hoverAnimBtn() {
+  $(function () {
+    $(".add-cart, .button")
+    .find('.hover-anim').remove()
+    .end()
+    .append('<i class="hover-anim"></i>')
+    .on("mouseenter", function(e) {
+      var parentOffset = $(this).offset(),
+        relX = e.pageX - parentOffset.left,
+        relY = e.pageY - parentOffset.top;
+      $(this)
+        .find(".hover-anim")
+        .css({ top: relY, left: relX });
+    })
+    .on("mouseout", function(e) {
+      var parentOffset = $(this).offset(),
+        relX = e.pageX - parentOffset.left,
+        relY = e.pageY - parentOffset.top;
+      $(this)
+        .find(".hover-anim")
+        .css({ top: relY, left: relX });
+    });    
+  })  
 }
 // Выносим функции из шаблонов
 function outFunctions() {
@@ -740,25 +797,8 @@ $(function(){
     form.trigger('submit');
     return (false);
   })
-  // Hover эффект на кнопках
-  $(".add-cart, .button")
-  .append('<i class="hover-anim"></i>')
-  .on("mouseenter", function(e) {
-    var parentOffset = $(this).offset(),
-      relX = e.pageX - parentOffset.left,
-      relY = e.pageY - parentOffset.top;
-    $(this)
-      .find(".hover-anim")
-      .css({ top: relY, left: relX });
-  })
-  .on("mouseout", function(e) {
-    var parentOffset = $(this).offset(),
-      relX = e.pageX - parentOffset.left,
-      relY = e.pageY - parentOffset.top;
-    $(this)
-      .find(".hover-anim")
-      .css({ top: relY, left: relX });
-  });
+  // 
+  hoverAnimBtn();
   // Слайдер в подвале
   $('#footer .block.collapse .title').on('click', function(){
     if(getClientWidth() <= 991){
@@ -862,6 +902,18 @@ function AddCart() {
 }
 // Добавление в сравнение и избранное
 function Addto() {
+  $(function(){
+    tippy('.add-compare, .add-wishlist', {
+      theme: 'material',
+      onShow(instance) {
+        var $link = $(instance.reference);
+        var title = $link.hasClass('added') ? $link.data('del-tooltip') : $link.data('add-tooltip');
+
+        $link.removeAttr('title');        
+        instance.setContent(title);
+      }
+    });
+  })
   // Добавление/удаление товара на сравнение/избранное через ajax
   $('.add-compare').off('click').on('click', function(){
     // Объект ссылки, по которой кликнули
@@ -1861,7 +1913,7 @@ function goodspage() {
 
   // С этим товаром смотрят
   $(".related-views .products-grid").owlCarousel({
-    items: 4,
+    margin: 10,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -1892,7 +1944,7 @@ function goodspage() {
   });
   // Сопутствующие товары
   $(".related-goods .products-grid").owlCarousel({
-    items: 4,
+    margin: 10,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -2374,6 +2426,7 @@ $(function(){
 
 // Инициализация табов на странице товара
 function initTabs() {
+  $('.tabs').find('.nav-splitter').css('width', $('.tabs .tabs-item').first().outerWidth())  
   // Блок в котором находятся табы
   var tabBlock = $('.product-tabs');
   if(!tabBlock.length) {
@@ -2434,6 +2487,10 @@ function tabSwitch(nb, noScroll) {
   tabBlock.find('div.tab-content').hide();
   $('#tab_' + nb).addClass('active');
   $('#content_' + nb).show();
+  var navPosition = $('#tab_' + nb).parent().position().left;
+  var navWidth =  $('#tab_' + nb).parent().outerWidth();
+  $('.tabs').find('.nav-splitter').css({'left': navPosition + 'px', 'width': navWidth})
+
   if('#goodsDataOpinionAdd' != document.location.hash && !noScroll) {
     // Записываем в хэш информацию о том какой таб сейчас открыт, для возможности скопировать и передать ссылку с открытым нужным табом
     document.location.hash = "#show_tab_" + nb;  
