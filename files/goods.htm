@@ -1,183 +1,116 @@
 <!-- Форма карточки товара -->
 <div class="product-view" itemscope itemtype="https://schema.org/Product">
-  <div class="container">
+  <div class="">
     <div class="block-bg">
     <div class="row">
-      <!-- Шапка товара -->
-      <div class="product-header col-xs-12">
-        <div class="row">
-          <div class="product-name col-md-11 col-xs-11"><h1 itemprop="name">{GOODS_NAME}</h1></div>
-          <div class="product-action col-md-1">
-            <!-- Если есть возможность добавить товар в избранное -->
-            {% IF GOODS_MOD_IS_HAS_IN_FAVORITES_LIST %}
-              <a class="add-wishlist added"
-                data-action-is-add="0"
-                data-action-add-url="{FAVORITES_ADD_URL}"
-                data-action-delete-url="{FAVORITES_DELETE_URL}"
-                data-action-add-title="Добавить в избранное"
-                data-action-delete-title="Убрать из избранного"
-                title="Убрать из избранного"
-                data-msgtype="2"
-                data-gname="{GOODS_NAME}"
-                data-prodname="{GOODS_NAME}"
-                data-prodimage="{GOODS_IMAGE_MEDIUM}"
-                data-produrl="{GOODS_URL}"
-                data-id="{GOODS_ID}"
-                data-mod-id="{GOODS_MOD_ID}"
-                data-mod-id-price="{GOODS_MOD_PRICE_NOW}"                
-                data-action-text-add="Добавить в избранное"
-                data-action-text-delete="Удалить из избранного"
-                data-add-tooltip="В Избранное"
-                data-del-tooltip="Убрать из избранного"
-                data-tooltip="Убрать из избранного"
-                href="{FAVORITES_DELETE_URL}?id={GOODS_MOD_ID}&amp;return_to={CURRENT_URL | urlencode}"
-                rel="nofollow"
-              ><i class="fal fa-heart"></i></a>
-            {% ELSE %}
-              <a class="add-wishlist"
-                data-action-is-add="1"
-                data-action-add-url="{FAVORITES_ADD_URL}"
-                data-action-delete-url="{FAVORITES_DELETE_URL}"
-                data-action-add-title="Добавить в избранное"
-                data-action-delete-title="Убрать из избранного"
-                data-msgtype="2"
-                data-gname="{GOODS_NAME}"
-                data-prodname="{GOODS_NAME}"
-                data-prodimage="{GOODS_IMAGE_MEDIUM}"
-                data-produrl="{GOODS_URL}"
-                data-id="{GOODS_ID}"
-                data-mod-id="{GOODS_MOD_ID}"
-                data-mod-id-price="{GOODS_MOD_PRICE_NOW}"                
-                data-action-text-add="Добавить в избранное"
-                data-action-text-delete="Удалить из избранного"
-                data-add-tooltip="В Избранное"
-                data-del-tooltip="Убрать из избранного"
-                data-tooltip="В Избранное"
-                title="Добавить в избранное" href="{FAVORITES_ADD_URL}?id={GOODS_MOD_ID}&amp;return_to={CURRENT_URL | urlencode}"
-                rel="nofollow"
-              ><i class="fal fa-heart"></i></a>
-            {% ENDIF %}
-            <!-- Если есть возможность добавить товар в сравнение -->
-            {% IF TARIFF_FEATURE_GOODS_COMPARE && SETTINGS_COMPARE_DISABLE=0 %}
-            {% IF GOODS_MOD_IS_HAS_IN_COMPARE_LIST %}
-              <a class="add-compare added" 
-                data-action-is-add="0" 
-                data-action-add-url="{COMPARE_ADD_URL}"
-                data-action-delete-url="{COMPARE_DELETE_URL}"
-                data-action-add-title="Добавить в список сравнения с другими товарами"
-                data-action-delete-title="Убрать из списка сравнения с другими товарами"
-                data-msgtype="1"
-                data-gname="{GOODS_NAME}"
-                data-prodname="{GOODS_NAME}"
-                data-prodimage="{GOODS_IMAGE_MEDIUM}"
-                data-produrl="{GOODS_URL}"
-                data-id="{GOODS_ID}"
-                data-mod-id="{GOODS_MOD_ID}"
-                data-mod-id-price="{GOODS_MOD_PRICE_NOW}"
-                data-action-text-add="Добавить к сравнению"
-                data-action-text-delete="Удалить из сравнения"
-                data-add-tooltip="В Сравнение"
-                data-del-tooltip="Убрать из сравнения"
-                data-tooltip="Убрать из сравнения"
-                title="Убрать из списка сравнения с другими товарами"
-                href="{COMPARE_DELETE_URL}?id=GET_GOODS_MOD_ID_FROM_PAGE&amp;from={GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
-                rel="nofollow"
-              ><i class="fal fa-signal"></i></a>
-            {% ELSE %}
-              <a class="add-compare" 
-                data-action-is-add="1" 
-                data-action-add-url="{COMPARE_ADD_URL}" 
-                data-action-delete-url="{COMPARE_DELETE_URL}" 
-                data-action-add-title="Добавить в список сравнения с другими товарами" 
-                data-action-delete-title="Убрать из списка сравнения с другими товарами" 
-                data-msgtype="1"
-                data-gname="{GOODS_NAME}"
-                data-prodname="{GOODS_NAME}"
-                data-prodimage="{GOODS_IMAGE_MEDIUM}"
-                data-produrl="{GOODS_URL}"
-                data-id="{GOODS_ID}"
-                data-mod-id="{GOODS_MOD_ID}"
-                data-mod-id-price="{GOODS_MOD_PRICE_NOW}"
-                data-action-text-add="Добавить к сравнению"
-                data-action-text-delete="Удалить из сравнения"
-                data-add-tooltip="В Сравнение"
-                data-del-tooltip="Убрать из сравнения"
-                data-tooltip="В Сравнение"
-                title="Добавить в список сравнения с другими товарами" 
-                href="{COMPARE_ADD_URL}?id=GET_GOODS_MOD_ID_FROM_PAGE&amp;from={GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
-                rel="nofollow"
-              ><i class="fal fa-signal"></i></a>
-            {% ENDIF %}
-            {% ENDIF %}
-            <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->            
-          </div>
-        </div>
-        
-      </div>
-      <div class="product-toolbar col-xs-12">
-        <!-- Артикул -->
-        {% IF GOODS_MOD_ART_NUMBER %}
-        <div class="goodsDataMainModificationArtNumber">
-          Артикул: <span>{GOODS_MOD_ART_NUMBER}</span>
-        </div>
-        {% ENDIF %} 
-        <!-- Среднее значение по результатам всех отзывов об этом товаре -->
-        <div class="ratings">
-          <div class="rating-box" title="Рейтинг товара">
-            {% IF GOODS_OPINION_RATING_VALUE_ROUND %}
-            <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-              <meta itemprop="worstRating" content = "1">
-              <meta itemprop="bestRating" content = "10">
-              <meta itemprop="ratingValue" content = "{GOODS_OPINION_RATING_VALUE_ROUND}">
-              <meta itemprop="reviewCount" content = "{GOODS_OPINION_RATING_CNT_ALL}">
-              <div class="rating" style="width:{GOODS_OPINION_RATING_VALUE_ROUND}0%" alt="{GOODS_OPINION_RATING_VALUE_ROUND}" title="Рейтинг товара"></div>
-            </span>
-            {% ELSE %}
-              <div class="rating" style="width:0%" alt="Рейтинг не определён" title="Рейтинг не определён"></div>
-            {% ENDIF %}
-          </div>
-          {% IF TARIFF_FEATURE_GOODS_OPINION && SETTINGS_OPINION_DISABLE=0 %}
-          <a href="#tab_4" class="ratiing-count scroll-link" data-href="{GOODS_URL}">({GOODS_OPINION_RATING_CNT_ALL})</a>
-          {% ENDIF %}
-        </div>
-        <!-- Доступность товара -->
-        <div class="goodsDataMainModificationAvailable">
-          <div class="available-true" {% IF GOODS_MOD_REST_VALUE=0 %}style="display:none;"{% ENDIF %}>Наличие товара: <span>В наличии</span></div>
-          <div class="available-false" style="{% IF GOODS_MOD_REST_VALUE>0 %}display:none;{% ENDIF %}">Наличие товара: <span>Нет в наличии</span></div>
-        </div>         
-        <!-- Следующий и Предыдущий товар -->
-        {% IFNOT neighbor_goods_empty %}
-        <div class="product-neighbor">
-          {% IF NEIGHBOR_PREVIOUS_GOODS_URL || NEIGHBOR_LAST_GOODS_URL %}
-          <div class="prev">
-            <a title="Предыдущий товар" href="{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_URL}{% ELSE %}{NEIGHBOR_LAST_GOODS_URL}{% ENDIF %}"><i class="fal fa-angle-left"></i></a>
-            <div class="content">
-              <a href="{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_URL}{% ELSE %}{NEIGHBOR_LAST_GOODS_URL}{% ENDIF %}" title="Перейти к &laquo;{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_NAME}{% ELSE %}{NEIGHBOR_LAST_GOODS_NAME}{% ENDIF %}&raquo;">
-                <img class="image" src="{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_IMAGE_ICON}{% ELSEIF NEIGHBOR_LAST_GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-medium.png{% ELSE %}{NEIGHBOR_LAST_GOODS_IMAGE_ICON}{% ENDIF %}" alt="{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_NAME}{% ELSE %}{NEIGHBOR_LAST_GOODS_NAME}{% ENDIF %}">
-                <h3 class="name">{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_NAME}{% ELSE %}{NEIGHBOR_LAST_GOODS_NAME}{% ENDIF %}</h3>
-              </a>
-            </div>
-          </div>
-          {% ENDIF %}
-          {% IF NEIGHBOR_NEXT_GOODS_URL || NEIGHBOR_FIRST_GOODS_URL %}
-          <div class="next">
-            <a title="Cледующий товар" href="{% IF NEIGHBOR_NEXT_GOODS_URL %}{NEIGHBOR_NEXT_GOODS_URL}{% ELSE %}{NEIGHBOR_FIRST_GOODS_URL}{% ENDIF %}"><i class="fal fa-angle-right"></i></a>
-            <div class="content">
-              <a href="{% IF NEIGHBOR_NEXT_GOODS_URL %}{NEIGHBOR_NEXT_GOODS_URL}{% ELSE %}{NEIGHBOR_FIRST_GOODS_URL}{% ENDIF %}" title="Перейти к &laquo;{% IF NEIGHBOR_NEXT_GOODS_URL %}{NEIGHBOR_NEXT_GOODS_NAME}{% ELSE %}{NEIGHBOR_FIRST_GOODS_NAME}{% ENDIF %}&raquo;">
-                <img class="image" src="{% IF NEIGHBOR_NEXT_GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-medium.png{% ELSEIF NEIGHBOR_NEXT_GOODS_NAME %}{NEIGHBOR_NEXT_GOODS_IMAGE_ICON}{% ELSE %}{NEIGHBOR_FIRST_GOODS_IMAGE_ICON}{% ENDIF %}" alt="{% IF NEIGHBOR_NEXT_GOODS_URL %}{NEIGHBOR_NEXT_GOODS_NAME}{% ELSE %}{NEIGHBOR_FIRST_GOODS_NAME}{% ENDIF %}">
-                <h3 class="name">{% IF NEIGHBOR_NEXT_GOODS_NAME %}{NEIGHBOR_NEXT_GOODS_NAME}{% ELSE %}{NEIGHBOR_FIRST_GOODS_NAME}{% ENDIF %}</h3>
-              </a>
-            </div>
-          </div>
-          {% ENDIF %}
-        </div>
-        {% ENDIF %}
-        <!-- /END Следующий и Предыдущий товар -->        
-      </div>
       <!-- Изображение товара -->
       <div class="product-img-box col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="product-image">
           <div class="general-img">
+              <div class="product-action">
+                <!-- Если есть возможность добавить товар в избранное -->
+                {% IF GOODS_MOD_IS_HAS_IN_FAVORITES_LIST %}
+                  <a class="add-wishlist added"
+                    data-action-is-add="0"
+                    data-action-add-url="{FAVORITES_ADD_URL}"
+                    data-action-delete-url="{FAVORITES_DELETE_URL}"
+                    data-action-add-title="Добавить в избранное"
+                    data-action-delete-title="Убрать из избранного"
+                    title="Убрать из избранного"
+                    data-msgtype="2"
+                    data-gname="{GOODS_NAME}"
+                    data-prodname="{GOODS_NAME}"
+                    data-prodimage="{GOODS_IMAGE_MEDIUM}"
+                    data-produrl="{GOODS_URL}"
+                    data-id="{GOODS_ID}"
+                    data-mod-id="{GOODS_MOD_ID}"
+                    data-mod-id-price="{GOODS_MOD_PRICE_NOW}"                
+                    data-action-text-add="Добавить в избранное"
+                    data-action-text-delete="Удалить из избранного"
+                    data-add-tooltip="В Избранное"
+                    data-del-tooltip="Убрать из избранного"
+                    data-tooltip="Убрать из избранного"
+                    href="{FAVORITES_DELETE_URL}?id={GOODS_MOD_ID}&amp;return_to={CURRENT_URL | urlencode}"
+                    rel="nofollow"
+                  ><i class="fal fa-heart"></i></a>
+                {% ELSE %}
+                  <a class="add-wishlist"
+                    data-action-is-add="1"
+                    data-action-add-url="{FAVORITES_ADD_URL}"
+                    data-action-delete-url="{FAVORITES_DELETE_URL}"
+                    data-action-add-title="Добавить в избранное"
+                    data-action-delete-title="Убрать из избранного"
+                    data-msgtype="2"
+                    data-gname="{GOODS_NAME}"
+                    data-prodname="{GOODS_NAME}"
+                    data-prodimage="{GOODS_IMAGE_MEDIUM}"
+                    data-produrl="{GOODS_URL}"
+                    data-id="{GOODS_ID}"
+                    data-mod-id="{GOODS_MOD_ID}"
+                    data-mod-id-price="{GOODS_MOD_PRICE_NOW}"                
+                    data-action-text-add="Добавить в избранное"
+                    data-action-text-delete="Удалить из избранного"
+                    data-add-tooltip="В Избранное"
+                    data-del-tooltip="Убрать из избранного"
+                    data-tooltip="В Избранное"
+                    title="Добавить в избранное" href="{FAVORITES_ADD_URL}?id={GOODS_MOD_ID}&amp;return_to={CURRENT_URL | urlencode}"
+                    rel="nofollow"
+                  ><i class="fal fa-heart"></i></a>
+                {% ENDIF %}
+                <!-- Если есть возможность добавить товар в сравнение -->
+                {% IF TARIFF_FEATURE_GOODS_COMPARE && SETTINGS_COMPARE_DISABLE=0 %}
+                {% IF GOODS_MOD_IS_HAS_IN_COMPARE_LIST %}
+                  <a class="add-compare added" 
+                    data-action-is-add="0" 
+                    data-action-add-url="{COMPARE_ADD_URL}"
+                    data-action-delete-url="{COMPARE_DELETE_URL}"
+                    data-action-add-title="Добавить в список сравнения с другими товарами"
+                    data-action-delete-title="Убрать из списка сравнения с другими товарами"
+                    data-msgtype="1"
+                    data-gname="{GOODS_NAME}"
+                    data-prodname="{GOODS_NAME}"
+                    data-prodimage="{GOODS_IMAGE_MEDIUM}"
+                    data-produrl="{GOODS_URL}"
+                    data-id="{GOODS_ID}"
+                    data-mod-id="{GOODS_MOD_ID}"
+                    data-mod-id-price="{GOODS_MOD_PRICE_NOW}"
+                    data-action-text-add="Добавить к сравнению"
+                    data-action-text-delete="Удалить из сравнения"
+                    data-add-tooltip="В Сравнение"
+                    data-del-tooltip="Убрать из сравнения"
+                    data-tooltip="Убрать из сравнения"
+                    title="Убрать из списка сравнения с другими товарами"
+                    href="{COMPARE_DELETE_URL}?id=GET_GOODS_MOD_ID_FROM_PAGE&amp;from={GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
+                    rel="nofollow"
+                  ><i class="fal fa-signal"></i></a>
+                {% ELSE %}
+                  <a class="add-compare" 
+                    data-action-is-add="1" 
+                    data-action-add-url="{COMPARE_ADD_URL}" 
+                    data-action-delete-url="{COMPARE_DELETE_URL}" 
+                    data-action-add-title="Добавить в список сравнения с другими товарами" 
+                    data-action-delete-title="Убрать из списка сравнения с другими товарами" 
+                    data-msgtype="1"
+                    data-gname="{GOODS_NAME}"
+                    data-prodname="{GOODS_NAME}"
+                    data-prodimage="{GOODS_IMAGE_MEDIUM}"
+                    data-produrl="{GOODS_URL}"
+                    data-id="{GOODS_ID}"
+                    data-mod-id="{GOODS_MOD_ID}"
+                    data-mod-id-price="{GOODS_MOD_PRICE_NOW}"
+                    data-action-text-add="Добавить к сравнению"
+                    data-action-text-delete="Удалить из сравнения"
+                    data-add-tooltip="В Сравнение"
+                    data-del-tooltip="Убрать из сравнения"
+                    data-tooltip="В Сравнение"
+                    title="Добавить в список сравнения с другими товарами" 
+                    href="{COMPARE_ADD_URL}?id=GET_GOODS_MOD_ID_FROM_PAGE&amp;from={GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
+                    rel="nofollow"
+                  ><i class="fal fa-signal"></i></a>
+                {% ENDIF %}
+                {% ENDIF %}
+                <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->            
+              </div>            
             <a href="{GOODS_IMAGE_LARGE}" id="zoom1" title="Увеличить {GOODS_NAME}">
               <img src="{% IF GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-medium.png{%ELSE%}{GOODS_IMAGE_MEDIUM}{% ENDIF %}" title="{GOODS_NAME}" alt="{GOODS_NAME}" class="goods-image-medium" itemprop="image"/>
               {% IF GOODS_IS_NEW %}
@@ -214,6 +147,72 @@
         </div><!-- END другие изображение товара -->
       </div>
       <div class="product-order col-lg-6 col-md-6 col-xs-12">
+        <!-- Шапка товара -->
+        <div class="product-header">
+          <div class="product-name"><h1 itemprop="name">{GOODS_NAME}</h1></div>
+          <!-- Следующий и Предыдущий товар -->
+          {% IFNOT neighbor_goods_empty %}
+          <div class="product-neighbor">
+            {% IF NEIGHBOR_PREVIOUS_GOODS_URL || NEIGHBOR_LAST_GOODS_URL %}
+            <div class="prev">
+              <a title="Предыдущий товар" href="{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_URL}{% ELSE %}{NEIGHBOR_LAST_GOODS_URL}{% ENDIF %}"><i class="fal fa-angle-left"></i></a>
+              <div class="content">
+                <a href="{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_URL}{% ELSE %}{NEIGHBOR_LAST_GOODS_URL}{% ENDIF %}" title="Перейти к &laquo;{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_NAME}{% ELSE %}{NEIGHBOR_LAST_GOODS_NAME}{% ENDIF %}&raquo;">
+                  <img class="image" src="{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_IMAGE_ICON}{% ELSEIF NEIGHBOR_LAST_GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-medium.png{% ELSE %}{NEIGHBOR_LAST_GOODS_IMAGE_ICON}{% ENDIF %}" alt="{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_NAME}{% ELSE %}{NEIGHBOR_LAST_GOODS_NAME}{% ENDIF %}">
+                  <h3 class="name">{% IF NEIGHBOR_PREVIOUS_GOODS_URL %}{NEIGHBOR_PREVIOUS_GOODS_NAME}{% ELSE %}{NEIGHBOR_LAST_GOODS_NAME}{% ENDIF %}</h3>
+                </a>
+              </div>
+            </div>
+            {% ENDIF %}
+            {% IF NEIGHBOR_NEXT_GOODS_URL || NEIGHBOR_FIRST_GOODS_URL %}
+            <div class="next">
+              <a title="Cледующий товар" href="{% IF NEIGHBOR_NEXT_GOODS_URL %}{NEIGHBOR_NEXT_GOODS_URL}{% ELSE %}{NEIGHBOR_FIRST_GOODS_URL}{% ENDIF %}"><i class="fal fa-angle-right"></i></a>
+              <div class="content">
+                <a href="{% IF NEIGHBOR_NEXT_GOODS_URL %}{NEIGHBOR_NEXT_GOODS_URL}{% ELSE %}{NEIGHBOR_FIRST_GOODS_URL}{% ENDIF %}" title="Перейти к &laquo;{% IF NEIGHBOR_NEXT_GOODS_URL %}{NEIGHBOR_NEXT_GOODS_NAME}{% ELSE %}{NEIGHBOR_FIRST_GOODS_NAME}{% ENDIF %}&raquo;">
+                  <img class="image" src="{% IF NEIGHBOR_NEXT_GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-medium.png{% ELSEIF NEIGHBOR_NEXT_GOODS_NAME %}{NEIGHBOR_NEXT_GOODS_IMAGE_ICON}{% ELSE %}{NEIGHBOR_FIRST_GOODS_IMAGE_ICON}{% ENDIF %}" alt="{% IF NEIGHBOR_NEXT_GOODS_URL %}{NEIGHBOR_NEXT_GOODS_NAME}{% ELSE %}{NEIGHBOR_FIRST_GOODS_NAME}{% ENDIF %}">
+                  <h3 class="name">{% IF NEIGHBOR_NEXT_GOODS_NAME %}{NEIGHBOR_NEXT_GOODS_NAME}{% ELSE %}{NEIGHBOR_FIRST_GOODS_NAME}{% ENDIF %}</h3>
+                </a>
+              </div>
+            </div>
+            {% ENDIF %}
+          </div>
+          {% ENDIF %}
+          <!-- /END Следующий и Предыдущий товар -->                   
+        </div>        
+        <div class="product-toolbar">
+          <!-- Артикул -->
+          {% IF GOODS_MOD_ART_NUMBER %}
+          <div class="goodsDataMainModificationArtNumber">
+            Артикул: <span>{GOODS_MOD_ART_NUMBER}</span>
+          </div>
+          {% ENDIF %} 
+          <!-- Среднее значение по результатам всех отзывов об этом товаре -->
+          <div class="ratings" {% IFNOT GOODS_OPINION_RATING_VALUE_ROUND %} style="display:none"{% ENDIF %}>
+            <div class="rating-box">
+              {% IF GOODS_OPINION_RATING_VALUE_ROUND %}
+              <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                <meta itemprop="worstRating" content = "1">
+                <meta itemprop="bestRating" content = "10">
+                <meta itemprop="ratingValue" content = "{GOODS_OPINION_RATING_VALUE_ROUND}">
+                <meta itemprop="reviewCount" content = "{GOODS_OPINION_RATING_CNT_ALL}">
+                <div class="rating">
+                  <span>{GOODS_OPINION_RATING_VALUE_ROUND | divide("2")}/5</span>
+                </div>
+              </span>
+              {% ELSE %}
+                <div class="rating" style="width:0%" alt="Рейтинг не определён" title="Рейтинг не определён"></div>
+              {% ENDIF %}
+            </div>
+            {% IF TARIFF_FEATURE_GOODS_OPINION && SETTINGS_OPINION_DISABLE=0 %}
+            <a href="#tab_4" class="ratiing-count scroll-link" data-href="{GOODS_URL}">({GOODS_OPINION_RATING_CNT_ALL})</a>
+            {% ENDIF %}
+          </div>
+          <!-- Доступность товара -->
+          <div class="goodsDataMainModificationAvailable">
+            <div class="available-true" {% IF GOODS_MOD_REST_VALUE=0 %}style="display:none;"{% ENDIF %}>Наличие товара: <span>В наличии</span></div>
+            <div class="available-false" style="{% IF GOODS_MOD_REST_VALUE>0 %}display:none;{% ENDIF %}">Наличие товара: <span>Нет в наличии</span></div>
+          </div>                 
+        </div>        
         <div class="product-order-inner clearfix">
         <!-- Цена товара -->
         <div class="price-box f-fix" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
@@ -304,7 +303,7 @@
         <div class="short-description f-fix">
           <p itemprop="description">{GOODS_DESCRIPTION_SHORT}</p>
           {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}
-          <a href="#tab_1" class="short-description-link pseudo-link scroll-link" data-href="{GOODS_URL}">Перейти к описанию</a>
+          <a href="#tab_1" class="short-description-link pseudo-link scroll-link" data-href="{GOODS_URL}">Подробнее</a>
           {% ENDIF %}
         </div>
         {% ENDIF %}   
@@ -312,25 +311,28 @@
         
         
         {% IFNOT goods_features_empty %}
-        <table class="table-features-min">
-          <tbody>
-            {% FOR goods_features %}
-              <tr>
-                <td class="cell1"><span class="features-name">{goods_features.NAME}</span></td>
-                <td class="cell2">{goods_features.VALUE}</td>
-              </tr>
-              
-              {% IF goods_features.index >= 6 %}
-              <tr>
-                <td><a href="#tab_2" class="short-description-link pseudo-link scroll-link" data-href="{GOODS_URL}">Все характеристики</a></td>
-              </tr>
-              {break}
-              {% ENDIF %}
-            {% ENDFOR %}
-          </tbody>
-        </table>   
-        {% ENDIF %}
+        <div class="table-features-min f-fix">
+          <table class="table-features">
+            <tbody>
+              {% FOR goods_features %}
+                <tr>
+                  <td class="cell1"><span class="features-name">{goods_features.NAME}</span></td>
+                  <td class="cell2">{goods_features.VALUE}</td>
+                </tr>
+                
+                {% IF goods_features.index >= 6 %}
+                <tr>
+                  <td><a href="#tab_2" class="short-description-link pseudo-link scroll-link" data-href="{GOODS_URL}">Все характеристики</a></td>
+                </tr>
+                {break}
+                {% ENDIF %}
+              {% ENDFOR %}
+            </tbody>
+          </table>  
 
+        </div>
+        {% ENDIF %}
+        
         <!-- Блок информации по акции действующей на товар, если таковая есть -->
         {% IF GOODS_MOD_MAX_DISCOUNT_ID %}
           <div class="goodsDataMainDiscountBlock f-fix" content="{GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date("Y-m-d")}">
@@ -346,199 +348,11 @@
 </div>
 <!-- /END Форма карточки товара -->
 
-<!-- Сопутствующие товары -->
-{% IFNOT related_goods_empty %}
-<div class="related clear">
-  <div class="container">
-    <div class="row">
-    {% IFNOT related_goods_empty %}
-      <div class="related-goods col-xs-12">                                                   
-        <div class="box-up-sell products-container block-bg">
-          <div class="block-title">
-            <h2 class="title">Сопутствующие товары</h2>
-            <div class="navigation owl-nav"></div>
-          </div>
-          <div class="products-grid owl-carousel">
-            {% FOR related_goods %}
-              <div class="item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_goods.MAX_REST_VALUE=0 %}empty{% ENDIF %}">
-                <div class="item-inner" itemscope itemtype="https://schema.org/Product">
-                  <form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product-form-{related_goods.MIN_PRICE_NOW_ID} goodsListForm">
-                    <input type="hidden" name="hash" value="{HASH}" />
-                    <input type="hidden" name="form[goods_from]" value="{related_goods.GOODS_FROM}" />
-                    <input type="hidden" name="form[goods_mod_id]" value="{related_goods.MIN_PRICE_NOW_ID}" />
-                    <div class="product-image">
-                      <div class="product-icons">
-                        <a class="quickview product-ico" href="{related_goods.URL_MIN_PRICE_NOW}" title="Быстрый просмотр &laquo;{related_goods.NAME}&raquo;" data-tooltip="Быстрый просмотр" rel="nofollow"><i class="fal fa-search-plus"></i><span>Быстрый просмотр</span></a>  
-                        <!-- Если есть возможность добавить товар в избранное -->
-                        {% IF related_goods.IS_HAS_IN_FAVORITES_LIST %}
-                          <a class="add-wishlist added product-ico"
-                            data-action-is-add="0"
-                            data-action-add-url="{FAVORITES_ADD_URL}"
-                            data-action-delete-url="{FAVORITES_DELETE_URL}"
-                            data-action-add-title="Добавить в избранное"
-                            data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из избранного"
-                            data-prodname="{related_goods.NAME}"
-                            data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
-                            data-produrl="{related_goods.URL}"
-                            data-id="{related_goods.ID}"
-                            data-mod-id="{related_goods.MIN_PRICE_NOW_ID}"
-                            data-mod-id-price="{related_goods.MIN_PRICE_NOW}"                            
-                            data-add-tooltip="В Избранное"
-                            data-del-tooltip="Убрать из избранного"
-                            data-tooltip="Убрать из избранного"
-                            title="Убрать &laquo;{related_goods.NAME}&raquo; из избранного"
-                            href="{FAVORITES_DELETE_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
-                            rel="nofollow"
-                          ><i class="fal fa-heart"></i></a>
-                        {% ELSE %}
-                          <a class="add-wishlist product-ico"
-                            data-action-is-add="1"
-                            data-action-add-url="{FAVORITES_ADD_URL}"
-                            data-action-delete-url="{FAVORITES_DELETE_URL}"
-                            data-action-add-title="Добавить в избранное"
-                            data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из избранного"
-                            data-prodname="{related_goods.NAME}"
-                            data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
-                            data-produrl="{related_goods.URL}"
-                            data-id="{related_goods.ID}"
-                            data-mod-id="{related_goods.MIN_PRICE_NOW_ID}"
-                            data-mod-id-price="{related_goods.MIN_PRICE_NOW}"                            
-                            data-add-tooltip="В Избранное"
-                            data-del-tooltip="Убрать из избранного"
-                            data-tooltip="В Избранное"
-                            title="Добавить &laquo;{related_goods.NAME}&raquo; в избранное" href="{FAVORITES_ADD_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
-                            href="{FAVORITES_ADD_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
-                            rel="nofollow"
-                          ><i class="fal fa-heart"></i></a>
-                        {% ENDIF %}
-                        <!-- /END Если есть возможность добавить товар в избранное -->
-                        <!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
-                        {% IF TARIFF_FEATURE_GOODS_COMPARE && SETTINGS_COMPARE_DISABLE=0 %}
-                          {% IF related_goods.IS_HAS_IN_COMPARE_LIST %}
-                            <a class="add-compare added product-ico" 
-                              data-action-is-add="0" 
-                              data-action-add-url="{COMPARE_ADD_URL}"
-                              data-action-delete-url="{COMPARE_DELETE_URL}"
-                              data-action-add-title="Добавить в сравнение"
-                              data-action-delete-title="Убрать из сравнения"
-                              data-prodname="{related_goods.NAME}"
-                              data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
-                              data-produrl="{related_goods.URL}"
-                              data-id="{related_goods.ID}"
-                              data-mod-id="{related_goods.MIN_PRICE_NOW_ID}"
-                              data-mod-id-price="{related_goods.MIN_PRICE_NOW}"
-                              data-add-tooltip="В Сравнение"
-                              data-del-tooltip="Убрать из сравнения"
-                              data-tooltip="Убрать из сравнения"
-                              title="Убрать &laquo;{related_goods.NAME}&raquo; из списка сравнения с другими товарами"
-                              href="{COMPARE_DELETE_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;from={related_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
-                              rel="nofollow"
-                            ><i class="fal fa-signal"></i></a>
-                          {% ELSE %}
-                            <a class="add-compare product-ico" 
-                              data-action-is-add="1" 
-                              data-action-add-url="{COMPARE_ADD_URL}" 
-                              data-action-delete-url="{COMPARE_DELETE_URL}" 
-                              data-action-add-title="Добавить в сравнение" 
-                              data-action-delete-title="Убрать из сравнения" 
-                              data-prodname="{related_goods.NAME}"
-                              data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
-                              data-produrl="{related_goods.URL}"
-                              data-id="{related_goods.ID}"
-                              data-mod-id="{related_goods.MIN_PRICE_NOW_ID}"
-                              data-mod-id-price="{related_goods.MIN_PRICE_NOW}"
-                              data-add-tooltip="В Сравнение"
-                              data-del-tooltip="Убрать из сравнения"
-                              data-tooltip="В Сравнение"
-                              title="Добавить в сравнение" 
-                              href="{COMPARE_ADD_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;from={related_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
-                              rel="nofollow"
-                            ><i class="fal fa-signal"></i></a>
-                          {% ENDIF %}
-                        {% ENDIF %}
-                        <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                        
-                      </div>
-                      <a href="{related_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_goods.NAME}" class="product-img">
-                        <img class="goods-image-small owl-lazy" data-src="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{related_goods.NAME}" title="{related_goods.NAME}"  itemprop="image">
-                      </a>
-                      {% IF related_goods.IS_NEW %}
-                        <span class="ico-new">Новинка</span>
-                      {% ELSEIF related_goods.IS_TOP %}
-                        <span class="ico-best">Хит</span>
-                      {% ENDIF %}
-                      {% IF related_goods.MAX_DISCOUNT %}
-                        <span class="ico-sale">Акция</span>
-                      {% ENDIF %}
-                    </div>
-                    <div class="product-shop">
-                      <meta itemprop="name" content="{related_goods.NAME}">
-                      <meta itemprop="description" content="{% IF related_goods.DESCRIPTION_SHORT %}{related_goods.DESCRIPTION_SHORT}{% ELSE %}Описание отсутствует{% ENDIF %}">
-                      <div class="product-name"><a href="{related_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_goods.NAME}" itemprop="url">{related_goods.NAME}</a></div>
-                      <div class="ratings">
-                        <a href="{related_goods.URL | url_amp}" title="Перейти к отзывам">
-                          <div class="rating-box">
-                            {% IF related_goods.OPINION_RATING_VALUE %}
-                            <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                              <meta itemprop="worstRating" content = "1">
-                              <meta itemprop="bestRating" content = "10">
-                              <meta itemprop="ratingValue" content = "{related_goods.OPINION_RATING_VALUE}">
-                              <meta itemprop="reviewCount" content = "{related_goods.OPINION_RATING_CNT_ALL}">
-                              <div class="rating" style="width:{related_goods.OPINION_RATING_VALUE}0%" alt="{related_goods.OPINION_RATING_VALUE}" title="Рейтинг товара"></div>
-                            </span>
-                            {% ELSE %}
-                              <div class="rating" style="width:0%" alt="Рейтинг не определён" title="Рейтинг не определён"></div>
-                            {% ENDIF %}
-                          </div>
-                        </a>
-                      </div>
-                      <div class="price-box" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                        <meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}"/>
-                        {% IF related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>related_goods.MIN_PRICE_NOW %}
-                          <span class="price old-price {CURRENCY_CHAR_CODE}">{related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
-                        {% ELSEIF related_goods.MIN_PRICE_OLD>related_goods.MIN_PRICE_NOW %}
-                          <span class="price old-price {CURRENCY_CHAR_CODE}">{related_goods.MIN_PRICE_OLD | money_format}</span>
-                        {% ELSE %}
-                          <span class="no-old-price"></span>
-                        {% ENDIF %}
-                          <span class="price {CURRENCY_CHAR_CODE}" itemprop="price" content="{related_goods.MIN_PRICE_NOW}">{related_goods.MIN_PRICE_NOW | money_format}</span>
-                      </div>
-                      <div class="actions">
-                        <div class="qty-wrap">
-                          <div class="qty-set">
-                            <a href="javascript:void(0)" class="qty-plus unselectable" title="Увеличить"><i class="fal fa-plus"></i></a>
-                            <input type="text" name="form[goods_mod_quantity]" maxlength="4" value="1" min="1" title="Количество" class="inputText quantity" onkeypress="return keyPress(this, event);" onpaste="return false;" autocomplete="off">
-                            <a href="javascript:void(0)" class="qty-minus unselectable" title="Уменьшить"><i class="fal fa-minus"></i></a>
-                          </div>
-                        </div>
-                        <!-- Добавление товара в корзину -->
-                        {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_goods.MAX_REST_VALUE=0 %}
-                          <div class="empty" title="В корзину" data-tooltip="Нет в наличии"><span>Нет в наличии</span></div>
-                        {% ELSE %}
-                          <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
-                          <a class="add-cart quick" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_goods.MIN_PRICE_NOW_ID}"><span>Купить в 1 клик</span></a>                          
-                        {% ENDIF %}
-                        <!-- /END Добавление товара в корзину -->
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            {% ENDFOR %}
-          </div>
-        </div>
-      </div>
-    {% ENDIF %}      
-    </div>
-  </div>
-</div>
-{% ENDIF %}      
-<!-- /END Сопутствующие товары -->
-
 <!-- Основные вкладки описаний товара -->
 <div class="product-tabs">
-  <div class="container">
-    <div class="row">
-      <div class="tabs-content col-xs-12">
+  <div class="">
+    <div class="">
+      <div class="tabs-content">
         <div class="tabs-wrap block-bg">
           <div class="tabs">
             <ul class="tabs-inner">
@@ -792,48 +606,49 @@
 </div>
 <!-- /END Основные вкладки описаний товара -->
 
-<!-- С этим товаром смотрят -->
-{% IFNOT related_views_goods_empty %}
-<div class="related">
-  <div class="container">
-    <div class="row">
-    {% IFNOT related_views_goods_empty %}
-      <div class="related-views col-xs-12">
+
+<!-- Сопутствующие товары -->
+{% IFNOT related_goods_empty %}
+<div class="related clear">
+  <div class="">
+    <div class="">
+    {% IFNOT related_goods_empty %}
+      <div class="related-goods">                                                   
         <div class="box-up-sell products-container block-bg">
           <div class="block-title">
-            <h2 class="title">С этим товаром смотрят</h2>
+            <h2 class="title">Сопутствующие товары</h2>
             <div class="navigation owl-nav"></div>
           </div>
           <div class="products-grid owl-carousel">
-            {% FOR related_views_goods %}
-              <div class="item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_views_goods.MAX_REST_VALUE=0 %}empty{% ENDIF %}">
+            {% FOR related_goods %}
+              <div class="item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_goods.MAX_REST_VALUE=0 %}empty{% ENDIF %}">
                 <div class="item-inner" itemscope itemtype="https://schema.org/Product">
-                  <form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product-form-{related_views_goods.MIN_PRICE_NOW_ID} goodsListForm">
+                  <form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product-form-{related_goods.MIN_PRICE_NOW_ID} goodsListForm">
                     <input type="hidden" name="hash" value="{HASH}" />
-                    <input type="hidden" name="form[goods_from]" value="{related_views_goods.GOODS_FROM}" />
-                    <input type="hidden" name="form[goods_mod_id]" value="{related_views_goods.MIN_PRICE_NOW_ID}" />
+                    <input type="hidden" name="form[goods_from]" value="{related_goods.GOODS_FROM}" />
+                    <input type="hidden" name="form[goods_mod_id]" value="{related_goods.MIN_PRICE_NOW_ID}" />
                     <div class="product-image">
                       <div class="product-icons">
-                        <a class="quickview product-ico" href="{related_views_goods.URL_MIN_PRICE_NOW}" title="Быстрый просмотр &laquo;{related_views_goods.NAME}&raquo;" data-tooltip="Быстрый просмотр" rel="nofollow"><i class="fal fa-search-plus"></i><span>Быстрый просмотр</span></a>
+                        <a class="quickview product-ico" href="{related_goods.URL_MIN_PRICE_NOW}" title="Быстрый просмотр &laquo;{related_goods.NAME}&raquo;" data-tooltip="Быстрый просмотр" rel="nofollow"><i class="fal fa-search-plus"></i><span>Быстрый просмотр</span></a>  
                         <!-- Если есть возможность добавить товар в избранное -->
-                        {% IF related_views_goods.IS_HAS_IN_FAVORITES_LIST %}
+                        {% IF related_goods.IS_HAS_IN_FAVORITES_LIST %}
                           <a class="add-wishlist added product-ico"
                             data-action-is-add="0"
                             data-action-add-url="{FAVORITES_ADD_URL}"
                             data-action-delete-url="{FAVORITES_DELETE_URL}"
-                            data-action-add-title="Добавить &laquo;{related_views_goods.NAME}&raquo; в избранное"
-                            data-action-delete-title="Убрать &laquo;{related_views_goods.NAME}&raquo; из избранного"
-                            data-prodname="{related_views_goods.NAME}"
-                            data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
-                            data-produrl="{related_views_goods.URL}"
-                            data-id="{related_views_goods.ID}"
-                            data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}" 
-                            data-mod-id-price="{related_views_goods.MIN_PRICE_NOW}"                            
+                            data-action-add-title="Добавить в избранное"
+                            data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из избранного"
+                            data-prodname="{related_goods.NAME}"
+                            data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                            data-produrl="{related_goods.URL}"
+                            data-id="{related_goods.ID}"
+                            data-mod-id="{related_goods.MIN_PRICE_NOW_ID}"
+                            data-mod-id-price="{related_goods.MIN_PRICE_NOW}"                            
                             data-add-tooltip="В Избранное"
                             data-del-tooltip="Убрать из избранного"
                             data-tooltip="Убрать из избранного"
-                            title="Убрать &laquo;{related_views_goods.NAME}&raquo; из избранного"
-                            href="{FAVORITES_DELETE_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
+                            title="Убрать &laquo;{related_goods.NAME}&raquo; из избранного"
+                            href="{FAVORITES_DELETE_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
                             rel="nofollow"
                           ><i class="fal fa-heart"></i></a>
                         {% ELSE %}
@@ -841,43 +656,43 @@
                             data-action-is-add="1"
                             data-action-add-url="{FAVORITES_ADD_URL}"
                             data-action-delete-url="{FAVORITES_DELETE_URL}"
-                            data-action-add-title="Добавить &laquo;{related_views_goods.NAME}&raquo; в избранное"
-                            data-action-delete-title="Убрать &laquo;{related_views_goods.NAME}&raquo; из избранного"
-                            data-prodname="{related_views_goods.NAME}"
-                            data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
-                            data-produrl="{related_views_goods.URL}"
-                            data-id="{related_views_goods.ID}"
-                            data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}" 
-                            data-mod-id-price="{related_views_goods.MIN_PRICE_NOW}"                            
+                            data-action-add-title="Добавить в избранное"
+                            data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из избранного"
+                            data-prodname="{related_goods.NAME}"
+                            data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                            data-produrl="{related_goods.URL}"
+                            data-id="{related_goods.ID}"
+                            data-mod-id="{related_goods.MIN_PRICE_NOW_ID}"
+                            data-mod-id-price="{related_goods.MIN_PRICE_NOW}"                            
                             data-add-tooltip="В Избранное"
                             data-del-tooltip="Убрать из избранного"
                             data-tooltip="В Избранное"
-                            title="Добавить &laquo;{related_views_goods.NAME}&raquo; в избранное" href="{FAVORITES_ADD_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
-                            href="{FAVORITES_ADD_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
+                            title="Добавить &laquo;{related_goods.NAME}&raquo; в избранное" href="{FAVORITES_ADD_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
+                            href="{FAVORITES_ADD_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
                             rel="nofollow"
                           ><i class="fal fa-heart"></i></a>
                         {% ENDIF %}
                         <!-- /END Если есть возможность добавить товар в избранное -->
                         <!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
                         {% IF TARIFF_FEATURE_GOODS_COMPARE && SETTINGS_COMPARE_DISABLE=0 %}
-                          {% IF related_views_goods.IS_HAS_IN_COMPARE_LIST %}
+                          {% IF related_goods.IS_HAS_IN_COMPARE_LIST %}
                             <a class="add-compare added product-ico" 
                               data-action-is-add="0" 
                               data-action-add-url="{COMPARE_ADD_URL}"
                               data-action-delete-url="{COMPARE_DELETE_URL}"
-                              data-action-add-title="Добавить &laquo;{related_views_goods.NAME}&raquo; в список сравнения с другими товарами"
-                              data-action-delete-title="Убрать &laquo;{related_views_goods.NAME}&raquo; из списка сравнения с другими товарами"
-                              data-prodname="{related_views_goods.NAME}"
-                              data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
-                              data-produrl="{related_views_goods.URL}"
-                              data-id="{related_views_goods.ID}"
-                              data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}"
-                              data-mod-id-price="{related_views_goods.MIN_PRICE_NOW}"
+                              data-action-add-title="Добавить в сравнение"
+                              data-action-delete-title="Убрать из сравнения"
+                              data-prodname="{related_goods.NAME}"
+                              data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                              data-produrl="{related_goods.URL}"
+                              data-id="{related_goods.ID}"
+                              data-mod-id="{related_goods.MIN_PRICE_NOW_ID}"
+                              data-mod-id-price="{related_goods.MIN_PRICE_NOW}"
                               data-add-tooltip="В Сравнение"
                               data-del-tooltip="Убрать из сравнения"
                               data-tooltip="Убрать из сравнения"
-                              title="Убрать &laquo;{related_views_goods.NAME}&raquo; из списка сравнения с другими товарами"
-                              href="{COMPARE_DELETE_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;from={related_views_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
+                              title="Убрать &laquo;{related_goods.NAME}&raquo; из списка сравнения с другими товарами"
+                              href="{COMPARE_DELETE_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;from={related_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
                               rel="nofollow"
                             ><i class="fal fa-signal"></i></a>
                           {% ELSE %}
@@ -885,51 +700,51 @@
                               data-action-is-add="1" 
                               data-action-add-url="{COMPARE_ADD_URL}" 
                               data-action-delete-url="{COMPARE_DELETE_URL}" 
-                              data-action-add-title="Добавить &laquo;{related_views_goods.NAME}&raquo; в список сравнения с другими товарами" 
-                              data-action-delete-title="Убрать &laquo;{related_views_goods.NAME}&raquo; из списка сравнения с другими товарами" 
-                              data-prodname="{related_views_goods.NAME}"
-                              data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
-                              data-produrl="{related_views_goods.URL}"
-                              data-id="{related_views_goods.ID}"
-                              data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}"
-                              data-mod-id-price="{related_views_goods.MIN_PRICE_NOW}"
+                              data-action-add-title="Добавить в сравнение" 
+                              data-action-delete-title="Убрать из сравнения" 
+                              data-prodname="{related_goods.NAME}"
+                              data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                              data-produrl="{related_goods.URL}"
+                              data-id="{related_goods.ID}"
+                              data-mod-id="{related_goods.MIN_PRICE_NOW_ID}"
+                              data-mod-id-price="{related_goods.MIN_PRICE_NOW}"
                               data-add-tooltip="В Сравнение"
                               data-del-tooltip="Убрать из сравнения"
                               data-tooltip="В Сравнение"
-                              title="Добавить &laquo;{related_views_goods.NAME}&raquo; в список сравнения с другими товарами" 
-                              href="{COMPARE_ADD_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;from={related_views_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
+                              title="Добавить в сравнение" 
+                              href="{COMPARE_ADD_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;from={related_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
                               rel="nofollow"
                             ><i class="fal fa-signal"></i></a>
                           {% ENDIF %}
                         {% ENDIF %}
                         <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                        
                       </div>
-                      <a href="{related_views_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_views_goods.NAME}" class="product-img">
-                        <img class="goods-image-small owl-lazy" data-src="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{related_views_goods.NAME}" title="{related_views_goods.NAME}"  itemprop="image">
+                      <a href="{related_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_goods.NAME}" class="product-img">
+                        <img class="goods-image-small owl-lazy" data-src="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{related_goods.NAME}" title="{related_goods.NAME}"  itemprop="image">
                       </a>
-                      {% IF related_views_goods.IS_NEW %}
+                      {% IF related_goods.IS_NEW %}
                         <span class="ico-new">Новинка</span>
-                      {% ELSEIF related_views_goods.IS_TOP %}
+                      {% ELSEIF related_goods.IS_TOP %}
                         <span class="ico-best">Хит</span>
                       {% ENDIF %}
-                      {% IF related_views_goods.MAX_DISCOUNT %}
+                      {% IF related_goods.MAX_DISCOUNT %}
                         <span class="ico-sale">Акция</span>
                       {% ENDIF %}
                     </div>
                     <div class="product-shop">
-                      <meta itemprop="name" content="{related_views_goods.NAME}">
-                      <meta itemprop="description" content="{% IF related_views_goods.DESCRIPTION_SHORT %}{related_views_goods.DESCRIPTION_SHORT}{% ELSE %}Описание отсутствует{% ENDIF %}">
-                      <div class="product-name"><a href="{related_views_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_views_goods.NAME}" itemprop="url">{related_views_goods.NAME}</a></div>
+                      <meta itemprop="name" content="{related_goods.NAME}">
+                      <meta itemprop="description" content="{% IF related_goods.DESCRIPTION_SHORT %}{related_goods.DESCRIPTION_SHORT}{% ELSE %}Описание отсутствует{% ENDIF %}">
+                      <div class="product-name"><a href="{related_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_goods.NAME}" itemprop="url">{related_goods.NAME}</a></div>
                       <div class="ratings">
-                        <a href="{related_views_goods.URL | url_amp}" title="Перейти к отзывам">
+                        <a href="{related_goods.URL | url_amp}" title="Перейти к отзывам">
                           <div class="rating-box">
-                            {% IF related_views_goods.OPINION_RATING_VALUE %}
+                            {% IF related_goods.OPINION_RATING_VALUE %}
                             <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
                               <meta itemprop="worstRating" content = "1">
                               <meta itemprop="bestRating" content = "10">
-                              <meta itemprop="ratingValue" content = "{related_views_goods.OPINION_RATING_VALUE}">
-                              <meta itemprop="reviewCount" content = "{related_views_goods.OPINION_RATING_CNT_ALL}">
-                              <div class="rating" style="width:{related_views_goods.OPINION_RATING_VALUE}0%" alt="{related_views_goods.OPINION_RATING_VALUE}" title="Рейтинг товара"></div>
+                              <meta itemprop="ratingValue" content = "{related_goods.OPINION_RATING_VALUE}">
+                              <meta itemprop="reviewCount" content = "{related_goods.OPINION_RATING_CNT_ALL}">
+                              <div class="rating" style="width:{related_goods.OPINION_RATING_VALUE}0%" alt="{related_goods.OPINION_RATING_VALUE}" title="Рейтинг товара"></div>
                             </span>
                             {% ELSE %}
                               <div class="rating" style="width:0%" alt="Рейтинг не определён" title="Рейтинг не определён"></div>
@@ -939,14 +754,14 @@
                       </div>
                       <div class="price-box" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                         <meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}"/>
-                        {% IF related_views_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>related_views_goods.MIN_PRICE_NOW %}
-                          <span class="price old-price {CURRENCY_CHAR_CODE}">{related_views_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
-                        {% ELSEIF related_views_goods.MIN_PRICE_OLD>related_views_goods.MIN_PRICE_NOW %}
-                          <span class="price old-price {CURRENCY_CHAR_CODE}">{related_views_goods.MIN_PRICE_OLD | money_format}</span>
+                        {% IF related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>related_goods.MIN_PRICE_NOW %}
+                          <span class="price old-price {CURRENCY_CHAR_CODE}">{related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+                        {% ELSEIF related_goods.MIN_PRICE_OLD>related_goods.MIN_PRICE_NOW %}
+                          <span class="price old-price {CURRENCY_CHAR_CODE}">{related_goods.MIN_PRICE_OLD | money_format}</span>
                         {% ELSE %}
                           <span class="no-old-price"></span>
                         {% ENDIF %}
-                          <span class="price {CURRENCY_CHAR_CODE}" itemprop="price" content="{related_views_goods.MIN_PRICE_NOW}">{related_views_goods.MIN_PRICE_NOW | money_format}</span>
+                          <span class="price {CURRENCY_CHAR_CODE}" itemprop="price" content="{related_goods.MIN_PRICE_NOW}">{related_goods.MIN_PRICE_NOW | money_format}</span>
                       </div>
                       <div class="actions">
                         <div class="qty-wrap">
@@ -957,11 +772,11 @@
                           </div>
                         </div>
                         <!-- Добавление товара в корзину -->
-                        {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_views_goods.MAX_REST_VALUE=0 %}
+                        {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_goods.MAX_REST_VALUE=0 %}
                           <div class="empty" title="В корзину" data-tooltip="Нет в наличии"><span>Нет в наличии</span></div>
                         {% ELSE %}
-                          <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_views_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_views_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
-                          <a class="add-cart quick" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_views_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_views_goods.MIN_PRICE_NOW_ID}"><span>Купить в 1 клик</span></a>                          
+                          <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
+                          <a class="add-cart quick" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_goods.MIN_PRICE_NOW_ID}"><span>Купить в 1 клик</span></a>                          
                         {% ENDIF %}
                         <!-- /END Добавление товара в корзину -->
                       </div>
@@ -969,6 +784,211 @@
                   </form>
                 </div>
               </div>
+            {% ENDFOR %}
+          </div>
+        </div>
+      </div>
+    {% ENDIF %}      
+    </div>
+  </div>
+</div>
+{% ENDIF %}      
+<!-- /END Сопутствующие товары -->
+
+<!-- С этим товаром смотрят -->
+{% IFNOT related_views_goods_empty %}
+<div class="related">
+  <div class="">
+    <div class="">
+    {% IFNOT related_views_goods_empty %}
+      <div class="related-views">
+        <div class="box-up-sell products-container block-bg">
+          <div class="block-title">
+            <h2 class="title">С этим товаром смотрят</h2>
+            <div class="navigation owl-nav"></div>
+          </div>
+          <div class="products-grid owl-carousel">
+            {% FOR related_views_goods %}
+            <div class="item {% IF related_views_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}empty{% ENDIF %}{% IF related_views_goods.COUNT_MODIFICATION > 1 %} _with-mod{% ENDIF %}">
+              <div class="item-inner" itemscope itemtype="https://schema.org/Product">
+                <form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product-form-{related_views_goods.MIN_PRICE_NOW_ID} goodsListForm">
+                  <input type="hidden" name="hash" value="{HASH}" />
+                  <input type="hidden" name="form[goods_from]" value="{related_views_goods.GOODS_FROM}" />
+                  <input type="hidden" name="form[goods_mod_id]" value="{related_views_goods.MIN_PRICE_NOW_ID}" />
+                  <div class="product-image">
+                    <a class="quickview" href="{related_views_goods.URL_MIN_PRICE_NOW}" title="Быстрый просмотр &laquo;{related_views_goods.NAME}&raquo;" data-tooltip="Быстрый просмотр" rel="nofollow">
+                      <span>Быстрый просмотр</span>
+                    </a>
+                    <div class="product-icons">
+                      <!-- Если есть возможность добавить товар в избранное -->
+                      {% IF related_views_goods.IS_HAS_IN_FAVORITES_LIST %}
+                        <a class="add-wishlist added  product-ico"
+                          data-action-is-add="0"
+                          data-action-add-url="{FAVORITES_ADD_URL}"
+                          data-action-delete-url="{FAVORITES_DELETE_URL}"
+                          data-action-add-title="Добавить в избранное"
+                          data-action-delete-title="Убрать из избранного"
+                          data-prodname="{related_views_goods.NAME}"
+                          data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                          data-produrl="{related_views_goods.URL}"
+                          data-id="{related_views_goods.ID}"
+                          data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}" 
+                          data-mod-id-price="{related_views_goods.MIN_PRICE_NOW}"                                 
+                          data-add-tooltip="В Избранное"
+                          data-del-tooltip="Убрать из избранного"
+                          data-tooltip="Убрать из избранного"
+                          title="Убрать из избранного"
+                          href="{FAVORITES_DELETE_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
+                          rel="nofollow"
+                        ><i class="fal fa-heart"></i></a>
+                      {% ELSE %}
+                        <a class="add-wishlist  product-ico"
+                          data-action-is-add="1"
+                          data-action-add-url="{FAVORITES_ADD_URL}"
+                          data-action-delete-url="{FAVORITES_DELETE_URL}"
+                          data-action-add-title="Добавить в избранное"
+                          data-action-delete-title="Убрать из избранного"
+                          data-prodname="{related_views_goods.NAME}"
+                          data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                          data-produrl="{related_views_goods.URL}"
+                          data-id="{related_views_goods.ID}"
+                          data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}" 
+                          data-mod-id-price="{related_views_goods.MIN_PRICE_NOW}"                              
+                          data-add-tooltip="В Избранное"
+                          data-del-tooltip="Убрать из избранного"
+                          data-tooltip="В Избранное"
+                          title="Добавить в избранное"
+                          href="{FAVORITES_ADD_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
+                          rel="nofollow"
+                        ><i class="fal fa-heart"></i></a>
+                      {% ENDIF %}
+                      <!-- /END Если есть возможность добавить товар в избранное -->
+                      <!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
+                      {% IF TARIFF_FEATURE_GOODS_COMPARE && SETTINGS_COMPARE_DISABLE=0 %}
+                        {% IF related_views_goods.IS_HAS_IN_COMPARE_LIST %}
+                          <a class="add-compare added  product-ico" 
+                            data-action-is-add="0" 
+                            data-action-add-url="{COMPARE_ADD_URL}"
+                            data-action-delete-url="{COMPARE_DELETE_URL}"
+                            data-action-add-title="Добавить в сравнение"
+                            data-action-delete-title="Убрать из сравнения"
+                            data-prodname="{related_views_goods.NAME}"
+                            data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                            data-produrl="{related_views_goods.URL}"
+                            data-id="{related_views_goods.ID}"
+                            data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}"
+                            data-mod-id-price="{related_views_goods.MIN_PRICE_NOW}"
+                            data-add-tooltip="Добавить в сравнение"
+                            data-del-tooltip="Убрать из сравнения"
+                            data-tooltip="Убрать из сравнения"
+                            title="Убрать из сравнения"
+                            href="{COMPARE_DELETE_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;from={related_views_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
+                            rel="nofollow"
+                          ><i class="fal fa-signal"></i></a>
+                        {% ELSE %}
+                          <a class="add-compare  product-ico" 
+                            data-action-is-add="1" 
+                            data-action-add-url="{COMPARE_ADD_URL}" 
+                            data-action-delete-url="{COMPARE_DELETE_URL}" 
+                            data-action-add-title="Добавить в сравнение" 
+                            data-action-delete-title="Убрать из сравнения" 
+                            data-prodname="{related_views_goods.NAME}"
+                            data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=neon{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                            data-produrl="{related_views_goods.URL}"
+                            data-id="{related_views_goods.ID}"
+                            data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}"
+                            data-mod-id-price="{related_views_goods.MIN_PRICE_NOW}"
+                            data-add-tooltip="Добавить в сравнение"
+                            data-del-tooltip="Убрать из сравнения"
+                            data-tooltip="Добавить в сравнение"
+                            title="Добавить в сравнение" 
+                            href="{COMPARE_ADD_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;from={related_views_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
+                            rel="nofollow"
+                          ><i class="fal fa-signal"></i></a>
+                        {% ENDIF %}
+                      {% ENDIF %}
+                      <!-- /END Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->                          
+                    </div>
+                    <a href="{related_views_goods.URL_MIN_PRICE_NOW | url_amp}"  class="product-img mouseHoverImgCarousel">
+                      {% IF related_views_goods.IMAGE_EMPTY %}
+                      <img class="lozad" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=assorti" alt="{related_views_goods.NAME}" title="{related_views_goods.NAME}"  itemprop="image">
+                      {% ELSE %}
+                        <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{related_views_goods.IMAGE_MEDIUM}" alt="{related_views_goods.NAME}" title="{related_views_goods.NAME}"  itemprop="image">
+                        {% FOR images %}
+                          {% IF related_views_goods.IMAGE_MEDIUM != related_views_goods.images.MEDIUM %}
+                          <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{related_views_goods.images.MEDIUM}" alt="{related_views_goods.NAME}" title="{related_views_goods.NAME}"  itemprop="image">
+                          {% ENDIF %}
+                        {% ENDFOR %}
+                      {% ENDIF %}
+                    </a>
+                    {% IF related_views_goods.IS_NEW %}
+                      <span class="ico-new">Новинка</span>
+                    {% ELSEIF related_views_goods.IS_TOP %}
+                      <span class="ico-best">Хит</span>
+                    {% ENDIF %}
+                    {% IF related_views_goods.MAX_DISCOUNT %}
+                      <span class="ico-sale">Акция</span>
+                    {% ENDIF %}
+                    <div class="ratings" {% IFNOT related_views_goods.OPINION_RATING_VALUE %} style="display:none"{% ENDIF %}>
+                      <a href="{related_views_goods.URL | url_amp}" title="Перейти к отзывам">
+                        <div class="rating-box">
+                          {% IF related_views_goods.OPINION_RATING_VALUE %}
+                          <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                            <meta itemprop="worstRating" content = "1">
+                            <meta itemprop="bestRating" content = "10">
+                            <meta itemprop="ratingValue" content = "{related_views_goods.OPINION_RATING_VALUE}">
+                            <meta itemprop="reviewCount" content = "{related_views_goods.OPINION_RATING_CNT_ALL}">
+                            <div class="rating">
+                              <span>{related_views_goods.OPINION_RATING_VALUE | divide("2")}/5</span>
+                            </div>                                    
+                          </span>
+                          {% ELSE %}
+                            <div class="rating" style="width:0%"  title="Рейтинг не определён"></div>
+                          {% ENDIF %}
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="product-shop">
+                    <meta itemprop="name" content="{related_views_goods.NAME}">
+                    <meta itemprop="description" content="{% IF related_views_goods.DESCRIPTION_SHORT %}{related_views_goods.DESCRIPTION_SHORT}{% ELSE %}Описание отсутствует{% ENDIF %}">
+                    <div class="product-name"><a href="{related_views_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_views_goods.NAME}" itemprop="url">{related_views_goods.NAME}</a></div>
+                    <div class="price-box" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                      <meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}"/>
+                        {% IF related_views_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>related_views_goods.MIN_PRICE_NOW %}
+                          <span class="price old-price {CURRENCY_CHAR_CODE}">{related_views_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+                        {% ELSEIF related_views_goods.MIN_PRICE_OLD>related_views_goods.MIN_PRICE_NOW %}
+                          <span class="price old-price {CURRENCY_CHAR_CODE}">{related_views_goods.MIN_PRICE_OLD | money_format}</span>
+                        {% ELSE %}
+                            <span class="no-old-price"></span>                            
+                        {% ENDIF %}
+                      <span class="price {CURRENCY_CHAR_CODE}" itemprop="price" content="{related_views_goods.MIN_PRICE_NOW}">{related_views_goods.MIN_PRICE_NOW | money_format}</span>
+                    </div>
+                    <div class="actions">
+                      <div class="qty-wrap">
+                        <div class="qty-set">
+                          <a href="javascript:void(0)" class="qty-plus unselectable" title="Увеличить"><i class="fal fa-plus"></i></a>
+                          <input type="number" name="form[goods_mod_quantity]" max="4" value="1" min="1" title="Количество" class="inputText quantity" onkeypress="return keyPress(this, event);"  autocomplete="off">
+                          <a href="javascript:void(0)" class="qty-minus unselectable" title="Уменьшить"><i class="fal fa-minus"></i></a>
+                        </div>
+                      </div>
+                      <!-- Добавление товара в корзину -->
+                      {% IF related_views_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}
+                        <div class="empty" title="Нет в наличии" data-tooltip="Нет в наличии"><span>Нет в наличии</span></div>
+                      {% ELSE %}
+                        {% IF related_views_goods.COUNT_MODIFICATION > 1 %}
+                          <a class="quickviewmod button" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{related_views_goods.URL_MIN_PRICE_NOW}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
+                        {% ELSE %}                                                     
+                          <a class="add-cart" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_views_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_views_goods.MIN_PRICE_NOW_ID}"><i class="fal fa-shopping-cart" aria-hidden="true"></i><span>В корзину</span></a>
+                          <a class="add-cart quick" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_views_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_views_goods.MIN_PRICE_NOW_ID}"><span>Купить в 1 клик</span></a>
+                        {% ENDIF %}
+                      {% ENDIF %}
+                      <!-- /END Добавление товара в корзину -->
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
             {% ENDFOR %}
           </div>
         </div>
