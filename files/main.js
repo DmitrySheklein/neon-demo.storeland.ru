@@ -1848,6 +1848,9 @@ $('.qty-wrap .quantity').off('change').change(function(){
 
 // Скрипты для карточки товара
 function goodspage() {
+  // Стилизация селектов
+  $('[name="form[properties][]"]').styler()
+
   // Скролл по ссылкам
   $('.scroll-link').on('click', function(evt){
     evt.preventDefault();
@@ -1919,7 +1922,7 @@ function goodspage() {
     lazyLoad: true,
     nav: false,
     dots: false,
-    autoplay: true,
+    autoplay: false,
     autoplayTimeout: 3000,
     autoplayHoverPause: true,
     navContainer: '.related-views .navigation',
@@ -1950,7 +1953,7 @@ function goodspage() {
     lazyLoad: true,
     nav: false,
     dots: false,
-    autoplay: true,
+    autoplay: false,
     autoplayTimeout: 3000,
     autoplayHoverPause: true,
     navContainer: '.related-goods .navigation',
@@ -2653,7 +2656,7 @@ function validCallBackF(){
 
 // Разделение поле адрес на Улица, Дом, Квартира
 function address(){
-  $('#quickform .button').click(function(){
+  $('#quickform .button').on('click', function(){
   var $quickDeliveryAddress = $('#quickDeliveryAddress'),
            quickDeliveryAddressStreetValue = $('#quickDeliveryAddressStreet').val(),
            quickDeliveryAddressHomeValue = $('#quickDeliveryAddressHome').val(),
@@ -3073,7 +3076,7 @@ $(function(){
 })*/
 // Поиск в шапке
 $(function(){
-  $('.header-search .header-searchLink, .header-search .search-close, .header-search .search-overlay').click(function(e){
+  $('.header-search .header-searchLink, .header-search .search-close, .header-search .search-overlay').on('click', function(e){
     e.preventDefault()
     $('.header-search .search').toggleClass('_active')
   })
@@ -3093,7 +3096,7 @@ $(function(){
       $clearBtn.hide()
     }
   })
-  $('#clear-file').click(function(){
+  $('#clear-file').on('click', function(){
     var $input = $('#feedback_file');
     
     if($input[0].files.length) {

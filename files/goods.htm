@@ -180,12 +180,6 @@
           <!-- /END Следующий и Предыдущий товар -->                   
         </div>        
         <div class="product-toolbar">
-          <!-- Артикул -->
-          {% IF GOODS_MOD_ART_NUMBER %}
-          <div class="goodsDataMainModificationArtNumber">
-            Артикул: <span>{GOODS_MOD_ART_NUMBER}</span>
-          </div>
-          {% ENDIF %} 
           <!-- Среднее значение по результатам всех отзывов об этом товаре -->
           <div class="ratings" {% IFNOT GOODS_OPINION_RATING_VALUE_ROUND %} style="display:none"{% ENDIF %}>
             <div class="rating-box">
@@ -203,14 +197,17 @@
                 <div class="rating" style="width:0%" alt="Рейтинг не определён" title="Рейтинг не определён"></div>
               {% ENDIF %}
             </div>
-            {% IF TARIFF_FEATURE_GOODS_OPINION && SETTINGS_OPINION_DISABLE=0 %}
-            <a href="#tab_4" class="ratiing-count scroll-link" data-href="{GOODS_URL}">({GOODS_OPINION_RATING_CNT_ALL})</a>
-            {% ENDIF %}
+          </div>          
+          <!-- Артикул -->
+          {% IF GOODS_MOD_ART_NUMBER %}
+          <div class="goodsDataMainModificationArtNumber">
+            Артикул: <span>{GOODS_MOD_ART_NUMBER}</span>
           </div>
+          {% ENDIF %} 
           <!-- Доступность товара -->
           <div class="goodsDataMainModificationAvailable">
-            <div class="available-true" {% IF GOODS_MOD_REST_VALUE=0 %}style="display:none;"{% ENDIF %}>Наличие товара: <span>В наличии</span></div>
-            <div class="available-false" style="{% IF GOODS_MOD_REST_VALUE>0 %}display:none;{% ENDIF %}">Наличие товара: <span>Нет в наличии</span></div>
+            <div class="available-true" {% IF GOODS_MOD_REST_VALUE=0 %}style="display:none;"{% ENDIF %}><span>Наличие товара: </span><span class="available-value">В наличии</span></div>
+            <div class="available-false" style="{% IF GOODS_MOD_REST_VALUE>0 %}display:none;{% ENDIF %}"><span>Наличие товара: </span><span class="available-value">Нет в наличии</span></div>
           </div>                 
         </div>        
         <div class="product-order-inner clearfix">
@@ -240,7 +237,7 @@
                   <!-- Если это первый элемент в списке -->
                   {% IF goods_modifications_properties.values.first %}
                     <span>{goods_modifications_properties.NAME}:</span>
-                    <select name="form[properties][]" class="selectBox">
+                    <select name="form[properties][]" class="">
                   {% ENDIF %}
                       <option value="{goods_modifications_properties.values.ID}" {% IF goods_modifications_properties.values.SELECTED %}selected="selected"{% ENDIF %}>{goods_modifications_properties.values.NAME}</option>
                     <!-- Если это последний элемент в списке -->
@@ -356,11 +353,11 @@
         <div class="tabs-wrap block-bg">
           <div class="tabs">
             <ul class="tabs-inner">
+              <li class="nav-splitter"></li>
               {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}<li class="tabs-item"><a href="javascript:tabSwitch(1);" id="tab_1" class="active">Описание</a></li>{% ENDIF %}
               {% IFNOT goods_features_empty %}<li class="tabs-item"><a href="javascript:tabSwitch(2);" id="tab_2">Характеристики</a></li>{% ENDIF %}
               {% IFNOT goods_delivery_empty %}<li class="tabs-item"><a href="javascript:tabSwitch(3);" id="tab_3">Доставка</a></li>{% ENDIF %}
-              {% IF TARIFF_FEATURE_GOODS_OPINION && SETTINGS_OPINION_DISABLE=0 %}<li class="tabs-item"><a href="javascript:tabSwitch(4);" id="tab_4">Отзывы ({GOODS_OPINION_RATING_CNT_ALL})</a></li>{% ENDIF %}
-              <li class="nav-splitter"></li>
+              {% IF TARIFF_FEATURE_GOODS_OPINION && SETTINGS_OPINION_DISABLE=0 %}<li class="tabs-item"><a href="javascript:tabSwitch(4);" id="tab_4">Отзывы (<span class="tabs-counter">{GOODS_OPINION_RATING_CNT_ALL}</span>)</a></li>{% ENDIF %}
             </ul>
           </div>
           <!-- Описание -->
@@ -460,9 +457,9 @@
                       <!-- Верхняя навигация (Фильтры и страницы) -->
                       <div class="goodsDataOpinionListNavigateTop">
                         <!-- Фильтры отзывов -->
-                        <a class="button button2 small allOpinions active">Все ({GOODS_OPINION_RATING_CNT_ALL})</a> 
-                        <a class="button button2 small goodOpinions {% IF GOODS_OPINION_RATING_CNT_GOOD= 0 %}disabled{% ENDIF %}">Положительные ({GOODS_OPINION_RATING_CNT_GOOD})</a> 
-                        <a class="button button2 small badOpinions {% IF GOODS_OPINION_RATING_CNT_BAD= 0 %}disabled{% ENDIF %}">Отрицательные ({GOODS_OPINION_RATING_CNT_BAD})</a>
+                        <a class="button button2 small opinionListBtn allOpinions active">Все (<span class="opinionListCount">{GOODS_OPINION_RATING_CNT_ALL}</span>)</a> 
+                        <a class="button button2 small opinionListBtn goodOpinions {% IF GOODS_OPINION_RATING_CNT_GOOD= 0 %}disabled{% ENDIF %}">Положительные (<span class="opinionListCount">{GOODS_OPINION_RATING_CNT_GOOD}</span>)</a> 
+                        <a class="button button2 small opinionListBtn badOpinions {% IF GOODS_OPINION_RATING_CNT_BAD= 0 %}disabled{% ENDIF %}">Отрицательные (<span class="opinionListCount">{GOODS_OPINION_RATING_CNT_BAD}</span>)</a>
                         <!--<a href="#goodsDataOpinionAdd" class="goodsDataOpinionShowAddForm button">Оставить отзыв</a>-->
                       </div>
                       <!-- END Верхняя навигация (Фильтры и страницы) -->
@@ -479,7 +476,9 @@
                                   <meta itemprop="worstRating" content = "1">
                                   <meta itemprop="bestRating" content = "10">
                                   <meta itemprop="ratingValue" content = "{opinion_list.RATING}">
-                                  <div class="rating" style="width:{opinion_list.RATING}0%" alt="{opinion_list.RATING}" title="Рейтинг товара"></div>
+                                  <div class="rating">
+                                    <span>{opinion_list.RATING | divide("2")}/5</span>
+                                  </div>
                                 </div>
                               {% ENDIF %}
                               <strong itemprop="author" class="goodsDataOpinionListClient {% IF opinion_list.CLIENT_ID %}auth{% ENDIF %}">{opinion_list.NAME}</strong>
