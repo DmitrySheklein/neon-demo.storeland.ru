@@ -1690,16 +1690,19 @@ function quickViewShowMod(href, atempt) {
         padding: 0,
         autoSize: true,
         maxWidth: 500,
+        baseClass: "_modification",
         wrapCSS: (!productShopContent) ? 'quickView' : '',
         afterShow: function() {
           // Обновление доступности модификаций
           MainFunctions();
           AddCart();
           quantity();
+          // Стилизация селектов
+          $('.fancybox-inner .product-view [name="form[properties][]"]').styler()
 
           $('.fancybox-inner .product-view').addClass('modification');
           $('.fancybox-inner .product-view .product-shop').removeClass('col-lg-5 col-md-6');
-          $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-3');
+          $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-6');
         }
       });
     }

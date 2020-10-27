@@ -225,7 +225,6 @@ label.invalidInput {color: #E80636;font-size: 90%;}
   background: #f3f3f5;
   -webkit-box-shadow: none;
   box-shadow: none;
-  font-family: 'Raleway', sans-serif;
   font-family: 'Arimo', sans-serif;
   text-shadow: none;
   transition: all .3s;
@@ -248,7 +247,7 @@ label.invalidInput {color: #E80636;font-size: 90%;}
   margin-top: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Arimo', sans-serif;
 }
 .jq-selectbox.opened .jq-selectbox__select {
   border-bottom-left-radius: 0;
@@ -1924,8 +1923,8 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 /* Быстрый просмотр */
 .fancybox-inner .container {max-width: 950px;padding:0;}
 .quickView .fancybox-inner .container {max-width: 700px;}
-.fancybox-inner .block-bg {border: none;}
-.fancybox-inner .product-view .product-name h1 {white-space: nowrap;}
+.fancybox-inner .block-bg {border: none;padding: 0;}
+.fancybox-inner .product-view .product-name h1 {font-size: 20px;}
 .fancybox-inner .product-view .product-order .add-to-box .button.quick {display: none;}
 .fancybox-inner .product-view .product-order .add-to-box .more {display: inline-block;}
 .fancybox-inner .product-view .product-shop .product-neighbor {display: none;}
@@ -1942,6 +1941,27 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   visibility: hidden;
   opacity: 0;
 }
+/*** Выбор модификации при добавлении в корзину ***/
+.fancybox-container._modification .product-view{max-width: 380px;padding: 30px;}
+.fancybox-container._modification .product-view .product-toolbar {padding-top: 0;}
+.fancybox-container._modification .product-shop {margin: 0;}
+.fancybox-container._modification .product-shop > div {display: none;}
+.fancybox-container._modification .product-shop .price-box {display: block;border: 0;}
+.fancybox-container._modification .product-shop .product-name {display: block;margin-bottom: 15px;}
+.fancybox-container._modification .product-shop .goodsDataMainModificationsValues {display: none;}
+.fancybox-container._modification .product-shop .goodsDataMainModificationsBlock {padding: 0;}
+.fancybox-container._modification .product-shop .goodsDataMainModificationsBlockProperty select {display: block;}
+.fancybox-container._modification .product-shop .add-to-box {padding: 0px 0 0 0;margin: 0px 0 0 0;border: 0;text-align: center;}
+.fancybox-container._modification .product-shop .add-to-box .qty-wrap {margin: 0 0 15px 0;}
+.fancybox-container._modification .product-shop .add-to-box .add-to-cart .button {width: 100%;margin: 0;}
+.fancybox-container._modification .product-shop .add-to-box .add-to-cart .more {display: none;}
+.fancybox-container._modification .product-shop .add-to-box .add-to-cart .quick {display: none !important;}
+.fancybox-container._modification .product-shop .goodsDataMainModificationArtNumber {display: none !important;}
+.fancybox-container._modification .product-img-box {display: none;}
+.fancybox-container._modification .product-shop {display: none;}
+.fancybox-container._modification .product-order .more{display: none;}
+.fancybox-container._modification .table-features-min {display: none;}
+.fancybox-container._modification .product-shop .add-to-box .add-to-cart .empty.active {display: block;}
 /*** Ajax Добавление товара в корзину ***/
 #cart-layer {max-width: 950px;}
 .cart-ajax {position: relative;line-height: 1.4;text-align: center;border: none;z-index: 100;}
