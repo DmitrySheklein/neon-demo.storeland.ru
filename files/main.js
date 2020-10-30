@@ -768,10 +768,10 @@ function hoverAnimBtn() {
 function outFunctions() {
 $(function(){
   // Вызов функции быстрого заказа в корзине
-/*  $('#startOrder, #startOrderTab').on('click', function() {
+  $('#startOrder, #startOrderTab').on('click', function() {
     startOrder();
     return false;
-  });*/
+  });
   // Вызов функции редиректа при обратном звонке
   $('#footer .callbackForm').submit(validCallBack);
   $('#fancybox-callback .callbackForm').submit(validCallBackC);
@@ -783,7 +783,7 @@ $(function(){
   $(document).on('click', '.add-cart', function() {
     var $btn  = $(this);
     $btn.addClass('_loading')
-    $btn.find('span').html('<i class="fal fa-spinner fa-spin"></i>')    
+    $btn.find('span').html('<i class="fal fa-spinner fa-spin"></i>')
 
     var form = $(this).closest('form');
     if ($(this).hasClass('quick')) {
@@ -1280,224 +1280,323 @@ $(function(){
     // Если true, то при активации даты, календарь закроется.
     autoClose: true,
     // Можно выбрать только даты, идущие за сегодняшним днем, включая сегодня
-    minDate: new Date()
+    minDate: new Date(),
+    onSelect: function(date) {
+      var d = new Date();
+      var nowDate = d.toLocaleDateString();
+      var utcOffset = 3; // Москва
+      var offsetTime = 0; // Дополнительный отступ по времени
+      var hours = d.getUTCHours() + utcOffset + offsetTime;
+      if (hours > 23) {
+        hours = (d.getUTCHours() - 24) + utcOffset + offsetTime;
+      }
+      
+      var $selectTime = $("#selectTime");
+      var template = $('<div>').html(
+        '<option value=""></option>' +
+        '<option value="9-10">09:00 - 10:00</option>' +
+        '<option value="11-12">11:00 - 12:00</option>' +
+        '<option value="12-13">12:00 - 13:00</option>' +
+        '<option value="13-14">13:00 - 14:00</option>' +
+        '<option value="14-15">14:00 - 15:00</option>' +
+        '<option value="15-16">15:00 - 16:00</option>' +
+        '<option value="16-17">16:00 - 17:00</option>' +
+        '<option value="17-18">17:00 - 18:00</option>' +
+        '<option value="18-19">18:00 - 19:00</option>' +
+        '<option value="19-20">19:00 - 20:00</option>' +
+        '<option value="20-21">20:00 - 21:00</option>' +
+        '<option value="21-22">21:00 - 22:00</option>'     
+      )
+      var $options = template.children();
+      
+      $selectTime.removeAttr("disabled");
+
+      if (date == nowDate) {
+        var $filterdOptions = $options.filter(function(){
+          var value = $(this).val();
+          var timeOption = parseInt(value.split('-'));
+          
+          return (hours < timeOption)
+        })
+        
+        if($filterdOptions.length){
+          $selectTime
+            .html('')
+            .append($options.first())
+            .append($filterdOptions)
+        } else {
+          $selectTime.html('<option value="0-0">На сегодня доставок нет</option>');
+          $selectTime.attr('disabled', 'disabled');
+          $selectTime.trigger('change')
+        }
+      } else {
+        $selectTime.html(template.html())
+      }
+      $('input[name="form[delivery][convenient_time_from]"]').val(0)
+      $('input[name="form[delivery][convenient_time_to]"]').val(0)      
+      $('#quickform .quickform-select-convenient').trigger('refresh')
+    }
   })
+  
 });
 }
 
 // Скрипты для Быстрого заказа
-function quickOrderScript1s(){
-$(function(){
-  
+function quickOrderScripts(){
   $(function(){
-  var ID = $('input[name="form[delivery][id]"]:checked').val();
-
-  $('.quick_order_payment').hide();
-  $('.quick_order_payment[rel="' + ID + '"]').show();
-  $('.quick_order_payment[rel="' + ID + '"]').find('input:first').attr('checked', true);
-
-  });
+    
+    $(function(){
+    var ID = $('input[name="form[delivery][id]"]:checked').val();
   
-  $('.deliveryRadio').on('click',function(){  
-    var ID = $('input[name="form[delivery][id]"]:checked').val();  
     $('.quick_order_payment').hide();
     $('.quick_order_payment[rel="' + ID + '"]').show();
     $('.quick_order_payment[rel="' + ID + '"]').find('input:first').attr('checked', true);
-  });
   
-  // Действия при выборе варианта доставки на этапе оформления заказа
-  $(function(){
-    sd = $($('.deliveryRadio')[0]);
-    id = sd.val(),
-    fz = $($('.deliveryZoneRadio[deliveryid='+id+']')[0]);
-    sd.prop('checked',true);
-    fz.prop('checked',true);
-    price = fz.next().find('.num').text();
-    oldPrice = $('tbody[rel='+ id +']').find('.pricefield').find('.num');
-    oldPrice.text(price);
-  });
-    
-  $(function(){
-    selectPayment = $('.quick_order_payment').css('display'); 
-    $('.quick_order_payment').change(function(){
-      selectValue = $(this).find('option:checked').attr('value');
-      $('.hiddenRadio .quick_order_payment').each(function(){
-        if($(this).css('display') == 'block'){
-          $(this).find('input[value=' + selectValue + ']').click();
-        }
-      });
     });
     
-    $('.mainSelect > option').attr('selected',false);
-    $('.mainSelect > option:first-of-type').attr('selected',true);
+    $('.deliveryRadio').click(function(){  
+      var ID = $('input[name="form[delivery][id]"]:checked').val();  
+      $('.quick_order_payment').hide();
+      $('.quick_order_payment[rel="' + ID + '"]').show();
+      $('.quick_order_payment[rel="' + ID + '"]').find('input:first').attr('checked', true);
+    });
     
-    loadPage = $('.mainSelect').find('option:selected').attr('delid');
-    
+    // Действия при выборе варианта доставки на этапе оформления заказа
     $(function(){
-      $('.zoneSelect option').each(function(){
-        id = $(this).attr('deliveryid');    
-        select = $(this).parent('select').length;
-        $('.zoneSelect select').addClass('input');
-      })
-      currentDelivery = $('.mainSelect option:checked').attr('delid');
-      $('div.zoneSelect select').each(function(){
-        if($(this).attr('del') != currentDelivery){
-          $(this).hide();
+      sd = $($('.deliveryRadio')[0]);
+      id = sd.val(),
+      fz = $($('.deliveryZoneRadio[deliveryid='+id+']')[0]);
+      sd.prop('checked',true);
+      fz.prop('checked',true);
+      price = fz.next().find('.num').text();
+      oldPrice = $('tbody[rel='+ id +']').find('.pricefield').find('.num');
+      oldPrice.text(price);
+    });
+      
+    $(function(){
+      selectPayment = $('.quick_order_payment').css('display'); 
+      $('.quick_order_payment').change(function(){
+        selectValue = $(this).find('option:checked').attr('value');
+        $('.hiddenRadio .quick_order_payment').each(function(){
+          if($(this).css('display') == 'block'){
+            $(this).find('input[value=' + selectValue + ']').click();
+          }
+        });
+      });
+      
+      $('.mainSelect > option').attr('selected',false);
+      $('.mainSelect > option:first-of-type').attr('selected',true);
+      
+      loadPage = $('.mainSelect').find('option:selected').attr('delid');
+      
+      $(function(){
+        $('.zoneSelect option').each(function(){
+          id = $(this).attr('deliveryid');    
+          select = $(this).parent('select').length;
+          $('.zoneSelect select').addClass('input');
+        })
+        currentDelivery = $('.mainSelect option:checked').attr('delid');
+        $('div.zoneSelect select').each(function(){
+          if($(this).attr('del') != currentDelivery){
+            $(this).parent().hide();
+          }
+        });
+      });
+      
+      $('.mainSelect').change(function() {
+        selectedDelId = $(this).find('option:selected').attr('delid');
+        $('.zoneSelect select').parent().hide();
+        $('.zoneSelect select[del="' + selectedDelId + '"]').parent().show();
+        $('.zoneSelect select option').attr('selected', false)
+        $('.zoneSelect select[del="' + selectedDelId + '"] option:first-of-type').attr('selected', true);
+        $('.deliveryOption .deliveryRadio[value="' + selectedDelId + '"]').click();
+      
+        WithoutZone = $('tbody[rel=' + selectedDelId + '] input.deliveryRadio:checked').attr('pricewithoutzones');
+        WithZone = $('tbody[rel=' + selectedDelId + '] input.deliveryZoneRadio:checked').attr('price');
+      
+        if (WithZone >= 0) {
+          startprice = WithZone;
+        } else {
+          startprice = WithoutZone;
+        }
+      
+        currentPriceWithoutChange = parseInt($('.formfast-cart .total-sum').data('total-sum'));
+        NewPriceWithChange = String(parseInt(startprice) + currentPriceWithoutChange);
+        $('.formfast-cart .subtotal .delivery-sum .num').text(startprice);
+        $('.formfast-cart .total-sum .num').text(addSpaces(NewPriceWithChange));
+      
+        $('.changeprice').text(startprice);
+        $('.quick_order_payment').hide();
+        $('.quick_order_payment[rel="' + selectedDelId + '"]').show();
+      
+        startInputId = $('input.deliveryRadio:checked').attr('value');
+        $('.hiddenpayment input').attr('checked', false);
+        $('.hiddenpayment[rel="' + startInputId + '"] input').each(function() {
+          $(this).click();
+          return false;
+        })
+        DeliveryDescription = $('input.deliveryRadio:checked').next('div').html();
+        $('.currentDeliveryDescription').html(DeliveryDescription);
+        PaymentDescription = $('input.paymentRadio:checked').next('div').html();
+        $('.currentPaymentDescription').html(PaymentDescription);
+        if ($('input.paymentRadio:checked').next('div').length && $('input.paymentRadio:checked').next('div').html().trim() === '') {
+          $('.currentPaymentDesc').css("display", "none");
+        } else {
+          $('.currentPaymentDesc').css("display", "block");
+        }
+        
+        //  Проверка на самовывоз 
+        var selectedName = $(this).find('option:selected').text();
+        var $orderCustom = $('.order-user-wrapper');
+        
+        if(selectedName == 'Курьером'){
+          $orderCustom.show().find('input').addClass('required')
+        } else {
+          $orderCustom.hide().find('input').removeClass('required')
+        }
+        
+        // $('.adress').toggleClass('_hidden', selectedName == 'Самовывоз')
+        
+        var $deliveryTitleSpan = $('.deliveryConvenientDate').find('span');
+        if(selectedName == 'Самовывоз'){
+          $('.adress').find('.form-list > div').hide().filter('.deliveryConvenientDate, .deliveryConvenientTime , .quickDeliveryComment').show();
+          $deliveryTitleSpan.text('самовывоза')
+        } else {
+          $('.adress').find('.form-list > div').show().filter('.deliveryConvenientDate, .deliveryConvenientTime , .quickDeliveryComment').show();
+          $deliveryTitleSpan.text('доставки')
         }
       });
+  
     });
-    
-    $('.mainSelect').change(function(){
-      selectedDelId = $(this).find('option:selected').attr('delid');   
-      $('.zoneSelect select').hide();
-      $('.zoneSelect select[del="'+selectedDelId+'"]').show();
-      $('.zoneSelect select option').attr('selected',false)
-      $('.zoneSelect select[del="'+selectedDelId+'"] option:first-of-type').attr('selected',true);
-      $('.deliveryOption .deliveryRadio[value="'+selectedDelId+'"]').click();
-      
-      WithoutZone = $('tbody[rel='+ selectedDelId +'] input.deliveryRadio:checked').attr('pricewithoutzones');
-      WithZone =  $('tbody[rel='+ selectedDelId +'] input.deliveryZoneRadio:checked').attr('price');
-      
-      if(WithZone > 0){
+     
+    $(function() {
+      WithoutZone = $('input.deliveryRadio:checked').attr('pricewithoutzones');
+      WithZone = $('.deliveryZoneRadio:checked').attr('price');
+      var startprice = 0;
+      if (WithZone > 0) {
         startprice = WithZone;
-      }else{
+      } else
+      if (WithZone == 0 || WithoutZone == 0) {
+        startprice = 0;
+      } else {
         startprice = WithoutZone;
       }
-      $('.changeprice').text(startprice);
-      $('.quick_order_payment').hide();
-      $('.quick_order_payment[rel="'+ selectedDelId +'"]').show();
-      
+    
+      currentPriceWithoutChange = parseInt($('.formfast-cart .total-sum').data('total-sum'));
+      NewPriceWithChange = String(parseInt(startprice) + currentPriceWithoutChange);
+      $('.formfast-cart .subtotal .delivery-sum .num').text(startprice);
+      $('.formfast-cart .total-sum .num').text(addSpaces(NewPriceWithChange));
+    
+      $('.orderStageDeliveryZonePrice .changeprice').text(startprice);
+      $('.hiddenpayment input').attr('checked', false);
       startInputId = $('input.deliveryRadio:checked').attr('value');
-      $('.hiddenpayment input').attr('checked',false);
-      $('.hiddenpayment[rel="'+startInputId+'"] input').each(function(){
+      $('.hiddenpayment[rel="' + startInputId + '"] input').each(function() {
         $(this).click();
         return false;
-      })
+      });
       DeliveryDescription = $('input.deliveryRadio:checked').next('div').html();
       $('.currentDeliveryDescription').html(DeliveryDescription);
       PaymentDescription = $('input.paymentRadio:checked').next('div').html();
       $('.currentPaymentDescription').html(PaymentDescription);
-      if ($('input.paymentRadio:checked').next('div').html().trim() === '') {
+      if ($('input.paymentRadio:checked').next('div').length && $('input.paymentRadio:checked').next('div').html().trim() === '') {
+        $('.currentPaymentDesc').css("display", "none");
+      } else {
+        $('.currentPaymentDesc').css("display", "block");
+      }
+    });
+  
+    
+    $('.paymentSelect').change(function(){
+      selectedDelId = $(this).find('option:selected').attr('value');
+      $('.orderStagePayment .paymentRadio[value="'+selectedDelId+'"]').click();
+      PaymentDescription = $('input.paymentRadio:checked').next('div').html();
+      $('.currentPaymentDescription').html(PaymentDescription);
+      if ($('input.paymentRadio:checked').next('div').length && $('input.paymentRadio:checked').next('div').html().trim() === '') {
         $('.currentPaymentDesc').css("display", "none");
       }else{
         $('.currentPaymentDesc').css("display", "block");
       }
     });
-  });
-   
-  $(function(){  
-    WithoutZone = $('input.deliveryRadio:checked').attr('pricewithoutzones');
-    WithZone =  $('.deliveryZoneRadio:checked').attr('price');
-    var startprice = 0;
-    if(WithZone > 0){
-      startprice = WithZone;
-    }else 
-    if(WithZone == 0 && WithoutZone == 0){
-      startprice = 0;
-    }else{
-      startprice = WithoutZone;
-    }
-    $('.orderStageDeliveryZonePrice .changeprice').text(startprice);
-    $('.hiddenpayment input').attr('checked',false);
-    startInputId = $('input.deliveryRadio:checked').attr('value');
-    $('.hiddenpayment[rel="'+startInputId+'"] input').each(function(){
-      $(this).click();
-      return false;
-    });
-    DeliveryDescription = $('input.deliveryRadio:checked').next('div').html();
-    $('.currentDeliveryDescription').html(DeliveryDescription);
-    PaymentDescription = $('input.paymentRadio:checked').next('div').html();
-    $('.currentPaymentDescription').html(PaymentDescription);
-    if ($('input.paymentRadio:checked').next('div').html().trim() === '') {
-      $('.currentPaymentDesc').css("display", "none");
-    }else{
-      $('.currentPaymentDesc').css("display", "block");
-    }
+  
+  
+    // Валидация формы на странице оформления заказа
+    $("#quickform").submit(function(){
+      // Если форма невалидна не отправляем её на сервер
+      if(!$(this).valid()) {
+        return false;
+      }
+  
+      // Получаем данные формы, которые будем отправлять на сервер
+      var formData = $(this).serializeArray();
+      // Сообщаем серверу, что мы пришли через ajax запрос
+      formData.push({name: 'ajax_q', value: 1});
+  
+      // Аяксом добавляем товар в корзину и вызываем форму быстрого заказа товара
+      $.ajax({
+        type    : "POST",
+        dataType: 'json',
+        cache    : false,
+        url  	  : $(this).attr('action'),
+        data		: formData,
+        success: function(data) {
+          // Если заказ был успешно создан
+          if( data.status == 'ok' ) {
+            window.location = data.location;
+          } else if( data.status == 'error' ) {
+            alert(data.message);
+          } else {
+            alert('Во время оформления заказа возникла неизвестная ошибка. Пожалуйста, обратитесь в службу технической поддержки.');
+          }
+        }
+      });
+      return false;      
+    }).validate();
   });
   
-  $('.paymentSelect').change(function(){
-    selectedDelId = $(this).find('option:selected').attr('value');
-    $('.orderStagePayment .paymentRadio[value="'+selectedDelId+'"]').click();
-    PaymentDescription = $('input.paymentRadio:checked').next('div').html();
-    $('.currentPaymentDescription').html(PaymentDescription);
-    if ($('input.paymentRadio:checked').next('div').html().trim() === '') {
-      $('.currentPaymentDesc').css("display", "none");
-    }else{
-      $('.currentPaymentDesc').css("display", "block");
-    }
-  });
-
-
-  // Валидация формы на странице оформления заказа
-  $("#quickform").submit(function(){
-    // Если форма невалидна не отправляем её на сервер
-    if(!$(this).valid()) {
+  $(function() {
+    $('.zoneSelect select').change(function() {
+      optValue = $(this).find('option:selected').attr('value');
+      $('.zones input[value="' + optValue + '"]').click();
+      WithZone = $('.deliveryZoneRadio:checked').attr('price');
+      $('.changeprice').text(WithZone);
+  
+      currentPriceWithoutChange = parseInt($('.formfast-cart .total-sum').data('total-sum'));
+      NewPriceWithChange = String(parseInt(WithZone) + currentPriceWithoutChange);
+      $('.formfast-cart .subtotal .delivery-sum .num').text(WithZone);
+      $('.formfast-cart .total-sum .num').text(addSpaces(NewPriceWithChange));
+    })
+  })
+  
+  
+  }
+  
+  // Быстрый заказ
+  function quickOrder(formSelector) {
+    // Находим форму, которую отправляем на сервер, для добавления товара в корзину
+    var formBlock = $($(formSelector).get(0));
+    // Проверка на существование формы отправки запроса на добавление товара в корзину
+    if(1 > formBlock.length || formBlock.get(0).tagName != 'FORM') {
+      alert('Не удалось найти форму добавления товара в корзину');
       return false;
     }
     // Получаем данные формы, которые будем отправлять на сервер
-    var formData = $(this).serializeArray();
+    var formData = formBlock.serializeArray();
     // Сообщаем серверу, что мы пришли через ajax запрос
     formData.push({name: 'ajax_q', value: 1});
+    // Так же сообщим ему, что нужно сразу отобразить форму быстрого заказа 
+    formData.push({name: 'fast_order', value: 1});
     // Аяксом добавляем товар в корзину и вызываем форму быстрого заказа товара
     $.ajax({
       type    : "POST",
-      dataType: 'json',
-      cache    : false,
-      url  	  : $(this).attr('action'),
+      cache	  : false,
+      url		  : formBlock.attr('action'),
       data		: formData,
       success: function(data) {
-        // Если заказ был успешно создан
-        if( data.status == 'ok' ) {
-          window.location = data.location;
-        } else if( data.status == 'error' ) {
-          alert(data.message);
-        } else {
-          alert('Во время оформления заказа возникла неизвестная ошибка. Пожалуйста, обратитесь в службу технической поддержки.');
-        }
+        $.fancybox.open(data)
       }
     });
-    return false;      
-  }).validate();
-});
-
-$(function(){
-  $('.zoneSelect select').change(function(){
-    optValue = $(this).find('option:selected').attr('value');
-    $('.zones input[value="'+optValue+'"]').click();
-    WithZone =  $('.deliveryZoneRadio:checked').attr('price');
-    $('.changeprice').text(WithZone); 
-  })
-})
-
-}
-
-// Быстрый заказ
-function quickOrder(formSelector) {
-  // Находим форму, которую отправляем на сервер, для добавления товара в корзину
-  var formBlock = $($(formSelector).get(0));
-  // Проверка на существование формы отправки запроса на добавление товара в корзину
-  if(1 > formBlock.length || formBlock.get(0).tagName != 'FORM') {
-    alert('Не удалось найти форму добавления товара в корзину');
     return false;
   }
-  // Получаем данные формы, которые будем отправлять на сервер
-  var formData = formBlock.serializeArray();
-  // Сообщаем серверу, что мы пришли через ajax запрос
-  formData.push({name: 'ajax_q', value: 1});
-  // Так же сообщим ему, что нужно сразу отобразить форму быстрого заказа 
-  formData.push({name: 'fast_order', value: 1});
-  // Аяксом добавляем товар в корзину и вызываем форму быстрого заказа товара
-  $.ajax({
-    type    : "POST",
-		cache	  : false,
-		url		  : formBlock.attr('action'),
-		data		: formData,
-		success: function(data) {
-			$.fancybox.open($(data));       
-		}
-	});
-  return false;
-}
 
 // Функция Быстрого просмотра товара
 function quickView() {
@@ -1682,7 +1781,7 @@ function quickViewShowMod(href, atempt) {
 
 }
 // Функция быстрого оформления заказа в корзине
-function startOrder1(){  
+function startOrder(){  
   var globalOrder = $('#globalOrder');
   var closeOrder = $('#closeOrder'); // объект кнопки отмены заказа
   // Если форма уже открыта то ничего не делаем.
@@ -1959,7 +2058,6 @@ $(function(){
     }
   });
   owl.owlCarousel({
-    items: 3,
     margin: 15,
     loop: false,
     rewind: true,
@@ -1979,9 +2077,9 @@ $(function(){
       320:{items:2},
       480:{items:3},
       640:{items:4},
-      768:{items:5},
-      992:{items:2},
-      1200:{items:3}
+      768:{items:4},
+      992:{items:3},
+      1200:{items:4}
     }
   });
   // Кнопки навигации
@@ -2960,7 +3058,7 @@ $(function(){
       var delay = 3000;
       var data = $("#fancybox-popup").html();
       setTimeout(function(){
-        $.fancybox({
+        $.fancybox.open(data, {
           autoSize: true,
           maxWidth: 700,
           padding: 15,

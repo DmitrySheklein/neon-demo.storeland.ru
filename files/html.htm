@@ -1754,9 +1754,14 @@
                           {% IF cart_items_empty %}
                           Корзина покупок пуста
                           {% ELSE %}
-                          <button type="button" class="title-tab">
+                          <button type="button" class="title-tab" id="closeOrderTab">
+                            <span class="title-step">1.</span>
                             Корзина
                           </button>                        
+                          <button type="button" class="title-tab disabled" id="startOrderTab">
+                            <span class="title-step">2.</span>
+                            Оформить заказ
+                          </button>
                           {% ENDIF %}
                         </h1>
                       </div>

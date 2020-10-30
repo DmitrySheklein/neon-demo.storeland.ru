@@ -151,6 +151,7 @@ label.invalidInput {color: #E80636;font-size: 90%;}
   text-align: left;
   padding-right: 15px;
 }
+.noty_content {padding: 15px;}
 .noty__content-text {
   padding: 10px 0;
 }
@@ -653,6 +654,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .cart .cart-content {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .cart .cart-content .cart-products-list {flex-grow: 1;padding: 5px 15px 5px 15px;list-style: none;display: block;max-width: 330px;max-height: 320px;overflow-x: hidden;overflow-y: auto;}
 .cart .cart-content .cart-products-list .item {position: relative;padding: 10px 0;overflow: hidden;}
@@ -1500,8 +1502,8 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .thumblist-box .next:before {content: "\f105";}
 .thumblist {max-width: 360px;margin: 0 auto;}
 .thumblist li {display: block;float: none;margin: 0 auto;width: {SETTINGS_GOODS_IMAGES_SIZE_ICON | divide("2")}px;}
-.thumblist li a {display: block;text-align: center;width: {SETTINGS_GOODS_IMAGES_SIZE_ICON | divide("2")}px;height: {SETTINGS_GOODS_IMAGES_SIZE_ICON | divide("2")}px;line-height: {SETTINGS_GOODS_IMAGES_SIZE_ICON | divide("2")}px;}
-.thumblist.owl-carousel li a img {display: inline-block;margin: 0 auto;width: auto;}
+.thumblist li a {display: block;text-align: center;width: 50px; height: 50px;}
+.thumblist.owl-carousel li a img {display: inline-block;margin: 0 auto;width: auto;max-width: 50px;max-height: 50px;}
 .thumblist .owl-stage {margin: 0 auto;}
 .product-view .product-shop {margin-bottom: 30px;}
 .product-view .product-header {display: flex;padding-bottom: 15px;}
@@ -1988,6 +1990,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .fancybox-container._modification .product-shop {display: none;}
 .fancybox-container._modification .product-order .more{display: none;}
 .fancybox-container._modification .table-features-min {display: none;}
+.fancybox-container._modification .product-view .short-description {display: none;}
 .fancybox-container._modification .goodsDataMainDiscountBlock {display: none;}
 .fancybox-container._modification .product-shop .add-to-box .add-to-cart .empty.active {display: block;}
 .fancybox-container._modification [name="form[properties][]"] {display: none!important;}
