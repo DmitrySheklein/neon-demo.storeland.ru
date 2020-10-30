@@ -1337,7 +1337,7 @@ $(function(){
       $('#quickform .quickform-select-convenient').trigger('refresh')
     }
   })
-  
+
 });
 }
 
@@ -1823,7 +1823,7 @@ function startOrder(){
     success: function(data) {
       OrderAjaxBlock.html($(data).find('.quickformfast').wrap('<div></div>').html());
       $('.formfast').addClass('col-sm-12 col-md-8 col-xs-12');
-      $('.formfast div.col').addClass('col-md-6 col-sm-12');
+      $('.formfast div.col').addClass('col-md-12 col-sm-12');
       $('.formfast-cart').hide();
       // Включаем возможность клика по неактивной кнопке
       $('#page-title .title-tab.disabled').prop('disabled', false)      
