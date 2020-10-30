@@ -12,7 +12,7 @@
             <i class="fal fa-map-marker"></i><p><b>Адрес</b><br> <span itemprop="addressLocality">{SETTINGS_STORE_REGION}</span></p>
           </div>
           {% ENDIF %}
-          {% IF SETTINGS_STORE_WORK_TIME %}<div><i class="fal fa-clock"></i><p><b>Время работы:</b><br>{SETTINGS_STORE_WORK_TIME}</p></div>{% ENDIF %}
+          {% IF SETTINGS_STORE_WORK_TIME %}<div><i class="fal fa-clock"></i><p class="block-contact-workTime"><b>Время работы:</b><br>{SETTINGS_STORE_WORK_TIME | htmlspecialchars_decode}</p></div>{% ENDIF %}
           {% IF SETTINGS_STORE_PHONE_NUMBER1 %}
           <div>
             <i class="fal fa-phone"></i>

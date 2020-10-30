@@ -1,884 +1,126 @@
 <div class="cart-info">
-  <div id="empty-cart" class="empty-cart _cart-page" style="{% IFNOT cart_count_empty %}display:none{% ENDIF %}">
-     <div class="empty-cart__content">
-       <h3 class="empty-cart__title">Ваша корзина пуста</h3>
-        <div class="buttons">
-          <a href="{INDEX_PAGE_URL}" class="button">Перейти на главную</a>
-        </div>
-     </div>
-  </div>
-  {% IFNOT cart_count_empty %}
-      <!--Корзина-->
-      <div class="cart _cart-page">
-        <form action="{CART_URL}" method="post" id="cart-content">
-          <input type="hidden" name="fast_order" value="1" />
-          <input type="hidden" name="hash" value="{HASH}" />
-          
-          <div class="preloader _opacity"><span class="content-loading"></span></div>
-          <div class="cart__products">
-            <div class="cart__table"> 
-              <div class="cart__table-row -head">
-                  <div class="cart__head-item -cart-count" id="cart-count">
-                    В корзине <span>{CART_COUNT_TOTAL}</span> товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}
-                  </div>
-                  <div class="cart__head-item -delete-all">
-                    <a id="cart-clear" class="cart__delete-all" title="Очистить корзину" href="{CART_TRUNCATE_URL}">
-                      <i class="fal fa-times"></i>
-                      Очистить
-                    </a>
-                  </div>
-              </div>
-              <div class="cart__body">
-                {% FOR cart_items %}
-                  <div class="cart__table-row" data-id="{cart_items.GOODS_MOD_ID}">
-                    <div class="cart__table-item -photo">
-                        <a href="{cart_items.GOODS_URL}">
-                            <img class="cart__photo goods-image-other" src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{cart_items.GOODS_IMAGE_OTHER}{% ENDIF %}">
-                        </a>
-                    </div> 
-                    <div class="cart__table-item -name"> 
-                        <a class="cart__product-name" href="{cart_items.GOODS_URL}">{cart_items.GOODS_NAME}</a>
-                        <!-- Если у товара есть отличительные свойства для модификации товара, допишем их к названию товара -->
-                        {% IF cart_items.GOODS_MOD_ART_NUMBER %}<div class="art">Артикул: <span>{cart_items.GOODS_MOD_ART_NUMBER}</span></div>{% ENDIF %}
-                        {% IFNOT cart_items.distinctive_properties_empty %}<div class="properties">{% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %},<br> {% ENDIF %}{% ENDFOR %}</div>{% ENDIF %}
-                    </div>
-                    <div class="cart__table-item -price">
-                        <span class="price _center cart__product-price-now {CURRENCY_CHAR_CODE}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>            
-                    </div>                    
-                    <div class="cart__table-item -qty">
-                      <div class="qty qty--cart">
-                          <div class="qty__wrap">
-                              <a href="javascript:void(0)" class="qty__btn qty__btn--plus" title="Увеличить"><i class="fal fa-plus"></i></a>
-                              <input name="form[quantity][{cart_items.GOODS_MOD_ID}]" value="{cart_items.ORDER_LINE_QUANTITY}" title="Количество, {cart_items.GOODS_MOD_MEASURE_NAME}" class="input qty__input qty--cart" type="number" maxlength="5" min="1" onkeypress="return keyPress(this, event);" onpaste="return fasse;" />
-                              <a href="javascript:void(0)" class="qty__btn qty__btn--minus" title="Уменьшить"><i class="fal fa-minus"></i></a>
-                          </div>
-                      </div>
-                    </div> 
-                    <div class="cart__table-item -price-total">
-                        <span class="price _center cart__product-ajax-price {CURRENCY_CHAR_CODE}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>            
-                    </div>
-                    <div class="cart__table-item -delete">
-                      <a class="cart__delete" href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить">
-                        <i class="fal fa-times cart__delete-icon"></i>
-                        <span class="cart__delete-title">Удалить</span>
-                      </a>
-                    </div>
-                  </div>
-                {% ENDFOR %}
-              </div>
-              <div class="cart__tfoot">
-                <div class="cart__coupon">
-                    <!-- Если в тарифном плане подключен модуль скидок по купонам и суммам заказов -->
-                    {% IF TARIFF_FEATURE_DISCOUNT_COUPONS %}
-                    <!-- Если скидки по купонам активированы в панели управления магазином -->
-                    {% IF ORDER_DISCOUNT_COUPON_IS_ENABLED %}
-                        <div class="coupon">
-                            <div class="coupon__wrap">
-                                <div class="coupon__box input-box">
-                                    <input type="text" id="quick_form_coupon_code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="input coupon__input _bordered" placeholder="Введите купон на скидку" />                                
-                                    <button type="button" class="coupon__clear" title="Очистить купон"><i class="fal fa-times" aria-hidden="true"></i></button>
-                                    <button type="button" class="button coupon__btn">Применить</button>
-                                </div>
-                            </div>
-                        </div>
-                    {% ENDIF %}
-                    {% ENDIF %}
-                    <!-- END Если в тарифном плане подключен модуль скидок по купонам и суммам заказов -->                          
-                </div>
-                <div class="cart__sum">
-                  <!-- Скидки, действующие на заказ -->
-                  {% IF CART_SUM_DISCOUNT_PERCENT %}
-                    {% FOR cart_discount %}
-                      {% IF cart_discount.DISCOUNT_IS_ENABLED %}          
-                      <div class="cart__sum-row cart__sum--discount">
-                          <span class="cart__sum-label">{cart_discount.DISCOUNT_NAME}:</span>
-                          <span class="cart__sum-text-price" data-discount-value="{cart_discount.END_PRICE}"><span class="price {CURRENCY_CHAR_CODE}">{% IF cart_discount.IS_PERCENT %}{cart_discount.DISCOUNT_VALUE}%{% ELSE %}{cart_discount.DISCOUNT_VALUE | money_format}{% ENDIF %}</span></span>
-                      </div>
-                      {% ENDIF %}
-                    {% ENDFOR %}
-                  {% ELSE %}
-                  <div class="cart__sum-row cart__sum--discount" style="display:none">
-                      <span class="cart__sum-label">Скидка:</span>
-                      <span class="cart__sum-text-price" data-discount-value="0"></span>
-                  </div>
-                  {% ENDIF %}
-                    <div class="cart__sum-row cart__sum--order-sum">
-                        <span class="cart__sum-label">Товаров на:</span>
-                        <span class="cart__sum-text-price"><span class="price {CURRENCY_CHAR_CODE}">{CART_SUM_NOW | money_format}</span></span>
-                    </div>                  
-                    <div class="cart__sum-row cart__sum--delivery-sum">
-                        <span class="cart__sum-label">Стоимость доставки:</span>
-                        <span class="cart__sum-text-price"><span class="price {CURRENCY_CHAR_CODE}"><span><span class="num">0</span><span>{CURRENCY_NAME}</span></span></span></span>
-                    </div>
-                    <div class="cart__sum-row cart__sum--total">
-                        <span class="cart__sum-label">Итого:</span>
-                        <span class="cart__sum-text-price">
-                            <span class="price total-sum {CURRENCY_CHAR_CODE}" data-total-sum="{CART_SUM_NOW}">
-                                {% FOR cart_sum %}
-                                    {cart_sum.NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}
-                                {% ENDFOR %}
-                            </span>                            
-                        </span>
-                    </div>               
-                </div>
-                <noscript>
-                  <style>
-                    .qty.qty--cart .qty__btn {display:none;}
-                    .qty.qty--cart .qty__input.qty--cart {border: 1px solid #898989;display: inline-block;max-width: 50px;}
-                  </style>
-                  <input class="button start-order _calc" type="submit" value="Пересчитать" title="Пересчитать" />
-                  <input class="button start-order" id="startOrder" type="submit" name="next_step" value="Оформить заказ" title="Перейти к оформлению заказа в 4 шага" />
-                </noscript>
-              </div>
-            </div>
-          </div>
-        </form> 
-      </div>
+  {% IF FORM_NOTICE %}
+    <div class="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>
+    <script>
+      $(function () {
+        new Noty({
+          text: '<div class="noty_content">{FORM_NOTICE | nl2br}</div>',
+          type: '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}'
+        }).show()         
+      });      
+    </script>
   {% ENDIF %}
-</div>
-<div id="globalOrder" style="display: none">
-  <div class="content-loading"></div>
-  <div id="OrderAjaxBlock" class="order__content" style="display:none">
-    <!-- Сюда грузится форма оформления быстрого заказа -->
+  {% IF cart_items_empty %}
+    <div class="attention">Корзина покупок пуста. Вы можете выбрать нужный товар из <a href="{CATALOG_URL}">каталога</a></div>
+  {% ELSE %}
+    <form action="{CART_URL}" method="post" class="cartForm">
+    <input type="hidden" name="fast_order" value="1" />
+    <input type="hidden" name="hash" value="{HASH}" />
+    <table class="cartTable"> 
+      <thead> 
+        <tr>
+          <td class="image name" colspan="2">Товар</td>
+          <td class="">Цена</td>
+          <td class="quantity">Количество</td>
+          <td class="total">Итого</td>
+          <td>&nbsp;</td>
+        </tr> 
+      </thead> 
+      <tbody>
+        {% FOR cart_items %}
+          <tr class="items" data-id="{cart_items.GOODS_MOD_ID}">
+            <td class="image"><a href="{cart_items.GOODS_URL}"><img class="goods-image-other" src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=techno{% ELSE %}{cart_items.GOODS_IMAGE_OTHER}{% ENDIF %}"></a></td> 
+            <td class="name"> 
+              <a href="{cart_items.GOODS_URL}">{cart_items.GOODS_NAME}</a>
+              <!-- Если у товара есть отличительные свойства для модификации товара, допишем их к названию товара -->
+              {% IF cart_items.GOODS_MOD_ART_NUMBER %}<div class="art">Артикул: <span>{cart_items.GOODS_MOD_ART_NUMBER}</span></div>{% ENDIF %}
+              {% IFNOT cart_items.distinctive_properties_empty %}<div class="properties">{% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %},<br> {% ENDIF %}{% ENDFOR %}</div>{% ENDIF %}
+            </td>
+            <td class="cart-price hide"> 
+              <span class="price">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>
+            </td>
+            <td class="cart-qty">
+              <div class="qty-wrap">
+                  <div class="qty-set">
+                    <a href="javascript:void(0)" class="qty-minus unselectable" title="Уменьшить"><i class="fal fa-minus"></i></a>
+                    <input name="form[quantity][{cart_items.GOODS_MOD_ID}]" value="{cart_items.ORDER_LINE_QUANTITY}" title="Количество, {cart_items.GOODS_MOD_MEASURE_NAME}" class="input cartqty" type="number" maxlength="5" min="1" onkeypress="return keyPress(this, event);" onpaste="return false;" />
+                    <a href="javascript:void(0)" class="qty-plus unselectable" title="Увеличить"><i class="fal fa-plus"></i></a>
+                  </div>
+              </div>
+            </td> 
+            <td class="cart-price">
+              <span class="ajaxtotal price">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>            
+            </td>
+            <td class="closetd"><a data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="ajaxdelete($(this))" class="remove"></a></td>
+          </tr>  
+        {% ENDFOR %}
+      </tbody> 
+      <tfoot>
+        <!-- Скидки, действующие на заказ -->
+        {% FOR cart_discount %}
+        {% IF cart_discount.DISCOUNT_IS_ENABLED %}
+          <tr class="discounttr">
+            <td class="hide" colspan="2"></td>
+            <td class="disc-name" colspan="2">
+              <span class="title">{cart_discount.DISCOUNT_NAME}</span>
+            </td>
+            <td colspan="2" class="text-right">
+              <span class="price">{% IF cart_discount.IS_PERCENT %}{cart_discount.DISCOUNT_VALUE}%{% ELSE %}{cart_discount.DISCOUNT_VALUE | money_format}{% ENDIF %}</span>
+            </td>
+          </tr>
+        {% ENDIF %}
+        {% ENDFOR %}
+        <tr class="total">
+          <td class="hide" colspan="2"></td>
+          <td colspan="2">
+            <span class="title">Сумма заказа</span>
+          </td>
+          <td colspan="2" class="text-right">
+            <span class="TotalSum">
+              <span class="price">
+                {% FOR cart_sum %}
+                  {cart_sum.NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}
+                {% ENDFOR %}
+              </span>
+            </span>
+          </td>
+        </tr> 
+        <tr class="actions"> 
+          <td colspan="6">
+            <!-- По умолчанию оформление заказа в 1 шаг. Если Вы хотите использовать 4 шага оформления, то добавьте style="display: none;" к блоку, который нужно скрыть и удалите style="display: none;" из блока, который нужно отобразить. -->
+            <!-- Быстрое оформление заказа в 1 шаг -->
+            <div class="buttons"> <!-- Если Вы хотите использовать 4 шага оформления, то добавьте style="display: none;" Пример: <div class="buttons" style="display: none;"> -->
+              <a class="button button2 col-left" title="Очистить корзину" href="{CART_TRUNCATE_URL}" onclick="return confirm('Вы действительно хотите удалить все товары из корзины?')">Очистить корзину</a>
+              <a id="closeOrder" class="button" title="Отменить быстрое оформление заказа">Отменить оформление</a>
+              <a id="startOrder" class="button" title="Перейти к быстрому оформлению заказа">Оформить заказ</a>
+              <noscript>
+              <style>#startOrder {display: none;}</style>
+              <input class="button" type="submit" name="next_step" value="Оформить заказ" title="Перейти к оформлению заказа в 4 шага" />
+              <div class="left">
+                <input class="button" type="submit" value="Пересчитать" title="Пересчитать" style="margin-left: 5px;"/>
+              </div>
+              </noscript>
+            </div>
+            <!-- Оформление заказа в 4 шага -->
+            <div class="buttons" style="display: none;"> <!-- Если Вы хотите использовать 1 шаг оформления, то удалите style="display: none;" Пример: <div class="buttons"> -->
+              <a class="button button2 col-left" title="Очистить корзину" href="{CART_TRUNCATE_URL}" onclick="return confirm('Вы действительно хотите удалить все товары из корзины?')">Очистить корзину</a>
+              <button class="button" type="submit" name="next_step" value="Оформить заказ" title="Перейти к оформлению заказа в 4 шага">Оформить заказ</button>
+              <noscript>
+              <div class="left">
+                <input class="button button2" type="submit" value="Пересчитать" title="Пересчитать" style="margin-left: 5px;"/>
+              </div>
+              </noscript>
+            </div>
+          </td> 
+        </tr>
+      </tfoot>
+    </table>
+    </form> 
+  {% ENDIF %}
+  <div id="globalOrder" style="display: none">
+    <div class="content-loading"></div>
+    <div id="OrderAjaxBlock" style="display:none">
+      <!-- Сюда грузится форма оформления быстрого заказа -->
+    </div>
   </div>
 </div>
-<style>
-.cart {
-    position: relative;
-}
-.cart__table-row {
-    display: flex;
-    align-items: center;
-    border-top: 1px solid #f2f2f2;
-    border-left: 1px solid #f2f2f2;
-    border-right: 1px solid #f2f2f2;
-    padding: 15px;
-}
-.cart__table-row.-head {
-    background: #f9f9f9;
-}
-.cart__table-row:last-child {
-    border-bottom: 1px solid #f2f2f2;
-}
-.cart__head-item.-cart-count {
-    position: relative;  
-    margin-right: auto;
-    font-weight: bold;    
-}
-.cart__table-item.-delete {
-    margin-bottom: auto;
-}
-
-.cart__delete {
-    display: block;
-    padding: 8px;
-}
-
-.cart__head-item.-cart-count:after {content: '';display: block;height: 2px;width: 100%;position: absolute;bottom: -5px;background-image: linear-gradient(160.47deg,#fe6260 11.94%,#fc9758 85.71%);}
-.cart__table-item.-delete {
-    margin-bottom: auto;
-}
-.cart__delete {
-    display: block;
-    padding: 8px;
-}
-.cart__table-item.-photo {
-    margin-right: 15px;
-    width: 10%;
-    text-align: center;
-}
-
-.cart__table-item.-name {
-    flex-grow: 1;
-}
-a.cart__product-name {
-    font-weight: 700;
-    font-size: 15px;
-}
-.cart__photo {
-    max-width: 130px;
-}
-.cart__product-price-now,
-.cart__product-ajax-price {
-    font-size: 16px;
-    font-weight: 700;
-    color: #333;
-}
-span.cart__delete-title {
-    display: none;
-}
-
-.cart__table-item.-price-total {
-    margin: 0 15px;
-}  
-.cart__tfoot {
-    display: none;
-    padding: 15px;
-    border: 1px solid #f6f6f6;
-}
-
-.cart__body {
-    margin-bottom: 15px;
-}
-
-.cart__sum {
-    margin-right: 15px;
-}
-
-span.cart__sum-label {
-    font-weight: 700;
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-.cart__sum-row {
-    display: flex;
-    align-items: center;
-}
-
-span.cart__sum-text-price {}
-
-.price.total-sum {
-    font-weight: 700;
-    font-size: 26px;
-}
-/**/
-.preloader._opacity {
-  background: #ffffffc4;
-}
-/*Количество*/
-
-.qty {
-    display: inline-block;
-    position: relative;
-    width: 84px;
-    margin: 0;
-    vertical-align: middle;
-    text-align: center;
-    margin-right: 5px;
-    background: #f3f3f5;
-    border-radius: 25px;
-}
-.qty__input {
-    display: inline-block;
-    vertical-align: middle;
-    width: 35px;
-    height: 34px;
-    margin: 0;
-    color: #21293c;
-    border-radius: 0;
-    font-size: 16px;
-    text-align: center;
-    padding: 3px;
-    background: transparent;
-    border: 0;
-}
-.qty__btn {
-    position: absolute;
-    top: 0;
-    width: 24px;
-    height: 34px;
-    line-height: 34px;
-    font-size: 12px;
-    color: #6d6d6e;
-    border-radius: 0;
-    margin: 0;
-    opacity: 1;
-    filter: alpha(opacity=100);
-    visibility: visible;
-}
-
-.qty__btn.qty__btn--plus {
-    right: 0px;
-}
-
-a.qty__btn.qty__btn--minus {
-    left: 0px;
-}
-.qty__wrap {
-    display: inline-block;
-    position: relative;
-    width: 85px;
-    margin: 0;
-    vertical-align: middle;
-    text-align: center;
-    margin-right: 5px;
-    background: #f3f3f5;
-    border-radius: 25px;
-}
-
-</style>
-{% IFNOT cart_count_empty %}
-<script>
-$(function(){
-  startOrder();
-  // Функция быстрого оформления заказа в корзине
-  function startOrder(){  
-    var globalOrder = $('#globalOrder');
-    var closeOrder = $('#closeOrder'); // объект кнопки отмены заказа
-    // Если форма уже открыта то ничего не делаем.
-    if (globalOrder.css('display') != 'none') {
-      // Если блок с формой заказа не скрыт то выходим из функции
-      return false;
-    }
-    //объект блока куда будет выводиться форма быстрого заказа
-    var OrderAjaxBlock = $('#OrderAjaxBlock');
-    // объект кнопки "Заказать"
-    var buttonStartOrder = $('#startOrder');
-    //объект блока с ajax анимацией
-    var ajaxLoaderQuickOrder = $('.content-loading');
-    var urlQuickForm = '/cart/add'; // адрес страницы с формой
-    // данные которые отарвятся на сервер чтобы получить только форму быстрого заказа без нижней части и верхней части сайта
-    var quickFormData = [
-      {name: 'ajax_q', value: 1},
-      {name: 'fast_order', value: 1}
-    ];
-    
-    var cartTable = $('.cartTable');
-    // открываем общий, глобальный блок
-    globalOrder.show().addClass('loading');
-    // включаем gif анимацию загрузки  
-    ajaxLoaderQuickOrder.show();
-    $.ajax({
-      type: "POST",
-      cache: false,
-      url: urlQuickForm,
-      data: quickFormData,
-      success: function(data) {
-        OrderAjaxBlock.html($(data).html());
-    
-        // скрываем блок с анимацией
-        ajaxLoaderQuickOrder.hide();
-        globalOrder.removeClass('loading')
-        // раскрываем блок с формой
-        OrderAjaxBlock.show();
-        coupons();
-        address();
-        ppModal();
-        
-    // Фикс меню
-    $(".order-info").stick_in_parent({
-      parent: '.order__content',
-      sticky_class: '_sticky'
-    }).on("sticky_kit:stick", function(e) {
-    console.log("has stuck!", e.target);
-    console.log($(e.target).outerWidth())
-    console.log($(e.target).parent().width())
-    // $(e.target).css('left', $(e.target).parent().width() - $(e.target).width())
-    var margin = $(e.target).outerWidth(true) - $(e.target).outerWidth();
-    $(e.target).css('left', $(e.target).parent().width() - $(e.target).outerWidth() + margin)
-  });  
-    
-        if(typeof ORDER_DELIVERY !== "undefined") {
-          DeliveryModule.init(ORDER_DELIVERY)
-        }        
-      }
-    });
-    return false;
-  }  
-});
-</script>
-<script>
-  $(function(){
-// Расчёт доставки и суммы заказа
-(function() {
-  var CURRENT_DELIVERY;
-
-  function init(ORDER_DELIVERY) {
-    if (typeof ORDER_DELIVERY == "undefined") {
-        console.error('Не передан массив доставок')
-        return;
-    }
-    CURRENT_DELIVERY = ORDER_DELIVERY[0];
-
-    changeCartSum();
-
-    $('.delivery-select').change(function() {
-        var deliveryId = $(this).val();
-        CURRENT_DELIVERY = getCurrentDelivery(deliveryId);
-
-
-        // Если есть варианты оплаты для текущей доставки
-        if (CURRENT_DELIVERY.availablePaymentList.length) {
-            renderPaymentSelect();
-        } else {
-            renderPaymentSelect(true);
-        }
-        // Если нет зон у текущего варианта доставки
-        if (CURRENT_DELIVERY.zoneListEmpty) {
-            renderDeliveryZone(true)
-        } else {
-            renderDeliveryZone()
-        }
-
-        changeCartSum();
-    });
-    $('.delivery-zone-select').change(function() {
-        var deliveryId = $(this).data('delivery-id');
-        var zoneId = $(this).val();
-        CURRENT_DELIVERY = getCurrentDelivery(deliveryId);
-
-        changeCartSum();
-    })
-    $('.payment-select').change(function() {
-        var deliveryId = $(this).data('delivery-id');
-        var paymentId = $(this).val();
-        CURRENT_DELIVERY = getCurrentDelivery(deliveryId);
-
-        if (CURRENT_DELIVERY.availablePaymentList.length) {
-            changePaymentSelect(paymentId);
-        }
-    });
-
-    function getCurrentDelivery(id) {
-        var currentDelivery;
-
-        $.each(ORDER_DELIVERY, function(i, item) {
-            if (String(id) === item.id) {
-                currentDelivery = item;
-            }
-        })
-        return currentDelivery;
-    }
-
-    function renderDeliveryZone(clearTemplate) {
-        var $deliveryZoneSelect = $('.delivery-zone-select');
-        var $deliveryZoneWrap = $deliveryZoneSelect.parent();
-
-        $deliveryZoneSelect.data('delivery-id', CURRENT_DELIVERY.id);
-        $deliveryZoneSelect.show().html('');
-
-        if (clearTemplate) {
-            $deliveryZoneSelect.hide();
-            $deliveryZoneWrap.addClass('_hide-triangle')
-            return;
-        } else {
-            $deliveryZoneSelect.show();
-            $deliveryZoneWrap.removeClass('_hide-triangle')
-        }
-
-        $.each(CURRENT_DELIVERY.zoneList, function(i, item) {
-            var $option = $('<option>').val(item.zoneId).text(item.name);
-            $deliveryZoneSelect.append($option);
-        })
-    }
-
-    function renderPaymentSelect(clearTemplate) {
-        var $paymentSelect = $('.payment-select');
-        var $paymentDescr = $('.payment__desc');
-
-        $paymentSelect.data('delivery-id', CURRENT_DELIVERY.id);
-        $paymentSelect.html('');
-
-        if (clearTemplate) {
-            var $option = $('<option>').val('').text('Не задан метод оплаты');
-            $paymentSelect.append($option);
-            $paymentSelect.prop('disabled', true)
-            $paymentDescr.hide();
-        } else {
-            $paymentSelect.prop('disabled', false)
-            $paymentDescr.show();
-        }
-
-        if (CURRENT_DELIVERY.availablePaymentList.length) {
-            $.each(CURRENT_DELIVERY.availablePaymentList, function(i, item) {
-                var $option = $('<option>').val(item.id).text(item.name);
-
-                $paymentSelect.append($option);
-
-                if (i == 0) {
-                    $paymentDescr.html(item.message);
-                }
-            });
-        }
-    }
-
-    function changePaymentSelect(paymentId) {
-        var $paymentDescrBlock = $('.payment__desc');
-        var currentPayment = $.grep(CURRENT_DELIVERY.availablePaymentList, function(item, i) {
-            return item.id === String(paymentId)
-        })[0]
-
-        $paymentDescrBlock.html(currentPayment.message);
-    }
-  }
-
-  function changeCartSum() {
-      var currentPriceWithoutChange = Number($('.cart__sum .total-sum').data('total-sum'));
-      var deliveryPrice = Number(getCurrentDeliveryPrice());
-      var discountPrice = Number($('.cart__sum .cart__sum--discount .cart__sum-text-price').data('discount-value'));
-
-      // Заполняем стоимость доставки
-      $('.cart__sum .cart__sum--delivery-sum .num').text(addSpaces(deliveryPrice));
-      $('.delivery__descr .delivery__price .num').text(addSpaces(deliveryPrice));
-      // Описание доставки
-      if (CURRENT_DELIVERY) {
-          $('.delivery__descr .delivery__text').text(CURRENT_DELIVERY.desc);
-      }
-
-      var priceNow = (currentPriceWithoutChange + deliveryPrice) - discountPrice;
-      if (priceNow < 0) {
-          priceNow = 0;
-      }
-      $('.cart__sum .total-sum').find('.num').text(addSpaces(priceNow));
-
-      /*    console.group('Цены заказа');
-          console.log('currentPriceWithoutChange', currentPriceWithoutChange)
-          console.log('deliveryPrice', deliveryPrice)
-          console.log('discountPrice', discountPrice)
-          console.log('priceNow', priceNow)
-          console.groupEnd();*/
-
-      if (CURRENT_DELIVERY) {
-          /*    console.group('Текущая доставка');
-              console.log('Название', CURRENT_DELIVERY.name)
-              console.log('Описание', CURRENT_DELIVERY.desc)
-              console.log('Обычная цена', CURRENT_DELIVERY.price)
-              console.log('Правила', CURRENT_DELIVERY.rulesList)
-              console.log('Зоны доставки', CURRENT_DELIVERY.zoneList)
-              console.groupEnd();*/
-      }
-  }
-
-  function getCurrentDeliveryPrice() {
-      function getPriceFromArray(array) {
-          var cartSumNow = Number($('.cart__sum .total-sum').data('total-sum'))
-          var deliveryPrice = null;
-          var maxMorePrice = 0;
-
-          $.each(array, function(i, el) {
-              // Если сумма заказа сейчас >= чем задана в правиле && текущее правило больше по цене, чем предыдущее
-              if (Number(cartSumNow) >= Number(el.sumMorePrice) && Number(maxMorePrice) <= Number(el.sumMorePrice)) {
-                  deliveryPrice = el.price
-                  maxMorePrice = el.sumMorePrice
-              }
-          })
-
-          return deliveryPrice;
-      }
-
-      if (typeof CURRENT_DELIVERY == "undefined") {
-          return '0';
-      }
-      // Если нет зон у текущего варианта доставки
-      if (CURRENT_DELIVERY.zoneListEmpty) {
-          // Если нет правил расчета стоимости для текущего варианта доставки
-          if (CURRENT_DELIVERY.rulesListEmpty) {
-              return Math.ceil(CURRENT_DELIVERY.price)
-          } else {
-              var priceFromArray = getPriceFromArray(CURRENT_DELIVERY.rulesList);
-              var deliveryPrice = (priceFromArray !== null) ? priceFromArray : Math.ceil(CURRENT_DELIVERY.price);
-
-              return deliveryPrice;
-          }
-      } else {
-          var zoneId = $('.delivery-zone-select').val();
-          var zoneList = $.grep(CURRENT_DELIVERY.zoneList, function(item, i) {
-              return item.zoneId == zoneId
-          })[0];
-
-          // Если у этой зоны нет правил
-          if (zoneList.zoneRuleListEmpty) {
-              return zoneList.price
-          } else {
-              // Берём подходящую стоимость из массива правил иначе стандартную цену для зоны
-              var priceFromArray = getPriceFromArray(zoneList.zoneRuleList);
-              var deliveryPrice = (priceFromArray !== null) ? priceFromArray : zoneList.price;
-
-              return deliveryPrice;
-          }
-      }
-  }
-
-  window.DeliveryModule = {
-      init: init,
-      changeCartSum: changeCartSum,
-      getCurrentDelivery: function() {
-          return CURRENT_DELIVERY;
-      }
-  }
-})();
-// Функция + - для товаров
-function quantity() {
-  $('.qty__btn.qty__btn--plus').off('click').click(function(){
-    var 
-      quantity = $(this).parent().find('.qty__input'),
-      currentVal = parseInt(quantity.val());
-    if (!isNaN(currentVal)){
-      quantity.val(currentVal + 1);
-      quantity.trigger('change');
-    }
-    return false;
-  });
-  $('.qty__btn.qty__btn--minus').off('click').click(function(){
-    var 
-      quantity = $(this).parent().find('.qty__input'),
-      currentVal = parseInt(quantity.val());
-    if (!isNaN(currentVal) && !(currentVal <= 1) ){
-      quantity.val(currentVal - 1);
-      quantity.trigger('change');
-    }
-    return false;
-  });
-  // Если вводят 0 то заменяем на 1
-  $('.qty .qty__input').off('change').change(function(){
-    if($(this).val() < 1){
-      $(this).val(1); 
-    }
-  });
-}    
-// Корзина
-function cartAjaxQty(){
-  $(function(){
-    $('.qty__input.qty--cart').off('change').change(
-      $.debounce(300, function(){
-        var $qtyInput = $(this);
-        var id = $qtyInput.closest('.cart__table-row').data('id');
-        var qtyInputVal = $qtyInput.val();
-        
-        if(qtyInputVal < 1) {
-          $qtyInput.val(1)
-        }
-        var formData = $('#cart-content').serializeArray();
-        formData.push({name: 'only_body', value: 1});
-    
-        $.ajax({
-          url: '/cart',
-          data: formData,
-          cache: false,
-          beforeSend: function(){
-            preloadShow($('#cart-content .preloader'))
-          },
-          success: function(data){
-            var $data = $(data).find('#cart-content');
-            var count = 0;
-            $data.find('.qty__input.qty--cart').each(function(){
-              count += Number($(this).val())
-            })  
-            $('.cart-header .cart-header__counter .num').html(count);
-            $('#cart-count').html($data.find('#cart-count').html())
-            
-            var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input.qty--cart').val();
-    
-            $qtyInput.val(newQtyInputVal)
-            
-            var $tableRow = $('[data-id="' + id + '"]');
-            var newItemPrice = $data.find('[data-id="' + id + '"] .cart__product-ajax-price').html();
-            $tableRow.find('.cart__product-ajax-price').html(newItemPrice); 
-            
-            $('.cart__sum').html($data.find('.cart__sum').html());
-            
-            // console.log($data.find('.cart__sum').find('.cart__sum--discount .cart__sum-text-price').data('discount-value'))
-            
-            var cartSum = $data.find('.total-sum').data('total-sum') || "0";
-            $('.cart-header .cart-header__cart-sum .num').text(addSpaces(cartSum));      
-            $('#quick_form_coupon_code, .coupon-hidden-input').val(null).trigger('input')
-            
-            DeliveryModule.changeCartSum();
-            
-            var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input.qty--cart').val();
-    
-            if(qtyInputVal > newQtyInputVal){
-              new Noty({
-                  timeout: "3000",
-                  layout: 'center',
-                  text: 'Вы пытаетесь положить в корзину товара больше, чем есть в наличии',
-                  type: "error",
-                  animation: {
-                    open: null, 
-                    close: null
-                  }   
-              }).show()
-            }
-            preloadHide($('#cart-content .preloader'), true)
-          }
-        })
-      })
-    )
-  })
-}
-
-// Очистить корзину
-function cartClear() {
- $(function(){
-	$('#cart-clear').click(function(e){
-	  e.preventDefault();
-    preloadShow($('#cart-content .preloader'));
-	  
-	  $.post('/cart/truncate/', function() {
-	    $('.header .cart-header .cart-header__cart-sum .num').text("0");
-	    $('.header .cart-header .cart-header__counter .num').text("0");
-	    
-      $('.quick-order, .cart-info .cart').hide();
-      $('#empty-cart').show();  			    
-	  });
-	})   
- })  
-}
-// Удаление товара из корзины
-function cartDeleteItem(){
-  $(function(){
-    $('.cart__delete').off('click').on('click', function(e){
-    e.preventDefault();
-    
-    var $cartDeleteLink = $(this);
-    var url = $cartDeleteLink.attr('href');
-    
-    $.ajax({
-      url: url,
-      cache: false,
-      beforeSend: function(){
-        preloadShow($('#cart-content .preloader'))
-      },
-      success: function(data){
-        var $data = $(data).find('#cart-content');
-        var count = 0;
-        
-        $data.find('.qty__input.qty--cart').each(function(){
-          count += Number($(this).val())
-        })
-        // Если корзина пуста
-        if(!count){
-          $('.quick-order, .cart-info .cart').hide();
-          $('#empty-cart').show();
-        }
-        $cartDeleteLink.closest('.cart__table-row').remove();
-        $('.header .cart-header .cart-header__counter .num').html(count);
-        $('#cart-count').html($data.find('#cart-count').html())
-        
-        $('.cart__sum').html($data.find('.cart__sum').html());
-        
-        var cartSum = $data.find('.total-sum').data('total-sum') || "0";
-        $('.cart-header .cart-header__cart-sum .num').text(addSpaces(cartSum));
-        $('#quick_form_coupon_code, .coupon-hidden-input').val(null).trigger('input')
-        
-        DeliveryModule.changeCartSum();
-        preloadHide($('#cart-content .preloader'),true)      
-       }      
-    })
-  })
-  })
-}
-
-    // orderScripts();
-    cartDeleteItem();
-    cartClear();
-    cartAjaxQty();  
-    quantity()
-  })
- 
-</script>
-{% ENDIF %}
-<style>
-section.quickform__row {
-    border: 1px solid #f2f2f2;
-    margin-bottom: 15px;
-}
-
-.cart._cart-page {
-    margin-bottom: 15px;
-}
-
-.quickform__title {
-    padding: 20px 15px 15px;
-    border-bottom: 1px solid #f2f2f2;
-    margin-bottom: 15px;
-    background: #f9f9f9;
-}
-.quickform__title-icon {
-    margin-right: 10px;
-    background-image: linear-gradient(160.47deg,#fe6260 11.94%,#fc9758 85.71%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.quickform__list {
-    padding: 0 50px 15px;
-}
-
-.quickform__item {
-    margin-bottom: 15px;
-}
-.quickform__item .input {
-    max-width: 100%;
-}
-
-.quick-order {
-    max-width: calc(70% - 30px);
-    width: 100%;
-}
-
-.quickform__select-box {}
-
-
-.quickform__row-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-section.quickform__row.-delivery {
-    width: calc(50% - 7.5px);
-}
-
-section.quickform__row.-payment {
-    width: calc(50% - 7.5px);
-}
-.quickform-delivery {
-    padding: 0 50px;
-}
-.quickform-payment {
-    padding: 0 50px 15px;
-}
-</style>
-<style>
-.order-content {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.order__content {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.order-info {
-    width: 30%;
-    margin-left: 30px;
-    border: 1px solid #f2f2f2;
-    align-self: flex-start;
-}
-
-.order-info__title {
-    padding: 20px 15px;
-    font-weight: 700;
-    font-size: 16px;
-    border-bottom: 1px solid #f2f2f2;
-    margin-bottom: 15px;
-    background: #f9f9f9;
-}
-
-.order-info__list {
-    padding: 0 15px 15px;
-}
-
-.order-info-row {
-    margin-bottom: 15px;
-}
-
-.order-info-text-price .price {
-    font-size: 16px;
-    font-weight: 700;
-    color: #000;
-}
-
-.order-info-row.order-info--total {
-    font-weight: bold;
-    border-top: 1px solid #f2f2f2;
-    padding-top: 15px;
-    font-size: 18px;
-}
-.order-info-row.order-info--total .price {
-        font-size: 18px;
-}  
-</style>
-<!--{print_r}-->

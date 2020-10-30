@@ -116,17 +116,17 @@
             <ul class="header-nav unstyled">
                 {% IF SETTINGS_STORE_EMAIL_MAIN %}
                 <li class="header-navItem">
-                  <a class="header-top-email header-navLink" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}"><span class="fal fa-envelope"></span> {SETTINGS_STORE_EMAIL_MAIN}</a>
+                  <a class="header-top-email header-navLink" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}"><span class="fal fa-envelope"></span>{SETTINGS_STORE_EMAIL_MAIN}</a>
                 </li>
                 {% ENDIF %} 
                 {% IF SETTINGS_STORE_PHONE_NUMBER2 %}
                 <li class="header-navItem">
-                  <a class="header-top-phone header-navLink" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}{SETTINGS_STORE_PHONE_CITY_CODE2}{SETTINGS_STORE_PHONE_NUMBER2}"><span class="fal fa-phone"></span> {SETTINGS_STORE_PHONE_COUNTRY_CODE2} ({SETTINGS_STORE_PHONE_CITY_CODE2}) {SETTINGS_STORE_PHONE_NUMBER2}</a>
+                  <a class="header-top-phone header-navLink" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}{SETTINGS_STORE_PHONE_CITY_CODE2}{SETTINGS_STORE_PHONE_NUMBER2}"><span class="fal fa-phone"></span>{SETTINGS_STORE_PHONE_COUNTRY_CODE2} ({SETTINGS_STORE_PHONE_CITY_CODE2}) {SETTINGS_STORE_PHONE_NUMBER2}</a>
                 </li>
                 {% ENDIF %}
                 {% IF SETTINGS_STORE_PHONE_NUMBER3 %}
                 <li class="header-navItem">
-                  <a class="header-top-phone header-navLink" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}{SETTINGS_STORE_PHONE_CITY_CODE3}{SETTINGS_STORE_PHONE_NUMBER3}"><span class="fal fa-phone"></span> {SETTINGS_STORE_PHONE_COUNTRY_CODE3} ({SETTINGS_STORE_PHONE_CITY_CODE3}) {SETTINGS_STORE_PHONE_NUMBER3}</a>
+                  <a class="header-top-phone header-navLink" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}{SETTINGS_STORE_PHONE_CITY_CODE3}{SETTINGS_STORE_PHONE_NUMBER3}"><span class="fal fa-phone"></span>{SETTINGS_STORE_PHONE_COUNTRY_CODE3} ({SETTINGS_STORE_PHONE_CITY_CODE3}) {SETTINGS_STORE_PHONE_NUMBER3}</a>
                 </li>
                 {% ENDIF %}
               </ul>
@@ -210,7 +210,7 @@
                       </form>
                     </div>
                     <div class="fancybox-body second">
-                      <p>Зарегистрировавшись в нашем магазине, Вы сможете оформлять заказы быстрее, просматривать и отслеживать Ваши заказы, хранить адреса доставки и многое другое.</p>
+                      <p>Зарегистрировавшись в нашем магазине, Вы сможете оформлять заказы быстрее, просматривать и отслеживать Ваши заказы</p>
                       <div class="buttons">
                         <a href="{USER_REGISTER_URL}" class="button _outline">Зарегистрироваться</a>
                       </div>
@@ -709,7 +709,7 @@
             {% IFNOT catalog_full.HIDE %}
                 <!-- Если нужны конкретные категории  -->
                 <!-- {% IF catalog_full.NAME = Техника || catalog_full.NAME = Обувь %} -->
-                {% IF catalog_full.LEVEL = 0  && catalog_full.index < 6 %}
+                {% IF catalog_full.LEVEL = 0  && catalog_full.index < 8 %}
                 <div class="item">
                   <div class="item-inner">
                     <div class="cat-image">

@@ -814,6 +814,9 @@ $(function(){
         }
     })
     $('.header-toolsLink').on('click', function(e){
+      if(getClientWidth() < 992){
+        return (true)
+      }
       e.preventDefault();
       if($(this).hasClass('_active')) {
         $('.header .header-tools').removeClass('_active');
@@ -895,6 +898,8 @@ function AddCart() {
           // Обновляем данные корзины
           $('.header .cart .count').html($(data).filter('#newCartCount').html());
           $('.header .cart .dropdown').html($(data).filter('#newCartData').html());
+          // Анимация на кнопках
+          hoverAnimBtn()
         }
       });
     return false;
@@ -1488,15 +1493,7 @@ function quickOrder(formSelector) {
 		url		  : formBlock.attr('action'),
 		data		: formData,
 		success: function(data) {
-			$.fancybox({
-        content : data,
-        // При изменении размера окна изменяем размер окна оформления заказа
-        onUpdate  : function(){
-          
-          return false;
-        }
-			}); 
-      setTimeout(function(){$.fancybox.update();}, 500);
+			$.fancybox.open($(data));       
 		}
 	});
   return false;
@@ -1661,75 +1658,28 @@ function quickViewShowMod(href, atempt) {
   if(typeof(document.quickviewPreload) == 'undefined') {
     document.quickviewPreload = [];
   }  
-  // Если данные по быстрому просмотру уже подгружены
-  if (typeof(document.quickviewPreload[href]) != 'undefined') {
-    // Если мы в режиме загрузки страницы и ждём результата от другой функции, то тоже подождём, когда тот контент загрузится и будет доступен в этом массиве.
-    if (1 == document.quickviewPreload[href]) {
-      // Если попытки ещё не указывались, ставим 0 - первая попытка
-      if (typeof(atempt) == 'undefined') {
-        atempt = 0;
-        // Иначе прибавляем счётчик попыток
-      } else {
-        atempt += 1;
-        // Если больше 500 попыток, то уже прошло 25 секунд и похоже, что быстрый просмотр не подгрузится, отменяем информацию о том, что контент загружен
-        if (atempt > 500) {
-          delete document.quickviewPreload[href];
-          // TODO сделать вывод красивой таблички
-          alert('Не удалось загрузить страницу товара. Пожалуйста, повторите попытку позже.');
-          return true;
-        }
-      }
-      // Запустим функцию быстрого просмотра через 5 сотых секунды, вероятно запрошендная страница товара уже подгрузится.
-      setTimeout('quickViewShowMod("' + href + '", ' + atempt + ')', 50);
-      return true;
-    } else {
+  $.get(href, function(content) {
       $.fancybox.close();
-      var productShopContent = $(document.quickviewPreload[href]).find('.product-shop').length;
-
-      $.fancybox.open(document.quickviewPreload[href] , {
+      $.fancybox.open(content, {
         padding: 0,
         autoSize: true,
         maxWidth: 500,
         baseClass: "_modification",
-        wrapCSS: (!productShopContent) ? 'quickView' : '',
         afterShow: function() {
           // Обновление доступности модификаций
           MainFunctions();
           AddCart();
           quantity();
+          hoverAnimBtn();
           // Стилизация селектов
           $('.fancybox-inner .product-view [name="form[properties][]"]').styler()
 
-          $('.fancybox-inner .product-view').addClass('modification');
           $('.fancybox-inner .product-view .product-shop').removeClass('col-lg-5 col-md-6');
           $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-6');
         }
       });
-    }
-  } else {
-    $.get(href, function(content) {
-      $.fancybox.close();
-      var productShopContent = $(document.quickviewPreload[href]).find('.product-shop').length;
-      $.fancybox({
-        padding: 0,
-        autoSize: true,
-        maxWidth: 500,
-        wrapCSS: (!productShopContent) ? 'quickView' : '',
-        content: $(content).getColumnContent(),
-        beforeShow: function() {
-          // Обновление доступности модификаций
-          MainFunctions();
-          AddCart();
-          quantity();
-          $('.product-img-box .product-image .general-img').find('a').attr('href', 'javascript:void(0)');
-
-          $('.fancybox-inner .product-view').addClass('modification');
-          $('.fancybox-inner .product-view .product-shop').removeClass('col-lg-5 col-md-6');
-          $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-3');
-        }
-      });
     });
-  }
+
 }
 // Функция быстрого оформления заказа в корзине
 function startOrder1(){  
@@ -2805,7 +2755,8 @@ function indexPage() {
     responsiveClass:true,
     responsive:{
       0:{items:1},
-      768:{items:2},
+      767:{items:2},
+      768:{items:3},
       992:{items:3},
       1199:{items: 5}
     }
@@ -2834,7 +2785,8 @@ function indexPage() {
     responsiveClass:true,
     responsive:{
       0:{items:1},
-      768:{items:2},
+      767:{items:2},
+      768:{items:3},
       992:{items:3},
       1199:{items:5}
     }
