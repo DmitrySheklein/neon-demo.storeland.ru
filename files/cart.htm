@@ -19,11 +19,13 @@
     <table class="cartTable"> 
       <thead> 
         <tr>
-          <td class="image name" colspan="2">Товар</td>
-          <td class="">Цена</td>
-          <td class="quantity">Количество</td>
-          <td class="total">Итого</td>
-          <td>&nbsp;</td>
+          <td colspan="5">
+            В корзине <span>{CART_COUNT_TOTAL}</span> товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}
+          </td>
+          <td class="cartTable-delete">
+            <input type="checkbox" id="cart-delete-checkbox" class="checkbox-hidden" name="pp-check" required="" aria-required="true">
+            <label for="cart-delete-checkbox"  class="checkbox-name cart-delete-label" title="Удалить несколько"></label>
+          </td>
         </tr> 
       </thead> 
       <tbody>
@@ -37,7 +39,7 @@
               {% IFNOT cart_items.distinctive_properties_empty %}<div class="properties">{% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %},<br> {% ENDIF %}{% ENDFOR %}</div>{% ENDIF %}
             </td>
             <td class="cart-price hide"> 
-              <span class="price">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>
+              <span class="price {CURRENCY_CHAR_CODE}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>
             </td>
             <td class="cart-qty">
               <div class="qty-wrap">
@@ -47,9 +49,10 @@
                     <a href="javascript:void(0)" class="qty-plus unselectable" title="Увеличить"><i class="fal fa-plus"></i></a>
                   </div>
               </div>
+              <span class="cart-qty-mesure">{cart_items.GOODS_MOD_MEASURE_NAME}</span>
             </td> 
             <td class="cart-price">
-              <span class="ajaxtotal price">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>            
+              <span class="ajaxtotal price {CURRENCY_CHAR_CODE}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>            
             </td>
             <td class="closetd"><a data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="ajaxdelete($(this))" class="remove"></a></td>
           </tr>  

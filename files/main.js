@@ -1868,35 +1868,35 @@ function startOrder(){
 
 // Функция + - для товаров
 function quantity() {
-//Regulator Up копки + в карточке товара при добавлении в корзину
-$('.qty-plus').off('click').click(function(){
-  var 
-    quantity = $(this).parent().find('.quantity'),
-    currentVal = parseInt(quantity.val());
-  if (!isNaN(currentVal)){
-    quantity.val(currentVal + 1);
-    quantity.trigger('keyup');
+  //Regulator Up копки + в карточке товара при добавлении в корзину
+  $('.qty-plus').off('click').click(function(){
+    var 
+      quantity = $(this).parent().find('.quantity, .cartqty'),
+      currentVal = parseInt(quantity.val());
+    if (!isNaN(currentVal)){
+      quantity.val(currentVal + 1);
+      quantity.trigger('change');
+    }
+    return false;
+  });
+  //Regulator Down копки - в карточке товара при добавлении в корзину
+  $('.qty-minus').off('click').click(function(){
+    var 
+      quantity = $(this).parent().find('.quantity, .cartqty'),
+      currentVal = parseInt(quantity.val());
+    if (!isNaN(currentVal) && !(currentVal <= 1) ){
+      quantity.val(currentVal - 1);
+      quantity.trigger('change');
+    }
+    return false;
+  });
+  // Если вводят 0 то заменяем на 1
+  $('.qty-wrap .quantity').off('change').change(function(){
+    if($(this).val() < 1){
+      $(this).val(1); 
+    }
+  });
   }
-  return false;
-});
-//Regulator Down копки - в карточке товара при добавлении в корзину
-$('.qty-minus').off('click').click(function(){
-  var 
-    quantity = $(this).parent().find('.quantity'),
-    currentVal = parseInt(quantity.val());
-  if (!isNaN(currentVal) && !(currentVal <= 1) ){
-    quantity.val(currentVal - 1);
-    quantity.trigger('keyup');
-  }
-  return false;
-});
-// Если вводят 0 то заменяем на 1
-$('.qty-wrap .quantity').off('change').change(function(){
-  if($(this).val() < 1){
-    $(this).val(1); 
-  }
-});
-}
 
 // Скрипты для карточки товара
 function goodspage() {
