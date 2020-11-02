@@ -2095,7 +2095,9 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .coupons .couponBlockPrice .couponNum:after {content: "\f158";display: inline-block;margin-left: 5px;font-family: FontAwesome;font-weight: 300;font-size: 15px;line-height: 1.1}
 .coupons .coupon-btn {margin: 5px 0}
 .formfast-cart {display: none;}
-.formfast-cart > .title {display: block;position: relative;overflow: hidden;margin: 0px 0 35px 0;padding: 0 5px 5px;border-bottom: 1px solid #dce4e9;text-align: center;}
+.formfast-cart > .title {position: relative;overflow: hidden;margin: 0;padding: 5px 15px 5px;text-align: center;background: #f9f9f9;border: 1px solid #f2f2f2;display: flex;justify-content: space-between;align-items: center;}
+.formfast-cart > .title span {font-size: 20px;}
+.formfast-cart > .title .title-link {font-size: 15px;}
 .formfast-cart .cart-products-list {margin: 0;padding: 0;list-style: none;list-style-position: inside;}
 .formfast-cart .cart-products-list .item {border-bottom: 1px solid #dce4e9;margin-bottom: 15px;padding-bottom: 15px;}
 .formfast-cart .cart-products-list .item .product-image {display: inline-block;width: 25%;text-align: center;vertical-align: top;margin-right: 3%;}
@@ -2105,9 +2107,9 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .formfast-cart .cart-products-list .item .product-details .product-price .quantity {margin-right: 5px;}
 .formfast-cart .cart-products-list .item .product-details .product-name {display: block;margin-bottom: 5px;font-size: 18px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 .formfast-cart .cart-products-list .item .product-details .product-price .price {font-size: 18px;}
-.formfast-cart .subtotal {margin-bottom: 20px;}
+.formfast-cart .subtotal {margin-bottom: 20px;border: 1px solid #f2f2f2;border-top: 0;}
 .formfast-cart .subtotal > div {padding: 5px;line-height: 25px;}
-.formfast-cart .subtotal > div .label {text-transform: uppercase;vertical-align: middle;}
+.formfast-cart .subtotal > div .label {text-transform: none;vertical-align: middle;}
 .formfast-cart .subtotal .price {float: right;font-size: 18px;}
 .formfast-cart .subtotal .price:after {font-size: 11px;}
 .formfast-cart .buttons {margin-bottom: 20px;text-align: center;}
@@ -2182,7 +2184,7 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .col-account .buttons .button {margin-bottom: 5px;vertical-align: middle;}
 .col-account .buttons p {margin-bottom: 0px;}
 
-.form-list {margin-bottom: 20px;}
+.form-list {margin-bottom: 0px;}
 .form-list .fields {margin: 0 0 15px 0;max-width: 450px;}
 .form-list .fields .input-box {position: relative;}
 .form-list .fields:last-child {margin-bottom: 0;}

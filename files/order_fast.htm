@@ -6,8 +6,8 @@
     {% IF cart_count_empty %}
       <div class="attention">Ваша корзина пуста, пожалуйста, выберите другой товар для оформления заказа</div>
     {% ELSE %}
-    <form action="{ORDER_STAGE_CONFIRM_WITHOUT_DOMAIN_URL}" method="post"  id="quickform">
-      <div class="formfast">
+    <form action="{ORDER_STAGE_CONFIRM_WITHOUT_DOMAIN_URL}" method="post"  id="quickform" class="formfast">
+      <div>
         <div class="">
         <input type="hidden" name="hash" value="{HASH}" />
         <div class="">
@@ -241,12 +241,7 @@
               {% ENDIF %}
               <!-- Если поле адреса доставки запрашивается -->
               {% IF SETTINGS_ORDER_FIELDS_ADDRESS < 3 %}
-                <div class="fields" style="display: none;">
-                  <label for="quickDeliveryAddress" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}class="required"{% ENDIF %}>Улица{% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}<em>*</em>{% ENDIF %}</label>
-                  <div class="input-box">
-                    <input type="text" id="quickDeliveryAddress" name="form[delivery][address]" value="{ORDER_FORM_DELIVERY_ADDRESS}" maxlength="500" class="input {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}"/>
-                  </div>
-                </div>
+                <input type="hidden" id="quickDeliveryAddress" name="form[delivery][address]" value="{ORDER_FORM_DELIVERY_ADDRESS}" maxlength="500" class="input {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}"/>
                 <!-- Улица -->
                 <div class="fields">
                   <label for="quickDeliveryAddressStreet" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}class="required"{% ENDIF %}>Улица{% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}<em>*</em>{% ENDIF %}</label>
@@ -280,14 +275,14 @@
               {% ENDIF %}
               <!-- Если поле даты доставки запрашивается -->
               {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME < 3 %}
-                <div class="fields">
+                <div class="fields deliveryConvenientDate">
                   <label for="deliveryConvenientDate" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}>Удобная дата доставки{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}<em>*</em>{% ENDIF %}</label>
                   <div class="input-box">
                     <input type="text" id="deliveryConvenientDate" name="form[delivery][convenient_date]" value="{ORDER_FORM_DELIVERY_CONVENIENT_DATE}" class="input {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %}" maxlength="10" minlength="10" autocomplete="off"/>
                   </div>
                 </div>
-                <div class="fields deliveryConvenientDate">
-                  <label for="deliveryConvenientDate" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}>Удобное время доставки{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}<em>*</em>{% ENDIF %}</label>
+                <div class="fields deliveryConvenientTime">
+                  <label for="deliveryConvenientTime" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}>Удобное время доставки{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}<em>*</em>{% ENDIF %}</label>
                   <div class="input-box">
                     <input type="hidden" name="form[delivery][convenient_time_from]" value="0">
                     <input type="hidden" name="form[delivery][convenient_time_to]" value="0">
@@ -312,6 +307,23 @@
             </div> 
           </div>
           {% ENDIF %}
+          <div class="formfast-col products">
+            <h3 class="title"><i class="fal fa-shopping-cart"></i> <span>Товары в заказе</span></h3>
+            <ul class="cart-products-list">
+              {% FOR cart_items %}
+              <li class="item">
+                <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="product-image"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=tourism{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon"></a>
+                <div class="product-details">
+                  <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="product-name">{cart_items.GOODS_NAME}</a>
+                  <div class="product-price">
+                    <span class="quantity">{cart_items.ORDER_LINE_QUANTITY} x </span>
+                    <span class="price {CURRENCY_CHAR_CODE}" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>
+                  </div>
+                </div>
+              </li>
+              {% ENDFOR %}
+            </ul>          
+          </div>          
           <!-- Если в тарифном плане подключен модуль скидок по купонам и суммам заказов -->
           {% IF TARIFF_FEATURE_DISCOUNT_COUPONS %}
             <!-- Если скидки по купонам активированы в панели управления магазином -->
@@ -357,21 +369,10 @@
       </div>
     </form>
     <div class="formfast-cart col-sm-6 col-md-4 col-xs-12" style="padding: 0 0 0 30px;">
-      <h3 class="title">Ваш заказ ({CART_COUNT_TOTAL})</h3>
-      <ul class="cart-products-list">
-        {% FOR cart_items %}
-        <li class="item">
-          <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="product-image"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=tourism{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon"></a>
-          <div class="product-details">
-            <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="product-name">{cart_items.GOODS_NAME}</a>
-            <div class="product-price">
-              <span class="quantity">{cart_items.ORDER_LINE_QUANTITY} x </span>
-              <span class="price {CURRENCY_CHAR_CODE}" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>
-            </div>
-          </div>
-        </li>
-        {% ENDFOR %}
-      </ul>
+      <h3 class="title">
+        <span>Ваш заказ</span>
+        <a id="closeOrder" class="title-link pseudo-link" title="Отменить быстрое оформление заказа">Изменить</a>
+      </h3>
       <div class="subtotal">
         <div class="discount" {% IF CART_SUM_DISCOUNT_PERCENT = 0 %}style="display:none"{% ENDIF %}>
           <!-- Скидки, действующие на заказ -->
@@ -387,17 +388,21 @@
           <span class="price">{CART_SUM_DISCOUNT_PERCENT}%</span>           
           {% ENDIF %}
         </div>
+        <div class="order-sum">
+          <span class="label">Товаров на:</span>
+          <span class="price {CURRENCY_CHAR_CODE}">{CART_SUM_NOW | money_format}</span>
+        </div>       
         <div class="delivery-sum">
           <span class="label">Стоимость доставки:</span>
-          <span class="price"><span class="num">0</span> {CURRENCY_NAME}</span>      
+          <span class="price {CURRENCY_CHAR_CODE}"><span><span class="num">0</span><span>{CURRENCY_NAME}</span></span>      
         </div>       
         <div class="total">
           <span class="label">Итого:</span>
-          <span class="price total-sum" data-total-sum="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
+          <span class="price total-sum {CURRENCY_CHAR_CODE}" data-total-sum="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
         </div>
       </div>
       <div class="buttons">
-        <a id="closeOrder" class="button button2 small" title="Отменить быстрое оформление заказа">Отменить оформление</a>
+        
       </div>
     </div>
     {% ENDIF %}
