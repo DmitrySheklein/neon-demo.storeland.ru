@@ -275,24 +275,26 @@
               {% ENDIF %}
               <!-- Если поле даты доставки запрашивается -->
               {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME < 3 %}
-                <div class="fields deliveryConvenientDate">
-                  <label for="deliveryConvenientDate" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}>Удобная дата доставки{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}<em>*</em>{% ENDIF %}</label>
-                  <div class="input-box">
-                    <input type="text" id="deliveryConvenientDate" name="form[delivery][convenient_date]" value="{ORDER_FORM_DELIVERY_CONVENIENT_DATE}" class="input {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %}" maxlength="10" minlength="10" autocomplete="off"/>
-                  </div>
-                </div>
-                <div class="fields deliveryConvenientTime">
-                  <label for="deliveryConvenientTime" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}>Удобное время доставки{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}<em>*</em>{% ENDIF %}</label>
-                  <div class="input-box">
-                    <input type="hidden" name="form[delivery][convenient_time_from]" value="0">
-                    <input type="hidden" name="form[delivery][convenient_time_to]" value="0">
-                    
-                    <div class="quickform-select-box">
-                      <select class="quickform-select-convenient"{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %} id="selectTime" disabled>
-                        <option value="">Сначала выберите дату</option>
-                      </select>
+                <div class="fields-row">
+                  <div class="fields deliveryConvenientDate">
+                    <label for="deliveryConvenientDate" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}>Удобная дата доставки{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}<em>*</em>{% ENDIF %}</label>
+                    <div class="input-box">
+                      <input type="text" id="deliveryConvenientDate" name="form[delivery][convenient_date]" value="{ORDER_FORM_DELIVERY_CONVENIENT_DATE}" class="input {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %}" maxlength="10" minlength="10" autocomplete="off"/>
                     </div>
-                </div>
+                  </div>
+                  <div class="fields deliveryConvenientTime">
+                    <label for="deliveryConvenientTime" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}>Удобное время доставки{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}<em>*</em>{% ENDIF %}</label>
+                    <div class="input-box">
+                      <input type="hidden" name="form[delivery][convenient_time_from]" value="0">
+                      <input type="hidden" name="form[delivery][convenient_time_to]" value="0">
+                      
+                      <div class="quickform-select-box">
+                        <select class="quickform-select-convenient"{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %} id="selectTime" disabled>
+                          <option value="">Сначала выберите дату</option>
+                        </select>
+                      </div>
+                  </div>
+                  </div>
                 </div>
               {% ENDIF %}
               <!-- Если поле комментарии запрашивается -->

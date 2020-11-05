@@ -2024,6 +2024,16 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .formfast .form-list .fields {max-width: 100%;margin: auto;margin-bottom: 10px;}
 .formfast .form-list .fields.small {display: inline-block;width: 150px;}
 .formfast .form-list .fields.small.first {margin-right: 45px;}
+.formfast .form-list .fields-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.formfast .fields.deliveryConvenientDate,
+.formfast .fields.deliveryConvenientTime {
+  width: 50%;
+  margin: 0;
+}
 .formfast .contactWantRegister {margin-bottom: 10px;}
 .formfast .contactRegisterNeedElement {margin-top: 10px;}
 .formfast .input-box {position: relative;}
@@ -2032,7 +2042,7 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .showPassBlock .showPass,
 .showPassBlock .OrderShowPass{display: block;padding: 8px 15px}
 .formfast .button {margin: 10px 0;}
-.deliveryConvenientDate .input {display: inline-block;width: 150px;    margin: 0 10px;}
+
 .formfast-row {
   display: flex;
   flex-wrap: wrap;
@@ -2053,7 +2063,7 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 
 .delivery .manufacturer-list,
 .payment .orderStagePaymentList {max-width: 450px; padding: 10px;}
-.adress .deliveryConvenientDate .input {width: 75px;padding: 10px 5px;}
+
 .adress .form-list {padding: 10px;}
 .customer .input-box {margin-bottom: 15px;}
 .customer .input-box:last-child {margin-bottom: 0;}
