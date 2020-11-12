@@ -328,7 +328,7 @@ function comparePage(){
 
 // Показать пароль 
 function showPass(){
-    $('.showPass').click(function(){
+    $('.showPass').on('click', function(){
     ChangePasswordFieldType(this, $('#sites_client_pass'));
     return false;
   });
@@ -2329,50 +2329,53 @@ function removeFromCartAll(e){
 
 // Корзина
 function ajaxnewqty(){
-  $('.cartqty').change(function(){
-    s = $(this);
-    id = $(this).closest('tr').data('id');
-    qty = $(this).val();
-    if(qty < 1) {
-      s.val(1)
-    }    
-    data = $('.cartForm').serializeArray();
-    data.push({name: 'only_body', value: 1});
-    $('tr[data-id="' + id + '"] .ajaxtotal').css('opacity','0');
-    $('.TotalSum').css('opacity','0');
-    $.ajax({
-      data: data,
-      cache:false,
-      success:function(d){        
-        s.val($(d).find('tr[data-id="' + id + '"] .cartqty').val())
-        $('tr[data-id="' + id + '"] .ajaxtotal').css('opacity','1');
-        $('.TotalSum').css('opacity','1');
-        tr = $('tr[data-id="' + id + '"]');
-        tr.find('.ajaxtotal').html($(d).find('tr[data-id="' + id + '"] .ajaxtotal').html()); 
-        $('.TotalSum').html($(d).find('.TotalSum').html());
-        $('.discounttr').each(function(){
-          $(this).remove();
-        });
-        $(d).find('.discounttr').each(function(){
-          $('.cartTable tfoot tr:first-child').before($(this));
-        });
-        c = $(d).find('tr[data-id="' + id + '"] .cartqty');
-        qw = c.val();
-        if(qty > qw){
-          $('.cartErr').remove();
-          $('.cartTable').before('<div class="cartErr warning">Вы пытаетесь положить в корзину товара больше, чем есть в наличии</div>');
-          $('.cartErr').fadeIn(500).delay(2500).fadeOut(500, function(){$('.cartErr').remove();});
-          $('.cartqty').removeAttr('readonly');
+  $('.cartqty').on('change',
+  $.debounce(300,
+    function(){       
+      var s = $(this);
+      var id = $(this).closest('tr').data('id');
+      var qty = $(this).val();
+      var dontPutMore = Number($(this).data('dont-put-more'));
+      if(qty < 1) {
+        s.val(1)
+      }    
+      var data = $('.cartForm').serializeArray();
+      data.push({name: 'only_body', value: 1});
+      $('tr[data-id="' + id + '"] .ajaxtotal').css('opacity','0');
+      $('.TotalSum').css('opacity','0');
+      $.ajax({
+        data: data,
+        cache:false,
+        success:function(d){        
+          s.val($(d).find('tr[data-id="' + id + '"] .cartqty').val())
+          $('tr[data-id="' + id + '"] .ajaxtotal').css('opacity','1');
+          $('.TotalSum').css('opacity','1');
+          tr = $('tr[data-id="' + id + '"]');
+          tr.find('.ajaxtotal').html($(d).find('tr[data-id="' + id + '"] .ajaxtotal').html()); 
+          $('.TotalSum').html($(d).find('.TotalSum').html());
+          $('.discounttr').each(function(){
+            $(this).remove();
+          });
+          $(d).find('.discounttr').each(function(){
+            $('.cartTable tfoot tr:first-child').before($(this));
+          });
+          c = $(d).find('tr[data-id="' + id + '"] .cartqty');
+          qw = c.val();
+          if(Number(qty) > Number(qw) && dontPutMore){
+            $('.cartErr').remove();
+            $('.cartTable').before('<div class="cartErr warning">Вы пытаетесь положить в корзину товара больше, чем есть в наличии</div>');
+            $('.cartErr').fadeIn(500).delay(2500).fadeOut(500, function(){$('.cartErr').remove();});
+            $('.cartqty').removeAttr('readonly');
+          }
         }
-      }
+      })
     })
-  })
+  )
 }
 
 // Удаление товара из корзины
 function ajaxdelete(s){
-  var yep = confirm('Вы точно хотите удалить товар из корзины?');
-  if(yep == true){
+  if(confirm('Вы точно хотите удалить товар из корзины?')){
     var closeimg = s;
     s.closest('tr').fadeOut();
     url = closeimg.data('href');
@@ -2381,6 +2384,7 @@ function ajaxdelete(s){
       cache:false,
       success:function(d){
         $('.cart-info').html($(d).find('.cart-info').html());
+        hoverAnimBtn();
         ajaxnewqty();
         $('.cartqty').first().trigger('change');
         $('#startOrder').on('click', function() {
@@ -2740,7 +2744,8 @@ function indexPage() {
     nav: true,
     navText: ["<i class='slideshow-nav fal fa-angle-left' aria-hidden='true'></i>", "<i class='slideshow-nav fal fa-angle-right' aria-hidden='true'></i>"],
     dots: true,
-    autoplay: true,
+    autoplay: false,
+    autoplayTimeout: 5000,
     autoplayHoverPause: true,
     smartSpeed: 500,
     dotsSpeed: 400,

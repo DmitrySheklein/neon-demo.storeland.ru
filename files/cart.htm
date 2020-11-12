@@ -45,7 +45,7 @@
               <div class="qty-wrap">
                   <div class="qty-set">
                     <a href="javascript:void(0)" class="qty-minus unselectable" title="Уменьшить"><i class="fal fa-minus"></i></a>
-                    <input name="form[quantity][{cart_items.GOODS_MOD_ID}]" value="{cart_items.ORDER_LINE_QUANTITY}" title="Количество, {cart_items.GOODS_MOD_MEASURE_NAME}" class="input cartqty" type="number" maxlength="5" min="1" onkeypress="return keyPress(this, event);" onpaste="return false;" />
+                    <input {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}data-dont-put-more="1"{% ENDIF %} name="form[quantity][{cart_items.GOODS_MOD_ID}]" value="{cart_items.ORDER_LINE_QUANTITY}" title="Количество, {cart_items.GOODS_MOD_MEASURE_NAME}" class="input cartqty" type="number" maxlength="5" min="1" onkeypress="return keyPress(this, event);" onpaste="return false;" />
                     <a href="javascript:void(0)" class="qty-plus unselectable" title="Увеличить"><i class="fal fa-plus"></i></a>
                   </div>
               </div>

@@ -218,9 +218,9 @@
                   </div>
         				</div>
               {% ELSE %}
-                <a class="header-loginLink" href="{USER_LOGOUT_URL}" title="Выход" rel="nofollow">                
-  									<span class="fal fa-sign-out"></span>
-  									<span>Выход</span>
+                <a class="header-loginLink" href="{USER_SETTINGS_URL}" title="Мой кабинет" rel="nofollow">                
+                    <span class="fal fa-cabinet-filing"></span>
+  									<span>Кабинет</span>
         				</a>              
               {% ENDIF %}              
             </div>
@@ -598,38 +598,67 @@
         <!-- <div class="preloader"><span class="content-loading"></span></div> -->
         <div class="slider owl-carousel">
           <!-- Слайд 1 -->
-          <div class="item">
-            <a href="#">
+          <div class="slider-item">
                 <picture>
                   <source class="owl-lazy" media="(min-width: 992px)" data-srcset="{ASSETS_IMAGES_PATH}slide-1.jpg">
                   <source class="owl-lazy" media="(max-width: 991px)" data-srcset="{ASSETS_IMAGES_PATH}slide-1-mobile.jpg">
                   <img class="owl-lazy" data-src="{ASSETS_IMAGES_PATH}slide-1.jpg" alt="Слайд 1">
                 </picture>
-            </a>
+                <div class="slider-content">
+                  <h3 class="slider-title">
+                    Все для ремонта <br> и строительства 
+                  </h3>
+                  <p class="slider-text">
+                    Так просто начать все с чистого листа, <br>
+                    когда все необходимое есть <br>
+                    в одном магазине                    
+                  </p>
+                  <a href="#" class="button">Узнать подробнее</a>
+                </div>
           </div>
           <!-- /Слайд 1 -->
           
           <!-- Слайд 2 -->
-          <div class="item">
-            <a href="#">
+          <div class="slider-item">
                 <picture>
                   <source class="owl-lazy" media="(min-width: 992px)" data-srcset="{ASSETS_IMAGES_PATH}slide-2.jpg">
                   <source class="owl-lazy" media="(max-width: 991px)" data-srcset="{ASSETS_IMAGES_PATH}slide-2-mobile.jpg">
                   <img class="owl-lazy" data-src="{ASSETS_IMAGES_PATH}slide-2.jpg" alt="Слайд 2">
                 </picture>
-            </a>
+                <div class="slider-content">
+                  <h3 class="slider-title">
+                    Параллельные миры <br>
+                    стали ближе                    
+                  </h3>
+                  <p class="slider-text">
+                    Мощные очки виртуальной реальности <br>
+                    и игровые приставки PlayStation VR <br>
+                    по самым выгодным ценам                    
+                  </p>
+                  <a href="#" class="button">Узнать подробнее</a>
+                </div>
           </div>
           <!-- /Слайд 2 -->
           
           <!-- Слайд 3 -->
-          <div class="item">
-            <a href="#">
+          <div class="slider-item">
                 <picture>
                   <source class="owl-lazy" media="(min-width: 992px)" data-srcset="{ASSETS_IMAGES_PATH}slide-3.jpg">
                   <source class="owl-lazy" media="(max-width: 991px)" data-srcset="{ASSETS_IMAGES_PATH}slide-3-mobile.jpg">
                   <img class="owl-lazy" data-src="{ASSETS_IMAGES_PATH}slide-3.jpg" alt="Слайд 3">
                 </picture>
-            </a>
+                <div class="slider-content">
+                  <h3 class="slider-title">
+                    Новый уровень <br>
+                    твоих тренировок                    
+                  </h3>
+                  <p class="slider-text">
+                    Профессиональная экипировка <br>
+                    для всех видов спорта. <br>
+                    Мужские, женские и детские коллекции                    
+                  </p>
+                  <a href="#" class="button">Узнать подробнее</a>
+                </div>                
           </div>
           <!-- /Слайд 3 -->
   
@@ -1671,6 +1700,12 @@
                             </li>
                           {% ENDFOR %}
                           </ul>
+                          {% FOR values %}
+                          {% IF filter_attr_list.values.index > 10 %}
+                          <button class="filter-more" type="button"><span class="filter-moreText pseudo-link">Показать все</span> <span class="filter-moreArrow fal fa-angle-down"></span></button>
+                          {break}
+                          {% ENDIF %}
+                          {% ENDFOR %}                          
                         </div>
                       {% ENDFOR %}
                       <!-- Фильтры по свойствам товарных модификаций (Например: Цвет, размер, модификация) -->
