@@ -1,0 +1,46 @@
+/*** Обратный звонок, Связь с администрацией ***/
+.callback-info .callback-form {text-align: left;}
+.callback-info .callback-form .name-error, .callback-info .callback-form .phone-error {position: relative;text-align: left;bottom: 0;}
+.callback-info .callback-form div {margin-bottom: 10px;}
+.callback-info .callback-form div label {display: block;}
+.callback-info .callback-form div input {margin: 0;}
+.contact-info .block-contact > div {margin-bottom: 12px;line-height: 36px;display: flex;}
+.contact-info .block-contact > div i {display: inline-block;vertical-align: top;color: #fff;background: #398f93;font-size: 22px;line-height: 45px;width: 45px;height: 45px;text-align: center;margin-right: 10px;border-radius: 50%;}
+.contact-info .block-contact > div [itemprop="telephone"] {font-family: 'Arimo', sans-serif;}
+.contact-info .block-contact .block-contact-workTime {font-family: 'Arimo', sans-serif;}
+.feedbackForm .feedbackForm-title {
+  margin: 25px 0;
+  font-size: 18px;
+  font-weight: 700;  
+}
+.feedbackForm .input,
+.feedbackForm .form-list .fields {max-width: 100%;}
+.feedbackForm .textarea {
+  height: 100px;
+  padding: 30px;
+}
+.feedbackForm .file .button {display:inline-block;vertical-align: top;}
+.clear-file {
+  display:inline-block;
+  vertical-align: top;
+  position: relative;
+  z-index: 1;
+  height: 36px;
+  border: 1px solid #398f93;
+  border-left: 0;
+  padding: 9px;
+  padding-left: 20px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-left: -15px;
+}
+.clear-file:hover {
+  background: #398f93;
+  color: #fff;  
+}
+.file-label-button {
+  position: relative;
+  z-index: 2;
+  color: #398f93!important;
+  background: #fff!important;
+}

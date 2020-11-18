@@ -22,18 +22,30 @@
   {% IF PAGE_CANONICAL %}
     <link rel="canonical" href="{PAGE_CANONICAL}" />
   {% ENDIF %}
-  
-  <!-- Подключаемые шрифты -->
-  <link rel="stylesheet" type="text/css" href="/design/fonts.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;subset=cyrillic" rel="stylesheet">
-
-  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-  
+ 
   <!-- Стили магазина -->
-  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}forall.css" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="{ASSETS_STYLES_PATH}main.css?design=neon"> 
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}forall.css?design=neon"/>
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}main.css?design=neon">
+  <!-- Стили для главной -->
+  {% IF index_page %}
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}indexPage.css?design=neon">   
+  {% ENDIF %}
+  <!-- Стили страниц с сайдбаром-->
+  {% IF MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare %}
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}catalogPage.css?design=neon">
+  {% ENDIF %}
+  <!-- Стили для страницы Товар -->
+  {% IF MOD_LNAME = goods %}
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}goodsPage.css?design=neon">  
+  {% ENDIF %}
+  <!-- Стили для страницы Корзины -->
+  {% IF MOD_LNAME = cart ||  MOD_LNAME = order %}
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}cartPage.css?design=neon">   
+  {% ENDIF %}
+  <!-- Стили для страницы Сравнение -->
+  {% IF MOD_LNAME = compare %}  
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}comparePage.css?design=neon"> 
+  {% ENDIF %}
 </head>
 <body>
   <div class="wrapper {% IF index_page %}index{% ENDIF %} nojs">
@@ -47,6 +59,12 @@
       </div>
     </noscript>
     <!-- /END Сообщение для инвалидов -->
+    <!-- Сообщение для инвалидов -->
+    <style>
+      .nojs .preloader{animation:fadeOut 0.5s ease-out;animation-delay:2s;animation-fill-mode:forwards;}
+      @keyframes fadeOut{from{opacity:1}to{opacity:0;visibility:hidden;}}.fadeOut{animation-name:fadeOut}
+    </style>
+    <!-- /END Сообщение для инвалидов -->    
     
     <!-- Уведомление -->
     <div class="banner-top" style="display:none">
@@ -68,11 +86,19 @@
     <header class="header">
       <div class="header-top">
         <!-- Мобильные иконки -->
-        <div class="header-icons clearfix">
-          <span class="header-iconsItem fal fa-ellipsis-v" type="button" data-target="#headerNav" role="button"></span>
-          <span class="header-iconsItem fal fa-search" type="button" data-target="#headerSearch" role="button"></span>
-          <span class="header-iconsItem fal fa-phone" type="button" data-target="#headerPhone" role="button"></span>
-          <span class="header-iconsItem fal fa-user-circle" type="button" data-target="#headerLogin" role="button"></span>
+        <div class="header-icons">
+          <span class="header-iconsItem" type="button" data-target="#headerNav" role="button">
+            <i class="fal fa-ellipsis-v"></i>
+          </span>
+          <span class="header-iconsItem" type="button" data-target="#headerSearch" role="button">
+            <i class="fal fa-search"></i>
+          </span>
+          <span class="header-iconsItem" type="button" data-target="#headerPhone" role="button">
+            <i class="fal fa-phone"></i>
+          </span>
+          <span class="header-iconsItem" type="button" data-target="#headerLogin" role="button">
+            <i class="fal fa-user-circle"></i>
+          </span>
         </div>
         <!-- /Мобильные иконки -->
 
@@ -599,11 +625,7 @@
         <div class="slider owl-carousel">
           <!-- Слайд 1 -->
           <div class="slider-item">
-                <picture>
-                  <source class="owl-lazy" media="(min-width: 992px)" data-srcset="{ASSETS_IMAGES_PATH}slide-1.jpg">
-                  <source class="owl-lazy" media="(max-width: 991px)" data-srcset="{ASSETS_IMAGES_PATH}slide-1-mobile.jpg">
-                  <img class="owl-lazy" data-src="{ASSETS_IMAGES_PATH}slide-1.jpg" alt="Слайд 1">
-                </picture>
+                <div class="slider-image sl-lozad" data-desktop-src="{ASSETS_IMAGES_PATH}slide-1.jpg" data-mobile-src="{ASSETS_IMAGES_PATH}slide-1-mobile.jpg"></div>
                 <div class="slider-content">
                   <h3 class="slider-title">
                     Все для ремонта <br> и строительства 
@@ -620,11 +642,7 @@
           
           <!-- Слайд 2 -->
           <div class="slider-item">
-                <picture>
-                  <source class="owl-lazy" media="(min-width: 992px)" data-srcset="{ASSETS_IMAGES_PATH}slide-2.jpg">
-                  <source class="owl-lazy" media="(max-width: 991px)" data-srcset="{ASSETS_IMAGES_PATH}slide-2-mobile.jpg">
-                  <img class="owl-lazy" data-src="{ASSETS_IMAGES_PATH}slide-2.jpg" alt="Слайд 2">
-                </picture>
+                <div class="slider-image sl-lozad" data-desktop-src="{ASSETS_IMAGES_PATH}slide-2.jpg" data-mobile-src="{ASSETS_IMAGES_PATH}slide-2-mobile.jpg"></div>
                 <div class="slider-content">
                   <h3 class="slider-title">
                     Параллельные миры <br>
@@ -642,11 +660,7 @@
           
           <!-- Слайд 3 -->
           <div class="slider-item">
-                <picture>
-                  <source class="owl-lazy" media="(min-width: 992px)" data-srcset="{ASSETS_IMAGES_PATH}slide-3.jpg">
-                  <source class="owl-lazy" media="(max-width: 991px)" data-srcset="{ASSETS_IMAGES_PATH}slide-3-mobile.jpg">
-                  <img class="owl-lazy" data-src="{ASSETS_IMAGES_PATH}slide-3.jpg" alt="Слайд 3">
-                </picture>
+                <div class="slider-image sl-lozad" data-desktop-src="{ASSETS_IMAGES_PATH}slide-3.jpg" data-mobile-src="{ASSETS_IMAGES_PATH}slide-3-mobile.jpg"></div>
                 <div class="slider-content">
                   <h3 class="slider-title">
                     Новый уровень <br>
@@ -1864,7 +1878,7 @@
                     {% FOR news_list_shop %}
                       <div class="item">
                         <div class="post-content">
-                          <a class="news-image-wrap" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;"><img class="news-image  owl-lazy" data-src="{% IF news_list_shop.IMG %}{news_list_shop.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
+                          <a class="news-image-wrap" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;"><img class="news-image lozad" data-src="{% IF news_list_shop.IMG %}{news_list_shop.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
                           <div class="title"><a href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;">{news_list_shop.TITLE}</a></div>
                           {% IF news_list_shop.SHOW_TIME %}<div class="date">{news_list_shop.TIME | date("d")}.{news_list_shop.TIME | date("m")}.{news_list_shop.TIME | date("Y")}</div>{% ENDIF %}
                           <a href="{news_list_shop.URL}" class="button button2">Подробнее</a>
@@ -1884,7 +1898,7 @@
                     {% FOR news_list_articles %}
                       <div class="item">
                         <div class="post-content">
-                          <a class="news-image-wrap" href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;"><img class="news-image owl-lazy" data-src="{% IF news_list_articles.IMG %}{news_list_articles.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
+                          <a class="news-image-wrap" href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;"><img class="news-image lozad" data-src="{% IF news_list_articles.IMG %}{news_list_articles.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
                           <div class="title"><a href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;">{news_list_articles.TITLE}</a></div>
                           {% IF news_list_articles.SHOW_TIME %}<div class="date">{news_list_articles.TIME | date("d")}.{news_list_articles.TIME | date("m")}.{news_list_articles.TIME | date("Y")}</div>{% ENDIF %}
                           <a href="{news_list_articles.URL}" class="button button2">Подробнее</a>
@@ -1904,7 +1918,7 @@
                     {% FOR news_list_mass_media %}
                       <div class="item">
                         <div class="post-content">
-                          <a class="news-image-wrap" href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;"><img class="news-image owl-lazy" data-src="{% IF news_list_mass_media.IMG %}{news_list_mass_media.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
+                          <a class="news-image-wrap" href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;"><img class="news-image lozad" data-src="{% IF news_list_mass_media.IMG %}{news_list_mass_media.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
                           <div class="title"><a href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;">{news_list_mass_media.TITLE}</a></div>
                           {% IF news_list_mass_media.SHOW_TIME %}<div class="date">{news_list_mass_media.TIME | date("d")}.{news_list_mass_media.TIME | date("m")}.{news_list_mass_media.TIME | date("Y")}</div>{% ENDIF %}
                           <a href="{news_list_mass_media.URL}" class="button button2">Подробнее</a>
@@ -1931,7 +1945,7 @@
                 {% FOR news_list_all %}
                   <div class="item">
                     <div class="post-content">
-                      <a class="news-image-wrap" href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;"><img class="news-image owl-lazy" data-src="{% IF news_list_all.IMG %}{news_list_all.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
+                      <a class="news-image-wrap" href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;"><img class="news-image lozad" data-src="{% IF news_list_all.IMG %}{news_list_all.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-other.png{% ENDIF %}"></a>
                       {% IF news_list_all.SHOW_TIME %}<div class="date">{news_list_all.TIME | date("d")}.{news_list_all.TIME | date("m")}.{news_list_all.TIME | date("Y")}</div>{% ENDIF %}
                       <div class="title"><a href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;">{news_list_all.TITLE}</a></div>
                       <div class="description"><p>{news_list_all.TEXT_SHORT}</p></div> 
@@ -1968,7 +1982,7 @@
                     </a>
                   </div>
                   <div class="product-info">
-                    <h2 class="product-name"><a href="{recently_viewed_goods.URL_MIN_PRICE_NOW | url_amp}" title="{recently_viewed_goods.NAME}" itemprop="url">{recently_viewed_goods.NAME}</a></h2>
+                    <div class="product-name"><a href="{recently_viewed_goods.URL_MIN_PRICE_NOW | url_amp}" title="{recently_viewed_goods.NAME}" itemprop="url">{recently_viewed_goods.NAME}</a></div>
                     <div class="price-box" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                       <meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}"/>
                       <span class="price {CURRENCY_CHAR_CODE}" itemprop="price" content="{recently_viewed_goods.MIN_PRICE_NOW}">{recently_viewed_goods.MIN_PRICE_NOW | money_format}</span>
@@ -2136,10 +2150,18 @@
   <!-- Overlay -->
   <div class="overlay"></div>  
 
+
+  
+  <!-- Подключаемые шрифты -->  
+  <link rel="stylesheet" href="/design/fonts.css">
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
   <!-- Скрипты магазина -->
-  <script src="{ASSETS_JS_PATH}forall.js"></script>
-  <script src="{ASSETS_JS_PATH}main.js?design=neon"></script>
-  <script src="{ASSETS_JS_PATH}smart-search.js?design=neon"></script>
+  <script src="{ASSETS_JS_PATH}forall.js?design=neon"></script>
+  <script defer src="{ASSETS_JS_PATH}main.js?design=neon"></script>
+  <script async src="{ASSETS_JS_PATH}smart-search.js?design=neon"></script>
+
   {% IF user_agent_ie %}
   <script>
     // Picture element HTML5 shiv
@@ -2151,84 +2173,93 @@
   {% IF JAVASCRIPT_BUG_HUNTING_URL %}
     <script src="{JAVASCRIPT_BUG_HUNTING_URL}"></script>
   {% ENDIF %}
-  <!-- Если отключен JS -->
-  <script >$(function () { $('.wrapper').removeClass('nojs'); });</script>
+  <!-- Если отключен JS -->  
+  <script>document.querySelector('.wrapper').classList.remove('nojs')</script>
   <!-- ВНИМАНИЕ! Если Вы удалите код ниже, то это повлияет на работу вашего сайта. Пожалуйста ничего не удаляйте без консультации у специалистов. -->
   <!-- Скрипты страниц с сайдбаром-->
-  {% IF MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare %}
+  {% IF MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare %}   
+  <script defer src="{ASSETS_JS_PATH}catalogPage.js?design=neon""></script>
   <script>
     // Запуск основных скриптов для страниц Каталога
-    $(function () { catalogFunctions(); });
-    $(function () { accordion(); });
+    document.addEventListener("DOMContentLoaded", function(){
+      catalogFunctions();
+      accordion();
+    })
   </script>
   {% ENDIF %}
   <!-- Скрипты для страницы Сравнение -->
   {% IF MOD_LNAME = compare %}
+  <script defer src="{ASSETS_JS_PATH}comparePage.js?design=neon""></script>
   <script >
     // Запуск основных скриптов для страницы Сравнение
-    $(function () { comparePage(); });
+    document.addEventListener("DOMContentLoaded", function(){
+      comparePage();
+    })
+  </script>
+  {% ENDIF %}
+  <!-- Стили для страницы Обратной связи -->
+  {% IF MOD_LNAME = feedback %}
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}feedbackPage.css?design=neon"> 
+  {% ENDIF %}
+  <!-- Стили для страницы Заказа по шагам -->
+  {% IF MOD_LNAME = order %}
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}orderPage.css?design=neon"> 
+  {% ENDIF %}
+  <!-- Скрипты для страницы Корзины -->
+  {% IF MOD_LNAME = cart ||  MOD_LNAME = order %}
+  <script defer src="{ASSETS_JS_PATH}cartPage.js?design=neon""></script>
+  <script >
+    // Запуск основных скриптов для страницы Сравнение
+    document.addEventListener("DOMContentLoaded", function(){
+      ajaxnewqty();
+      ajaxnewqty()
+    })
   </script>
   {% ENDIF %}
   <!-- Скрипты для страницы Товар -->
   {% IF MOD_LNAME = goods %}
+  <script defer src="{ASSETS_JS_PATH}goodsPage.js?design=neon""></script>
   <script >
     // Запуск основных скриптов для страницы Товар
-    $(function () { goodspage(); });
-    $(function () { goodsImage(); });
-    // Инициализируем табы на странице
-    $(function () { initTabs(); });
+    document.addEventListener("DOMContentLoaded", function(){
+      goodspage();
+      goodsImage();
+      // Инициализируем табы на странице
+      initTabs();
+    })
   </script>
   {% ENDIF %}
   <!-- Скрипты для главной -->
   {% IF index_page %}
+  <script defer src="{ASSETS_JS_PATH}indexPage.js?design=neon""></script>
   <script >
     // Запуск основных скриптов для главной страницы
-    $(function () { indexPage(); });
+    document.addEventListener("DOMContentLoaded", function(){
+      indexPage();
+    })
+  </script>
+  {% ENDIF %}
+  <!-- Модальное окно уведомления при отправке сообщения -->
+  {% IF FORM_NOTICE %}  
+  <script>
+  window.addEventListener('load', function(){
+    function generate(type) {
+      new Noty({
+        text: '<div class="noty_content">{FORM_NOTICE | nl2br}</div>',
+        type: '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}'
+      }).show()        
+    }
+    generate();
+  })
   </script>
   {% ENDIF %}
   <script >
     // Анимация перед загружаемым слайдером
-    $(window).on('load', function () {
+    window.addEventListener('load', function(){
       preloadHide();
-    });
-    //Модальное окно уведомления при отправке сообщения
-    {% IF FORM_NOTICE %}
-      function generate(type) {
-        new Noty({
-          text: '<div class="noty_content">{FORM_NOTICE | nl2br}</div>',
-          type: '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}'
-        }).show()        
-      }
-      $(function () { generate(); });
-    {% ENDIF %}
-  </script>
-  <!-- /END Конец основных скриптов которые лучше не удалять -->
-  <!-- Сообщение для инвалидов -->
-  <style>
-    .nojs .preloader{animation:fadeOut 0.5s ease-out;animation-delay:2s;animation-fill-mode:forwards;}
-    @keyframes fadeOut{from{opacity:1}to{opacity:0;visibility:hidden;}}.fadeOut{animation-name:fadeOut}
-  </style>
-  <!-- /END Сообщение для инвалидов --> 
-
-<!-- Development -->
-<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
-<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
-<script>
-  (function () {
-    // return;
-    
-    tippy('.selectBox', {
-          theme: 'material',
-          onShow(instance) {
-            var $link = $(instance.reference);
-            var titleName = $link.attr('title');
-            $link.removeAttr('title');
-            $link.attr('data-title', titleName);
-            instance.setContent($link.attr('data-title'))
-            console.log(titleName);
-          }
-      });      
-  })()
+    })   
+  </script>  
+  <!-- /END Конец основных скриптов которые лучше не удалять --> 
 
 </script>
   <!-- Debug -->

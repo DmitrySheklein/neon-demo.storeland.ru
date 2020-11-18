@@ -23,8 +23,8 @@
             В корзине <span>{CART_COUNT_TOTAL}</span> товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}
           </td>
           <td class="cartTable-delete">
-            <input type="checkbox" id="cart-delete-checkbox" class="checkbox-hidden" name="pp-check" required="" aria-required="true">
-            <label for="cart-delete-checkbox"  class="checkbox-name cart-delete-label" title="Удалить несколько"></label>
+            <!-- <input type="checkbox" id="cart-delete-checkbox" class="checkbox-hidden" name="pp-check" required="" aria-required="true"> -->
+            <!-- <label for="cart-delete-checkbox"  class="checkbox-name cart-delete-label" title="Удалить несколько"></label> -->
           </td>
         </tr> 
       </thead> 
@@ -98,7 +98,7 @@
               <a id="startOrder" class="button" title="Перейти к быстрому оформлению заказа">Оформить заказ</a>
               <noscript>
               <style>#startOrder {display: none;}</style>
-              <input class="button" type="submit" name="next_step" value="Оформить заказ" title="Перейти к оформлению заказа в 4 шага" />
+              <button class="button" type="submit" name="next_step"title="Перейти к оформлению заказа в 4 шага">Оформить заказ</button>
               <div class="left">
                 <input class="button" type="submit" value="Пересчитать" title="Пересчитать" style="margin-left: 5px;"/>
               </div>
