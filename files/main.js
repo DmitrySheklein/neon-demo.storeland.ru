@@ -392,6 +392,7 @@ function AddCart() {
           var msg = $(data).find('.notify').html();
           var type = $(data).find('.notify').hasClass('good') ? 'success' : 'error'
           var iconTemplate = ('success' == type) ? '<i class="fal fa-check"></i>' : '<i class="fal fa-times"></i>';
+          if('success' == type){$.fancybox.close();};
           // Если есть функция, которая отображает сообщения пользователю
           if(typeof(Noty) == "function") {
             new Noty({

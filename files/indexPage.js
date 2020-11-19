@@ -16,25 +16,39 @@ function indexPage() {
       dotsSpeed: 400,
       mouseDrag: true,
       touchDrag: true,
-      pullDrag: true
+      pullDrag: true,
+      onChange: function(){
+        lozad('.sl-lozad', {load: changeSlideshowImage}).observe();
+      }
     });
     lozad('.sl-lozad', {load: changeSlideshowImage}).observe();
+
     function changeSlideshowImage(el){
       var $img = $(el);
-      var desktopLink = $img.data('desktop-src');
-      var mobileLink = $img.data('mobile-src');
+      var desktopLink = 'desktop-src';
+      var mobileLink = 'mobile-src';
       var bgLink = '';
+      var webpSupport = (!!$img.data('webp')) && support_format_webp();
+      var prefix = (webpSupport) ? 'webp-' : '';
+
       if(getClientWidth() < 991) {
-        bgLink = mobileLink;
+        bgLink = $img.data(prefix + mobileLink);  
       } else {
-        bgLink = desktopLink;
+        bgLink = $img.data(prefix + desktopLink);  
       }
-      $img.css('background-image', 'url("' + bgLink + '")');
+      
+      if(bgLink){
+        $img.css('background-image', 'url("' + bgLink + '")');
+      }
     }
-    $(window).on('resize', $.debounce(300, function(){
+    $(window).on('resize', $.debounce(300, 
+      function(){
       $('.sl-lozad').each(function(i, el){changeSlideshowImage(el);})
-    })
+      })
     );
+    function support_format_webp(){var e=document.createElement("canvas");return!(!e.getContext||!e.getContext("2d"))&&0==e.toDataURL("image/webp").indexOf("data:image/webp")}
+    support_format_webp()
+
     // Преимущества
     $("#features .features-list").owlCarousel({
       items: 4,

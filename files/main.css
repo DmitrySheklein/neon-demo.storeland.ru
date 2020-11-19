@@ -953,6 +953,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 #footer .name-error,#footer  .phone-error {display:block;font-size: 13px;}
 #footer .input.input--error {border: none;}
 .callbackForm .pp {font-size: 10px;text-align: center;}
+.pp a {text-decoration: underline;}
 .pp a:hover {color: #2e2e2e;text-decoration:none}
 .pp .pp-label {
   display: inline-block;

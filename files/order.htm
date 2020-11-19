@@ -358,13 +358,11 @@
               <tr class="discount">
                 <td colspan="2" class="name">{cart_discount.DISCOUNT_NAME}</td>
                 <td class="percent">
-                  <span class="num">
                     {% IF cart_discount.IS_PERCENT %}
                       {cart_discount.DISCOUNT_VALUE}%
                     {% ELSE %}
                       {cart_discount.DISCOUNT_VALUE | money_format}
                     {% ENDIF %}
-                  </span>
                 </td>
                 <td>
                   {cart_discount.END_PRICE | money_format}
@@ -376,7 +374,7 @@
             <td colspan="2">
               <span>Итого:</span>
             </td>
-            <td class="total-sum" colspan="2">
+            <td class="total-sum" colspan="2" data-total-sum="{% FOR cart_sum %}{cart_sum.NOW_WITH_DELIVERY_AND_DISCOUNT}{% ENDFOR %}">
               <span class="price">
                 {% FOR cart_sum %}
                   {cart_sum.NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}

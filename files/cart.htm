@@ -19,11 +19,13 @@
     <table class="cartTable"> 
       <thead> 
         <tr>
-          <td colspan="6" class="cartTable-cart-count">
-            В корзине <span>{CART_COUNT_TOTAL}</span> товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}
-          </td>
+          <td class="image name" colspan="2">Товар</td>
+          <td class="">Цена</td>
+          <td class="quantity">Количество</td>
+          <td class="total">Итого</td>
+          <td>&nbsp;</td>
         </tr> 
-      </thead> 
+      </thead>  
       <tbody>
         {% FOR cart_items %}
           <tr class="items" data-id="{cart_items.GOODS_MOD_ID}">
@@ -50,7 +52,7 @@
             <td class="cart-price">
               <span class="ajaxtotal price {CURRENCY_CHAR_CODE}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>            
             </td>
-            <td class="closetd"><a data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="ajaxdelete($(this))" class="remove"></a></td>
+            <td class="closetd"><a href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="ajaxdelete()" class="remove"></a></td>
           </tr>  
         {% ENDFOR %}
       </tbody> 

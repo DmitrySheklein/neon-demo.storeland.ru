@@ -183,9 +183,10 @@ function ajaxnewqty() {
 }
 
 // Удаление товара из корзины
-function ajaxdelete(s) {
+function ajaxdelete(event) {
+  event.preventDefault();
   if (confirm('Вы точно хотите удалить товар из корзины?')) {
-    var closeimg = s;
+    var closeimg = event.target;
     s.closest('tr').fadeOut();
     url = closeimg.data('href');
     $.ajax({
@@ -217,65 +218,80 @@ function coupons() {
   var $submitBtn = $('.coupons .coupon-btn');
   var $cuponInput = $('#quick_form_coupon_code');
   var $resetBtn = $('.coupons .coupon_clear');
-
-  $submitBtn.click(function () {
+ 
+  $submitBtn.click(function(){
     var url = '/order/stage/confirm';
     var val = $cuponInput.val();
-    var orderSum = $('.coupons input[name="orderSumDefaul"]').val()
+    var orderSumDefaul = $('.coupons input[name="orderSumDefaul"]').val()
     // Получаем данные формы, которые будем отправлять на сервер
     var formData = $('#myform').serializeArray();
-    formData.push({
-      name: 'ajax_q',
-      value: 1
-    });
-    formData.push({
-      name: 'only_body',
-      value: 1
-    });
-    formData.push({
-      name: 'form[coupon_code]',
-      value: val
-    });
+    formData.push({name: 'ajax_q', value: 1});
+    formData.push({name: 'only_body', value: 1});
+    formData.push({name: 'form[coupon_code]', value: val});
     $.ajax({
       type: "POST",
       cache: false,
       url: url,
       data: formData,
-      success: function (data) {
-        var tr_discount = $(data).closest('#myform').find('tr.discount');
-        $('.subtotal .discount .label').html(tr_discount.find('td.name').text());
-        $('.subtotal .discount .price').html(tr_discount.find('td.percent').text());
-        var tr_total = $(data).closest('#myform').find('tr.total');
-        $('.subtotal .total .price').html(tr_total.find('td.total-sum').text());
-
-        var newOrderSum = tr_total.find('td.total-sum .num').text().replace(/\s+/g, '').replace(',', '.');
-        var discountRub = String(Math.floor(orderSum) - Math.floor(newOrderSum));
-
-        $('.coupons .couponBlockSale').toggleClass('active', discountRub > 0);
-        if (discountRub > 0) {
-          $('.subtotal .discount').show();
-          $('.coupons .couponNum').text(addSpaces(discountRub))
-        } else {
-          $('.coupons .couponNum').text('0')
-          $('.subtotal .discount').hide();
-        }
-
+      success: function(data) {
+            var $discountBlock = $(data).closest('#myform').find('tr.discount');
+            var discountName = $discountBlock.find('td.name').text();
+            var discountPercent = $discountBlock.find('td.percent').html();
+            var $totalBlock = $(data).closest('#myform').find('tr.total');
+            
+            // Записываем название и размер скидки по купону
+            $('.subtotal .discount .label').html(discountName);
+            $('.subtotal .discount .price').html(discountPercent);
+            // Получаем новую итоговую стоимость заказа
+            var newTotalSum = $totalBlock.find('td.total-sum').data('total-sum');
+            var TotalSum = $('.subtotal .total .total-sum').data('total-sum');
+            // console.log(newTotalSum,TotalSum);
+            if (newTotalSum >= TotalSum) {
+              $cuponInput.addClass('error');
+              $cuponInput.val("").attr("placeholder", "Купон не применён");
+            }            
+            
+            // Обновляем значение
+            $('.subtotal .total .total-sum').data('total-sum', newTotalSum);
+            // Получаем текущую стоимость выбранной доставки
+            var deliverySum = $('.formfast-cart .subtotal .delivery-sum .num').text();
+            // Считаем итоговую сумму заказа вместе с доставкой
+            var totalPriceWithDelivery = String(parseInt(deliverySum) + Math.floor(newTotalSum));
+            $('.formfast-cart .total-sum .num').text(addSpaces(totalPriceWithDelivery));  
+            // Считаем размер скидки
+            var discountRub = String(Math.floor(orderSumDefaul) - Math.floor(newTotalSum));
+            $('.coupons .couponBlockSale').toggleClass('active', discountRub > 0);
+            // console.log('discountRub',discountRub)
+            if(discountRub > 0) {
+              $('.subtotal .discount').show();               
+              $('.coupons .couponNum').text(addSpaces(discountRub))          
+            } else {
+              $('.coupons .couponNum').text('0')
+              $('.subtotal .discount').hide(); 
+            }
+            
+            if (newTotalSum >= TotalSum) {
+              $('.coupons .couponNum').text('0')
+              $('.coupons .couponBlockSale').removeClass('active');
+            }
       },
-      error: function (data) {
-        console.log("Возникла ошибка: Невозможно отправить форму купона.");
+      error: function(data){
+            console.log("Возникла ошибка: Невозможно отправить форму купона.");
       }
     });
   });
-  $cuponInput.on('input', function () {
+  $cuponInput.on('input',function(){
     var $input = $(this);
 
-    if ($input.val()) {
+    if( $input.val() ) {
       $input.next('.coupon_clear').addClass('active')
+      $submitBtn.removeClass('_disabled')
     } else {
       $input.next('.coupon_clear').removeClass('active')
+      $submitBtn.addClass('_disabled')
     }
   })
-  $resetBtn.on('click', function () {
+  $resetBtn.on('click', function(){
     $('#quick_form_coupon_code').val('').trigger('input');
     $('.coupons .coupon-btn').trigger('click');
   })

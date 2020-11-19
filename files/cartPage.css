@@ -89,6 +89,9 @@ github.com/t1m0n/air-datepicker
   margin-bottom: 15px;
   border-radius: 5px;
 }
+.formfast-col._products {  
+  border-bottom-right-radius: 0;
+}
 .formfast-col.delivery,
 .formfast-col.payment {width: calc(50% - 7.5px);}
 .formfast-col.account .form-list {
@@ -135,17 +138,19 @@ github.com/t1m0n/air-datepicker
 .coupons .couponBlock label {display: block;margin-right: 15px;font-weight: normal;text-align: left;}
 .coupons .couponBlock .input-box {display: block;flex-grow: 1;}
 .coupons .couponBlock .input {max-width:100%;}
-.coupons .couponBlock .coupon_clear {position: absolute;top: 0;right: 0;padding: 12px 15px;cursor: pointer;opacity:0;visibility: hidden;transition: all .3s;}
+.coupons .couponBlock .coupon_clear {position: absolute;top: 0;right: 0;padding: 10px 15px;cursor: pointer;opacity:0;visibility: hidden;transition: all .3s;}
 .coupons .couponBlock .coupon_clear.active {opacity:1;visibility: visible;}
 .coupons .couponBlockSale {text-align: left;  color: #b5b6b7; transition: color .3s;     padding-top: 10px;}
 .coupons .couponBlockSale.active {color: #2e2e2e;}
-.coupons .couponBlockSale .couponNum {font-family: 'Arimo';}
+.coupons .couponBlockSale .couponNum {font-family: 'Arimo';font-weight: 700;}
 .coupons .couponBlocLabel {font-size: 12px}
-.coupons .couponBlockPrice p {font-size: 16px;font-weight: 700;margin-bottom: 0}
-.coupons .couponBlockPrice .couponNum:after {content: "\f158";display: inline-block;margin-left: 5px;font-family: FontAwesome;font-weight: 300;font-size: 15px;line-height: 1.1}
+.coupons .couponBlockPrice .couponNum:after {content: "руб.";display: inline-block;margin-left: 5px;line-height: 1.1;font-weight: 600;font-size: 14px;}
 .coupons .coupon-btn {margin: 0;margin-left: 15px;}
-
-.formfast .cart-products-list {margin: 0;padding: 0;list-style: none;list-style-position: inside;}
+.coupons .coupon-btn._disabled {
+  opacity: .3;
+  pointer-events: none;
+}
+.formfast .cart-products-list {margin: 0;padding: 0;list-style: none;max-height: 275px;overflow: auto;}
 .formfast .cart-products-list .cart-products-item {display: flex;border-bottom: 1px solid #f2f2f2;margin-bottom: 0;padding: 0px 10px;}
 .formfast .cart-products-list .cart-products-item:last-child {border-bottom: 0;}
 .formfast .cart-products-list .cart-products-item > div {
@@ -188,8 +193,13 @@ github.com/t1m0n/air-datepicker
 .formfast-cart .subtotal > div .label {text-transform: none;vertical-align: middle;}
 .formfast-cart .subtotal .price {float: right;font-size: 18px;}
 .formfast-cart .subtotal .price:after {font-size: 11px;}
+.formfast-cart .subtotal .price.total-sum {font-size: 20px;}
 .formfast-cart .buttons {margin-bottom: 0px;text-align: center;}
-
+.formfast-cart .buttons .pp {
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: 10px;  
+}
 /*** Корзина ***/
 .cartTable {width: 100%;border-collapse: collapse;}
 .cartTable #closeOrder {display:none;}
@@ -209,7 +219,7 @@ github.com/t1m0n/air-datepicker
 .cartTable thead tr td {
   border: 1px solid #f2f2f2;
 }
-.cartTable thead tr td {background-color: #f9f9f9;text-align: left;}
+.cartTable thead tr td {background-color: #f9f9f9;text-align: center;}
 .cartTable .cartTable-delete {text-align: center;}
 .cartTable .cart-delete-label {
   display: inline-block;

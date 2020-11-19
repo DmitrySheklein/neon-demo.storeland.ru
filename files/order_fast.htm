@@ -311,7 +311,7 @@
             </div> 
           </div>
           {% ENDIF %}
-          <div class="formfast-col products">
+          <div class="formfast-col _products">
             <h3 class="title"><i class="fal fa-shopping-cart"></i> <span>Товары в заказе</span></h3>
             <ul class="cart-products-list">
               {% FOR cart_items %}
@@ -321,7 +321,7 @@
                 <div class="product-price">
                   <span class="price {CURRENCY_CHAR_CODE}" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>
                 </div>
-                <div class="product-quantity">{cart_items.ORDER_LINE_QUANTITY} x </div>
+                <div class="product-quantity">{cart_items.ORDER_LINE_QUANTITY} {cart_items.GOODS_MOD_MEASURE_NAME}</div>
                 <div class="product-total-price">
                   <span class="price {CURRENCY_CHAR_CODE}" data-price="{cart_items.ORDER_LINE_PRICE_NOW}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>
                 </div>                
@@ -360,10 +360,6 @@
           {% ENDIF %}
           <!-- END Если в тарифном плане подключен модуль скидок по купонам и суммам заказов -->
         </div>
-        <div class="buttons">
-          <div class="pp">Нажимая на кнопку Оформить заказ, Вы соглашаетесь с <a href="#" data-fancybox data-src="#fancybox-pp">правилами обработки данных</a></div>
-          <button type="submit" class="button" title="Оформить заказ">Оформить заказ</button>
-        </div>
         </div>
       </div>
     </form>
@@ -379,12 +375,12 @@
             {% FOR cart_discount %}
             {% IF cart_discount.DISCOUNT_IS_ENABLED %}        
             <span class="label">{cart_discount.DISCOUNT_NAME}</span>
-            <span class="price">{% IF cart_discount.IS_PERCENT %}{cart_discount.DISCOUNT_VALUE}%{% ELSE %}{cart_discount.DISCOUNT_VALUE | money_format}{% ENDIF %}</span>
+            <span class="price {CURRENCY_CHAR_CODE}">{% IF cart_discount.IS_PERCENT %}{cart_discount.DISCOUNT_VALUE}%{% ELSE %}{cart_discount.DISCOUNT_VALUE | money_format}{% ENDIF %}</span>
             {% ENDIF %}
             {% ENDFOR %}
           {% ELSE %}
           <span class="label">Скидка:</span>
-          <span class="price">{CART_SUM_DISCOUNT_PERCENT}%</span>           
+          <span class="price {CURRENCY_CHAR_CODE}">{CART_SUM_DISCOUNT_PERCENT}%</span>           
           {% ENDIF %}
         </div>
         <div class="order-sum">
@@ -401,6 +397,7 @@
         </div>
         <div class="buttons">
           <button type="submit" class="button" title="Оформить заказ" onclick="$('#quickform').submit()">Оформить заказ</button>
+          <div class="pp">Нажимая на кнопку Оформить заказ, Вы соглашаетесь с <a href="#" data-fancybox data-src="#fancybox-pp">правилами обработки данных</a></div>
         </div>
       </div>
     </div>
