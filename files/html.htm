@@ -16,7 +16,7 @@
 	<meta property="og:url" content="{INDEX_PAGE_URL}">
 	<meta property="og:site_name" content='{SETTINGS_STORE_NAME}'>
 	<meta property="og:type" content="website">
-  <meta property="og:description" content="{PAGE_META_DESCRIPTION}">  
+  <meta property="og:description" content="{PAGE_META_DESCRIPTION}">
 
   <!-- SEO параметр определяющий главную страницу для фильтрации её дублей -->
   {% IF PAGE_CANONICAL %}
@@ -31,24 +31,36 @@
   <link rel="stylesheet" href="{ASSETS_STYLES_PATH}indexPage.css?design=neon">   
   {% ENDIF %}
   <!-- Стили страниц с сайдбаром-->
+  <link id="catalogPage-css" rel="stylesheet" 
   {% IF MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare %}
-  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}catalogPage.css?design=neon">
+    href="{ASSETS_STYLES_PATH}catalogPage.css?design=neon"
+  {% ELSE %}
+    data-href="{ASSETS_STYLES_PATH}catalogPage.css?design=neon"
   {% ENDIF %}
+  >  
   <!-- Стили для страницы Товар -->
+  <link id="goodsPage-css" rel="stylesheet" 
   {% IF MOD_LNAME = goods %}
-  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}goodsPage.css?design=neon">  
+    href="{ASSETS_STYLES_PATH}goodsPage.css?design=neon"
+  {% ELSE %}
+    data-href="{ASSETS_STYLES_PATH}goodsPage.css?design=neon"
   {% ENDIF %}
+  >  
   <!-- Стили для страницы Корзины -->
-  {% IF MOD_LNAME = cart ||  MOD_LNAME = order %}
-  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}cartPage.css?design=neon">   
+  <link id="cartPage-css" rel="stylesheet" 
+  {% IF MOD_LNAME = cart || MOD_LNAME = order %}
+    href="{ASSETS_STYLES_PATH}cartPage.css?design=neon"
+  {% ELSE %}
+    data-href="{ASSETS_STYLES_PATH}cartPage.css?design=neon"
   {% ENDIF %}
+  >
   <!-- Стили для страницы Сравнение -->
   {% IF MOD_LNAME = compare %}  
   <link rel="stylesheet" href="{ASSETS_STYLES_PATH}comparePage.css?design=neon"> 
   {% ENDIF %}
 </head>
 <body>
-  <div class="wrapper {% IF index_page %}index{% ENDIF %} nojs">
+  <div class="wrapper {% IF index_page %}index{% ENDIF %} {% IF MOD_LNAME = cart %}_cart-page{% ENDIF %} nojs">
     <!-- Сообщение для инвалидов -->
     <noscript>
       <div class="noscript"> 
@@ -1830,7 +1842,7 @@
     {% ENDIF %}
     
     {% IF index_page %}
-    <div id="main" class="section">
+    <div id="main" class="section _index">
       <div class="container">      
         {BODY}
       </div>
@@ -2178,7 +2190,7 @@
   <!-- ВНИМАНИЕ! Если Вы удалите код ниже, то это повлияет на работу вашего сайта. Пожалуйста ничего не удаляйте без консультации у специалистов. -->
   <!-- Скрипты страниц с сайдбаром-->
   {% IF MOD_LNAME = catalog || MOD_LNAME = user && ACT= settings || MOD_LNAME = user && ACT= favorites || MOD_LNAME = user && ACT= history_list || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = news || MOD_LNAME = compare %}   
-  <script defer src="{ASSETS_JS_PATH}catalogPage.js?design=neon""></script>
+  <script defer src="{ASSETS_JS_PATH}catalogPage.js?design=neon"></script>
   <script>
     // Запуск основных скриптов для страниц Каталога
     document.addEventListener("DOMContentLoaded", function(){
@@ -2189,7 +2201,7 @@
   {% ENDIF %}
   <!-- Скрипты для страницы Сравнение -->
   {% IF MOD_LNAME = compare %}
-  <script defer src="{ASSETS_JS_PATH}comparePage.js?design=neon""></script>
+  <script defer src="{ASSETS_JS_PATH}comparePage.js?design=neon"></script>
   <script >
     // Запуск основных скриптов для страницы Сравнение
     document.addEventListener("DOMContentLoaded", function(){
@@ -2206,24 +2218,39 @@
   <link rel="stylesheet" href="{ASSETS_STYLES_PATH}orderPage.css?design=neon"> 
   {% ENDIF %}
   <!-- Скрипты для страницы Корзины -->
+  
+  <script id="cartPage-js" defer 
   {% IF MOD_LNAME = cart ||  MOD_LNAME = order %}
-  <script defer src="{ASSETS_JS_PATH}cartPage.js?design=neon""></script>
+  src="{ASSETS_JS_PATH}cartPage.js?design=neon"
+  {% ELSE %}
+  data-src="{ASSETS_JS_PATH}cartPage.js?design=neon"
+  {% ENDIF %}
+  ></script>
+  
+  {% IF MOD_LNAME = cart ||  MOD_LNAME = order %}
   <script >
     // Запуск основных скриптов для страницы Сравнение
     document.addEventListener("DOMContentLoaded", function(){
       ajaxnewqty();
       ajaxnewqty()
     })
-  </script>
+  </script>  
   {% ENDIF %}
-  <!-- Скрипты для страницы Товар -->
+  <!-- Скрипты для страницы Товар -->  
+  <script id="goodsPage-js" defer
+    {% IF MOD_LNAME = goods %}
+    src="{ASSETS_JS_PATH}goodsPage.js?design=neon"
+    {% ELSE %}
+    data-src="{ASSETS_JS_PATH}goodsPage.js?design=neon"
+    {% ENDIF %}
+  ></script>
   {% IF MOD_LNAME = goods %}
-  <script defer src="{ASSETS_JS_PATH}goodsPage.js?design=neon""></script>
   <script >
     // Запуск основных скриптов для страницы Товар
     document.addEventListener("DOMContentLoaded", function(){
-      goodspage();
+      goodsPage();
       goodsImage();
+      goodsMods()
       // Инициализируем табы на странице
       initTabs();
     })
@@ -2231,7 +2258,7 @@
   {% ENDIF %}
   <!-- Скрипты для главной -->
   {% IF index_page %}
-  <script defer src="{ASSETS_JS_PATH}indexPage.js?design=neon""></script>
+  <script defer src="{ASSETS_JS_PATH}indexPage.js?design=neon"></script>
   <script >
     // Запуск основных скриптов для главной страницы
     document.addEventListener("DOMContentLoaded", function(){

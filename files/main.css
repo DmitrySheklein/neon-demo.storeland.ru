@@ -3,6 +3,7 @@ body {position: relative;font-family: 'Raleway', sans-serif;font-size: 15px;line
 
 *, *:before, *:after {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
 .wrapper {overflow: hidden;}
+.wrapper._cart-page {overflow: initial;}
 .container {margin-right:auto;margin-left:auto;padding-left: 15px;padding-right: 15px;}
 .row {margin-left: -15px;margin-right: -15px;display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap}
 .clear {clear:both;}
@@ -80,6 +81,10 @@ select.input {-webkit-appearance: menulist;cursor: pointer;}
 .checkbox-hidden:checked + .checkbox-name:before,.checkbox-hidden[checked=checked] + .checkbox-name:before {background-color: #398f93;border-color: #398f93}
 .checkbox-hidden:checked + .checkbox-name:after,.checkbox-hidden[checked=checked] + .checkbox-name:after {content: '\f00c';font: normal normal normal 12px/1 FontAwesome;color: #fff;opacity: 1;visibility: visible;-webkit-transform: translateY(0);transform: translateY(0);}
 .checkbox-hidden:disabled + .checkbox-name {color: #b1bfc8;cursor: default}
+/* Показать пароль */
+.showPassBlock {position: absolute;top: 0;right: 0;}
+.showPassBlock .showPass,
+.showPassBlock .OrderShowPass{display: block;padding: 8px 15px}
 /* Заголовки */
 h1, h2, h3, h4, h5, h6 {text-rendering: optimizelegibility;line-height:1.3;margin:0;padding:0;font-family: 'Raleway',Arial, sans-serif;font-weight: 400;color: #2e2e2e;}
 h1 {font-size: 36px;}
@@ -118,7 +123,7 @@ dt, dd {line-height: 1.4;}
 /*.block-bg {border: 1px solid #dce4e9;background-color: #fff;overflow: hidden}*/
 .DescriptionBlock {background-color: #fff}
 .no-padding .DescriptionBlock {padding: 0px}
-.index#main .DescriptionBlock {border: 1px solid #dce4e9;margin-bottom: 0;padding: 15px}
+#main._index .DescriptionBlock p:last-child {margin-bottom: 0;}
 .pseudo-link {position: relative}
 .pseudo-link:after {content: '';position: absolute;bottom: -2px;left: 0;width: 100%;border-bottom: 1px solid;transition: all .3s ease;opacity: 1;visibility: visible;}
 .pseudo-link:hover:after {visibility: hidden;opacity: 0;}
@@ -380,8 +385,8 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 /*
 * Основной контент
 */
-#main {position: relative;margin: 0px 0 60px;}
-.index#main{margin: 0px 0 20px;}
+#main {position: relative;margin-bottom: 60px;}
+#main._index {margin-bottom: 0px;}
 .section {padding-top: 30px;padding-bottom: 30px;}
 .section-top-block {
   margin-bottom: 20px;
@@ -1457,11 +1462,11 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .col-account .buttons .button {margin-bottom: 5px;vertical-align: middle;}
 .col-account .buttons p {margin-bottom: 0px;}
 
-.form-list {margin-bottom: 0px;}
-.form-list .fields {margin: 0 0 15px 0;max-width: 450px;}
-.form-list .fields .input-box {position: relative;}
-.form-list .fields:last-child {margin-bottom: 0;}
-.form-list .fields > label {display: block;margin-bottom: 15px;text-align: left;}
+.col-account .form-list {margin-bottom: 0px;}
+.col-account .form-list .fields {margin: 0 0 15px 0;max-width: 450px;}
+.col-account .form-list .fields .input-box {position: relative;}
+.col-account .form-list .fields:last-child {margin-bottom: 0;}
+.col-account .form-list .fields > label {display: block;margin-bottom: 15px;text-align: left;}
 .account .message {margin-left: 15px;margin-right: 15px;}
 .account .first .buttons {
     max-width:450px;
@@ -1543,14 +1548,13 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
   Адаптивная часть
 *******************************************************************************/
 @media all and (max-width: 1199px) {
-.formfast .form-list .fields.small.first {margin-right: 0;}
+
 }
 
 @media all and (max-width: 991px) {
-.toolbar.bottom .sort-by {display: none;}
-.col-left .block {margin-bottom:10px;}
-.discount-box .content .image {margin-bottom: 15px;}
 .quickview {display: none !important;}
+
+.discount-box .content .image {margin-bottom: 15px;}
 .products-grid {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-pack: start;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-wrap: wrap;flex-wrap: wrap;text-align: center}
 #footer .callbackForm .button {margin: 0;}
 #footer .fotter-bottom .copyright {text-align: center;margin-bottom: 15px;}

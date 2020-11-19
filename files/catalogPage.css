@@ -109,6 +109,8 @@
   .filters > .content {display: block!important;}
 }
 @media all and (max-width: 991px) {
+  .toolbar.bottom .sort-by {display: none;}
+  .col-left .block {margin-bottom:10px;}  
   .col-left .filters {padding-top: 0}
   .filters-price .layout-slider .input {max-width: 125px}
   .filters-price .layout-slider .price-separator {margin: 0 7px}

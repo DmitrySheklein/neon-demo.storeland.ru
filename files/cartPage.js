@@ -83,7 +83,7 @@ function startOrder() {
       OrderScripts();
       coupons();
       address();
-
+      hoverAnimBtn();      
       $('#closeOrder, #closeOrderTab').off('click').on('click', function () {
         // Если таб уже активен выходим
         if ($(this).hasClass('title-tab') && !$(this).hasClass('disabled')) {
@@ -153,6 +153,7 @@ function ajaxnewqty() {
           data: data,
           cache: false,
           success: function (d) {
+            $('.cartTable .cartTable-cart-count').html($(d).find('.cartTable .cartTable-cart-count').html());
             s.val($(d).find('tr[data-id="' + id + '"] .cartqty').val())
             $('tr[data-id="' + id + '"] .ajaxtotal').css('opacity', '1');
             $('.TotalSum').css('opacity', '1');
@@ -191,6 +192,7 @@ function ajaxdelete(s) {
       url: url,
       cache: false,
       success: function (d) {
+        $('.cartTable .cartTable-cart-count').html($(d).find('.cartTable .cartTable-cart-count').html());
         $('.cart-info').html($(d).find('.cart-info').html());
         hoverAnimBtn();
         ajaxnewqty();
@@ -281,7 +283,9 @@ function coupons() {
 
 // Регистрация и выбор доставки
 function OrderScripts() {
-  $(function () {
+  $(function () {    
+    $('#selectTime, .mainSelect, .paymentSelect').styler();
+
     // Форма регистрации нового пользователя, при оформлении заказа
     $('.OrderShowPass').on('click', function () {
       ChangePasswordFieldType(this, $('#contactPassWord'));
@@ -347,6 +351,7 @@ function OrderScripts() {
 
     // Выбор даты доставки
     // Документация к плагину //t1m0n.name/air-datepicker/docs/index-ru.html
+    var TIME_ZONE = 0; // Учёт временной зоны магазина: 0 - выключен, 1 - включен
     $("#deliveryConvenientDate").datepicker({
       // Если true, то при активации даты, календарь закроется.
       autoClose: true,
@@ -382,7 +387,7 @@ function OrderScripts() {
 
         $selectTime.removeAttr("disabled");
 
-        if (date == nowDate) {
+        if (date == nowDate && TIME_ZONE) {
           var $filterdOptions = $options.filter(function () {
             var value = $(this).val();
             var timeOption = parseInt(value.split('-'));
@@ -415,8 +420,8 @@ function OrderScripts() {
 // Скрипты для Быстрого заказа
 function quickOrderScripts() {
   $(function () {
-
     $(function () {
+      
       var ID = $('input[name="form[delivery][id]"]:checked').val();
 
       $('.quick_order_payment').hide();

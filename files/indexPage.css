@@ -73,6 +73,7 @@
   }
 }
 /* Табы товаров */
+#producttabs {margin-bottom: -10px;}
 #producttabs .products-container {display: none;width: 100%;}
 #producttabs .tab-content-actived {display: inline-block;}
 #producttabs .pdt-nav {display: flex;}
@@ -140,7 +141,7 @@
 }
 #news .block-news .post-content {position: relative;background-color: #fff;text-align: center;display: flex;flex-direction: column;z-index: 19;transition: .3s;}
 #news .block-news .item:hover .post-content {z-index: 21}
-#news .block-title {height: 50px;overflow: hidden;margin-bottom: 30px;}
+#news .block-title {margin-bottom: 30px;}
 #news .block-title .title {box-shadow: none}
 #news .block-news .title {min-height: auto;margin-bottom: 9px;border: 0}
 #news .block-news .post-content .title a {display: block;overflow: hidden;line-height: 20px;font-size: 16px;font-weight: 500;color: #2a3034;margin-bottom: 5px;height: 40px;}

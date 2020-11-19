@@ -196,10 +196,7 @@ $(function(){
 function mainFunctions() {
   $(function(){
     // Вызов функции редиректа при обратном звонке
-    $('#footer .callbackForm').submit(validCallBack);
-    $('#fancybox-callback .callbackForm').submit(validCallBackC);
-    $('#fancybox-feedback .feedbackForm-header').submit(validCallBackF);
-    // Возврашаем пользователя на страницу с которой был сделан обратный звонок
+    // Возвращаем пользователя на страницу с которой был сделан обратный звонок
     $('.callbackredirect').val(document.location.href);
       
     // Добавление товара в корзину
@@ -229,35 +226,33 @@ function mainFunctions() {
       }
     })
     // Раскрытие корзины на сайте
-    $(function () {
-      $(document).on('click', function (e) {
-        var $this  = $(e.target)
-        if(!$this.closest('.header-tools').length){
-           $('.header-tools, .header-toolsCol, .header-toolsLink').removeClass('_active')
-          }
-      })
-      $('.header-toolsLink').on('click', function(e){
-        if(getClientWidth() < 992){
-          return (true)
+    $(document).on('click', function (e) {
+      var $this  = $(e.target)
+      if(!$this.closest('.header-tools').length){
+          $('.header-tools, .header-toolsCol, .header-toolsLink').removeClass('_active')
         }
-        e.preventDefault();
-        if($(this).hasClass('_active')) {
-          $('.header .header-tools').removeClass('_active');
-          $(this).removeClass('_active')
-          return
-        }
-        $('.header .header-tools').addClass('_active')
-  
-        $('.header-tools').find('.header-toolsLink').removeClass('_active')
-        $(this).addClass('_active')
-  
-        $('.header-tools').find('.dropdown').removeClass('_active')
-        $(this).parent().find('.dropdown').addClass('_active')
-  
-        $('.header-tools').find('.header-toolsCol').removeClass('_active')
-        $(this).closest('.header-toolsCol').addClass('_active')
-      })
-    })  
+    })
+    $('.header-toolsLink').on('click', function(e){
+      if(getClientWidth() < 992){
+        return (true)
+      }
+      e.preventDefault();
+      if($(this).hasClass('_active')) {
+        $('.header .header-tools').removeClass('_active');
+        $(this).removeClass('_active')
+        return
+      }
+      $('.header .header-tools').addClass('_active')
+
+      $('.header-tools').find('.header-toolsLink').removeClass('_active')
+      $(this).addClass('_active')
+
+      $('.header-tools').find('.dropdown').removeClass('_active')
+      $(this).parent().find('.dropdown').addClass('_active')
+
+      $('.header-tools').find('.header-toolsCol').removeClass('_active')
+      $(this).closest('.header-toolsCol').addClass('_active')
+    })
   });
 
   tippy('.selectBox', {
@@ -269,13 +264,13 @@ function mainFunctions() {
       $link.removeAttr('title');
       $link.attr('data-title', titleName);
       instance.setContent($link.attr('data-title'))
-      console.log(titleName);
+      // console.log(titleName);
     }
   }); 
 
   $(function(){
   // Валидация формы на странице оформления заказа, а так же формы на страницы связи с администрацией
-  $("#myform, .feedbackForm, .clientForm, #quickform, .goodsDataOpinionAddForm, .callback-info .callbackForm").validate({
+  $("#myform, .feedbackForm, .clientForm, .goodsDataOpinionAddForm, .callbackForm").validate({
     rules: {
     reg_name: "required"
    }
@@ -749,7 +744,31 @@ function quickOrder(formSelector) {
     url		  : formBlock.attr('action'),
     data		: formData,
     success: function(data) {
-      $.fancybox.open(data)
+      $.fancybox.open(data, {
+        baseClass: "_quickOrder",
+        beforeShow(){
+          loadFile('cartPage', 'css');
+          loadFile('cartPage', 'js');
+        },
+        afterShow(){
+          var loaded = loadFile('cartPage', 'css') && loadFile('cartPage', 'js');
+          console.log(`loaded = ${loaded}`);
+          if(loaded) {
+            $(function(){ quickOrderScripts()});
+            $(function(){ OrderScripts()});
+            $(function(){ address()});
+            $('.zoneSelect select').off('change').on('change',function(){
+              optValue = $(this).find('option:selected').attr('value');
+              $('.zones input[value="'+optValue+'"]').click();
+              WithZone =  $('.deliveryZoneRadio:checked').attr('price');
+              $('.changeprice').text(WithZone); 
+            });
+            $(function () {
+              setTimeout(preloadHide, 500);
+            });            
+          }
+        }
+      })
     }
   });
   return false;
@@ -780,17 +799,26 @@ function quickViewShowMod(href, atempt) {
         autoSize: true,
         maxWidth: 500,
         baseClass: "_modification",
+        beforeShow: function(){
+          loadFile('goodsPage', 'css');
+          loadFile('goodsPage', 'js');
+        },
         afterShow: function() {
-          // Обновление доступности модификаций
-          // mainFunctions();
-          AddCart();
-          quantity();
-          hoverAnimBtn();
-          // Стилизация селектов
-          $('.fancybox-inner .product-view [name="form[properties][]"]').styler()
+          var isLoad = loadFile('goodsPage', 'css') && loadFile('goodsPage', 'js');
 
-          $('.fancybox-inner .product-view .product-shop').removeClass('col-lg-5 col-md-6');
-          $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-6');
+          if(isLoad){
+            // Обновление доступности модификаций
+            goodsMods();
+            goodsPage();
+            AddCart();
+            quantity();
+            hoverAnimBtn();
+            // Стилизация селектов
+            $('.fancybox-inner .product-view [name="form[properties][]"]').styler()
+  
+            $('.fancybox-inner .product-view .product-shop').removeClass('col-lg-5 col-md-6');
+            $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-6');
+          };
         }
       });
     });
@@ -1064,158 +1092,24 @@ $(function(){
 	});
 });
 
+// Загрузчик файлов 
+function loadFile(fileName, ext, cb){
+  if(!fileName){console.error('Не передано имя загружаемого файла');return;}
+  if(!ext){console.error('Не передано расширение загружаемого файла');return;}
+  if(!(typeof cb === 'function')){cb = function(){}};
 
-// Валидаторы для Имени и телефона
-function validName(){
-  var $input = $('#footer #callback_person');
-  var name = $input.val();
+  var $file = $('#' + fileName + '-' + ext);  
+  var attrName = (ext === 'css') ? 'href' : 'src';
   
-  if(name != ''){
-    $input.next('.name-error').remove();
-    $input.removeClass('input--error');
-    
-    return true;
-  }else{
-    $input.next('.name-error').remove();
-    $input.addClass('input--error');
-    $input.after('<div class="name-error">Вы не указали ваше Имя</div>');
-    
-    return false;
-  } 
-}
-function validPhone(){
-  var $input = $('#footer #callback_phone')
-  var tel = $input.val();
-  var check = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{5,10}$/.test(tel);
-  
-  if(check == true && check != ''){
-    $input.next('.phone-error').remove();
-    $input.removeClass('input--error');
-    
-    return true;
+  if(!$file.length){console.error('Файл не найден в разметке и не может быть загружен');return;}
+  // Если файл уже загружен
+  if($file.attr(attrName)){
+    cb();
+    console.log('Already loaded');
+    return (true);
   }
-  else{
-    $input.next('.phone-error').remove();
-    $input.addClass('input--error');
-    $input.after('<div class="phone-error">Вы ввели неверный номер телефона</div>');
-    
-    return false;
-  }
-}
-//Проверка телефона в обратном звонке.
-function validCallBack(){
-  var name = validName();
-  var phone = validPhone();
-  
-  return name && phone;
-}
-
-// Валидаторы для Имени и телефона
-function validNameC(){
-  var $input = $('#fancybox-callback #callback_person_header');
-  var name = $input.val();
-  
-  if(name != ''){
-    $input.next('.name-error').remove();
-    $input.removeClass('input--error');
-    
-    return true;
-  }else{
-    $input.next('.name-error').remove();
-    $input.addClass('input--error');
-    $input.after('<div class="name-error">Вы не указали ваше Имя</div>');
-    
-    return false;
-  } 
-}
-function validPhoneC(){
-  var $input = $('#fancybox-callback #callback_phone_header')
-  var tel = $input.val();
-  var check = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{5,10}$/.test(tel);
-  
-  if(check == true && check != ''){
-    $input.next('.phone-error').remove();
-    $input.removeClass('input--error');
-    
-    return true;
-  }
-  else{
-    $input.next('.phone-error').remove();
-    $input.addClass('input--error');
-    $input.after('<div class="phone-error">Вы ввели неверный номер телефона</div>');
-    
-    return false;
-  }
-}
-//Проверка телефона в обратном звонке.
-function validCallBackC(){
-  var name = validNameC();
-  var phone = validPhoneC();
-  
-  return name && phone;
-}
-
-// Валидаторы для Имени, Почты, Комментария
-function validNameF(){
-  var $input = $('#fancybox-feedback #feedback_name');
-  var name = $input.val();
-  
-  if(name != ''){
-    $input.next('.name-error').remove();
-    $input.removeClass('input--error');
-    
-    return true;
-  }else{
-    $input.next('.name-error').remove();
-    $input.addClass('input--error');
-    $input.after('<div class="name-error">Вы не указали ваше Имя</div>');
-    
-    return false;
-  } 
-}
-function validEmailF(){
-  var $input = $('#fancybox-feedback #feedback_email')
-  var email = $input.val();
-  var check = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i.test(email);
-  
-  if(check == true && check != ''){
-    $input.next('.phone-error').remove();
-    $input.removeClass('input--error');
-    
-    return true;
-  }
-  else{
-    $input.next('.phone-error').remove();
-    $input.addClass('input--error');
-    $input.after('<div class="phone-error">Вы ввели неверную почту</div>');
-    
-    return false;
-  }
-}
-function validCommentF(){
-  var $input = $('#fancybox-feedback #feedback_message');
-  var name = $input.val();
-  
-  if(name != ''){
-    $input.next('.name-error').remove();
-    $input.removeClass('input--error');
-    
-    return true;
-  }else{
-    $input.next('.name-error').remove();
-    $input.addClass('input--error');
-    $input.after('<div class="name-error">Вы не указали комментарий</div>');
-    
-    return false;
-  } 
-}
-//Проверка телефона в обратном звонке.
-function validCallBackF(){
-  var name = validNameF();
-  var email = validEmailF();
-  var comment = validCommentF();
-  
-  return name && email && comment;
+  $file.on('load', cb)
+  $file.attr(attrName, $file.data(attrName));
 }
 
 // Предзагрузчик

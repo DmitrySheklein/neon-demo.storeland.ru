@@ -19,12 +19,8 @@
     <table class="cartTable"> 
       <thead> 
         <tr>
-          <td colspan="5">
+          <td colspan="6" class="cartTable-cart-count">
             В корзине <span>{CART_COUNT_TOTAL}</span> товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}
-          </td>
-          <td class="cartTable-delete">
-            <!-- <input type="checkbox" id="cart-delete-checkbox" class="checkbox-hidden" name="pp-check" required="" aria-required="true"> -->
-            <!-- <label for="cart-delete-checkbox"  class="checkbox-name cart-delete-label" title="Удалить несколько"></label> -->
           </td>
         </tr> 
       </thead> 
@@ -75,7 +71,7 @@
         {% ENDFOR %}
         <tr class="total">
           <td class="hide" colspan="2"></td>
-          <td colspan="2">
+          <td colspan="2" class="disc-name">
             <span class="title">Сумма заказа</span>
           </td>
           <td colspan="2" class="text-right">
