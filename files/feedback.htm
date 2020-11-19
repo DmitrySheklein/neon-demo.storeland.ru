@@ -61,11 +61,17 @@
               </div>
               <div class="fields file">
                 <label>Прикрепить файл</label>
-                <label for="feedback_file" class="button _outline file-label-button"> Выберите файл </label>
-                <button id="clear-file" class="clear-file" type="button" style="display:none" title="Очистить"><i class="fal fa-times"></i></button>
-                <input style="display:none" id="feedback_file" type="file" name="form[assets_file]"  class="input">
+                <div class="file-inner">
+                  <label for="feedback_file" class="button _outline file-label-button"> Выберите файл </label>
+                  <button id="clear-file" class="clear-file" type="button" style="display:none" title="Очистить"><i class="fal fa-times"></i></button>
+                  <input style="display:none" id="feedback_file" type="file" name="form[assets_file]"  class="input">
+                </div>
               </div>
             </div>
+          </div>
+          <div class="buttons">
+            <button type="submit" title="Отправить" class="button"><span>Отправить</span></button>
+            <button type="reset" title="Сбросить" class="button _outline"><span>Сбросить</span></button>
           </div>
           <div class="pp">
             <input type="checkbox" id="pp-check" class="pp-checkbox checkbox-hidden" name="pp-check" required="" aria-required="true" checked>
@@ -73,8 +79,6 @@
             Я согласен на <a class="blue-link" href="#" data-fancybox data-src="#fancybox-pp">обработку персональных данных</a>
             </label>
           </div>
-          <button type="submit" title="Отправить" class="button"><span>Отправить</span></button>
-          <button type="reset" title="Сбросить" class="button _outline"><span>Сбросить</span></button>
         </form>
     </div>
     {% ENDIF %}    

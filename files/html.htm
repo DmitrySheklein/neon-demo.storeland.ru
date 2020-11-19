@@ -24,8 +24,16 @@
   {% ENDIF %}
  
   <!-- Стили магазина -->
-  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}forall.css?design=neon"/>
-  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}main.css?design=neon">
+<!--   {% IF user_agent_chrome %}
+    <link rel="preload" href="{ASSETS_STYLES_PATH}forall.css?design=neon" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{ASSETS_STYLES_PATH}forall.css?design=neon"></noscript>  
+    <link rel="preload" href="{ASSETS_STYLES_PATH}main.css?design=neon" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{ASSETS_STYLES_PATH}main.css?design=neon"></noscript>  
+  {% ELSE %} -->
+    <link rel="stylesheet" href="{ASSETS_STYLES_PATH}forall.css?design=neon"/>
+    <link rel="stylesheet" href="{ASSETS_STYLES_PATH}main.css?design=neon">
+  <!-- {% ENDIF %} -->
+
   <!-- Стили для главной -->
   {% IF index_page %}
   <link rel="stylesheet" href="{ASSETS_STYLES_PATH}indexPage.css?design=neon">   
@@ -121,32 +129,11 @@
                 <ul class="header-sectionsList">
                   {% FOR menu %}
                     {% FOR header %}
-                      {% FOR links %}
-                      
-                        {% IF menu.header.links.index < 6 %}
-                        <li class="header-sectionsItem  {% IF menu.header.links.SELECTED %}active{%ENDIF%}"><a class="header-sectionsLink" href="{menu.header.links.URL}"  {% IF menu.header.links.TITLE %}title="{menu.header.links.TITLE}"{% ENDIF %} itemprop="url"><span>{menu.header.links.NAME}</span></a></li>
-                        {% ENDIF %}
-                        
+                      {% FOR links %}                      
+                        <li class="header-sectionsItem  {% IF menu.header.links.SELECTED %}active{%ENDIF%}"><a class="header-sectionsLink" href="{menu.header.links.URL}"  {% IF menu.header.links.TITLE %}title="{menu.header.links.TITLE}"{% ENDIF %} itemprop="url"><span>{menu.header.links.NAME}</span></a></li>                        
                       {% ENDFOR %}
                     {% ENDFOR %}
                   {% ENDFOR %}
-                  
-                  
-                  <li class="header-sectionsItem" {% FOR menu %}{% FOR header %}{% FOR links %}{% IF menu.header.links.index = 6 %}style="display:block"{% ENDIF %}{% ENDFOR %}{% ENDFOR %}{% ENDFOR %}>
-                    <a class="header-sectionsLink" href="{menu.header.links.URL}">...</a>
-                    <ul class="" style="display:none">                    
-                    {% FOR menu %}
-                      {% FOR header %}
-                        {% FOR links %}
-                              {% IF menu.header.links.index >= 6 %}
-                              <!--<li>{menu.header.links.index}</li>-->
-                              <li class="header-sectionsIte  {% IF menu.header.links.SELECTED %}active{%ENDIF%}"><a class="header-sectionsLink" href="{menu.header.links.URL}"  {% IF menu.header.links.TITLE %}title="{menu.header.links.TITLE}"{% ENDIF %} itemprop="url"><span>{menu.header.links.NAME}</span></a></li>
-                              {% ENDIF %}     
-                        {% ENDFOR %}
-                      {% ENDFOR %}
-                    {% ENDFOR %}
-                  </ul>                    
-                  </li>
                 </ul>
             </div>
 
@@ -363,11 +350,11 @@
                         {ANTISPAM_CODE}
                         <div class="callback-input">
                           <label class="callback-label required" for="callback_person_header">Ваше имя <em>*</em></label>
-                          <input id="callback_person_header" class="input callback_person required" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="{FORM_CALLBACK_PERSON}"  maxlength="50" title="Представьтесь, пожалуйста" autocomplete="off">
+                          <input id="callback_person_header" class="input callback_person required" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="{FORM_CALLBACK_PERSON}"  maxlength="50" title="Представьтесь, пожалуйста" autocomplete="off" required>
                         </div>
                         <div class="callback-input">
                           <label class="callback-label required" for="callback_phone_header">Номер телефона <em>*</em></label>
-                          <input id="callback_phone_header" class="input callback_phone required" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}"  maxlength="50" title="Введите номер телефона" autocomplete="off">
+                          <input id="callback_phone_header" class="input callback_phone required" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}"  maxlength="50" title="Введите номер телефона" autocomplete="off" required>
                         </div>
                         <div class="callback-input" style="display:none">
                           <label class="callback-label" for="callback_comment_header">Комментарий</label>
@@ -2231,20 +2218,26 @@
   {% IF MOD_LNAME = feedback %}
   <link rel="stylesheet" href="{ASSETS_STYLES_PATH}feedbackPage.css?design=neon"> 
   {% ENDIF %}
+  <!-- Скрипты для страницы Сравнение -->
+  {% IF MOD_LNAME = compare %}
+  <script>
+  document.addEventListener("DOMContentLoaded", function(){
+    feedbackPage();
+  })    
+  </script>
+  {% ENDIF %}
   <!-- Стили для страницы Заказа по шагам -->
   {% IF MOD_LNAME = order %}
   <link rel="stylesheet" href="{ASSETS_STYLES_PATH}orderPage.css?design=neon"> 
   {% ENDIF %}
-  <!-- Скрипты для страницы Корзины -->
-  
+  <!-- Скрипты для страницы Корзины -->  
   <script id="cartPage-js" defer 
   {% IF MOD_LNAME = cart ||  MOD_LNAME = order %}
   src="{ASSETS_JS_PATH}cartPage.js?design=neon"
   {% ELSE %}
   data-src="{ASSETS_JS_PATH}cartPage.js?design=neon"
   {% ENDIF %}
-  ></script>
-  
+  ></script>  
   {% IF MOD_LNAME = cart ||  MOD_LNAME = order %}
   <script >
     // Запуск основных скриптов для страницы Сравнение

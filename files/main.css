@@ -964,7 +964,13 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 #footer .pp a:hover {color: #fff;}
 .feedbackForm .pp,
 .feedbackForm-header .pp{font-size: 10px;margin-bottom: 15px;text-align: center;}
-.feedbackForm .pp {text-align: left;}
+
+.feedbackForm .pp {text-align: left;margin-top: 10px;}
+.feedbackForm .form-list {margin-bottom: 15px;}
+.feedbackForm .form-list .fields {margin-bottom: 10px;max-width: 450px;}
+.feedbackForm .form-list .fields .input-box {position: relative;}
+.feedbackForm .form-list .fields:last-child {margin-bottom: 0;}
+.feedbackForm .form-list .fields > label {display: block;margin-bottom: 10px;text-align: left;}
 /* Перезвоните мне */
 .callbackForm .callback-input {margin-bottom: 15px;}
 .callbackForm .callback-input .callback-label {display:block;margin-bottom: 10px;cursor:pointer;}
@@ -1492,6 +1498,10 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .clientForm .form-list {
   margin-bottom: 15px;
 }
+.clientForm .form-list .fields {margin-bottom: 15px;max-width: 450px;}
+.clientForm .form-list .fields .input-box {position: relative;}
+.clientForm .form-list .fields:last-child {margin-bottom: 0;}
+.clientForm .form-list .fields > label {display: block;margin-bottom: 15px;text-align: left;}
 /*** Личный кабинет (Избранное) ***/
 .account.cart-info .buttons .button {margin-right: 11px;margin-bottom:5px;}
 

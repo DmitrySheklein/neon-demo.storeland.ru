@@ -253,7 +253,7 @@ function mainFunctions() {
       $('.header-tools').find('.header-toolsCol').removeClass('_active')
       $(this).closest('.header-toolsCol').addClass('_active')
     })
-  });
+
 
   tippy('.selectBox', {
     theme: 'material',
@@ -266,14 +266,15 @@ function mainFunctions() {
       instance.setContent($link.attr('data-title'))
       // console.log(titleName);
     }
-  }); 
-
-  $(function(){
+  });
+    
   // Валидация формы на странице оформления заказа, а так же формы на страницы связи с администрацией
-  $("#myform, .feedbackForm, .clientForm, .goodsDataOpinionAddForm, .callbackForm").validate({
-    rules: {
-    reg_name: "required"
-   }
+  $("#myform, .feedbackForm, .clientForm, .goodsDataOpinionAddForm, .callbackForm").each(function(){
+    $(this).validate({
+      rules: {
+        reg_name: "required"
+      }
+    })
   });
 
   // Отправка формы по Ctrl+Enter
@@ -1353,27 +1354,27 @@ $(function(){
   })
 })
 // Файл в форме контактов
-$(function(){
-  $('#feedback_file').on('change',function(e){
-    var $btn = $('.file .button');
-    var $clearBtn = $('#clear-file');
-    
-    if(e.target.files.length){
-      var fileName = e.target.files[0].name;
-      $btn.text(fileName);
-      $clearBtn.show()
-    } else {
-      $btn.text('Выберите файл');
-      $clearBtn.hide()
-    }
-  })
-  $('#clear-file').on('click', function(){
-    var $input = $('#feedback_file');
-    
-    if($input[0].files.length) {
-      $input.val(null)
-      $('.file .button').text('Выберите файл')
-      $(this).hide()
-    }
-  })
-})
+function feedbackPage(){
+    $('#feedback_file').on('change',function(e){
+      var $btn = $('.file .button');
+      var $clearBtn = $('#clear-file');
+      
+      if(e.target.files.length){
+        var fileName = e.target.files[0].name;
+        $btn.text(fileName);
+        $clearBtn.show()
+      } else {
+        $btn.text('Выберите файл');
+        $clearBtn.hide()
+      }
+    })
+    $('#clear-file').on('click', function(){
+      var $input = $('#feedback_file');
+      
+      if($input[0].files.length) {
+        $input.val(null)
+        $('.file .button').text('Выберите файл')
+        $(this).hide()
+      }
+    })
+}
