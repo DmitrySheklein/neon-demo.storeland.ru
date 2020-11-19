@@ -413,7 +413,7 @@
                         <li class="item">
                           <a data-href="{cart_items.ORDER_LINE_DELETE_URL}" data-count="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" class="remove item-remove" onclick="removeFromCart($(this))"></a>
                           <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="product-image">
-                            <img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon">
+                            <img class="lozad" data-src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon">
                           </a>
                           <div class="product-details">
                             <div class="product-name"><a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}">{cart_items.GOODS_NAME}</a></div>
@@ -461,7 +461,7 @@
                         <li class="item" {% IF compare_goods.index > 10 %}style="display:none;"{% ENDIF %} data-id="{compare_goods.ID}">
                           <a data-href="{COMPARE_DELETE_URL}?id={compare_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{compare_goods.MIN_PRICE_NOW_ID}" class="remove item-remove" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"></a>
                           <a href="{compare_goods.URL}" title="{compare_goods.NAME}" class="product-image">
-                            <img src="{% IF compare_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{compare_goods.IMAGE_ICON}{% ENDIF %}" alt="{compare_goods.NAME}" class="goods-image-icon">
+                            <img class="lozad" data-src="{% IF compare_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{compare_goods.IMAGE_ICON}{% ENDIF %}" alt="{compare_goods.NAME}" class="goods-image-icon">
                           </a>
                           <div class="product-details">
                             <p class="product-name"><a href="{compare_goods.URL}" title="{compare_goods.NAME}">{compare_goods.NAME}</a></p>
@@ -502,7 +502,7 @@
                         <li class="item" {% IF favorites_goods.index > 10 %}style="display:none;"{% ENDIF %} data-id="{favorites_goods.ID}">
                           <a data-href="{FAVORITES_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{favorites_goods.MIN_PRICE_NOW_ID}" class="remove item-remove" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"></a>
                           <a href="{favorites_goods.URL}" title="{favorites_goods.NAME}" class="product-image">
-                            <img src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" alt="{favorites_goods.NAME}" class="goods-image-icon">
+                            <img class="lozad" data-src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" alt="{favorites_goods.NAME}" class="goods-image-icon">
                           </a>
                           <div class="product-details">
                             <p class="product-name"><a href="{favorites_goods.URL}" title="{favorites_goods.NAME}">{favorites_goods.NAME}</a></p>
@@ -1656,7 +1656,7 @@
                       {% IF catalog_full.FIRST %}{% IFNOT catalog_full.LEVEL = 0 %}<ul class="sub">{% ENDIF %}{% ENDIF %}
                       <li {% IF catalog_full.HIDE %}style="display:none;"{% ENDIF %} class="{% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.LEVEL = 0 %}subhead{% ENDIF %} {% IF catalog_full.CURRENT || catalog_full.CURRENT_PARENT %}active{% ENDIF %}" title="{catalog_full.NAME}">
                         <a href="{catalog_full.URL}" {% IF catalog_full.CURRENT %}class="active"{% ENDIF %}>
-                          {% IF catalog_full.IMAGE_ICON %}<img src="{catalog_full.IMAGE_ICON}" class="goods-cat-image-icon"/>{% ENDIF %}{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="open-sub {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}active{% ENDIF %}"></span>{% ENDIF %}
+                          {% IF catalog_full.IMAGE_ICON %}<img class="lozad" data-src="{catalog_full.IMAGE_ICON}" class="goods-cat-image-icon"/>{% ENDIF %}{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="open-sub {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}active{% ENDIF %}"></span>{% ENDIF %}
                           {catalog_full.NAME}
                           {% IF catalog_full.GOODS_COUNT>0 %} <span class="count">{catalog_full.GOODS_COUNT}</span>{% ELSEIF catalog_full.BRANCH_GOODS_COUNT>0 %}<span class="count">{catalog_full.BRANCH_GOODS_COUNT}</span>{% ENDIF %}
                         </a>
@@ -2099,28 +2099,28 @@
               <div id="payment">                   
                   <a href="#" title="Подробнее о способах оплаты">
                     <div class="payment-ico sber">
-                      <img src="{ASSETS_IMAGES_PATH}sberbank.svg" alt="">
+                      <img class="lozad" data-src="{ASSETS_IMAGES_PATH}sberbank.svg" alt="">
                     </div>
                     <div class="payment-ico visa">
-                      <img src="{ASSETS_IMAGES_PATH}visa.svg" alt="">
+                      <img class="lozad" data-src="{ASSETS_IMAGES_PATH}visa.svg" alt="">
                     </div>
                     <div class="payment-ico mastercard">
-                        <img src="{ASSETS_IMAGES_PATH}mastercard.svg" alt="">
+                        <img class="lozad" data-src="{ASSETS_IMAGES_PATH}mastercard.svg" alt="">
                     </div>
                     <div class="payment-ico yandex">
-                      <img src="{ASSETS_IMAGES_PATH}yandex_dengi.svg" alt="">
+                      <img class="lozad" data-src="{ASSETS_IMAGES_PATH}yandex_dengi.svg" alt="">
                     </div>
                     <div class="payment-ico yandex">
-                      <img src="{ASSETS_IMAGES_PATH}yandexkassa.svg" alt="">
+                      <img class="lozad" data-src="{ASSETS_IMAGES_PATH}yandexkassa.svg" alt="">
                     </div>
                     <div class="payment-ico webmoney">
-                      <img src="{ASSETS_IMAGES_PATH}webmoney.svg" alt="">
+                      <img class="lozad" data-src="{ASSETS_IMAGES_PATH}webmoney.svg" alt="">
                     </div>
                     <div class="payment-ico walletone">
-                      <img src="{ASSETS_IMAGES_PATH}wallet.svg" alt="">
+                      <img class="lozad" data-src="{ASSETS_IMAGES_PATH}wallet.svg" alt="">
                     </div>
                     <div class="payment-ico qiwi">
-                      <img src="{ASSETS_IMAGES_PATH}qiwi.svg" alt="">
+                      <img class="lozad" data-src="{ASSETS_IMAGES_PATH}qiwi.svg" alt="">
                     </div>
                   </a>
               </div>             
