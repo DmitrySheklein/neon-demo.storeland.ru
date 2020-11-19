@@ -126,15 +126,18 @@
             <div class="header-top-wrapper">
               <!-- Меню -->
               <div class="header-sections _header-mobile" id="headerNav">
-                <ul class="header-sectionsList">
-                  {% FOR menu %}
-                    {% FOR header %}
-                      {% FOR links %}                      
-                        <li class="header-sectionsItem  {% IF menu.header.links.SELECTED %}active{%ENDIF%}"><a class="header-sectionsLink" href="{menu.header.links.URL}"  {% IF menu.header.links.TITLE %}title="{menu.header.links.TITLE}"{% ENDIF %} itemprop="url"><span>{menu.header.links.NAME}</span></a></li>                        
+                <nav class="mainnav" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                  <ul class="mainnav__list">
+                    {% FOR menu %}
+                      {% FOR header %}
+                        {% FOR links %}                      
+                          <li class="mainnav__item"><a class="mainnav__link {% IF menu.header.links.SELECTED %}active{%ENDIF%}" href="{menu.header.links.URL}"  {% IF menu.header.links.TITLE %}title="{menu.header.links.TITLE}"{% ENDIF %} itemprop="url"><span>{menu.header.links.NAME}</span></a></li>                        
+                        {% ENDFOR %}
                       {% ENDFOR %}
                     {% ENDFOR %}
-                  {% ENDFOR %}
-                </ul>
+                  </ul>
+                  <ul class="overflowMenu"></ul>
+                </nav>
             </div>
 
             <!-- Навигация -->

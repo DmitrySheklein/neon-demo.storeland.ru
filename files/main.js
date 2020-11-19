@@ -267,7 +267,7 @@ function mainFunctions() {
       // console.log(titleName);
     }
   });
-    
+
   // Валидация формы на странице оформления заказа, а так же формы на страницы связи с администрацией
   $("#myform, .feedbackForm, .clientForm, .goodsDataOpinionAddForm, .callbackForm").each(function(){
     $(this).validate({
@@ -1253,7 +1253,8 @@ $(function(){
   quantity();
   OpenMenu();  
   viewed();
-  quickViewMod()
+  quickViewMod();
+  mainnav();
 });
 
 // Запуск основных функций для разных разрешений экрана
@@ -1346,6 +1347,52 @@ $(function(){
   }
   }
 })*/
+// Дополнительные пункты меню в шапке Перенос пунктов меню
+function mainnav(){
+  var overMenuExist = $('.overflowMenu li').length;
+  if(overMenuExist){
+   $('.overflowMenu li').removeClass('mainnav__replaced');
+   $('.mainnav .mainnav__more').remove();
+   $('.overflowMenu li').each(function(){
+     $('.mainnav .mainnav__list').append($(this));
+   })
+  }
+  menuWidth = $('.mainnav').width();
+  menuCount = $('.mainnav .mainnav__list li').length + 1;
+  var nextCheck = 0;
+  var CurrentWidthCounter = 0;
+  for(var i=1; i < menuCount;  i++){
+    currentWidth = parseInt(Math.ceil($('.mainnav .mainnav__list li:nth-child('+i+')').width())) + 46;
+    nextCheck += currentWidth;
+    if(nextCheck > menuWidth){
+      var a = i;
+      for(a;a < menuCount;a++){
+        $('.mainnav .mainnav__list li:nth-child('+ a +')').addClass('mainnav__replaced');
+      }
+      $('.mainnav .mainnav__replaced').each(function(){
+        $('.overflowMenu').append($(this));
+      });
+      $('.mainnav .mainnav__list').append('<li class="mainnav__item mainnav__more"><a class="mainnav__link">Еще...</a></li>');
+      menuMorePosition = parseInt($('.mainnav__more').position().left);
+      $('.mainnav .mainnav__more').on('click',function(){
+        $('.overflowMenu').hasClass('active') ? $('.overflowMenu').removeClass('active') : $('.overflowMenu').addClass('active');
+        $('.mainnav .mainnav__list').hasClass('active') ? $('.mainnav .mainnav__list').removeClass('active') : $('.mainnav .mainnav__list').addClass('active');
+      });
+      $(function($){
+        $(document).mouseup(function (e){ 
+          var div = $(".overflowMenu.active"); 
+          var btn = $(".mainnav .mainnav__more");
+          if (!div.is(e.target) && div.has(e.target).length === 0 && !btn.is(e.target)) {
+            div.removeClass('active');
+            $('.mainnav .mainnav__list').removeClass('active');
+          }
+        });
+      });
+      return false;
+    }
+  }
+}
+
 // Поиск в шапке
 $(function(){
   $('.header-search .header-searchLink, .header-search .search-close, .header-search .search-overlay').on('click', function(e){

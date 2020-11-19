@@ -303,7 +303,7 @@ label.invalidInput {color: #E80636;font-size: 90%;}
   Анимация
 *******************************************************************************/
 a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages li span, .social-links a, .qty-set > a, .actions a, 
-.header .header-sectionsItem, .header-toolsIcon i, .product-tabs .tabs li
+.mainnav .mainnav__item, .header-toolsIcon i, .product-tabs .tabs li
 {-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-transition: all 0.3s ease;-ms-transition: all 0.3s ease;transition: all 0.3s ease;}
 
 
@@ -564,7 +564,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .header-contacts .header-phoneNum ~ .header-phoneNum {display: none}
 .header-contacts .header-phoneSub {margin-top: 3px;color: #b1bfc8}
 .header-contacts .header-phoneCallback {display: block;text-align: right;padding-left: 15px;font-size: 12px;color: #f4605d;}
-.header-contacts .header-phoneCallback:hover {}
+.header-contacts .header-phoneCallback:hover {color: #398f93}
 @media(min-width: 992px){
   .header-contacts .header-phoneNum {
     margin-bottom: 0;
@@ -849,21 +849,32 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   /* .header-subcatalog {width: 500%;} */
 }
 /* Пункты меню*/
-.header .header-sections {}
-.header .header-sectionsList {display: table;width: 100%;height: 100%;border-collapse: collapse;margin: 0;padding: 0;list-style: none}
-.header .header-sectionsItem {display: table-cell;vertical-align: middle;text-align: center;}
-/*.header .header-sectionsItem:nth-child(5) ~ .header-sectionsItem  {display:none;}*/
-.header .header-sectionsLink {padding: 0 15px;height: 100%;display: block;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;font-weight: normal;font-size: 15px; text-transform: none;transform: translateX(-15px);}
-.header .header-sectionsItem.active,.header .header-sectionsItem:hover {color:#f4605d;}
-.header .header-sectionsLink:before,.header-sectionsName {display: inline-block;vertical-align: middle}
+.mainnav {position: relative;}
+.mainnav .mainnav__list {display: flex;width: 560px;height: 45px;border-collapse: collapse;margin: 0;padding: 0;list-style: none}
+@media (min-width: 1200px) {
+  .mainnav .mainnav__list {width: 670px;}
+  /* .mainnav .mainnav__list {width: auto;} */
+}
+.mainnav .mainnav__item {text-align: center;padding: 0 15px;height: 100%;display: block;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;font-weight: normal;font-size: 15px; text-transform: none;}
+
+.mainnav .mainnav__item.active,.mainnav .mainnav__item:hover {color:#f4605d;}
+.mainnav .mainnav__item:before,.header-sectionsName {display: inline-block;vertical-align: middle}
+.mainnav .mainnav__link {white-space: nowrap;}
+.mainnav .overflowMenu {margin: 0;padding: 0;}
+@media (min-width: 992px){
+  .mainnav .mainnav__list > .mainnav__item  {transform: translateX(-15px);}
+  .mainnav .overflowMenu {display:none;position:absolute;top: 100%;right: 80px;padding: 3px 0;background:#fff;border: 1px solid #eeeeee;text-align: center;z-index:52;}
+  .mainnav .overflowMenu.active {display: block;}
+  .mainnav .overflowMenu li {padding: 12px 24px;}  
+}
 @media (max-width: 991px){
   .header .header-nav {display: none}
-  .header .header-sectionsList {display: block}
-  .header .header-sectionsItem {display: block;text-align: left;box-shadow: none!important;transition: background .3s ease}
-  .header .header-sectionsItem.active,.header .header-sectionsItem:hover {background: #f4605d}
-  .header .header-sectionsItem + .header-sectionsItem {border-top: 1px solid #4c4c4c}
-  .header .header-sectionsLink {line-height: 30px;color: #fff}
-  .header .header-sectionsLink:before {display: none}
+  .mainnav .mainnav__list {display: block;height: auto;}
+  .mainnav .mainnav__item {display: block;text-align: left;box-shadow: none!important;transition: background .3s ease}
+  .mainnav .mainnav__item.active,.mainnav .mainnav__item:hover {background: #f4605d}
+  .mainnav .mainnav__item + .mainnav__item {border-top: 1px solid #4c4c4c}
+  .mainnav .mainnav__item {line-height: 30px;color: #fff}
+  .mainnav .mainnav__item:before {display: none}
 }
 /* Всплывающие блоки моб версии */
 @media (max-width: 991px){
