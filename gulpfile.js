@@ -20,6 +20,7 @@ let paths = {
 	styles: {
 		src:  (preprocessorOn) ? baseDir + '/' + preprocessor + '/main.scss' : baseDir + '/main.css',				
 		dest: baseDir + '/',
+		all: baseDir + '/**.css'	
 	},
 
 	images: {
@@ -105,7 +106,9 @@ function scripts() {
 	.pipe(browserSync.stream())
 }
 
-function styles() {
+function styles(event = {}) {	
+	let {fileName} = event;
+
 	if(preprocessorOn){
 		return src(paths.styles.src)
 		.pipe(plumber())
@@ -117,9 +120,13 @@ function styles() {
 		// .pipe(wait(1500))
 		.pipe(browserSync.stream())
 	} else {
-		return src(paths.styles.src)
+		if(fileName){
+			return src(`${baseDir}/${fileName}`).pipe(browserSync.stream())
+		}else {
+			return src(paths.styles.all).pipe(browserSync.stream())
+		}
 		// .pipe(wait(WAIT_TIME))
-		.pipe(browserSync.stream())
+		// .pipe(browserSync.stream())
 	}
 }
 
@@ -200,7 +207,10 @@ function uploadFile(event, cb){
 					browserSync.reload()
 				}
 				if(cb){
-					cb()
+					cb({
+						fileName,
+						fileExt
+					})
 				}
 			} else if (json.status == `error`) {
 				console.log(`Ошибка отправки ⛔ ${fileName}`); 
