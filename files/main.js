@@ -1375,11 +1375,12 @@ function mainnav(){
       $('.mainnav .mainnav__list').append('<li class="mainnav__item mainnav__more"><a class="mainnav__link">Еще...</a></li>');
       menuMorePosition = parseInt($('.mainnav__more').position().left);
       $('.mainnav .mainnav__more').on('click',function(){
+        $(this).hasClass('active') ? $(this).removeClass('active') : $(this).addClass('active');
         $('.overflowMenu').hasClass('active') ? $('.overflowMenu').removeClass('active') : $('.overflowMenu').addClass('active');
         $('.mainnav .mainnav__list').hasClass('active') ? $('.mainnav .mainnav__list').removeClass('active') : $('.mainnav .mainnav__list').addClass('active');
       });
       $(function($){
-        $(document).mouseup(function (e){ 
+        $(document).on('mouseup', function (e){ 
           var div = $(".overflowMenu.active"); 
           var btn = $(".mainnav .mainnav__more");
           if (!div.is(e.target) && div.has(e.target).length === 0 && !btn.is(e.target)) {
@@ -1402,6 +1403,7 @@ $(function(){
 })
 // Файл в форме контактов
 function feedbackPage(){
+  $(function () {
     $('#feedback_file').on('change',function(e){
       var $btn = $('.file .button');
       var $clearBtn = $('#clear-file');
@@ -1423,5 +1425,6 @@ function feedbackPage(){
         $('.file .button').text('Выберите файл')
         $(this).hide()
       }
-    })
+    })    
+  })
 }
