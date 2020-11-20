@@ -27,8 +27,6 @@ github.com/t1m0n/air-datepicker
 .formfast .form-list .fields._comment {
   margin-bottom: 0;
 }
-/* .formfast .form-list .fields.small {display: inline-block;width: 150px;} */
-/* .formfast .form-list .fields.small.first {margin-right: 45px;} */
 .formfast .form-list .fields > label {
   display: block;
   margin-bottom: 8px;
@@ -60,8 +58,11 @@ github.com/t1m0n/air-datepicker
   flex-grow: 1;
 }
 
-.formfast .form-list .fields-row._address .fields._small:not(:last-child) {
+.formfast .form-list .fields-row._address .fields._small {
   margin-right: 14px;
+}
+.formfast .form-list .fields-row._address .fields._small:last-child {
+  margin-right: 0;
 }
 .fields-row._deliveryConvenient {
   justify-content: space-between;
@@ -71,6 +72,7 @@ github.com/t1m0n/air-datepicker
   width: calc(50% - 7px);
   margin: 0;
 }
+#deliveryConvenientDate {font-family: 'Arimo', sans-serif;}
 .formfast .contactWantRegister {margin-bottom: 10px;}
 .formfast .contactRegisterNeedElement {margin-top: 10px;}
 .formfast .input-box {position: relative;}
@@ -145,7 +147,7 @@ github.com/t1m0n/air-datepicker
 .coupons .couponBlockSale .couponNum {font-family: 'Arimo';font-weight: 700;}
 .coupons .couponBlocLabel {font-size: 12px}
 .coupons .couponBlockPrice .couponNum:after {content: "руб.";display: inline-block;margin-left: 5px;line-height: 1.1;font-weight: 600;font-size: 14px;}
-.coupons .coupon-btn {margin: 0;margin-left: 15px;}
+.coupons .coupon-btn {margin: 0;margin-left: 15px;flex-shrink: 0;}
 .coupons .coupon-btn._disabled {
   opacity: .3;
   pointer-events: none;
@@ -228,13 +230,12 @@ github.com/t1m0n/air-datepicker
   height: 16px;
   padding-left: 0;
 }
-/* .cartTable tbody tr.items:nth-child(2n) {background-color: #fafafa;} */
 .cartTable tbody tr .cart-name {text-align: left;padding: 20px;}
 .cartTable tbody tr td.image {text-align: center;border-right: 0;}
 .cartTable tbody tr td.name {text-align: left;border-left: 0;}
 .cartTable tbody tr td.name a {display: block;font-size: 16px;margin-bottom: 10px;max-height: 53px;overflow: hidden;    }
 .cartTable tbody tr td.name .art {margin-bottom: 5px;}
-.cartTable tbody tr .cart-qty .qty-wrap {display: inline-block;vertical-align: middle;}
+.cartTable tbody tr .cart-qty .qty-wrap {display: inline-block;vertical-align: middle;margin-right: 0;}
 .cartTable tbody tr .cart-qty-mesure {display: block;}
 .cartTable tfoot tr.discounttr td {padding: 15px;border-bottom: 1px solid #f2f2f2;}
 .cartTable tfoot tr.discounttr td.disc-name {border-left: 1px solid #f2f2f2;}
@@ -256,47 +257,63 @@ github.com/t1m0n/air-datepicker
 .cartTable .inputText:disabled {background-color: #ececec;cursor: not-allowed;}
 
 @media all and (max-width: 1199px) {
-    .formfast .form-list .fields.small.first {margin-right: 0;}
-    .cartTable tbody tr .cart-name .image {display: block;text-align: center;margin: 0 0 15px 0;}
-    .cartTable tbody tr .cart-name .name {width: 100%;}
+  .formfast .form-list .fields.small.first {margin-right: 0;}
+  .cartTable tbody tr .cart-name .image {display: block;text-align: center;margin: 0 0 15px 0;}
+  .cartTable tbody tr .cart-name .name {width: 100%;}
 }
 @media all and (max-width: 991px) {
-    .cartTable thead {display: none;}
-    .cartTable td.hide {display: none;}
-    .cartTable tbody tr td, .cartTable thead tr td {border-bottom: 0;padding: 0;}
-    .cartTable tbody tr {display: block;position: relative;width: 100%;margin-bottom: 20px;border-bottom: 1px solid #f2f2f2;}
-    .cartTable tbody tr:last-child {margin: 0;}
-    .cartTable tbody tr > td {display: inline-block;}
-    .cartTable tbody tr .cart-name {display: block;text-align: center;margin-bottom: 0px;}
-    .cartTable tbody tr td.image {display: block;text-align: center;border-right: 1px solid #f2f2f2;}
-    .cartTable tbody tr td.image img {margin: 10px;}
-    .cartTable tbody tr td.name {display: block;border-top: 0;border-left: 1px solid #f2f2f2;padding: 10px;}
-    .cartTable tbody tr td.name a {margin-bottom: 0px;}
-    .cartTable tbody tr td.name div {display: none;}
-    .cartTable tbody tr td.cart-price.hide {display: none;}
-    .cartTable tbody tr td.cart-price {display: block;position: relative;width: 100%;line-height: 38px;text-align: center;}
-    .cartTable tbody tr td.closetd {position: absolute;right: 0;bottom: 0;line-height: 37px;padding: 0 10px;border-top:none;}
-    .cartTable tbody tr td.cart-qty {position: absolute;left: 0;z-index: 1;}
-    .cartTable tbody tr td.cart-qty .input {border: 0;background-color: transparent;height: 39px;max-width: 70px;}
-    .cartTable tfoot tr {display: block;float: left;width: 100%;border-bottom: 1px solid #f2f2f2;}
-    .cartTable tfoot tr > td {float: left;}
-    .cartTable tfoot tr > td:last-child {float: right;}
-    .cartTable tfoot tr.actions {border-bottom: 0;}
-    .cartTable tfoot tr.actions td {display: block;width: 100%;}
-    .cartTable tfoot tr.discounttr td, .cartTable tfoot tr.total td {border-bottom: 0;}
-    .formfast-cart {display: none !important;}
-    #OrderAjaxBlock .formfast .buttons {width: 100%;}
+  .cartTable thead {display: none;}
+  .cartTable td.hide {display: none;}
+  .cartTable tbody tr td, .cartTable thead tr td {border-bottom: 0;padding: 0;}
+  .cartTable tbody tr {display: block;position: relative;width: 100%;margin-bottom: 20px;border-bottom: 1px solid #f2f2f2;}
+  .cartTable tbody tr:last-child {margin: 0;}
+  .cartTable tbody tr > td {display: inline-block;}
+  .cartTable tbody tr .cart-qty-mesure {display: none;}
+  .cartTable tbody tr .cart-name {display: block;text-align: center;margin-bottom: 0px;}
+  .cartTable tbody tr td.image {display: block;text-align: center;border-right: 1px solid #f2f2f2;}
+  .cartTable tbody tr td.image img {margin: 10px;}
+  .cartTable tbody tr td.name {display: block;border-top: 0;border-left: 1px solid #f2f2f2;padding: 10px;}
+  .cartTable tbody tr td.name a {margin-bottom: 0px;}
+  .cartTable tbody tr td.name div {display: none;}
+  .cartTable tbody tr td.cart-price.hide {display: none;}
+  .cartTable tbody tr td.cart-price {display: block;position: relative;width: 100%;line-height: 38px;text-align: center;}
+  .cartTable tbody tr td.closetd {position: absolute;right: 0;bottom: 0;line-height: 37px;padding: 0 10px;border-top:none;}
+  .cartTable tbody tr td.cart-qty {position: absolute;left: 0;z-index: 1;}
+  .cartTable tbody tr td.cart-qty .input {border: 0;background-color: transparent;height: 39px;max-width: 70px;}
+  .cartTable tbody tr td.cart-qty .qty-set > a {height: 39px;line-height: 39px;}
+  .cartTable tfoot tr {display: block;float: left;width: 100%;border-bottom: 1px solid #f2f2f2;}
+  .cartTable tfoot tr > td {float: left;}
+  .cartTable tfoot tr > td:last-child {float: right;}
+  .cartTable tfoot tr.actions {border-bottom: 0;}
+  .cartTable tfoot tr.actions td {display: block;width: 100%;}
+  .cartTable tfoot tr.discounttr td, .cartTable tfoot tr.total td {border-bottom: 0;}
+  .formfast-cart {padding: 0;}
+  #OrderAjaxBlock .formfast .buttons {width: 100%;}
+}
+@media all and (max-width: 767px) {
+  .formfast-col.delivery,
+  .formfast-col.payment {width: 100%;}
+  .formfast .form-list .fields-row._address {flex-wrap: wrap;}
+  .formfast .form-list .fields-row._address .fields._big {width: 100%;margin-right: 0;margin-bottom: 10px;}
+  .formfast .form-list .fields-row._address .fields._small {width: calc(33.3% - 14px);flex-grow: 0;}
 }
 @media all and (max-width: 641px) {
-    .delivery .orderStageDeliveryListTable .cell3 {min-width: auto;}
+  .delivery .orderStageDeliveryListTable .cell3 {min-width: auto;}
 }
 @media all and (max-width: 481px) {
-    .cartTable {table-layout: fixed;}
-    .cartTable tbody tr td.cart-qty .input {max-width: 40px;padding:5px;}
-    .cartTable tfoot tr.actions td {display: block;}
-    .cartTable tfoot tr.discounttr td.disc-name {max-width: 160px;}
-    .cartTable tfoot tr.actions .buttons .button {display: block;width: 100%;}
-    .cartTable tfoot tr.actions .buttons .button:first-child {margin-bottom: 10px;}
-    .cartTable .TotalSum .price {font-size: 16px;}
-    .formfast .form-list .fields.small.first {margin-right: 0px;}
+  .cartTable tbody tr .cart-qty .qty-wrap {border-radius: 0;}
+  .formfast .form-list .fields-row._address .fields._small {width: 100%;margin-right: 0;}
+  .formfast .fields.deliveryConvenientDate {margin-bottom: 10px;}
+  .formfast .fields.deliveryConvenientDate,
+  .formfast .fields.deliveryConvenientTime {
+    width: 100%;
+  }    
+  .cartTable {table-layout: fixed;}
+  .cartTable tbody tr td.cart-qty .input {max-width: 40px;padding:5px;}
+  .cartTable tfoot tr.actions td {display: block;}
+  .cartTable tfoot tr.discounttr td.disc-name {max-width: 160px;}
+  .cartTable tfoot tr.actions .buttons .button {display: block;width: 100%;}
+  .cartTable tfoot tr.actions .buttons .button:first-child {margin-bottom: 10px;}
+  .cartTable .TotalSum .price {font-size: 16px;}
+  .formfast .form-list .fields.small.first {margin-right: 0px;}
 }

@@ -62,6 +62,7 @@ function startOrder() {
     url: urlQuickForm,
     data: quickFormData,
     success: function (data) {
+      $('.wrapper').addClass('_cart-page');
       OrderAjaxBlock.html($(data).find('.quickformfast').wrap('<div></div>').html());
       $('.formfast').addClass('col-sm-12 col-md-8 col-xs-12');
       $('.formfast div.col').addClass('col-md-12 col-sm-12');
@@ -89,6 +90,7 @@ function startOrder() {
         if ($(this).hasClass('title-tab') && !$(this).hasClass('disabled')) {
           return;
         }
+        $('.wrapper').removeClass('_cart-page');
         //Скрываем блок оформления заказа
         ajaxLoaderQuickOrder.hide();
         OrderAjaxBlock.hide();

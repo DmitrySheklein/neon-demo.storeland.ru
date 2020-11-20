@@ -72,7 +72,7 @@
   {% ENDIF %}
 </head>
 <body>
-  <div class="wrapper {% IF index_page %}index{% ENDIF %} {% IF MOD_LNAME = cart %}_cart-page{% ENDIF %} nojs">
+  <div class="wrapper {% IF index_page %}index{% ENDIF %} nojs">
     <!-- Сообщение для инвалидов -->
     <noscript>
       <div class="noscript"> 
@@ -140,7 +140,6 @@
                       {% ENDFOR %}
                     {% ENDFOR %}
                   </ul>
-                  <ul class="overflowMenu"></ul>
                 </nav>
             </div>
 

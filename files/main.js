@@ -1369,10 +1369,11 @@ function mainnav(){
       for(a;a < menuCount;a++){
         $('.mainnav .mainnav__list li:nth-child('+ a +')').addClass('mainnav__replaced');
       }
+      $('.mainnav .mainnav__list').append('<li class="mainnav__item mainnav__more"><a class="mainnav__link">Еще...</a></li>');
+      $('.mainnav__more').append($('<ul>').addClass('overflowMenu'))
       $('.mainnav .mainnav__replaced').each(function(){
         $('.overflowMenu').append($(this));
       });
-      $('.mainnav .mainnav__list').append('<li class="mainnav__item mainnav__more"><a class="mainnav__link">Еще...</a></li>');
       menuMorePosition = parseInt($('.mainnav__more').position().left);
       $('.mainnav .mainnav__more').on('click',function(){
         $(this).hasClass('active') ? $(this).removeClass('active') : $(this).addClass('active');
@@ -1385,6 +1386,7 @@ function mainnav(){
           var btn = $(".mainnav .mainnav__more");
           if (!div.is(e.target) && div.has(e.target).length === 0 && !btn.is(e.target)) {
             div.removeClass('active');
+            btn.removeClass('active');
             $('.mainnav .mainnav__list').removeClass('active');
           }
         });

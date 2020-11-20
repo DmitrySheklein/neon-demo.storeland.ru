@@ -267,7 +267,7 @@
                   <!-- Если поле почтового индекса запрашивается -->
                   {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE < 3 %}
                     <div class="fields _small _third">
-                      <label for="quickDeliveryZipCode" {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}class="required"{% ENDIF %}>Почтовый индекс{% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}<em>*</em>{% ENDIF %}</label>
+                      <label for="quickDeliveryZipCode" {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}class="required"{% ENDIF %}>Индекс{% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}<em>*</em>{% ENDIF %}</label>
                       <div class="input-box">
                         <input type="text" id="quickDeliveryZipCode" name="form[delivery][zip_code]" value="{ORDER_FORM_DELIVERY_ZIP_CODE}" minlength="5" maxlength="6" class="input digits {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}required{% ENDIF %}" maxlength="255" />
                       </div>
@@ -363,7 +363,7 @@
         </div>
       </div>
     </form>
-    <div class="formfast-cart col-sm-6 col-md-4 col-xs-12" style="">
+    <div class="formfast-cart col-sm-12 col-md-4 col-xs-12" style="">
       <h3 class="title">
         <span>Ваш заказ</span>
         <a id="closeOrder" class="title-link pseudo-link" title="Отменить быстрое оформление заказа">Изменить</a>

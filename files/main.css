@@ -850,22 +850,26 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   /* .header-subcatalog {width: 500%;} */
 }
 /* Пункты меню*/
-.mainnav {position: relative;}
+.mainnav {position: relative;z-index: 1;}
 .mainnav .mainnav__list {display: flex;width: 560px;height: 45px;border-collapse: collapse;margin: 0;padding: 0;list-style: none}
+.mainnav .mainnav__list.active {overflow: visible;}
 @media (min-width: 1200px) {
   .mainnav .mainnav__list {width: 670px;overflow: hidden;}
   /* .mainnav .mainnav__list {width: auto;} */
 }
 .mainnav .mainnav__item {text-align: center;padding: 0 15px;height: 100%;display: block;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;font-weight: normal;font-size: 15px; text-transform: none;}
 
-.mainnav .mainnav__item.active,.mainnav .mainnav__item:hover {color:#f4605d;}
+.mainnav .mainnav__item.active > .mainnav__link,.mainnav .mainnav__item:hover > .mainnav__link{color:#f4605d;}
+.mainnav .mainnav__item.mainnav__more.active > .mainnav__link {color: #2e2e2e;}
 .mainnav .mainnav__item:before,.header-sectionsName {display: inline-block;vertical-align: middle}
 .mainnav .mainnav__link {white-space: nowrap;}
 .mainnav .overflowMenu {margin: 0;padding: 0;}
+.mainnav__item.mainnav__more {position: relative;}
+.mainnav .mainnav__item.mainnav__more .mainnav__link {position: relative;z-index: 5;}
 @media (min-width: 992px){
   .mainnav__more.active {position: relative;z-index: 3;}
   .mainnav .mainnav__list > .mainnav__item  {transform: translateX(-15px);}
-  .mainnav .overflowMenu {display:none;position:absolute;top: 100%;right: 0px;padding: 0;opacity: 0;visibility: hidden;background:#fff;text-align: center;z-index:2;transition: all .15s ease-in-out;}
+  .mainnav .overflowMenu {display:none;position:absolute;top: 100%;left: 0px;padding: 0;opacity: 0;visibility: hidden;background:#fff;text-align: center;z-index:2;transition: all .15s ease-in-out;}
   .mainnav .overflowMenu:before {
     content: '';
     display: block;
