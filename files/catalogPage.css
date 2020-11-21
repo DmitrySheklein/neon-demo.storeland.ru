@@ -7,7 +7,7 @@
 .col-left .block > .title {margin: 13px 0 10px;font-size: 19px;font-weight: 700;line-height: 1.2;}
 .col-left .block > .title a:hover {color: #398f93;}
 @media all and (max-width:991px){
-  .col-left .page-sidebar {padding-bottom: 0;border-right: 0;}
+  .col-left .page-sidebar {padding-bottom: 0;border-right: 0;margin-bottom: 15px;}
 }
 /*** Правая часть ***/
 .page-content.no-padding {padding: 0;}
@@ -201,9 +201,11 @@
 @media all and (max-width: 641px) {
     .sort-by label, .show-by label {display: none;}
 }
-@media all and (max-width: 481px) {
-    .sort-by {display: block;width: 100%;margin-bottom: 10px;}
-    .sort-by select {width: 100%;max-width: 100%;}
-    .toolbar .compare, .show-by label {display: inline-block;}
+@media all and (max-width: 550px) {
+  .sort-by {display: block;width: 100%;margin-bottom: 10px;}
+  .sort-by .jq-selectbox {width: 100%;}
+  .show-by {margin-left: 0;}
+}
+@media all and (max-width: 481px) {    
     .toolbar.bottom .pages {-webkit-box-ordinal-group: 2;-ms-flex-order: 1;order: 1;margin: auto;margin-top: 10px;padding: 0;}    
 }

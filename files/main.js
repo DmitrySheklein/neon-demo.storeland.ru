@@ -305,7 +305,7 @@ function viewed(){
     responsiveClass: true,
     responsiveRefreshRate: 100,
     responsive: {
-      0:{items:1},
+      0:{items:1,margin: 5},
       320:{items:1,margin: 5},
       480:{items:2,margin: 10},
       1200:{items:5,margin: 10}
@@ -1322,31 +1322,6 @@ $(function(){
   // banner();
 })
 
-/*$(function(){
-  menuWidth = $('.main_menu .mainnav').width() - 50;
-  menuCount = $('.main_menu .mainnav li').length;
-  console.log('menuWidth ' + menuWidth);
-  console.log('MenuCount ' + menuCount);
-  var WidthCounter = 0;
-  for(var i=1; i < menuCount;  i++){
-  currentWidth = parseInt($('.main_menu .mainnav li:nth-child('+i+')').width());
-  WidthCounter += currentWidth;
-  if(WidthCounter > menuWidth){
-    a = i - 1;
-    for(a;a < menuCount;a++){
-      $('.main_menu .mainnav li:nth-child('+a+')').addClass('need-replace');
-    }
-    $('.need-replace').each(function(){
-      $('.overflowMenu').append($(this));
-    })
-    $('.main_menu .mainnav').append('<li class="menu_more">Еще...</li>');
-    $('.menu_more').on('click',function(){
-         $('.overflowMenu').toggleClass('active', $('.overflowMenu').hasClass('active'))
-      })
-    return false;
-  }
-  }
-})*/
 // Дополнительные пункты меню в шапке Перенос пунктов меню
 function mainnav(){
   var overMenuExist = $('.overflowMenu li').length;
@@ -1395,7 +1370,6 @@ function mainnav(){
     }
   }
 }
-
 // Поиск в шапке
 $(function(){
   $('.header-search .header-searchLink, .header-search .search-close, .header-search .search-overlay').on('click', function(e){

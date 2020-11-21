@@ -393,7 +393,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 }
 .section .section-title {
     display: inline-block;
-    margin-right: 40px;
+    margin-right: 0px;
     font-size: 24px;
     color: #2e2e2e;
     line-height: 30px;
@@ -405,6 +405,10 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   padding: 0 15px;
   line-height: 27px;
   font-size: 14px;
+  margin-left: 40px;
+}
+@media (max-width: 481px) {
+  .section .section-title {font-size: 20px;}
 }
 /* Шапка */
 .header {position: relative;z-index: 22}
@@ -419,16 +423,15 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 }
 @media (min-width:992px) {
   .header .header-top-wrapper {display: -webkit-box;display: -ms-flexbox;display: flex}
-  .header .header-nav {margin-left: auto;}
+  .header .header-nav {margin-left: auto;display: flex;}
   .header .header-navLink {position: relative}
-  .header .header-navItem {display: inline-block;vertical-align: middle;}
   .header .header-navItem [class^=fa] {
     font-size: 17px;
     vertical-align: middle;
     color: #f4605d;
     margin-right: 9px;
-  }
-  .header .header-navLink,.header-subnavLink {display: block;padding: 0 15px;line-height: 45px;}
+  }  
+  .header .header-navLink,.header-subnavLink {display: block;padding: 0 7.5px;line-height: 45px;}
 }
 /** ЛК **/
 .header .header-login {text-align: right;}
@@ -436,7 +439,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .header .header-login.isLogin .header-loginMenu:hover .pseudo-link:after {display: none}
 .header-loginFlyout {text-align: left}
 .header-loginArrow {-webkit-transition: -webkit-transform .15s ease-in-out;transition: -webkit-transform .15s ease-in-out;transition: transform .15s ease-in-out;transition: transform .15s ease-in-out,-webkit-transform .15s ease-in-out}
-.header .header-login .header-loginLink {display: inline-block;vertical-align: middle;line-height: 45px;padding: 0 15px;}
+.header .header-login .header-loginLink {display: inline-block;vertical-align: middle;line-height: 45px;padding: 0 7.5px;}
 .header .header-login .header-loginLink .fal {color: #f4605d;margin-right: 5px;}
 .header .header-login .header-loginLink:hover {background: #f4f5f7;color:#f4605d;}
 .header .header-login.isLogin .header-loginLink {display: block}
@@ -622,11 +625,20 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 @media(max-width: 991px){
   .header .header-tools {
     top: auto;
-    bottom: 0;
+    bottom: 0px;
     left: 0;
     right: 0;
     flex-direction: row;
     margin-top: 0;
+  }
+  .header .header-tools:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #424f60;
   }
   .header-toolsCol {
     border: none;
@@ -851,11 +863,10 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 }
 /* Пункты меню*/
 .mainnav {position: relative;z-index: 1;}
-.mainnav .mainnav__list {display: flex;width: 560px;height: 45px;border-collapse: collapse;margin: 0;padding: 0;list-style: none}
+.mainnav .mainnav__list {display: flex;width: 315px;height: 45px;overflow: hidden;margin: 0;padding: 0;list-style: none}
 .mainnav .mainnav__list.active {overflow: visible;}
 @media (min-width: 1200px) {
-  .mainnav .mainnav__list {width: 670px;overflow: hidden;}
-  /* .mainnav .mainnav__list {width: auto;} */
+  .mainnav .mainnav__list {width: 670px;}
 }
 .mainnav .mainnav__item {text-align: center;padding: 0 15px;height: 100%;display: block;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;font-weight: normal;font-size: 15px; text-transform: none;}
 
@@ -869,7 +880,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 @media (min-width: 992px){
   .mainnav__more.active {position: relative;z-index: 3;}
   .mainnav .mainnav__list > .mainnav__item  {transform: translateX(-15px);}
-  .mainnav .overflowMenu {display:none;position:absolute;top: 100%;left: 0px;padding: 0;opacity: 0;visibility: hidden;background:#fff;text-align: center;z-index:2;transition: all .15s ease-in-out;}
+  .mainnav .overflowMenu {display:none;position:absolute;top: 100%;left: -50%;padding: 0;opacity: 0;visibility: hidden;background:#fff;text-align: center;z-index:2;transition: all .15s ease-in-out;}
   .mainnav .overflowMenu:before {
     content: '';
     display: block;
@@ -1064,6 +1075,8 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 #page-title {text-align: left;margin-bottom: 25px;}
 #page-title.index-catalog {padding: 15px 15px 0;}
 #page-title .block-title h1.title {font-size: 24px;word-break: break-word;font-weight: 700;}
+@media all and (max-width: 641px) {  #page-title .block-title h1.title {font-size: 22px;}}
+@media all and (max-width: 481px) {  #page-title .block-title h1.title {font-size: 20px;}}
 #page-title .block-title h5.result {display: none;color: #fff;font-family: 'PT Sans Narrow', sans-serif;font-weight: 600;letter-spacing: 0.025em;}
 .block-title {position:relative;}
 .block-title h2.title {margin: 0;margin-bottom: 20px;font-weight: bold;text-align: left;padding: 0;font-size: 24px;text-transform: none;}
@@ -1368,8 +1381,9 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 /*** Категории ***/
 .toolbar + .categories {padding-top: 0px;margin-bottom: 10px;}
 .categories {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;text-align: center}
-.categories .item {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;position: relative;text-align: center;width: calc(20% - 10px);margin-right: 10px;padding: 30px 10px;background: #fff;transition: box-shadow,border-color .3s;transition: box-shadow,border-color .3s;/* box-shadow: 0 5px 40px rgba(61,77,95,.25); */border-radius: 5px;border: 1px solid #f0f0f0;}
-.categories .item:nth-child(5) ~ .item {display: none;}
+.categories .item {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;position: relative;text-align: center;width: calc(20% - 10px);margin-right: 10px;margin-bottom: 10px;padding: 30px 10px;background: #fff;transition: box-shadow,border-color .3s;transition: box-shadow,border-color .3s;border-radius: 5px;border: 1px solid #f0f0f0;}
+.categories .item {width: calc(20% - 10px);}
+.index.categories .item:nth-child(5) ~ .item {display: none;}
 .categories .item .item-inner {
   z-index: 19;
   transition: .3s;
@@ -1409,7 +1423,15 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .categories .item .cat-name {display: -webkit-box;display: -ms-flexbox;display: flex;margin: 0;padding: 0;background: 0 0;text-align: center;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;z-index: 19;}
 .categories .item .cat-name a {display: block;margin: auto;overflow: hidden;font-size: 16px;font-weight: bold;}
 .categories .item:hover .cat-name a {color: #398f93}
-
+@media (max-width: 1200px) {
+  .categories .item {width: calc(25% - 10px);}
+}
+@media (max-width: 767px) {
+  .categories .item {width: calc(33.3% - 10px);}
+}
+@media (max-width: 481px) {
+  .categories .item {width: calc(100%);}
+}
 /** Вы смотрели **/
 .col-left .block#viewed .content {overflow: visible;padding-top: 10px;}
 /** Меню **/
@@ -1621,7 +1643,6 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 
 @media all and (max-width: 641px) {
   .scroll {overflow-x: scroll;}
-  #page-title .block-title h1.title {font-size: 28px;}
 }
 
 @media all and (max-width: 481px) {
@@ -1630,7 +1651,6 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
   .col-contact {margin-bottom: 20px;}
   .header .header-logo {padding: 0 10px;}
   .related .block-title h2.title {font-size: 16px;line-height: 27px}
-  #page-title .block-title h1.title {font-size: 26px;}
   #breadcrumbs li:last-child {padding-right: 20px}
   #footer .callbackForm .button {margin: 0 auto 10px}
 }
