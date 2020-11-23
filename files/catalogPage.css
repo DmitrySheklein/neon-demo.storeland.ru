@@ -44,7 +44,7 @@
 .toolbar.bottom .sort-by {display: none}
 .toolbar .OrderFilterForm {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: justify;-ms-flex-pack: justify;justify-content: space-between}
 .view-mode {float: right;margin-left: 30px;}
-.view-mode .view-mode-btn {display: block;float: left;width: 35px;line-height: 35px;cursor: default;text-align: center;font-size: 14px;border-radius: 2px;background: #f3f3f5;}
+.view-mode .view-mode-btn {display: block;float: left;width: 35px;line-height: 35px;cursor: default;text-align: center;font-size: 14px;border-radius: 5px;background: #f3f3f5;}
 .view-mode a.view-mode-btn {cursor: pointer;}
 .view-mode .view-mode-btn:last-child {margin-left: 10px;}
 .view-mode .view-mode-btn.active {color: #fff;background-color: #f65e64;}
@@ -58,7 +58,7 @@
 /** Навигация **/
 .pages {float: right;margin: 0;padding: 0;list-style: none;list-style-position: inside;}
 .pages ol {display: block;margin: 0;padding: 0;font-size: 0;}
-.pages li {display: inline-block;vertical-align:middle;width: 35px;height: 35px;cursor: default;text-align: center;background-color: #f3f3f5;border-radius: 2px;}
+.pages li {display: inline-block;vertical-align:middle;width: 35px;height: 35px; margin-bottom: 5px;cursor: default;text-align: center;background-color: #f3f3f5;border-radius: 5px;}
 .pages li:not(:last-child) {margin-right: 10px}
 .pages li.current {background-color: #f65e64;}
 .pages li:not(.current):hover {background-color: #f6f8fa;}
@@ -93,7 +93,7 @@
 #goods-filter-price-slider.noUi-horizontal .noUi-handle {background: #ffffff;top: -10px;width: 20px;height: 20px;cursor: pointer;outline: 0;border: 2px solid#398f93;box-shadow: none;border-radius: 5px;}
 #goods-filter-price-slider .noUi-handle:after, .noUi-handle:before {content: none;}
 #goods-filter-price-slider .noUi-connect {background:#398f93;}
-#goods-filter-price-slider.noUi-horizontal .noUi-handle.noUi-handle-lower {right: -0px;}
+#goods-filter-price-slider.noUi-horizontal .noUi-handle.noUi-handle-lower {right: -20px;}
 #goods-filter-price-slider.noUi-horizontal .noUi-handle.noUi-handle-upper {right: 0;}
 
 .filters-price .layout-slider {text-align: center;margin: 0 auto 10px;max-width: 300px;}
@@ -114,7 +114,7 @@
   .col-left .filters {padding-top: 0}
   .filters-price .layout-slider .input {max-width: 125px}
   .filters-price .layout-slider .price-separator {margin: 0 7px}
-  .col-left .filters > .title {color: #fff;background-color:#398f93;padding: 6px 20px;cursor: pointer}
+  .col-left .filters > .title {color: #fff;background-color:#398f93;padding: 6px 20px;border-radius: 5px;;cursor: pointer}
   .col-left .filters > .title .fal {display: inline-block;vertical-align: middle}
   .col-left .page-sidebar .filters .content {width: 80%;position: fixed;right: -100%;top: 0;height: 100%;z-index: 50;background: #fff;padding: 15px;-webkit-transition: right .3s cubic-bezier(0,1,.63,1);transition: right .3s cubic-bezier(0,1,.63,1)}
   #filters-form {overflow-x: auto;height: 100%;padding-right: 10px;padding-left: 10px;padding-bottom: 36px}
@@ -204,8 +204,8 @@
 @media all and (max-width: 550px) {
   .sort-by {display: block;width: 100%;margin-bottom: 10px;}
   .sort-by .jq-selectbox {width: 100%;}
-  .show-by {margin-left: 0;}
+  .toolbar._top .show-by {margin-left: 0;}
 }
 @media all and (max-width: 481px) {    
-    .toolbar.bottom .pages {-webkit-box-ordinal-group: 2;-ms-flex-order: 1;order: 1;margin: auto;margin-top: 10px;padding: 0;}    
+    .toolbar.bottom .pages {-webkit-box-ordinal-group: 2;-ms-flex-order: 1;order: 1;margin: auto;margin-top: 0px;padding: 0;}    
 }

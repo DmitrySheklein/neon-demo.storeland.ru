@@ -1168,12 +1168,15 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 }
 @media all and (max-width: 1199px) {
   .index .products-grid .item {width: calc(33.3% - 10px);}
+  .products-grid .item {width: calc(33.3% - 10px);}
 }
 @media all and (max-width: 767px) {
   .index .products-grid .item {width: calc(50% - 10px);}
+  .products-grid .item {width: calc(50% - 10px);}
 }
 @media all and (max-width: 576px) {
   .index .products-grid .item {width: 100%;}
+  .products-grid .item {width: 100%;}
 }
 .products-grid .goodsListForm {display:flex;flex-direction: column;height: 100%;}
 .products-grid.owl-carousel .item .item-inner {width: 100%;}
