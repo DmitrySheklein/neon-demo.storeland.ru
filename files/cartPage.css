@@ -128,6 +128,7 @@ github.com/t1m0n/air-datepicker
 .delivery .orderStageDeliveryListTable .cell1 {background: #f5f5f5;padding: 0 5px;text-align: center !important;}
 .delivery .orderStageDeliveryListTable .cell3 {min-width: 160px;}
 .delivery .orderStageDeliveryListTable input {cursor: pointer;vertical-align: middle;margin: 0;}
+.delivery .mainSelect {font-size: 16px;}
 .orderStageDeliveryZonePrice, .orderStageDeliveryDefaultPrice {margin-left: 10px;font-size: 18px;font-weight: bold;}
 .payment .orderStagePayment {float:left;position: relative;width:100%;margin:0 0 15px 0;}
 .payment .orderStagePayment:last-child {margin: 0;}
@@ -135,6 +136,7 @@ github.com/t1m0n/air-datepicker
 .payment .orderStagePayment .cell1 input {margin: 0;vertical-align: middle;}
 .payment .orderStagePayment .cell1 label.invalidInput {position: absolute;bottom: -15px;}
 .payment .orderStagePayment .cell2 {float: left;width: 90%;}
+.payment .paymentSelect {font-size: 16px;}
 .coupons .couponBlock {padding: 10px;}
 .coupons .couponBlockCoupon {display: flex;align-items: center;}
 .coupons .couponBlock label {display: block;margin-right: 15px;font-weight: normal;text-align: left;}

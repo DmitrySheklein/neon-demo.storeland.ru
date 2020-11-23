@@ -188,3 +188,8 @@
   #news .nav-splitter {display: none;}
   #news .tabs-headerList-wrap::after {display: none;}
 }
+@media (max-width: 481px) {
+  #news .tabs-headerList .tabs-headerItem .tabs-headerLink {
+    font-size: 18px;
+  }
+}
