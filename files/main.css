@@ -388,6 +388,8 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 #main._index {margin-bottom: 0px;}
 .section {padding-top: 30px;padding-bottom: 30px;}
 .section-top-block {
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
 }
 .section .section-title {
@@ -398,13 +400,14 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
     line-height: 30px;
     font-weight: 700;
 }
-.section .section-link {
+.section .section-link {  
+  width: 120px;
   display: inline-block;
   vertical-align: top;
-  padding: 0 15px;
   line-height: 27px;
   font-size: 14px;
-  margin-left: 40px;
+  margin-left: 1%;
+  padding: 0;
 }
 @media (max-width: 481px) {
   .section .section-title {font-size: 20px;}
@@ -864,8 +867,11 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .mainnav {position: relative;z-index: 1;}
 .mainnav .mainnav__list {display: flex;width: 315px;height: 45px;overflow: hidden;margin: 0;padding: 0;list-style: none}
 .mainnav .mainnav__list.active {overflow: visible;}
-@media (min-width: 1200px) {
+@media (min-width: 1300px) {
   .mainnav .mainnav__list {width: 670px;}
+}
+@media (min-width: 1200px) {
+  .mainnav .mainnav__list {width: 570px;}
 }
 .mainnav .mainnav__item {text-align: center;padding: 0 15px;height: 100%;display: block;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;font-weight: normal;font-size: 15px; text-transform: none;}
 
@@ -898,11 +904,13 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 }
 @media (max-width: 991px){
   .header .header-nav {display: none}
-  .mainnav .mainnav__list {display: block;height: auto;}
+  .mainnav .mainnav__list {display: block;height: auto;width: auto;}
+  .mainnav__item.mainnav__more {padding: 0;}
+  .mainnav__item.mainnav__more > .mainnav__link {display: none;}
   .mainnav .mainnav__item {display: block;text-align: left;box-shadow: none!important;transition: background .3s ease}
   .mainnav .mainnav__item.active,.mainnav .mainnav__item:hover {background: #f4605d}
   .mainnav .mainnav__item + .mainnav__item {border-top: 1px solid #4c4c4c}
-  .mainnav .mainnav__item {line-height: 30px;color: #fff}
+  .mainnav .mainnav__item {line-height: 35px;color: #fff}
   .mainnav .mainnav__item:before {display: none}
 }
 /* Всплывающие блоки моб версии */
@@ -1175,8 +1183,8 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   .products-grid .item {width: calc(50% - 10px);}
 }
 @media all and (max-width: 576px) {
-  .index .products-grid .item {width: 100%;}
-  .products-grid .item {width: 100%;}
+  .index .products-grid .item {width: calc(50% - 10px);}
+  .products-grid .item {width: calc(50% - 10px);padding: 5px;}
 }
 
 .index .products-grid .item:nth-child(10) ~ .item {display: none;}
@@ -1202,6 +1210,12 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   border-radius: 25px;
   margin: 0;
   transition: all .3s;
+}
+@media(max-width: 481px){
+  .products-grid .item .product-image .product-img {
+    height: 162px;
+    line-height: 162px;
+  }
 }
 .products-grid .item .ico-new ~ .ratings {
   top: 25px;
@@ -1303,6 +1317,9 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .product-shop .actions .quickviewmod span {color: #fff;    transition: all .5s ease-in-out;}
 .product-shop .actions .quickviewmod:hover span {color: #398f93}
 .product-shop .actions .quickviewmod .fal.fa-shopping-cart {display: none;}
+@media(max-width: 481px){
+  .product-shop .actions .quickviewmod {max-width: 100%;}
+}
 .product-shop .actions .add-cart .fal {vertical-align: middle;margin-right: 5px;font-size: 16px;}
 .product-shop .actions .add-cart .fal.fa-spinner {margin-right: 0;}
 .product-shop .actions .add-cart .fal.fa-shopping-cart {display: none;}
@@ -1654,6 +1671,15 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
   .related .block-title h2.title {font-size: 16px;line-height: 27px}
   #breadcrumbs li:last-child {padding-right: 20px}
   #footer .callbackForm .button {margin: 0 auto 10px}
+  .products-grid .item .product-shop .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }  
+  .products-grid .item .product-shop .qty-wrap {
+    margin: 0;
+    margin: auto;
+    margin-bottom: 5px;
+  }
 }
 
 /******************************************************************************
