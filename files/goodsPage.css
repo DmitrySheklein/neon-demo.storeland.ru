@@ -207,6 +207,12 @@
   .goodsDataOpinionFormReset {background: transparent;text-decoration: underline;width: 150px;text-align: left;padding-left: 0;border: 0;outline: 0;cursor: pointer;}
   .goodsDataOpinionFormReset:hover {color: #398f93;}
 
+/* С этим товаром смотрят, Сопутствующие товары */
+.related {padding-top: 40px;}
+.related .owl-stage {display: flex;}
+.related .owl-item {
+  flex: 1 0 auto;
+}
   @media all and (max-width: 1199px) {
     .thumblist {max-width: 330px;}
     .product-view .product-shop .custom-block .item {text-align: center;padding: 0;}
