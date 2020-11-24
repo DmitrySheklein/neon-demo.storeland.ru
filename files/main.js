@@ -206,6 +206,9 @@ function mainFunctions() {
       $btn.find('span').html('<i class="fal fa-spinner fa-spin"></i>')
   
       var form = $(this).closest('form');
+      if ($(this).hasClass('_cart-page')) {
+        form.attr('rel', 'cartPage')
+      }      
       if ($(this).hasClass('quick')) {
         form.attr('rel', 'quick');
       } else {
@@ -393,6 +396,7 @@ function AddCart() {
           var msg = $(data).find('.notify').html();
           var type = $(data).find('.notify').hasClass('good') ? 'success' : 'error'
           var iconTemplate = ('success' == type) ? '<i class="fal fa-check"></i>' : '<i class="fal fa-times"></i>';
+
           if('success' == type){$.fancybox.close();};
           // Если есть функция, которая отображает сообщения пользователю
           if(typeof(Noty) == "function") {
@@ -409,7 +413,11 @@ function AddCart() {
               }              
             }).show();
           }
-          $btn.removeClass('_added').find('span').html('Купить')
+          $btn.removeClass('_added').find('span').html('Купить');
+
+          if(formBlock.attr('rel') === 'cartPage' && type === 'success'){
+            document.location.href = '/cart'
+          }          
 
           // Обновляем данные корзины
           $('.header .cart .count').html($(data).filter('#newCartCount').html());
@@ -816,8 +824,11 @@ function quickViewShowMod(href, atempt) {
             quantity();
             hoverAnimBtn();
             // Стилизация селектов
-            $('.fancybox-inner .product-view [name="form[properties][]"]').styler()
-  
+            $('.fancybox-inner .product-view [name="form[properties][]"]').styler();
+
+            if($('.wrapper').hasClass('_cart-page')){
+              $('.fancybox-inner .add-cart.button').addClass('_cart-page');
+            }
             $('.fancybox-inner .product-view .product-shop').removeClass('col-lg-5 col-md-6');
             $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-6');
           };

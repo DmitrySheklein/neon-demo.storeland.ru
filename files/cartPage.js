@@ -62,7 +62,7 @@ function startOrder() {
     url: urlQuickForm,
     data: quickFormData,
     success: function (data) {
-      $('.wrapper').addClass('_cart-page');
+      $('.wrapper').addClass('_overflow');
       OrderAjaxBlock.html($(data).find('.quickformfast').wrap('<div></div>').html());
       $('.formfast').addClass('col-sm-12 col-md-8 col-xs-12');
       $('.formfast div.col').addClass('col-md-12 col-sm-12');
@@ -90,7 +90,7 @@ function startOrder() {
         if ($(this).hasClass('title-tab') && !$(this).hasClass('disabled')) {
           return;
         }
-        $('.wrapper').removeClass('_cart-page');
+        $('.wrapper').removeClass('_overflow');
         //Скрываем блок оформления заказа
         ajaxLoaderQuickOrder.hide();
         OrderAjaxBlock.hide();
@@ -729,3 +729,63 @@ function quickOrderScripts() {
 
 
 }
+
+$(function(){
+  // С этим товаром покупаюты
+  $(".сart-related .products-grid").owlCarousel({
+    margin: 10,
+    loop: false,
+    rewind: true,
+    lazyLoad: true,
+    nav: false,
+    dots: false,
+    autoplay: false,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    navContainer: '.сart-related .navigation',
+    navText: [, ],
+    navText: ["<i class='slideshow-nav fal fa-angle-left' aria-hidden='true'></i>", "<i class='slideshow-nav fal fa-angle-right' aria-hidden='true'></i>"],
+    smartSpeed: 500,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    responsiveClass: true,
+    responsiveRefreshRate: 100,
+    responsive: {
+      0: {
+        items: 1
+      },
+      320: {
+        items: 1
+      },
+      480: {
+        items: 1
+      },
+      540: {
+        items: 2
+      },
+      768: {
+        items: 3
+      },
+      992: {
+        items: 3
+      },
+      1200: {
+        items: 5
+      }
+    },
+    onInitialized: changeNavBtn
+  });
+
+  function changeNavBtn(event) {
+    var items = event.item.count;
+    var size = event.page.size;
+    var $nav = $(event.target).prev('.block-title').find('.navigation');
+
+    if (items > size) {
+      $nav.show();
+    } else {
+      $nav.hide();
+    }
+  }   
+})

@@ -3,7 +3,7 @@ body {position: relative;font-family: 'Open Sans', sans-serif;font-size: 15px;li
 
 *, *:before, *:after {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
 .wrapper {overflow: hidden;}
-.wrapper._cart-page {overflow: initial;}
+.wrapper._overflow {overflow: initial;}
 
 .clear {clear:both;}
 .clearfix:before, .clearfix:after {content: " ";display: table;}
@@ -1321,7 +1321,7 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 #viewed .title {font-size: 24px;font-weight: bold;margin-bottom: 15px;}
 #viewed .product .title {padding: 15px;background: #fafafa;}
 @media(max-width: 991px){
-  #viewed .owl-stage-outer {overflow: visible;}
+  /* #viewed .owl-stage-outer {overflow: visible;} */
 }
 #viewed .viewed-items .owl-stage {
     display: -webkit-box;
@@ -1364,9 +1364,6 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
   overflow: hidden;
 }
 .nojs #viewed .content .viewed-items .item {width: 20%;flex-shrink: 0;}
-/* С этим товаром смотрят, Сопутствующие товары */
-.related {padding-top: 40px;}
-.related .owl-stage {display: flex;}
 
 /*** Категории на главной ***/
 .nojs #categories-index .item {width: calc(20% - 10px);}
