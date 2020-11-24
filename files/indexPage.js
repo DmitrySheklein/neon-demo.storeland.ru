@@ -110,7 +110,25 @@ function indexPage() {
           $element.find('.nav-splitter').css({'left': navPosition + 'px', 'width': navWidth})
         });
       $element.find('.nav-splitter').css('width', itemNav.first().outerWidth())
-    })('#producttabs');  
+    })('#producttabs');
+    //Функция показать больше 
+    $('.products-button-load').on('click', function () {
+      var $btn = $(this);
+
+      if($btn.hasClass('_loaded')){
+        $btn.closest('.products-container').find('.products-grid .item').filter('._visible').removeClass('_visible').hide();
+        $btn
+          .removeClass('_loaded')
+          .find('span')
+          .text('Показать все')
+      }else{ 
+        $btn.closest('.products-container').find('.products-grid .item').not(':visible').addClass('_visible').show();
+        $btn
+          .addClass('_loaded')
+          .find('span')    
+          .text('Скрыть')
+      }
+    })
     // Установшка ширины .nav-splitter при загрузке
     $('#news .tabs-headerList').find('.nav-splitter').css('width', $('#news .tabs-headerList .tabs-headerItem').first().outerWidth())
     // Клик по табам в блоке новости
