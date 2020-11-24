@@ -810,7 +810,7 @@ function quickViewShowMod(href, atempt) {
 
           if(isLoad){
             // Обновление доступности модификаций
-            goodsMods();
+            goodsMods($('.fancybox-content.product-view'));
             goodsPage();
             AddCart();
             quantity();

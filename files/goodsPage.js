@@ -73,109 +73,6 @@ function goodsPage() {
     return false;
   });
 
-  // С этим товаром смотрят
-  $(".related-views .products-grid").owlCarousel({
-    margin: 10,
-    loop: false,
-    rewind: true,
-    lazyLoad: true,
-    nav: false,
-    dots: false,
-    autoplay: false,
-    autoplayTimeout: 3000,
-    autoplayHoverPause: true,
-    navContainer: '.related-views .navigation',
-    navText: [, ],
-    navText: ["<i class='slideshow-nav fal fa-angle-left' aria-hidden='true'></i>", "<i class='slideshow-nav fal fa-angle-right' aria-hidden='true'></i>"],
-    smartSpeed: 500,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    responsiveClass: true,
-    responsiveRefreshRate: 100,
-    responsive: {
-      0: {
-        items: 1
-      },
-      320: {
-        items: 1
-      },
-      480: {
-        items: 1
-      },
-      540: {
-        items: 2
-      },
-      768: {
-        items: 3
-      },
-      992: {
-        items: 3
-      },
-      1200: {
-        items: 5
-      }
-    },
-    onInitialized: changeNavBtn
-  });
-  // Сопутствующие товары
-  $(".related-goods .products-grid").owlCarousel({
-    margin: 10,
-    loop: false,
-    rewind: true,
-    lazyLoad: true,
-    nav: false,
-    dots: false,
-    autoplay: false,
-    autoplayTimeout: 3000,
-    autoplayHoverPause: true,
-    navContainer: '.related-goods .navigation',
-    navText: [, ],
-    navText: ["<i class='slideshow-nav fal fa-angle-left' aria-hidden='true'></i>", "<i class='slideshow-nav fal fa-angle-right' aria-hidden='true'></i>"],
-    smartSpeed: 500,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    responsiveClass: true,
-    responsiveRefreshRate: 100,
-    responsive: {
-      0: {
-        items: 1
-      },
-      320: {
-        items: 1
-      },
-      480: {
-        items: 1
-      },
-      540: {
-        items: 2
-      },
-      768: {
-        items: 3
-      },
-      992: {
-        items: 3
-      },
-      1200: {
-        items: 5
-      }
-    },
-    onInitialized: changeNavBtn
-  });
-
-  function changeNavBtn(event) {
-    var items = event.item.count;
-    var size = event.page.size;
-    var $nav = $(event.target).prev('.block-title').find('.navigation');
-
-    if (items > size) {
-      $nav.show();
-    } else {
-      $nav.hide();
-    }
-  }
-
 }
 
 // Скрипты для изображения товара
@@ -345,7 +242,7 @@ function tabSwitch(nb, noScroll) {
   }
 }
 
-function goodsMods() {
+function goodsMods($container) {
   // Функция собирает свойства в строку, для определения модификации товара
   function getSlugFromGoodsDataFormModificationsProperties(obj) {
     var properties = new Array();
@@ -357,11 +254,12 @@ function goodsMods() {
     }).join('_');
   }
 
+  var $parentBlock = $container || $('.page-content .product-view')
   var
     // Запоминаем поля выбора свойств, для ускорения работы со значениями свойств
-    goodsDataProperties = $('form.goodsDataForm select[name="form[properties][]"]'),
+    goodsDataProperties = $parentBlock.find('form.goodsDataForm select[name="form[properties][]"]'),
     // Запоминаем блоки с информацией по модификациям, для ускорения работы
-    goodsDataModifications = $('div.goodsDataMainModificationsList');
+    goodsDataModifications = $parentBlock.find('div.goodsDataMainModificationsList');
 
   // Обновляет возможность выбора свойств модификации, для отключения возможности выбора по характеристикам модификации которой не существует.
   function updateVisibility(y) {
@@ -403,7 +301,7 @@ function goodsMods() {
   goodsDataProperties.each(function () {
     $(this).on('change', function () {
       var slug = getSlugFromGoodsDataFormModificationsProperties(goodsDataProperties),
-        modificationBlock = $('.goodsDataMainModificationsList[rel="' + slug + '"]'),
+        modificationBlock = $parentBlock.find('.goodsDataMainModificationsList[rel="' + slug + '"]'),
         modificationId = parseInt(modificationBlock.find('[name="id"]').val()),
         modificationArtNumber = modificationBlock.find('[name="art_number"]').val(),
         modificationPriceNow = parseInt(modificationBlock.find('[name="price_now"]').val()),
@@ -417,20 +315,20 @@ function goodsMods() {
         modificationMeasureDesc = modificationBlock.find('[name="measure_desc"]').val(),
         modificationMeasurePrecision = modificationBlock.find('[name="measure_precision"]').val(),
         modificationIsHasInCompareList = modificationBlock.find('[name="is_has_in_compare_list"]').val(),
-        goodsModificationId = $('.goodsDataMainModificationId'),
-        goodsPriceNow = $('.goodsDataMainModificationPriceNow'),
-        goodsPriceOld = $('.goodsDataMainModificationPriceOld'),
-        goodsAvailable = $('.goodsDataMainModificationAvailable'),
+        goodsModificationId = $parentBlock.find('.goodsDataMainModificationId'),
+        goodsPriceNow = $parentBlock.find('.goodsDataMainModificationPriceNow'),
+        goodsPriceOld = $parentBlock.find('.goodsDataMainModificationPriceOld'),
+        goodsAvailable = $parentBlock.find('.goodsDataMainModificationAvailable'),
         goodsAvailableTrue = goodsAvailable.find('.available-true'),
         goodsAvailableFalse = goodsAvailable.find('.available-false'),
-        goodsAvailableAddCart = $('.add-to-form .add-to-cart'),
-        goodsAvailableQty = $('.add-to-form .wrap-qty'),
-        goodsArtNumberBlock = $('.goodsDataMainModificationArtNumber'),
+        goodsAvailableAddCart = $parentBlock.find('.add-to-form .add-to-cart'),
+        goodsAvailableQty = $parentBlock.find('.add-to-form .wrap-qty'),
+        goodsArtNumberBlock = $parentBlock.find('.goodsDataMainModificationArtNumber'),
         goodsArtNumber = goodsArtNumberBlock.find('span'),
-        goodsCompareAddButton = $('.goodsDataCompareButton.add'),
-        goodsCompareDeleteButton = $('.goodsDataCompareButton.delete'),
-        goodsModDescriptionBlock = $('.goodsDataMainModificationsDescriptionBlock'),
-        goodsModEmpty = $('.goodsDataMainModificationEmpty');
+        goodsCompareAddButton = $parentBlock.find('.goodsDataCompareButton.add'),
+        goodsCompareDeleteButton = $parentBlock.find('.goodsDataCompareButton.delete'),
+        goodsModDescriptionBlock = $parentBlock.find('.goodsDataMainModificationsDescriptionBlock'),
+        goodsModEmpty = $parentBlock.find('.goodsDataMainModificationEmpty');
 
       // Изменяем данные товара для выбранных параметров. Если нашлась выбранная модификация
       if (modificationBlock.length) {
@@ -490,4 +388,108 @@ function goodsMods() {
       }
     });
   });
+}
+function goodsRelated() {
+  // С этим товаром смотрят
+  $(".related-views .products-grid").owlCarousel({
+    margin: 10,
+    loop: false,
+    rewind: true,
+    lazyLoad: true,
+    nav: false,
+    dots: false,
+    autoplay: false,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    navContainer: '.related-views .navigation',
+    navText: [, ],
+    navText: ["<i class='slideshow-nav fal fa-angle-left' aria-hidden='true'></i>", "<i class='slideshow-nav fal fa-angle-right' aria-hidden='true'></i>"],
+    smartSpeed: 500,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    responsiveClass: true,
+    responsiveRefreshRate: 100,
+    responsive: {
+      0: {
+        items: 1
+      },
+      320: {
+        items: 1
+      },
+      480: {
+        items: 1
+      },
+      540: {
+        items: 2
+      },
+      768: {
+        items: 3
+      },
+      992: {
+        items: 3
+      },
+      1200: {
+        items: 5
+      }
+    },
+    onInitialized: changeNavBtn
+  });
+  // Сопутствующие товары
+  $(".related-goods .products-grid").owlCarousel({
+    margin: 10,
+    loop: false,
+    rewind: true,
+    lazyLoad: true,
+    nav: false,
+    dots: false,
+    autoplay: false,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    navContainer: '.related-goods .navigation',
+    navText: [, ],
+    navText: ["<i class='slideshow-nav fal fa-angle-left' aria-hidden='true'></i>", "<i class='slideshow-nav fal fa-angle-right' aria-hidden='true'></i>"],
+    smartSpeed: 500,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    responsiveClass: true,
+    responsiveRefreshRate: 100,
+    responsive: {
+      0: {
+        items: 1
+      },
+      320: {
+        items: 1
+      },
+      480: {
+        items: 1
+      },
+      540: {
+        items: 2
+      },
+      768: {
+        items: 3
+      },
+      992: {
+        items: 3
+      },
+      1200: {
+        items: 5
+      }
+    },
+    onInitialized: changeNavBtn
+  });
+
+  function changeNavBtn(event) {
+    var items = event.item.count;
+    var size = event.page.size;
+    var $nav = $(event.target).prev('.block-title').find('.navigation');
+
+    if (items > size) {
+      $nav.show();
+    } else {
+      $nav.hide();
+    }
+  }  
 }
