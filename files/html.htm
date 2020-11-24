@@ -2247,10 +2247,10 @@
   ></script>  
   {% IF MOD_LNAME = cart ||  MOD_LNAME = order %}
   <script >
-    // Запуск основных скриптов для страницы Сравнение
+    // Запуск основных скриптов для страницы Корзины
     document.addEventListener("DOMContentLoaded", function(){
       ajaxnewqty();
-      ajaxnewqty()
+      cartItemsDelete();
     })
   </script>  
   {% ENDIF %}

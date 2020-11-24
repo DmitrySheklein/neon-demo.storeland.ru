@@ -231,14 +231,39 @@ github.com/t1m0n/air-datepicker
   width: 16px;
   height: 16px;
   padding-left: 0;
+  font-size: 0;
+}
+.cartTable-delete .cart-delete-btn {
+  display: block;
+  margin: auto;
+  margin-top: 3px;
+  line-height: 13px;
+  width: 15px;
+  padding: 0px;
+}
+.cart-item-delete-label {
+  display: inline-block;
+  vertical-align: top;
+  width: 16px;
+  height: 16px;
+  padding-left: 0;
+  font-size: 0;
+}
+.cart-item-delete-wrap {
+  width: 25px;
+  display: inline-block;
+  vertical-align: middle;
 }
 .cartTable tbody tr .cart-name {text-align: left;padding: 20px;}
 .cartTable tbody tr td.image {text-align: center;border-right: 0;}
 .cartTable tbody tr td.name {text-align: left;border-left: 0;}
-.cartTable tbody tr td.name a {display: block;font-size: 16px;margin-bottom: 10px;max-height: 53px;overflow: hidden;    }
+.cartTable tbody tr td.name a {display: block;font-size: 16px;margin-bottom: 10px;max-height: 53px;overflow: hidden;}
+.cartTable tbody tr td.name a:hover {color: #f4605d;}
 .cartTable tbody tr td.name .art {margin-bottom: 5px;}
 .cartTable tbody tr .cart-qty .qty-wrap {display: inline-block;vertical-align: middle;margin-right: 0;}
 .cartTable tbody tr .cart-qty-mesure {display: block;}
+.cartTable tbody tr td.closetd {padding: 0;}
+.cartTable tbody tr .cartTable-remove-item {padding: 8px;}
 .cartTable tfoot tr.discounttr td {padding: 15px;border-bottom: 1px solid #f2f2f2;}
 .cartTable tfoot tr.discounttr td.disc-name {border-left: 1px solid #f2f2f2;}
 .cartTable tfoot tr.discounttr td.disc-name + td {border-right: 1px solid #f2f2f2;}
@@ -263,7 +288,7 @@ github.com/t1m0n/air-datepicker
   .cartTable tbody tr .cart-name .image {display: block;text-align: center;margin: 0 0 15px 0;}
   .cartTable tbody tr .cart-name .name {width: 100%;}
 }
-@media all and (max-width: 991px) {
+@media all and (max-width: 991px) {  
   .cartTable thead {display: none;}
   .cartTable td.hide {display: none;}
   .cartTable tbody tr td, .cartTable thead tr td {border-bottom: 0;padding: 0;}
@@ -272,17 +297,18 @@ github.com/t1m0n/air-datepicker
   .cartTable tbody tr > td {display: inline-block;}
   .cartTable tbody tr .cart-qty-mesure {display: none;}
   .cartTable tbody tr .cart-name {display: block;text-align: center;margin-bottom: 0px;}
-  .cartTable tbody tr td.image {display: block;text-align: center;border-right: 1px solid #f2f2f2;}
+  .cartTable tbody tr td.image {display: block;text-align: center;border-right: 0;border-left: 0;}
   .cartTable tbody tr td.image img {margin: 10px;}
-  .cartTable tbody tr td.name {display: block;border-top: 0;border-left: 1px solid #f2f2f2;padding: 10px;}
+  .cartTable tbody tr td.name {display: block;border-top: 0;padding: 10px;border-right: 0;border-left: 0;}
   .cartTable tbody tr td.name a {margin-bottom: 0px;}
   .cartTable tbody tr td.name div {display: none;}
   .cartTable tbody tr td.cart-price.hide {display: none;}
-  .cartTable tbody tr td.cart-price {display: block;position: relative;width: 100%;line-height: 38px;text-align: center;}
-  .cartTable tbody tr td.closetd {position: absolute;right: 0;bottom: 0;line-height: 37px;padding: 0 10px;border-top:none;}
+  .cartTable tbody tr td.cart-price {display: block;position: relative;width: 100%;line-height: 38px;text-align: center;border-right: 0;border-left: 0;}
+  .cartTable tbody tr td.closetd {position: absolute;right: 0;bottom: 0;line-height: 23px;padding: 0 10px;border-top:none;border-right: 0;}
   .cartTable tbody tr td.cart-qty {position: absolute;left: 0;z-index: 1;}
   .cartTable tbody tr td.cart-qty .input {border: 0;background-color: transparent;height: 39px;max-width: 70px;}
   .cartTable tbody tr td.cart-qty .qty-set > a {height: 39px;line-height: 39px;}
+  .cartTable tbody tr td.cart-qty .qty-wrap {border-radius: 0;}
   .cartTable tfoot tr {display: block;float: left;width: 100%;border-bottom: 1px solid #f2f2f2;}
   .cartTable tfoot tr > td {float: left;}
   .cartTable tfoot tr > td:last-child {float: right;}

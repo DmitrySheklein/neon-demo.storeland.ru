@@ -184,22 +184,26 @@ function ajaxnewqty() {
   )
 }
 
+$('.cartTable-remove-item').on('click', ajaxdelete);
 // Удаление товара из корзины
 function ajaxdelete(event) {
-  event.preventDefault();
   if (confirm('Вы точно хотите удалить товар из корзины?')) {
-    var closeimg = event.target;
-    s.closest('tr').fadeOut();
-    url = closeimg.data('href');
+    var $link = $(event.target);
+    $link.closest('tr').fadeOut();
+    var url = $link.attr('href');
+    console.log($link, $link.closest('tr'));
+
     $.ajax({
       url: url,
       cache: false,
       success: function (d) {
         $('.cartTable .cartTable-cart-count').html($(d).find('.cartTable .cartTable-cart-count').html());
         $('.cart-info').html($(d).find('.cart-info').html());
+        $('.cartTable-remove-item').on('click', ajaxdelete);
         hoverAnimBtn();
         ajaxnewqty();
-        $('.cartqty').first().trigger('change');
+        cartItemsDelete();
+        quantity();
         $('#startOrder').on('click', function () {
           startOrder();
           return false;
@@ -210,9 +214,68 @@ function ajaxdelete(event) {
         }
       }
     })
-  } else {
-    return false;
   }
+  return false;
+}
+// Удаление нескольких товаров
+function cartItemsDelete() {
+  $('.cart-delete-btn').on('click', function () {
+    var deletedItemsArray = $('.cartTable .items').filter('._deleted').map(function () {return $(this).data('id');}).toArray()
+    if(!deletedItemsArray.length) {console.log('Нет товаров для удаления'); return false;};
+
+    $.post("/cart/delete/", { 'id[]': deletedItemsArray, 'ajax_q': '1'}, 
+      function(data) {
+        var msgType = ('ok' == data.status) ? 'success' : 'error';
+        var message = data.message;
+
+        // Если есть функция, которая отображает сообщения пользователю
+        if(typeof(Noty) == "function") {
+          new Noty({
+            text: '<div class="noty__content">'+ '<div class="noty__content-text">' + message + '</div>' +'</div>',
+            type: msgType,
+            layout: "bottomRight",
+            timeout: "2000",
+            animation: {
+                open: 'animated fadeInRight', 
+                close: 'animated fadeOutRight',
+                easing: 'swing',
+                speed: 500                  
+            },
+            callbacks: {
+              onShow: function () {
+                if('ok' == data.status){
+                  setTimeout(function () {
+                    document.location.href = '/cart';                  
+                  }, 1000);                  
+                }
+              }
+            }         
+          }).show();               
+        }
+    }, "json");
+  })  
+  $('#cart-delete-checkbox').on('change', function () {
+    var isChecked = $(this).is(':checked');
+    $('.cartTable-remove-item').toggle();
+    $('.cart-delete-btn').toggle();
+    $('.cart-item-delete-wrap').toggle();
+  
+    if(!isChecked){
+      $('.cartTable .items').removeClass('_deleted');
+      $('.cart-item-delete-checkbox').prop('checked', false)
+    }  
+  })
+  $('.cart-item-delete-checkbox').on('change', function () {
+    $(this).closest('.items').toggleClass('_deleted')
+  })
+  tippy('.cart-delete-label', {
+    theme: 'material',
+    content: "Выделить несколько товаров"
+  });
+  tippy('.cart-delete-btn', {
+    theme: 'material',
+    content: "Удалить выбранные товары"
+  });
 }
 
 // Отправка купона при оформлении заказа

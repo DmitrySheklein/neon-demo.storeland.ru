@@ -1,15 +1,4 @@
 <div class="cart-info">
-  {% IF FORM_NOTICE %}
-    <div class="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>
-    <script>
-      $(function () {
-        new Noty({
-          text: '<div class="noty_content">{FORM_NOTICE | nl2br}</div>',
-          type: '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}'
-        }).show()         
-      });      
-    </script>
-  {% ENDIF %}
   {% IF cart_items_empty %}
     <div class="attention">Корзина покупок пуста. Вы можете выбрать нужный товар из <a href="{CATALOG_URL}">каталога</a></div>
   {% ELSE %}
@@ -23,7 +12,12 @@
           <td class="">Цена</td>
           <td class="quantity">Количество</td>
           <td class="total">Итого</td>
-          <td>&nbsp;</td>
+          <!-- <td>&nbsp;</td> -->
+          <td class="cartTable-delete">
+            <input type="checkbox" id="cart-delete-checkbox" class="checkbox-hidden" required="" aria-required="true">
+            <label for="cart-delete-checkbox"  class="cart-delete-label checkbox-name">Удалить несколько товаров</label>
+            <button type="button" class="button small cart-delete-btn" style="display: none;"><i class="fal fa-times"></i></button>
+          </td>
         </tr> 
       </thead>  
       <tbody>
@@ -52,7 +46,13 @@
             <td class="cart-price">
               <span class="ajaxtotal price {CURRENCY_CHAR_CODE}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>            
             </td>
-            <td class="closetd"><a href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="ajaxdelete()" class="remove"></a></td>
+            <td class="closetd">
+              <a href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" class="remove cartTable-remove-item"></a>
+              <div class="cart-item-delete-wrap" style="display: none;">
+                <input type="checkbox" id="cart-item-delete-checkbox-{cart_items.GOODS_MOD_ID}" class="cart-item-delete-checkbox checkbox-hidden" required="" aria-required="true">
+                <label for="cart-item-delete-checkbox-{cart_items.GOODS_MOD_ID}" class="cart-item-delete-label checkbox-name"></label>
+              </div>
+            </td>
           </tr>  
         {% ENDFOR %}
       </tbody> 
