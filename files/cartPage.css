@@ -361,4 +361,15 @@ github.com/t1m0n/air-datepicker
   .cartTable tfoot tr.actions .buttons .button:first-child {margin-bottom: 10px;}
   .cartTable .TotalSum .price {font-size: 16px;}
   .formfast .form-list .fields.small.first {margin-right: 0px;}
+  .formfast .cart-products-list .cart-products-item .product-image {
+    width: 65px;
+  }
+  .formfast .cart-products-list .cart-products-item .product-name {
+    width: calc(100% - 65px);
+  }
+  .formfast .cart-products-list .cart-products-item .product-total-price {width: 35%;flex-shrink: 0;}
+  .formfast .cart-products-list .cart-products-item .product-quantity,
+  .formfast .cart-products-list .cart-products-item .product-price {
+    min-width: 65px;
+  }  
 }
