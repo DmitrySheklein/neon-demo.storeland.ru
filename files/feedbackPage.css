@@ -6,8 +6,8 @@
 .callback-info .callback-form div input {margin: 0;}
 .contact-info .block-contact > div {margin-bottom: 12px;line-height: 36px;display: flex;}
 .contact-info .block-contact > div i {display: inline-block;vertical-align: top;color: #fff;background: #398f93;font-size: 22px;line-height: 45px;width: 45px;height: 45px;text-align: center;margin-right: 10px;border-radius: 50%;}
-.contact-info .block-contact > div [itemprop="telephone"] {font-family: 'Arimo', sans-serif;}
-.contact-info .block-contact .block-contact-workTime {font-family: 'Arimo', sans-serif;}
+.contact-info .block-contact > div [itemprop="telephone"] {font-family: 'Open Sans', sans-serif;}
+.contact-info .block-contact .block-contact-workTime {font-family: 'Open Sans', sans-serif;}
 .feedbackForm .feedbackForm-title {
   margin: 25px 0;
   font-size: 18px;

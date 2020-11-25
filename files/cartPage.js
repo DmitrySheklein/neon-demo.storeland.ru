@@ -161,6 +161,13 @@ function ajaxnewqty() {
             $('.TotalSum').css('opacity', '1');
             tr = $('tr[data-id="' + id + '"]');
             tr.find('.ajaxtotal').html($(d).find('tr[data-id="' + id + '"] .ajaxtotal').html());
+            var $minOrderBlock = $(d).find('.attention._min-order');
+            var isMinOrder = Boolean($minOrderBlock.length);
+
+            $('.attention._min-order').remove();
+            $('.cartForm').before($minOrderBlock);
+            $('#startOrder').toggleClass('_disabled', isMinOrder);
+
             $('.TotalSum').html($(d).find('.TotalSum').html());
             $('.discounttr').each(function () {
               $(this).remove();
@@ -204,6 +211,13 @@ function ajaxdelete(event) {
         ajaxnewqty();
         cartItemsDelete();
         quantity();
+        var $minOrderBlock = $(d).find('.attention._min-order');
+        var isMinOrder = Boolean($minOrderBlock.length);
+
+        $('.attention._min-order').remove();
+        $('.cartForm').before($minOrderBlock);
+        $('#startOrder').toggleClass('_disabled', isMinOrder);
+
         $('#startOrder').on('click', function () {
           startOrder();
           return false;
@@ -604,23 +618,10 @@ function quickOrderScripts() {
 
         //  Проверка на самовывоз 
         var selectedName = $(this).find('option:selected').text();
-        var $orderCustom = $('.order-user-wrapper');
-
-        if (selectedName == 'Курьером') {
-          $orderCustom.show().find('input').addClass('required')
+        if (selectedName == 'Самовывоз' || selectedName.match(/самовывоз/gi)) {
+          $('.formfast-col.adress').hide();
         } else {
-          $orderCustom.hide().find('input').removeClass('required')
-        }
-
-        // $('.adress').toggleClass('_hidden', selectedName == 'Самовывоз')
-
-        var $deliveryTitleSpan = $('.deliveryConvenientDate').find('span');
-        if (selectedName == 'Самовывоз') {
-          $('.adress').find('.form-list > div').hide().filter('.deliveryConvenientDate, .deliveryConvenientTime , .quickDeliveryComment').show();
-          $deliveryTitleSpan.text('самовывоза')
-        } else {
-          $('.adress').find('.form-list > div').show().filter('.deliveryConvenientDate, .deliveryConvenientTime , .quickDeliveryComment').show();
-          $deliveryTitleSpan.text('доставки')
+          $('.formfast-col.adress').show();        
         }
       });
 
@@ -677,7 +678,7 @@ function quickOrderScripts() {
 
 
     // Валидация формы на странице оформления заказа
-    $("#quickform").submit(function () {
+    $("#quickform").off('submit').on('submit', function () {
       // Если форма невалидна не отправляем её на сервер
       if (!$(this).valid()) {
         return false;
@@ -690,24 +691,32 @@ function quickOrderScripts() {
         name: 'ajax_q',
         value: 1
       });
-
-      // Аяксом добавляем товар в корзину и вызываем форму быстрого заказа товара
+      var $orderBtns = $("#quickform, .formfast-cart").find('button[type="submit"]');
+      // Аяксом обормляем заказ
       $.ajax({
         type: "POST",
         dataType: 'json',
         cache: false,
         url: $(this).attr('action'),
         data: formData,
+        timeout: 5000,
+        beforeSend: function(){
+          $orderBtns.addClass('_disabled').html('<i class="fal fa-spin fa-spinner"></i> Оформляется')
+        },        
         success: function (data) {
           // Если заказ был успешно создан
           if (data.status == 'ok') {
             window.location = data.location;
           } else if (data.status == 'error') {
             alert(data.message);
+            $orderBtns.removeClass('_disabled').html('Оформить заказ')
           } else {
             alert('Во время оформления заказа возникла неизвестная ошибка. Пожалуйста, обратитесь в службу технической поддержки.');
           }
-        }
+        },
+        error: function(){
+          $orderBtns.removeClass('_disabled').html('Оформить заказ')
+        }         
       });
       return false;
     }).validate();

@@ -62,7 +62,7 @@
 .pages li:not(:last-child) {margin-right: 10px}
 .pages li.current {background-color: #f65e64;}
 .pages li:not(.current):hover {background-color: #f6f8fa;}
-.pages li a, .pages li span {display: block;height: 100%;position: relative;font-size: 15px;line-height: 35px;vertical-align: middle;border: 0;text-align: center;    font-family: 'Arimo', sans-serif;}
+.pages li a, .pages li span {display: block;height: 100%;position: relative;font-size: 15px;line-height: 35px;vertical-align: middle;border: 0;text-align: center;    font-family: 'Open Sans', sans-serif;}
 .pages li:last-child a, .pages li:last-child:hover a, .pages li:last-child span, .pages li:last-child:hover span  {border-right: 0;}
 .pages li span {border: 0;color: #ffff;}
 .pages li.current span {cursor: default;}

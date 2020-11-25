@@ -2,6 +2,12 @@
   {% IF cart_items_empty %}
     <div class="attention">Корзина покупок пуста. Вы можете выбрать нужный товар из <a href="{CATALOG_URL}">каталога</a></div>
   {% ELSE %}
+    {% IF CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT < SETTINGS_STORE_ORDER_MIN_ORDER_PRICE && cart_count_empty = 0 %}
+    <div class="attention _min-order" style="display: {% FOR cart_sum %}{% IF cart_sum.NOW_WITH_DELIVERY_AND_DISCOUNT < SETTINGS_STORE_ORDER_MIN_ORDER_PRICE %}block{% ELSE %}none{% ENDIF %}{% ENDFOR %}">
+      Внимание! Минимальный заказ {SETTINGS_STORE_ORDER_MIN_ORDER_PRICE} рублей{% IF SETTINGS_STORE_ORDER_MIN_PRICE_WITHOUT_DELIVERY %} (без учёта доставки){% ENDIF %}, добавьте в корзину что-нибудь ещё из <a href="{CATALOG_URL}">каталога</a>
+    </div>
+    {% ENDIF %}
+
     <form action="{CART_URL}" method="post" class="cartForm">
     <input type="hidden" name="fast_order" value="1" />
     <input type="hidden" name="hash" value="{HASH}" />
@@ -12,7 +18,6 @@
           <td class="">Цена</td>
           <td class="quantity">Количество</td>
           <td class="total">Итого</td>
-          <!-- <td>&nbsp;</td> -->
           <td class="cartTable-delete">
             <input type="checkbox" id="cart-delete-checkbox" class="checkbox-hidden" required="" aria-required="true">
             <label for="cart-delete-checkbox"  class="cart-delete-label checkbox-name">Удалить несколько товаров</label>
@@ -91,9 +96,9 @@
             <!-- По умолчанию оформление заказа в 1 шаг. Если Вы хотите использовать 4 шага оформления, то добавьте style="display: none;" к блоку, который нужно скрыть и удалите style="display: none;" из блока, который нужно отобразить. -->
             <!-- Быстрое оформление заказа в 1 шаг -->
             <div class="buttons"> <!-- Если Вы хотите использовать 4 шага оформления, то добавьте style="display: none;" Пример: <div class="buttons" style="display: none;"> -->
-              <a class="button button2 col-left" title="Очистить корзину" href="{CART_TRUNCATE_URL}" onclick="return confirm('Вы действительно хотите удалить все товары из корзины?')">Очистить корзину</a>
+              <a class="button _outline col-left" title="Очистить корзину" href="{CART_TRUNCATE_URL}" onclick="return confirm('Вы действительно хотите удалить все товары из корзины?')">Очистить корзину</a>
               <a id="closeOrder" class="button" title="Отменить быстрое оформление заказа">Отменить оформление</a>
-              <a id="startOrder" class="button" title="Перейти к быстрому оформлению заказа">Оформить заказ</a>
+              <a id="startOrder" class="button {% FOR cart_sum %}{% IF cart_sum.NOW_WITH_DELIVERY_AND_DISCOUNT < SETTINGS_STORE_ORDER_MIN_ORDER_PRICE %}_disabled {break}{% ENDIF %}{% ENDFOR %}" title="Перейти к быстрому оформлению заказа">Оформить заказ</a>
               <noscript>
               <style>#startOrder {display: none;}</style>
               <button class="button" type="submit" name="next_step"title="Перейти к оформлению заказа в 4 шага">Оформить заказ</button>

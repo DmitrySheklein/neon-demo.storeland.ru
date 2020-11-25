@@ -62,7 +62,7 @@
   .product-view .product-toolbar .ratings .ratiing-count {display: inline-block;vertical-align: middle;font-size: 14px}
   .product-view .product-toolbar .ratings .ratiing-count:hover {color: #323f48}
   .product-view .product-toolbar .goodsDataMainModificationArtNumber {display: inline-block;vertical-align: middle;white-space: nowrap;margin-right: 11px;margin-top: 2px;margin-bottom: 2px;}
-  .product-view .product-toolbar .goodsDataMainModificationArtNumber span {font-family: 'Arimo', sans-serif;}
+  .product-view .product-toolbar .goodsDataMainModificationArtNumber span {font-family: 'Open Sans', sans-serif;}
   .product-view .product-toolbar .goodsDataMainModificationAvailable {display: inline-block;vertical-align: middle;white-space: nowrap;}
   .product-view .product-toolbar .goodsDataMainModificationAvailable span {display: none;}
   .product-view .product-toolbar .goodsDataMainModificationAvailable .available-value {display: block;}
@@ -98,7 +98,7 @@
   .product-view .product-order .goodsDataMainModificationsBlock .goodsDataMainModificationsBlockProperty:not(:first-child) {margin-top: 10px;} 
   .product-view .product-order .goodsDataMainModificationsBlock .goodsDataMainModificationsBlockProperty span {display: block;margin-bottom: 10px;}
   .product-view .product-order .goodsDataMainModificationsBlock .goodsDataMainModificationsBlockProperty .jq-selectbox {width: 100%;}
-  .product-view .product-order .goodsDataMainModificationsBlock .goodsDataMainModificationsBlockProperty select {display: block;width: 100%;padding: 5px;border: 1px solid #dce4e9;cursor: pointer;}
+  .product-view .product-order .goodsDataMainModificationsBlock .goodsDataMainModificationsBlockProperty select {display: block;width: 100%;padding: 5px;border: 1px solid #dce4e9;cursor: pointer;font-size: 16px;}
   .product-view .product-order .goodsDataMainModificationsBlock .goodsDataMainModificationsBlockProperty select:hover {border-color: #b1bfc8;}
   .product-view .product-order .goodsDataMainModificationsBlock .goodsDataMainModificationsDescriptionBlock {display:none!important;width: 100%;max-height: 50px;overflow: hidden;border-left: 3px solid #398f93;padding: 0 0 0 15px;}
   .product-view .product-order .goodsDataMainModificationsBlock .goodsDataMainModificationsDescriptionBlock div {margin: 0;}
@@ -153,7 +153,7 @@
   }
   .product-tabs .tabs .tabs-item {display: inline-block;background-color: transparent;border-radius: 0;z-index: 2;margin-right: 25px;}
   .product-tabs .tabs .tabs-item:last-child {margin-right: 0;}
-  .product-tabs .tabs .tabs-counter {font-family: 'Arimo', sans-serif;}
+  .product-tabs .tabs .tabs-counter {font-family: 'Open Sans', sans-serif;}
   .product-tabs .tabs .tabs-item a {display: block;font-size: 18px;font-weight: bold;padding: 14px 0;border-bottom: 2px solid transparent;}
   .product-tabs .tabs .tabs-item a.active {color: #398f93;}
   .product-tabs .tabs .tabs-item a:not(.active):hover {color: #398f93;}
@@ -171,7 +171,7 @@
   .goodsDataOpinionListNavigateTop {display: inline-block;}
   .goodsDataOpinionListNavigateTop .button {display: inline-block;margin: 0 5px 5px 0;}
   .goodsDataOpinionListNavigateTop .opinionListCount {
-    font-family: 'Arimo', sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
   .goodsDataOpinionShowAddForm {text-decoration: underline;}
   .goodsDataOpinionListNavigateTop .goodsDataOpinionShowAddForm {background-color: #006600;}
@@ -184,7 +184,7 @@
   .goodsDataOpinionList .goodsDataOpinionListTitle {display: block;margin-bottom: 5px;padding-right: 10px;color: #2e2e2e;line-height: 1.3;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
   .goodsDataOpinionList .goodsDataOpinionListClient {display: inline-block;vertical-align: middle;padding-right: 10px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
   .goodsDataOpinionList .rating-box {display: inline-block;vertical-align: middle;font-size: 11px;}
-  .goodsDataOpinionList .goodsDataOpinionListDate {display: inline-block;vertical-align: middle;font-size: 14px;font-family: 'Arimo', sans-serif;}
+  .goodsDataOpinionList .goodsDataOpinionListDate {display: inline-block;vertical-align: middle;font-size: 14px;font-family: 'Open Sans', sans-serif;}
   .goodsDataOpinionList .button {max-width: 100px;float: right}
   .goodsDataOpinionList .goodsDataOpinionListDesc,.goodsDataOpinionListTableAnswer {margin-bottom: 15px}
   .goodsDataOpinionList .goodsDataOpinionListDesc strong {display: block;margin-bottom: 10px;color: #2a3034}

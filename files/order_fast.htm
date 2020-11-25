@@ -299,18 +299,23 @@
                   </div>
                 </div>
               {% ENDIF %}
-              <!-- Если поле комментарии запрашивается -->
-              {% IF SETTINGS_ORDER_FIELDS_COMMENT < 3 %}
-                <div class="fields _comment">
-                  <label for="quickDeliveryComment" {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}class="required"{% ENDIF %}>Комментарий к заказу{% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}<em>*</em>{% ENDIF %}</label>
-                  <div class="input-box">
-                    <textarea cols="100" rows="5" id="quickDeliveryComment" name="form[delivery][comment]" class="{% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %} input textarea">{ORDER_FORM_DELIVERY_COMMENT}</textarea>
-                  </div>  
-                </div>
-              {% ENDIF %}
             </div> 
           </div>
           {% ENDIF %}
+          <!-- Если поле комментарии запрашивается -->
+          {% IF SETTINGS_ORDER_FIELDS_COMMENT < 3 %}          
+          <div class="formfast-col _comment">
+            <h3 class="title"><i class="fal fa-comments"></i> <span>Комментарий к заказу</span></h3>
+            <div class="form-list">
+              <div class="fields _comment">
+                <!-- <label for="quickDeliveryComment" {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}class="required"{% ENDIF %}>Комментарий к заказу{% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}<em>*</em>{% ENDIF %}</label> -->
+                <div class="input-box">
+                  <textarea cols="100" rows="5" id="quickDeliveryComment" name="form[delivery][comment]" class="{% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %} input textarea">{ORDER_FORM_DELIVERY_COMMENT}</textarea>
+                </div>  
+              </div>
+            </div>
+          </div>  
+          {% ENDIF %}              
           <div class="formfast-col _products">
             <h3 class="title"><i class="fal fa-shopping-cart"></i> <span>Товары в заказе</span></h3>
             <ul class="cart-products-list">

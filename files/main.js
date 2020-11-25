@@ -6,7 +6,7 @@ $(function(){
 })
 // Hover карусель изображений
 $(function(){
-  $(".mouseHoverImgCarousel").HoverMouseCarousel();
+  $(".mouseHoverImgCarousel").HoverMouseCarousel().on('click', function (e) {e.preventDefault();});
 })
 // Fancybox default
 $.fancybox.defaults.lang = "ru";
@@ -333,6 +333,10 @@ function tippyViewBtn() {
 // Hover эффект на кнопках
 function hoverAnimBtn() {
   $(function () {
+    if(getClientWidth() <= 991) {
+      $(".add-cart, .button").find('.hover-anim').remove();
+      return;
+    };
     $(".add-cart, .button")
     .find('.hover-anim').remove()
     .end()
@@ -355,7 +359,7 @@ function hoverAnimBtn() {
     });    
   })  
 }
-
+$(window).on('resize', $.debounce(300, hoverAnimBtn))
 // Добавление товара в корзину
 function AddCart() {
   $('.goodsDataForm, .goodsToCartFromCompareForm, .goodsListForm').off('submit').on('submit', function() {    
@@ -753,8 +757,13 @@ function quickOrder(formSelector) {
     cache	  : false,
     url		  : formBlock.attr('action'),
     data		: formData,
+    beforeSend: function () {
+      
+    },
     success: function(data) {
+      $('.add-cart.quick._loading').removeClass('_loading').find('span').text("Купить в 1 клик")      
       $.fancybox.open(data, {
+        keyboard: false,
         baseClass: "_quickOrder",
         beforeShow(){
           loadFile('cartPage', 'css');
@@ -762,11 +771,12 @@ function quickOrder(formSelector) {
         },
         afterShow(){
           var loaded = loadFile('cartPage', 'css') && loadFile('cartPage', 'js');
-          console.log(`loaded = ${loaded}`);
+
           if(loaded) {
             $(function(){ quickOrderScripts()});
             $(function(){ OrderScripts()});
             $(function(){ address()});
+            $(function(){ coupons()});
             $('.zoneSelect select').off('change').on('change',function(){
               optValue = $(this).find('option:selected').attr('value');
               $('.zones input[value="'+optValue+'"]').click();
