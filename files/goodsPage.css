@@ -16,9 +16,9 @@
   .thumblist-box .prev:before {content: "\f104";}
   .thumblist-box .next:before {content: "\f105";}
   .thumblist {max-width: 460px;margin: 0 auto;}
-  .thumblist li {display: block;float: none;margin: 0 auto;width: 100px;}
-  .thumblist li a {display: block;text-align: center;width: 100px; height: 100px;}
-  .thumblist.owl-carousel li a img {display: inline-block;margin: 0 auto;width: auto;max-width: 100px;max-height: 100px;}
+  .thumblist .thumblist-item {display: block;float: none;margin: 0 auto;width: 100px;}
+  .thumblist .thumblist-item a {display: block;text-align: center;width: 100px; height: 100px;}
+  .thumblist.owl-carousel .thumblist-item a img {display: inline-block;margin: 0 auto;width: auto;max-width: 100px;max-height: 100px;}
   .thumblist .owl-stage {margin: 0 auto;}
   .product-view .product-shop {margin-bottom: 30px;}
   .product-view .product-header {display: flex;padding-bottom: 15px;}
@@ -26,7 +26,7 @@
   @media all and (max-width:1199px) {.product-view .product-header .product-name h1 {font-size: 21px}}
   @media all and (max-width:991px) {.product-view .product-header .product-name h1 {font-size: 18px}}
   @media all and (max-width:481px) {.product-view .product-header .product-name h1 {font-size: 16px}}
-  .product-view .product-name {padding-right: 20px}}
+  .product-view .product-name {padding-right: 20px}
   .product-view .product-header .product-name.quick-view h1 {font-size: 20px;}
   .product-view .product-action {text-align: right;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: end;-ms-flex-pack: end;justify-content: flex-end;
     position: absolute;

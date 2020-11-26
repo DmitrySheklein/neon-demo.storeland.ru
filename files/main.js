@@ -813,6 +813,7 @@ function quickViewShowMod(href, atempt) {
     document.quickviewPreload = [];
   }  
   $.get(href, function(content) {
+      console.log(content);
       $.fancybox.close();
       $.fancybox.open(content, {
         padding: 0,
@@ -824,6 +825,7 @@ function quickViewShowMod(href, atempt) {
           loadFile('goodsPage', 'js');
         },
         afterShow: function() {
+          $('.fancybox-container._modification .block-bg').prepend('<div class="preloader"><span class="content-loading"></span></div>')          
           var isLoad = loadFile('goodsPage', 'css') && loadFile('goodsPage', 'js');
 
           if(isLoad){
@@ -839,8 +841,9 @@ function quickViewShowMod(href, atempt) {
             if($('.wrapper').hasClass('_cart-page')){
               $('.fancybox-inner .add-cart.button').addClass('_cart-page');
             }
-            $('.fancybox-inner .product-view .product-shop').removeClass('col-lg-5 col-md-6');
             $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-6');
+            $('.fancybox-container._modification .product-view .block-bg > .row').css({visibility: 'visible',opacity: 1})
+            preloadHide($('.fancybox-container._modification .block-bg .preloader'))            
           };
         }
       });

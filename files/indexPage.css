@@ -71,6 +71,9 @@
   #features .main-featuresInner {
     padding-left: 0;
   }
+  #features .main-featuresItem .main-featuresIcon {
+    box-shadow: 0 20px 60px rgba(156, 158, 158, .5)
+  }  
 }
 /* Табы товаров */
 #producttabs {margin-bottom: -10px;}
@@ -79,7 +82,7 @@
 #producttabs .pdt-nav {display: flex;}
 #producttabs .pdt-nav-wrap {display: flex;align-items: center;position: relative;margin-top: 0;margin-bottom: 20px;width: auto;text-align: left;padding: 0;list-style: none;}
 #producttabs .pdt-nav-wrap:after {content: '';display: block;height: 2px;width: 100%;position: absolute;top: 100%;background: #f0f0f0;}
-#producttabs .pdt-nav li {position: relative;z-index: 2;display: inline-block;margin-right: 35px;margin-bottom: 10px;cursor: pointer;position: relative;user-select: none;border-radius: 25px;transition: .3s color;white-space: nowrap;}
+#producttabs .pdt-nav li {position: relative;z-index: 2;display: inline-block;margin-right: 35px;margin-bottom: 10px;cursor: pointer;position: relative;user-select: none;transition: .3s color;white-space: nowrap;}
 #producttabs .pdt-nav li:last-child {
   margin-right: 0;
 }
@@ -179,6 +182,9 @@
 .nojs #news .preloader {display: none}
 .nojs #news .block-news .item {width: 20%;}
 @media (max-width: 767px) {
+  #news .tabs-headerList-wrap {
+    flex-wrap: wrap;
+  }
   #news .tabs-headerList .tabs-headerItem .tabs-headerLink {
     font-size: 20px;
   }
