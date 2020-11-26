@@ -314,12 +314,12 @@ function coupons() {
       data: formData,
       success: function(data) {
             var $discountBlock = $(data).closest('#myform').find('tr.discount');
-            var discountName = $discountBlock.find('td.name').text();
+            // var discountName = $discountBlock.find('td.name').text();
             var discountPercent = $discountBlock.find('td.percent').html();
             var $totalBlock = $(data).closest('#myform').find('tr.total');
             
             // Записываем название и размер скидки по купону
-            $('.subtotal .discount .label').html(discountName);
+            // $('.subtotal .discount .label').html(discountName);
             $('.subtotal .discount .price').html(discountPercent);
             // Получаем новую итоговую стоимость заказа
             var newTotalSum = $totalBlock.find('td.total-sum').data('total-sum');

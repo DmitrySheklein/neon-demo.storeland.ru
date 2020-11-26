@@ -341,8 +341,8 @@
               <div class="formfast-col coupons">
                 <h3 class="title"><i class="fal fa-ticket-alt"></i><span>Купон на скидку</span></h3>
                 <div class="couponBlock">
-                    <div class="couponBlockCoupon">
-                      <label for="quick_form_coupon_code">Код купона</label> 
+                    <label for="quick_form_coupon_code">Код купона</label> 
+                    <div class="couponBlockCoupon">                      
                       <div class="input-box">
                         <input type="text" id="quick_form_coupon_code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="input" />
                         <i class="coupon_clear fal fa-times" aria-hidden="true"></i>
@@ -379,7 +379,7 @@
           {% IF CART_SUM_DISCOUNT_PERCENT %}
             {% FOR cart_discount %}
             {% IF cart_discount.DISCOUNT_IS_ENABLED %}        
-            <span class="label">{cart_discount.DISCOUNT_NAME}</span>
+            <span class="label" data-name="{cart_discount.DISCOUNT_NAME}">Скидка:</span>
             <span class="price {CURRENCY_CHAR_CODE}">{% IF cart_discount.IS_PERCENT %}{cart_discount.DISCOUNT_VALUE}%{% ELSE %}{cart_discount.DISCOUNT_VALUE | money_format}{% ENDIF %}</span>
             {% ENDIF %}
             {% ENDFOR %}
