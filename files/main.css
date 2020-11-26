@@ -352,7 +352,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 
 /* Навигация */
 .navigation .prev, .navigation .next {display: inline-block;width: 20px;font-size: 40px;line-height: 1;color: #777;margin: 0 5px;padding: 0;overflow: hidden;text-align: center;cursor: pointer;z-index: 2;}
-.navigation .prev:hover, .navigation .next:hover, .navigation .owl-prev:hover, .navigation .owl-next:hover {color: #2e2e2e;cursor: pointer;}
+.navigation .prev:hover, .navigation .next:hover, .navigation .owl-prev:hover, .navigation .owl-next:hover {color:#398f93;cursor: pointer;}
 .navigation .prev.disable, .navigation .next.disable, .navigation .prev.disable:hover, .navigation .next.disable:hover {color: #e1e1e1;cursor: default;}
 
 /* Иконки Новинка, Хит, Скидка */
@@ -1087,8 +1087,9 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 @media all and (max-width: 481px) {  #page-title .block-title h1.title {font-size: 20px;}}
 #page-title .block-title h5.result {display: none;color: #fff;font-family: 'PT Sans Narrow', sans-serif;font-weight: 600;letter-spacing: 0.025em;}
 .products-container .block-title {margin-bottom: 20px;}
-.block-title {position:relative;display: flex;}
+.block-title {position:relative;display: flex;align-items: center;}
 .block-title h2.title {margin: 0;margin-bottom: 0px;font-weight: bold;text-align: left;padding: 0;font-size: 24px;text-transform: none;}
+.block-title .block-result {margin-left: auto;}
 .block-title .navigation {margin-left: auto;}
 .block-title .navigation .owl-prev,
 .block-title .navigation .owl-next {display: inline-block;width: 30px;height: 30px;margin-left: auto;font-size: 24px;line-height: 28px;text-align: center;color: #b7b7b7;user-select: none;}
@@ -1164,7 +1165,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .index .products-grid {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-pack: start;-ms-flex-pack: start;justify-content: flex-start;-webkit-box-align: stretch;-ms-flex-align: stretch;align-items: stretch;-ms-flex-wrap: wrap;flex-wrap: wrap;text-align: center;}
 .products-grid {margin: 0px -5px;position: relative;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-pack: start;-ms-flex-pack: start;justify-content: flex-start;-webkit-box-align: stretch;-ms-flex-align: stretch;align-items: stretch;-ms-flex-wrap: wrap;flex-wrap: wrap;text-align: center}
 .products-grid.owl-carousel {margin: 0;}
-.products-grid .item {position: relative;padding: 20px;}
+.products-grid .item {position: relative;padding: 15px;}
 .products-grid .item-inner {
   height: 100%;
   position: relative;
@@ -1330,14 +1331,12 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .product-shop .actions .add-cart .fal.fa-shopping-cart {display: none;}
 .qty-wrap {position: relative;width: 84px;margin: 0;vertical-align: middle;text-align: center;margin-right:5px;background: #f3f3f5;border-radius:5px;overflow: hidden;}
 .catalog .product-shop .actions .qty-wrap {margin-bottom: 0px;}
-input.quantity, input.cartqty {display: inline-block;vertical-align: middle;width: 35px;height: 34px;margin: 0;color: #2e2e2e;border-radius: 0;font-size: 16px;text-align: center;padding: 3px;background: transparent;border: 0;font-family: 'Open Sans', sans-serif;}
+input.quantity, input.cartqty {display: inline-block;vertical-align: middle;width: 35px;height: 36px;margin: 0;color: #2e2e2e;border-radius: 0;font-size: 16px;text-align: center;padding: 3px;background: transparent;border: 0;font-family: 'Open Sans', sans-serif;}
 .qty-set {display: block;}
-.qty-set > a {position: absolute;top: 0;width: 24px;height: 34px;line-height: 34px;font-size: 12px;color: #6d6d6e;border-radius: 0;margin: 0;opacity: 1;filter: alpha(opacity=100);visibility: visible;}
+.qty-set > a {position: absolute;top: 0;width: 24px;height: 36px;line-height: 36px;font-size: 12px;color: #6d6d6e;border-radius: 0;margin: 0;opacity: 1;filter: alpha(opacity=100);visibility: visible;}
 .qty-set > a:hover {    background: #e7e7eb;}
 .qty-set .qty-plus {right: 0px;}
 .qty-set .qty-minus {left: 0px;}
-
-
 
 /** Вы смотрели **/
 #viewed {

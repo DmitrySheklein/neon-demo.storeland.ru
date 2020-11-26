@@ -162,7 +162,12 @@ function goodsImage() {
 }
 // Инициализация табов на странице товара
 function initTabs() {
-  $('.tabs').find('.nav-splitter').css('width', $('.tabs .tabs-item').first().outerWidth())
+  setTimeout(function() {
+    var $el = $('.tabs .tabs-item a.active');
+    var width = $el.parent().outerWidth()
+    var position = $el.position().left
+    $('.tabs').find('.nav-splitter').css({'width': width, 'left': position })
+  }, 200);
   // Блок в котором находятся табы
   var tabBlock = $('.product-tabs');
   if (!tabBlock.length) {
