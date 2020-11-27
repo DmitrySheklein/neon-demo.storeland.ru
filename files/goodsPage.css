@@ -229,6 +229,7 @@
     .product-view .product-shop .add-to-box .add-to-cart .button.quick {display: none;}
     .product-tabs .tabs-content {padding-bottom: 30px;}
     .product-view .product-neighbor {display:none;}
+    .product-view .product-img-box {border-right: 0;}
   }
   @media all and (max-width: 767px) {
     .thumblist {max-width: 500px;}

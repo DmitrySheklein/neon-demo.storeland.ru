@@ -1148,6 +1148,12 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
     box-shadow: 0 20px 60px rgba(156, 158, 158, .5);
     z-index: 20;
 }
+@media(max-width: 481px){
+  .products-container .products-grid .item:hover:before {display: none;}
+  .products-container .products-grid .item:hover {
+    border-color: #398f93;
+  }  
+}
 .products-container .products-grid .item:hover .item-inner {z-index: 21;}
 .products-container .products-grid.owl-carousel .item:before {
   display: none;

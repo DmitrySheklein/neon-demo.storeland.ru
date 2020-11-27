@@ -241,11 +241,12 @@ function cartItemsDelete() {
       function(data) {
         var msgType = ('ok' == data.status) ? 'success' : 'error';
         var message = data.message;
+        var iconTemplate = ('success' == msgType) ? '<i class="fal fa-check"></i>' : '<i class="fal fa-times"></i>';
 
         // Если есть функция, которая отображает сообщения пользователю
         if(typeof(Noty) == "function") {
           new Noty({
-            text: '<div class="noty__content">'+ '<div class="noty__content-text">' + message + '</div>' +'</div>',
+            text: '<div class="noty__content">'+ iconTemplate + '<div class="noty__content-text">' + message + '</div>' +'</div>',
             type: msgType,
             layout: "bottomRight",
             timeout: "2000",
