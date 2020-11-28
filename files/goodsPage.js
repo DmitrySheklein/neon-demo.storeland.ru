@@ -386,6 +386,26 @@ function goodsMods($container) {
             // В этом объекте хранится идентификатор картинки главного изображения для коректной работы галереи изображений
             MainImageIdObject = MainImageBlock.attr('data-id')
           ;
+          // Если не удалось найти блок, в котором находится главное изображение товара
+          if(!MainImageBlock.length) {
+            console.log("GoodsModImage error: MainImageBlock not found");
+            return false;
+          }
+          // Если не удалось найти главное изображение товара
+          if(!MainImage.length) {
+            console.log("GoodsModImage error: MainImage not found");
+            return false;
+          }
+          // Если не удалось найти главное изображение товара
+          if(!goodsModImageBlock.length) {
+            console.log("GoodsModImage error: goodsModImageBlock not found");
+            return false;
+          }
+          // Если не удалось найти URL изображения для модификации товара
+          if(typeof MediumImageUrl === 'undefined') {
+            console.log("GoodsModImage error: MediumImageUrl not found");
+            return false;
+          }          
           
           // Если изображение модификации товара найдено - изменяем главное изображение
           MainImage.attr('src', MediumImageUrl);
