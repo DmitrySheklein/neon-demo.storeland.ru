@@ -632,7 +632,7 @@
         <div class="slider owl-carousel">
           <!-- Слайд 1 -->
           <div class="slider-item">
-                <div class="slider-image sl-lozad" 
+                <div class="slider-image _1 sl-lozad" 
                   data-desktop-src="{ASSETS_IMAGES_PATH}slide-1.jpg"
                   data-mobile-src="{ASSETS_IMAGES_PATH}slide-1-mobile.jpg"
                   data-webp-desktop-src="{ASSETS_IMAGES_PATH}slide-1.webp"
@@ -655,7 +655,7 @@
           
           <!-- Слайд 2 -->
           <div class="slider-item">
-                <div class="slider-image sl-lozad"
+                <div class="slider-image _2 sl-lozad"
                  data-desktop-src="{ASSETS_IMAGES_PATH}slide-2.jpg"
                  data-mobile-src="{ASSETS_IMAGES_PATH}slide-2-mobile.jpg"
                  data-webp-desktop-src="{ASSETS_IMAGES_PATH}slide-2.webp"
@@ -679,7 +679,7 @@
           
           <!-- Слайд 3 -->
           <div class="slider-item">
-                <div class="slider-image sl-lozad"
+                <div class="slider-image _2 sl-lozad"
                  data-desktop-src="{ASSETS_IMAGES_PATH}slide-3.jpg"
                  data-mobile-src="{ASSETS_IMAGES_PATH}slide-3-mobile.jpg"
                  data-webp-desktop-src="{ASSETS_IMAGES_PATH}slide-3.webp"
@@ -1823,7 +1823,7 @@
                     {% ELSEIF MOD_LNAME=order && ACT=stage %}
                       <div class="block-title"><h1 class="title">Оформление заказа. Шаг {ORDER_STAGE_NUM} из 4</h1></div>
                     {% ELSEIF MOD_LNAME=search %}
-                      <div class="block-title"><h1 class="title">Результат поиска по запросу: {% IFNOT search_query_empty %}&laquo;{SEARCH_QUERY}&raquo;{% ENDIF %}</h1>{% IFNOT search_query_empty %} <span class="block-result">({GOODS_PAGES_RESULTS} товар{GOODS_PAGES_RESULTS | gen_word_end("","а","ов")} найд{GOODS_PAGES_RESULTS | gen_word_end("ен","ено","ено")} по запросу)</span>{% ENDIF %}</div>
+                      <div class="block-title _search-page"><h1 class="title">Результат поиска по запросу: {% IFNOT search_query_empty %}&laquo;{SEARCH_QUERY}&raquo;{% ENDIF %}</h1>{% IFNOT search_query_empty %} <span class="block-result">({GOODS_PAGES_RESULTS} товар{GOODS_PAGES_RESULTS | gen_word_end("","а","ов")} найд{GOODS_PAGES_RESULTS | gen_word_end("ен","ено","ено")} по запросу)</span>{% ENDIF %}</div>
                     {% ELSEIF MOD_LNAME=discount && ACT=index && ID %}
                       <div class="block-title"><h1 class="title">{PROMOTIONAL_CAMPAIGN_NAME}</h1> <h5 class="result">{GOODS_PAGES_RESULTS} товар{GOODS_PAGES_RESULTS | gen_word_end("","а","ов")}</h5></div>
                     {% ELSEIF MOD_LNAME=discount && ACT=index %}

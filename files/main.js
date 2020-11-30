@@ -813,7 +813,6 @@ function quickViewShowMod(href, atempt) {
     document.quickviewPreload = [];
   }  
   $.get(href, function(content) {
-      console.log(content);
       $.fancybox.close();
       $.fancybox.open(content, {
         padding: 0,

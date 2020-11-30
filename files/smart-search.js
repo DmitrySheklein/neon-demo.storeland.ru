@@ -311,7 +311,7 @@ document.SearchInCatalogAjaxQuerySender[randHash] = function (old_val) {
        if(i == data.goods.length - 1){
         $("#search-result .inner #show-wrap").remove();
         
-        var $showAllBtn = $('<a>').text('Все результаты').addClass('show-all').click(function(){$('.search-form').submit();})
+        var $showAllBtn = $('<a>').text('Все результаты').addClass('show-all button').click(function(){$('.search-form').submit();})
         var $showAllWrap = $('<div>').attr('id', 'show-wrap').addClass('result-item').append($showAllBtn)
         
         $("#search-result .inner .result-goods").append($showAllWrap)
