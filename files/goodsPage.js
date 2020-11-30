@@ -79,6 +79,13 @@ function goodsPage() {
 function goodsImage() {
   // Другие изображения товара
   $(function () {
+    $('#zoomImage').on('click', function (e) {
+      e.preventDefault();
+      var imgId = $(this).attr('data-id');
+      if(imgId) {
+        $('.thumblist [data-id="' + parseInt(imgId) + '"').find('a').trigger('click')
+      }      
+    })
     var owl = $(".thumblist-box .owl-carousel");
     // Показывать\Скрывать навигацию
     owl.on('initialized.owl.carousel changed.owl.carousel', function (event) {
@@ -378,7 +385,7 @@ function goodsMods($container) {
             // Блок с изображением выбранной модификации товара
             goodsModImageBlock = $('.thumblist [data-id="' + parseInt(goods_mod_image_id) + '"'),
             // Блок, в котором находится главное изображение товара
-            MainImageBlock = $('.general-img'),
+            MainImageBlock = $('#zoomImage'),
             // Изображение модификации товара, на которое нужно будет изменить главное изображение товара.
             MediumImageUrl = goodsModImageBlock.find('a').attr('href'),
             // Главное изображение, в которое будем вставлять новое изображение
@@ -411,7 +418,7 @@ function goodsMods($container) {
           MainImage.attr('src', MediumImageUrl);
           MainImageBlock.find('a').attr('href', MediumImageUrl);
           // Изменяем идентификатор главного изображения
-          MainImageBlock.find('a').attr("data-id", parseInt(goods_mod_image_id));
+          MainImageBlock.attr('data-id', parseInt(goods_mod_image_id));
           return true;
         }
         // Обновляем изображние модификации товара, если оно указано

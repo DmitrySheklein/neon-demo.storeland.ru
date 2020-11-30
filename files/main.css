@@ -563,16 +563,16 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 #search-result .inner .result-item a:hover,
 #search-result .inner .result-item a._active {color: #398f93}
 #search-result .inner .result-item a img {max-width: 40px;max-height: 40px;margin-right: 15px}
+#search-result .inner .result-item .show-all {
+  width: fit-content;
+  background: #424f60;
+}
+#search-result .inner .result-item .show-all:hover {
+  border-color: transparent;
+  color: #fff;
+}
 @media (max-width: 991px) {
   #search-result {width: calc(100%)}
-  #search-result .inner .result-item .show-all {
-    width: fit-content;
-    background: #424f60;
-  }
-  #search-result .inner .result-item .show-all:hover {
-    border-color: transparent;
-    color: #fff;
-  }
 }
 /** Контакты **/
 .header-contacts {margin-left: auto;}
