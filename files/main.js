@@ -6,7 +6,7 @@ $(function(){
 })
 // Hover карусель изображений
 $(function(){
-  $(".mouseHoverImgCarousel").HoverMouseCarousel().on('click', function (e) {e.preventDefault();});
+  $(".mouseHoverImgCarousel").HoverMouseCarousel().on('click', function (e) {if(getClientWidth() <= 991) {e.preventDefault()}});
 })
 // Fancybox default
 $.fancybox.defaults.lang = "ru";
@@ -1395,10 +1395,18 @@ function mainnav(){
 }
 // Поиск в шапке
 $(function(){
-  $('.header-search .header-searchLink, .header-search .search-close, .header-search .search-overlay').on('click', function(e){
-    e.preventDefault()
+  function toggleSearch() {
     $('.header-search .search').toggleClass('_active')
+  }
+  $('.header-search .search-close').on('click', function(e){
+    toggleSearch();
+  }
+  )
+  $('.header-search .header-searchLink, .header-search .search-overlay').on('click', function(e){
+    e.preventDefault()
+    toggleSearch();
   })
+
 })
 // Файл в форме контактов
 function feedbackPage(){

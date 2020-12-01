@@ -77,9 +77,10 @@ body.compensate-for-scrollbar{overflow:hidden}.fancybox-active{height:auto}.fanc
 }
 /* jQuery.Rating Plugin CSS - http://www.fyneworks.com/jquery/star-rating/ */
 .ratings {font-size: 11px;line-height: 1.25;margin: 3px 0;height: 14px;}
-.rating-box {display: inline-block;position: relative;vertical-align: middle;width: 35px;height: 14px;overflow: hidden;font-family: 'Open Sans', sans-serif;}
-.rating-box:before {display: block;font-family: "FontAwesome";content: "\f005\20\f005\20\f005\20\f005\20\f005";width: 14px;height: 14px;line-height: 14px;font-size: 14px;color: #f4605d;}
-.rating-box .rating {position: absolute;float: left;height: 14px;left: 18px;top: 0px;overflow: hidden;font-family: 'Open Sans', sans-serif;font-weight: bold;}
+.rating-box {display: flex;align-items: center;position: relative;width: auto;height: 14px;overflow: hidden;font-family: 'Open Sans', sans-serif;}
+.rating-box:before {display: block;margin-right: 4px;font-family: "FontAwesome";content: "\f005\20\f005\20\f005\20\f005\20\f005";width: 14px;height: 14px;line-height: 14px;font-size: 14px;color: #f4605d;}
+.rating-box .rating {height: 14px;left: 18px;top: 0px;overflow: hidden;font-family: 'Open Sans', sans-serif;font-weight: bold;}
+.ratings a {display: block}
 .rating-box .rating:before {display: none;font-family: "FontAwesome";content: "\f005\20\f005\20\f005\20\f005\20\f005";width: 95px;height: 14px;line-height: 14px;font-size: 14px;color: rgb(0 0 0 / 0);}
 .rating-cancel, .star-rating {display:block;float:left;width:16px;height:14px;text-indent:-999em;cursor:pointer;background:transparent;overflow:hidden}
 .rating-cancel, .rating-cancel a {background:url('{FORALL_STYLES_PATH}jquery-ui-stars/4.11/delete.gif') no-repeat 0 -16px}

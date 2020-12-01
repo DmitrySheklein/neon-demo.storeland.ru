@@ -119,9 +119,8 @@ dt, dd {line-height: 1.4;}
 .separator {display: inline-block;width: 1px;height: 18px;background: #2e2e2e;margin: 0 5px;text-indent: 9999px;}
 .tc {color: #398f93!important}
 .blockquote {padding: 0 0 0 15px;margin: 0 0 20px;border-left: 3px solid #398f93;text-align: left;line-height: 25px}
-/*.block-bg {border: 1px solid #dce4e9;background-color: #fff;overflow: hidden}*/
 .DescriptionBlock {background-color: #fff}
-.no-padding .DescriptionBlock {padding: 0px}
+.no-padding .DescriptionBlock {padding: 15px}
 #main._index .DescriptionBlock p:last-child {margin-bottom: 0;}
 .pseudo-link {position: relative}
 .pseudo-link:after {content: '';position: absolute;bottom: -2px;left: 0;width: 100%;border-bottom: 1px solid;transition: all .3s ease;opacity: 1;visibility: visible;}
@@ -530,6 +529,12 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
     background: #424f60;
   }
   .header .header-search .search #search_mini_form .search-close {
+    position: absolute;
+    top: 5px;
+    right: 115px;
+    height: 35px;
+    padding: 0 15px;
+    font-size: 16px;    
     color: #ffffff;
   }
   .header .header-search .header-searchLink {
@@ -543,7 +548,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   .header .header-search .search #search_mini_form {
     padding: 5px 0;
   }
-  .header .header-search .search #search_mini_form .search-string {font-size: 15px;padding-right: 0;padding-left: 0;color: #f9f9fa;}
+  .header .header-search .search #search_mini_form .search-string {font-size: 15px;    line-height: 21px;padding-right: 0;padding-left: 0;color: #f9f9fa;}
   .header .header-search .search #search_mini_form .search-submit {
     padding: 0;
     width: 130px;
@@ -1241,6 +1246,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   width: auto;
   height: 22px;
   padding: 3px 5px;
+  padding-right: 6px;
   border-radius: 25px;
   margin: 0;
   transition: all .3s;
@@ -1290,12 +1296,22 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .products-grid .item .quickview [class*=fa] {display:none;}
 .products-grid .item:hover .quickview {visibility: visible;}
 .products-grid .item .product-icons {position: absolute;z-index: 2;right: 0;top: 0;border: 1px solid transparent;border-radius: 25px;overflow: hidden;font-size: 0;}
-.products-grid .item .product-ico {display: inline-block;vertical-align: middle;padding: 4px 9px;font-size: 12px;color: #9c9e9e;/* background: #fff; */z-index: 1;transition: .1s all;opacity:0; border-radius: 25px; }
+.products-grid .item .product-ico {display: inline-block;vertical-align: middle;padding: 4px 9px;font-size: 12px;color: #9c9e9e;z-index: 1;transition: .1s all;opacity:0; border-radius: 25px;}
 .products-grid .item:hover .product-icons {background: #f3f3f5;border-color:#f3f3f5;}
 .products-grid .item:hover .product-ico,
 .products-grid .item:hover .product-ico.added {opacity: 1;}
 .products-grid .item .product-ico:hover,
 .products-grid .item .product-ico.added {opacity: .8;color: #fff;background: #398f93;}
+@media(max-width: 481px){
+  .products-grid .item .product-ico {
+    opacity: 1;
+    padding: 4px 7px;
+  }
+  .products-grid .item .product-icons {
+    background: #f3f3f5;
+    border-color: #f3f3f5;
+  }
+}
 .products-grid .item .product-shop {position: static;background-color: #fff;padding-top: 10px;text-align: left;}
 .products-grid .item .product-shop .product-name {margin: 0 0 5px;font-weight: 400;letter-spacing: normal;overflow: hidden;text-overflow: ellipsis;text-overflow: -o-ellipsis-lastline;display: -webkit-box;-webkit-line-clamp: 50;-webkit-box-orient: vertical;white-space: normal;text-align: center;}
 .products-grid .item .product-shop .product-name a {display: block;font-size: 14px;font-weight: 700;color: #2e2e2e;}
@@ -1370,14 +1386,15 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 
 /** Вы смотрели **/
 #viewed {
-    background: #f6f6f7;
-    border-bottom: 1px solid #eee; 
-    padding: 30px 0;    
+  content-visibility: auto;
+  background: #f6f6f7;
+  border-bottom: 1px solid #eee; 
+  padding: 30px 0;    
 }
 #viewed .title {font-size: 24px;font-weight: bold;margin-bottom: 15px;}
 #viewed .product .title {padding: 15px;background: #fafafa;}
 @media(max-width: 991px){
-  /* #viewed .owl-stage-outer {overflow: visible;} */
+  #viewed .owl-stage-outer {overflow: visible;}
 }
 #viewed .viewed-items .owl-stage {
     display: -webkit-box;

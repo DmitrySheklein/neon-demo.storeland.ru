@@ -330,9 +330,11 @@
         <!-- Блок информации по акции действующей на товар, если таковая есть -->
         {% IF GOODS_MOD_MAX_DISCOUNT_ID %}
           <div class="goodsDataMainDiscountBlock f-fix" content="{GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date("Y-m-d")}">
-            <i class="fal fa-percent"></i>
-            <span>Товар участвует в акции <strong class="br">&laquo;{GOODS_MOD_MAX_DISCOUNT_CAMPAIGN_NAME}&raquo;.</strong></span><br />
-            <span>До {GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date} скидка <strong>{GOODS_MOD_MAX_DISCOUNT}%</strong></span>
+            <a href="{GOODS_MOD_MAX_DISCOUNT_URL}" class="clearfix">
+              <i class="fal fa-percent"></i>
+              <span>Товар участвует в акции <strong class="br">&laquo;{GOODS_MOD_MAX_DISCOUNT_CAMPAIGN_NAME}&raquo;.</strong></span><br />
+              <span>До {GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date} скидка <strong>{GOODS_MOD_MAX_DISCOUNT}%</strong></span>
+            </a>
           </div>
         {% ENDIF %}             
       </div>

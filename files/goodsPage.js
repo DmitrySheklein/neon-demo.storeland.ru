@@ -458,10 +458,10 @@ function goodsRelated() {
         items: 1
       },
       320: {
-        items: 1
+        items: 2
       },
       480: {
-        items: 1
+        items: 2
       },
       540: {
         items: 2
@@ -503,10 +503,10 @@ function goodsRelated() {
         items: 1
       },
       320: {
-        items: 1
+        items: 2
       },
       480: {
-        items: 1
+        items: 2
       },
       540: {
         items: 2
