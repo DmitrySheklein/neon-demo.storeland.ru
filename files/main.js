@@ -784,7 +784,7 @@ function quickOrder(formSelector) {
               $('.changeprice').text(WithZone); 
             });
             $(function () {
-              setTimeout(preloadHide, 500);
+              preloadHide(null, true)
             });            
           }
         }
@@ -798,6 +798,12 @@ function quickOrder(formSelector) {
 function quickViewMod() {
   // Действие при нажатии на кнопку в корзину товара c модификацией
   $(function() {
+    $(document).on('mouseover', '.item._with-mod', function (params) {
+      var isLoad = loadFile('goodsPage', 'css') && loadFile('goodsPage', 'js');
+      if(isLoad) {
+        $(document).off('mouseover', '.item._with-mod');
+      }     
+    })
     $(document).on('click', 'a.quickviewmod', function() {
       var href = $(this).attr('href');
       href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
@@ -819,10 +825,6 @@ function quickViewShowMod(href, atempt) {
         autoSize: true,
         maxWidth: 500,
         baseClass: "_modification",
-        beforeShow: function(){
-          loadFile('goodsPage', 'css');
-          loadFile('goodsPage', 'js');
-        },
         afterShow: function() {
           $('.fancybox-container._modification .block-bg').prepend('<div class="preloader"><span class="content-loading"></span></div>')          
           var isLoad = loadFile('goodsPage', 'css') && loadFile('goodsPage', 'js');
@@ -1138,11 +1140,11 @@ function loadFile(fileName, ext, cb){
 }
 
 // Предзагрузчик
-function preloadHide(currentPreloader) {
+function preloadHide(currentPreloader, nodelay) {
   var $preloader = currentPreloader || $('.preloader'),
   $spinner = $preloader.find('.content-loading');
   $spinner.fadeOut();
-  $preloader.delay(500).fadeOut('slow');
+  $preloader.delay((nodelay)? 0 : 500).fadeOut('fast');
 }
 
 function preloadShow(currentPreloader) {
