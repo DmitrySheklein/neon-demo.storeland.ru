@@ -21,8 +21,8 @@
   .thumblist.owl-carousel .thumblist-item a img {display: inline-block;margin: 0 auto;width: auto;max-width: 100px;max-height: 100px;}
   .thumblist .owl-stage {margin: 0 auto;}
   .product-view .product-shop {margin-bottom: 30px;}
-  .product-view .product-header {display: flex;padding-bottom: 15px;}
-  .product-view .product-header .product-name h1 {display: block;margin: 0;font-size: 24px;font-weight: 600;text-transform: none;overflow: hidden;}
+  .product-view .product-header {display: flex;padding-bottom: 15px;padding-top: 15px;}
+  .product-view .product-header .product-name h1 {display: block;margin: 0;font-size: 24px;font-weight: 700;text-transform: none;overflow: hidden;}
   @media all and (max-width:1199px) {.product-view .product-header .product-name h1 {font-size: 21px}}
   @media all and (max-width:991px) {.product-view .product-header .product-name h1 {font-size: 18px}}
   @media all and (max-width:481px) {.product-view .product-header .product-name h1 {font-size: 16px}}

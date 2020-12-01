@@ -758,17 +758,14 @@ function quickOrder(formSelector) {
     url		  : formBlock.attr('action'),
     data		: formData,
     beforeSend: function () {
-      
+      loadFile('cartPage', 'css');
+      loadFile('cartPage', 'js');
     },
     success: function(data) {
       $('.add-cart.quick._loading').removeClass('_loading').find('span').text("Купить в 1 клик")      
       $.fancybox.open(data, {
         keyboard: false,
         baseClass: "_quickOrder",
-        beforeShow(){
-          loadFile('cartPage', 'css');
-          loadFile('cartPage', 'js');
-        },
         afterShow(){
           var loaded = loadFile('cartPage', 'css') && loadFile('cartPage', 'js');
 
@@ -844,7 +841,7 @@ function quickViewShowMod(href, atempt) {
             }
             $('.fancybox-inner .product-view .product-order').removeClass('col-md-4 col-md-6 col-lg-6');
             $('.fancybox-container._modification .product-view .block-bg > .row').css({visibility: 'visible',opacity: 1})
-            preloadHide($('.fancybox-container._modification .block-bg .preloader'))            
+            preloadHide($('.fancybox-container._modification .block-bg .preloader'), true);
           };
         }
       });
@@ -1132,7 +1129,7 @@ function loadFile(fileName, ext, cb){
   // Если файл уже загружен
   if($file.attr(attrName)){
     cb();
-    console.log('Already loaded');
+    // console.log('Already loaded');
     return (true);
   }
   $file.on('load', cb)
