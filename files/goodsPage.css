@@ -152,7 +152,6 @@
     list-style: none;
     text-align: left;
     height: 50px;
-    border-radius: 25px;
   }
   .product-tabs .tabs-inner:after {
     content: '';
@@ -166,7 +165,7 @@
   .product-tabs .tabs .tabs-item {display: inline-block;background-color: transparent;border-radius: 0;z-index: 2;margin-right: 25px;}
   .product-tabs .tabs .tabs-item:last-child {margin-right: 0;}
   .product-tabs .tabs .tabs-counter {font-family: 'Open Sans', sans-serif;}
-  .product-tabs .tabs .tabs-item a {display: block;font-size: 18px;font-weight: bold;padding: 14px 0;border-bottom: 2px solid transparent;}
+  .product-tabs .tabs .tabs-item a {display: block;font-size: 18px;font-weight: 700;padding: 14px 0;border-bottom: 2px solid transparent;white-space: nowrap;}
   .product-tabs .tabs .tabs-item a.active {color: #398f93;}
   .product-tabs .tabs .tabs-item a:not(.active):hover {color: #398f93;}
   .product-tabs .tab-content {background-color: transparent;padding: 15px;font-size: 15px;overflow: hidden;border-radius: 5px;border: 1px solid #f0f0f0;}
@@ -250,12 +249,11 @@
     .product-view .product-shop .custom-block .item i {display: block;text-align: center;}
     .product-view .product-shop .custom-block .text-area {text-align: center;margin: 0;}
     .product-tabs .tabs {padding: 0;}
-    .product-tabs .tabs li {display: block;padding: 0;}
     .product-tabs .tabs li a {padding: 15px;}
     .thumblist {max-width: 340px;}
   }
   @media all and (max-width: 550px) {
-    .product-tabs .tabs-inner {flex-wrap: wrap;height: auto;}
+    .product-tabs .tabs-inner {height: auto;overflow: auto;}
     .product-tabs .tabs-inner .nav-splitter {display: none;}
     .product-tabs .tabs-inner:after {display: none;}
     .product-tabs .tabs .tabs-item a {padding: 5px 0;}
@@ -267,8 +265,14 @@
     .product-view .product-shop .custom-block .item i {display: inline-block;text-align: left;width: 45px;font-size: 25px;text-align: center;}
     .product-view .product-shop .custom-block .text-area {text-align: left;margin-left: 5px;}
     .product-view .product-shop .add-to-box .add-to-cart {display: block;}
-    .thumblist {max-width: 220px;}
+    .thumblist {max-width: 220px;}   
     .tab-content .delivery h4 {font-size: 16px;}    
     .goodsDataOpinionFormReset {width: auto;}
 
+  }
+  @media all and (max-width: 320px) {
+    .product-tabs .tabs .tabs-item {
+      width: 50%;
+      margin-right: 0;
+    } 
   }

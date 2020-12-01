@@ -44,7 +44,7 @@
 }
 @media (max-width: 481px){
   #slideshow .slider-image {height: 275px;background-position: left center;}
-  #slideshow .container .slider-content .slider-title {font-size: 24px;}
+  #slideshow .container .slider-content .slider-title {font-size: 22px;}
   #slideshow .container .slider-content .slider-text {margin-top: 10px;font-size: 15px;}
   #slideshow .owl-nav .owl-prev {left: 0px;}
   #slideshow .owl-nav .owl-next {right: 0px;}
@@ -99,7 +99,7 @@
   #producttabs .pdt-nav li span {font-size: 20px;}
   #producttabs .pdt-nav-wrap:after {display: none;}
   #producttabs .pdt-nav-wrap {
-    flex-wrap: wrap;
+    overflow: auto;
   }
   #producttabs .nav-splitter {display: none;}
 }
