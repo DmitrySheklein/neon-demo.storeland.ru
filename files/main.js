@@ -822,11 +822,19 @@ function quickViewShowMod(href, atempt) {
   $btn.find('.fal').remove();
   $btn.find('span').html('<i class="fal fa-spinner fa-spin"></i>')
 
-  $.get(href, function(content) {
+  $.ajax({
+    type    : "GET",
+    cache	  : false,
+    url		  : href,
+    beforeSend: function () {
+      loadFile('goodsPage', 'css');
+      loadFile('goodsPage', 'js');
+    },
+    success: function(data) {
       $btn.removeClass('_loading').find('span').html('В корзину')
 
       $.fancybox.close();
-      $.fancybox.open(content, {
+      $.fancybox.open(data, {
         padding: 0,
         autoSize: true,
         maxWidth: 500,
@@ -854,7 +862,8 @@ function quickViewShowMod(href, atempt) {
           };
         }
       });
-    });
+    }
+  });
 
 }
 
