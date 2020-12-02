@@ -802,6 +802,9 @@ function quickViewMod() {
       }     
     })
     $(document).on('click', 'a.quickviewmod', function() {
+      if (!$(this).hasClass('quick')) {
+        $(this).addClass('_loading');
+      }      
       var href = $(this).attr('href');
       href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
       quickViewShowMod(href);
@@ -814,8 +817,14 @@ function quickViewShowMod(href, atempt) {
   // Если массив с подгруженными заранее карточками товара для быстрого просмотра ещё не создан - создадим его.
   if(typeof(document.quickviewPreload) == 'undefined') {
     document.quickviewPreload = [];
-  }  
+  }
+  var $btn = $('.quickviewmod._loading');
+  $btn.find('.fal').remove();
+  $btn.find('span').html('<i class="fal fa-spinner fa-spin"></i>')
+
   $.get(href, function(content) {
+      $btn.removeClass('_loading').find('span').html('В корзину')
+
       $.fancybox.close();
       $.fancybox.open(content, {
         padding: 0,
