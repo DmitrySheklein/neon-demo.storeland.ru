@@ -94,42 +94,93 @@ function indexPage() {
       }
     });  
     // Товары на главной
-    (function(element){
-        var $element = $(element);
-        var itemNav = $('.item-nav', $element);
-        var itemContent = $('.products-container', $element);    
-        itemNav.on('click', function(){
-          var $this = $(this);
-          var navPosition = $this.position().left
-          var navWidth = $this.outerWidth();
-          if($this.hasClass('tab-nav-actived')) return false;
-          itemNav.removeClass('tab-nav-actived');
-          $this.addClass('tab-nav-actived');
-          var itemActive = '.' + $this.data('href');
-          itemContent.hide()
-          $(itemActive, $element).fadeIn()
-          $element.find('.nav-splitter').css({'left': navPosition + 'px', 'width': navWidth})
-        });
-      $element.find('.nav-splitter').css('width', itemNav.first().outerWidth())
-    })('#producttabs');
-    //Функция показать больше 
-    $('.products-button-load').on('click', function () {
-      var $btn = $(this);
+    if(goodsIndexTemplateView === 'tabs'){
+      (function(element){
+          var $element = $(element);
+          var itemNav = $('.item-nav', $element);
+          var itemContent = $('.products-container', $element);    
+          itemNav.on('click', function(){
+            var $this = $(this);
+            var navPosition = $this.position().left
+            var navWidth = $this.outerWidth();
+            if($this.hasClass('tab-nav-actived')) return false;
+            itemNav.removeClass('tab-nav-actived');
+            $this.addClass('tab-nav-actived');
+            var itemActive = '.' + $this.data('href');
+            itemContent.hide()
+            $(itemActive, $element).fadeIn()
+            $element.find('.nav-splitter').css({'left': navPosition + 'px', 'width': navWidth})
+          });
+        $element.find('.nav-splitter').css('width', itemNav.first().outerWidth())
+      })('#producttabs');
+      //Функция показать больше 
+      $('.products-button-load').on('click', function () {
+        var $btn = $(this);
+  
+        if($btn.hasClass('_loaded')){
+          $btn.closest('.products-container').find('.products-grid .item').filter('._visible').removeClass('_visible').hide();
+          $btn
+            .removeClass('_loaded')
+            .find('span')
+            .text('Показать все')
+        }else{ 
+          $btn.closest('.products-container').find('.products-grid .item').not(':visible').addClass('_visible').show();
+          $btn
+            .addClass('_loaded')
+            .find('span')    
+            .text('Скрыть')
+        }
+      })
+    }
+    if(goodsIndexTemplateView === 'carousel'){
 
-      if($btn.hasClass('_loaded')){
-        $btn.closest('.products-container').find('.products-grid .item').filter('._visible').removeClass('_visible').hide();
-        $btn
-          .removeClass('_loaded')
-          .find('span')
-          .text('Показать все')
-      }else{ 
-        $btn.closest('.products-container').find('.products-grid .item').not(':visible').addClass('_visible').show();
-        $btn
-          .addClass('_loaded')
-          .find('span')    
-          .text('Скрыть')
-      }
-    })
+      $(".products-container").each(function () {
+        var $navBlock = $(this).find('.navigation');
+
+        $(this).find('.products-grid').owlCarousel({
+          margin: 10,
+          loop: false,
+          rewind: true,
+          lazyLoad: true,
+          nav: true,
+          dots: false,
+          autoplay: false,
+          autoplayTimeout: 3000,
+          autoplayHoverPause: true,
+          navContainer: $navBlock,
+          navText: [, ],
+          navText: ["<i class='slideshow-nav fal fa-angle-left' aria-hidden='true'></i>", "<i class='slideshow-nav fal fa-angle-right' aria-hidden='true'></i>"],
+          smartSpeed: 500,
+          mouseDrag: true,
+          touchDrag: true,
+          pullDrag: true,
+          responsiveClass: true,
+          responsiveRefreshRate: 100,
+          responsive: {
+            0:{items:1},
+            320:{items:2},
+            480:{items:2},
+            540:{items:2},
+            768:{items:3},
+            992:{items:3},
+            1200:{items:5}
+          },          
+          onInitialized: changeNavBtn
+        });        
+      })
+
+      function changeNavBtn(event){
+        var items = event.item.count;
+        var size = event.page.size;
+        var $nav = $(event.target).siblings('.block-title').find('.navigation');
+        
+        if (items > size){
+          $nav.show();
+        } else {
+          $nav.hide();
+        }
+      }      
+    }
     // Установшка ширины .nav-splitter при загрузке
     $('#news .tabs-headerList').find('.nav-splitter').css('width', $('#news .tabs-headerList .tabs-headerItem').first().outerWidth())
     // Клик по табам в блоке новости
