@@ -288,7 +288,7 @@ label.invalidInput {color: #E80636;font-size: 90%;}
 .fancybox-callback {
   padding: 0;
 }
-.fancybox-header {position: relative;min-width: 420px;padding: 30px;padding-right: 70px;background-position: center;background-color: #fff;text-align: left;border-bottom: 2px solid #398f93;}
+.fancybox-header {position: relative;width: 100%;padding: 30px;background-position: center;background-color: #fff;text-align: left;border-bottom: 2px solid #398f93;}
 .fancybox-header .title {font-size: 25px;font-weight: 500;font-family: 'Open Sans',Arial, sans-serif;}
 .fancybox-body {position: relative;padding: 30px}
 /* Политика конф-ти */
@@ -469,9 +469,14 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   .header .header-login .header-loginLink ~ .header-loginLink,.header .header-loginList .header-loginLink + .header-loginLink {border-top: 1px solid #4c4c4c}
   .header .header-login .header-loginLink .pseudo-link::after {display: none}
   .header .header-login {
-    text-align-last: left;
+    text-align: left;
   }
-  .header .header-login .header-loginLink {width: 100%;;color: #fff;padding-left: 15px;padding-right: 15px;}
+  .header .header-login .header-loginLink {display: block;color: #fff;padding-left: 15px;padding-right: 15px;}
+  .header .header-login .header-loginLink:hover {
+    color: #fff;
+    background: #f4605d;
+  }
+  .header .header-login .header-loginLink:hover .fal {color: #fff}
 } 
 /** Header main **/
 .header-main {background-color: #fff;padding: 15px 0;border-bottom: 1px solid #f0f0f0;}
@@ -585,6 +590,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .header-contacts .header-phoneNum {display: inline-block;vertical-align: middle;padding-right: 0px;margin-right: 0;margin-bottom: 10px;font-size: 18px;font-weight: bold;    font-family: 'Open Sans', sans-serif;}
 .header-contacts .header-phoneNum ~ .header-phoneNum {display: none}
 .header-contacts .header-phoneSub {margin-top: 3px;color: #b1bfc8}
+.header-contacts .header-phoneCallback-mobile {display: none;}
 .header-contacts .header-phoneCallback {display: block;text-align: right;padding-left: 15px;font-size: 12px;color: #f4605d;}
 .header-contacts .header-phoneCallback:hover {color: #398f93}
 .header-contacts .header-phoneCallback:hover .pseudo-link:after {color: #398f93}
@@ -599,14 +605,8 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   .header-contacts .header-phoneNum {width: 100%;color: #fff;margin-right: 0}
   .header-contacts .header-phoneNum ~ .header-phoneNum {display: block;margin-top: 5px}
   .header .header-contacts {text-align: center}
-  .header-contacts .header-phoneCallback {display: block;width: 100%;max-width: 300px;height: 30px;margin: 10px auto;line-height: 30px;color: #fff;border-radius: 5px;text-align: center;padding-right: 0;background: #398f93;}
-  .header-contacts .header-phoneCallback .pseudo-link:after {
-    display: none;
-  }
-  .header-contacts .header-phoneCallback:hover {
-    color: #fff;
-  }
-  .header-contacts .header-phoneCallback:after {display: none}
+  .header-contacts .header-phoneCallback-mobile {display: block;}
+  .header-contacts .header-phoneCallback {display: none;}
 }
 /* Избранное Сравнение Корзина */
 .header .header-tools {text-align: right;position: fixed;top: 50%;margin-top: -110px;z-index: 1046;right: 0;display: flex;flex-direction: column;transition: right .3s ease-in-out;}
@@ -898,7 +898,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .mainnav .mainnav__link {white-space: nowrap;}
 .mainnav .overflowMenu {margin: 0;padding: 0;}
 .mainnav__item.mainnav__more {position: relative;}
-.mainnav .mainnav__item.mainnav__more .mainnav__link {position: relative;z-index: 5;}
+.mainnav .mainnav__item.mainnav__more .mainnav__link {position: relative;width: 100%;display: block;z-index: 5;}
 @media (min-width: 992px){
   .mainnav__more.active {position: relative;z-index: 3;}
   .mainnav .mainnav__list > .mainnav__item  {transform: translateX(-15px);}
@@ -916,14 +916,17 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
     box-shadow: 0 5px 40px rgb(61 77 95 / 15%);
   }  
   .mainnav .overflowMenu.active {display: block;opacity:1;visibility:visible}
-  .mainnav .overflowMenu li {padding: 12px 24px;position: relative;z-index: 1;}
+  .mainnav .overflowMenu .mainnav__item {position: relative;z-index: 1;padding: 0;}
+  .mainnav .overflowMenu .mainnav__link {padding: 12px 15px;}
   .mainnav .mainnav__item + .mainnav__item {border-top: 1px solid #edf1f4;}
 }
 @media (max-width: 991px){
   .header .header-nav {display: none}
   .mainnav .mainnav__list {display: block;height: auto;width: auto;}
-  .mainnav__item.mainnav__more {padding: 0;}
-  .mainnav__item.mainnav__more > .mainnav__link {display: none;}
+  .mainnav .mainnav__item.mainnav__more {padding: 0;background: none}
+  .mainnav .mainnav__item.mainnav__more:hover {background: none}
+  .mainnav .mainnav__item.mainnav__more > .mainnav__link {display: none;}
+  .mainnav .mainnav__item.active > .mainnav__link, .mainnav .mainnav__item:hover > .mainnav__link {color: #fff}
   .mainnav .mainnav__item {display: block;text-align: left;box-shadow: none!important;transition: background .3s ease}
   .mainnav .mainnav__item.active,.mainnav .mainnav__item:hover {background: #f4605d}
   .mainnav .mainnav__item + .mainnav__item {border-top: 1px solid rgba(249,249,250, .2)}
@@ -933,7 +936,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 /* Всплывающие блоки моб версии */
 @media (max-width: 991px){
   ._header-mobile {display: none}
-  .header ._header-mobile {position: absolute;z-index: 2;top: 30px;left: 0;width: 100%;padding: 0;background-color: #424f60;border-top: 1px solid #f6f6f6;}
+  .header ._header-mobile {position: absolute;z-index: 2;top: 30px;left: 0;right: 0;width: 100%;padding: 0;background-color: #424f60;border-top: 1px solid #f6f6f6;}
 }
 @media (min-width: 992px) {
   ._header-mobile {display: block!important;}
@@ -1514,11 +1517,7 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .col-left .block#viewed .content {overflow: visible;padding-top: 10px;}
 /** Меню **/
 .col-left .block.user-menu .content ul li a.active {font-weight: bold;}
-/* Логин */
-.fancybox-login  {
-  max-width: 500px;
-  padding: 0;
-}
+
 /* Быстрый просмотр */
 .fancybox-inner .container {max-width: 950px;padding:0;}
 .quickView .fancybox-inner .container {max-width: 700px;}
@@ -1562,6 +1561,7 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .fancybox-container._modification .product-img-box {display: none;}
 .fancybox-container._modification .product-shop {display: none;}
 .fancybox-container._modification .product-view .product-order {padding:0}
+.fancybox-container._modification .product-view .product-header {padding-top: 0;}
 .fancybox-container._modification .product-order .more{display: none;}
 .fancybox-container._modification .table-features-min {display: none;}
 .fancybox-container._modification .product-view .short-description {display: none;}
@@ -1581,6 +1581,12 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .fancybox-margin {margin-right: 17px !important;}
 
 /*** Личный кабинет (Всплывающее окно) ***/
+.fancybox-login {padding: 0;}
+.fancybox-login-content  {
+  max-width: 420px;
+  width: 100%;
+  padding: 0;
+}
 .fancybox-login .fancybox-body.first p {
   font-size: 15px;
 }
