@@ -1,4 +1,4 @@
-/*** Обратный звонок, Связь с администрацией ***/
+/*! Обратный звонок, Связь с администрацией ***/
 .callback-info .callback-form {text-align: left;}
 .callback-info .callback-form .name-error, .callback-info .callback-form .phone-error {position: relative;text-align: left;bottom: 0;}
 .callback-info .callback-form div {margin-bottom: 10px;}

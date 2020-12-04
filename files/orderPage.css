@@ -1,26 +1,29 @@
-/*** Оформление заказа ***/
-.orderStrageContent .quick_order_payment, .orderStrageContent .coupons {margin-bottom: 15px;}
-.orderStrageContent .buttons .button:nth-child(2) {float: right;}
-.orderStrageContent .payment {margin-bottom: 15px;}
-.orderStrageContent .registrations .text, .orderStrageContent .form-list .text {text-transform: uppercase;margin-bottom: 8px;}
-.orderStrageContent .registrations .text-italic {color: #b2b2b2;margin-bottom: 15px;}
-.orderStrageContent .registrations .contactWantRegister input {margin: 0;vertical-align: middle;}
-.orderStrageContent h3.title {margin-bottom: 15px;}
-.orderStrageContent .delivery {margin-bottom: 15px;}
-.stages-list {float: left;width: 100%;margin: 30px 0 20px 0;padding-top: 30px;border-top: 1px solid #eacd8e;}
-.stages .stage {display: inline-block;width: 48px;height: 48px;line-height: 48px;background-color: #c1c1c1;text-align: center;margin-right: 15px;margin-bottom: 15px;color: #fff;font-size: 22px;}
-.stages .title {display: inline-block;font-size: 20px;color: #b2b2b2;text-transform: uppercase;}
-.stages.active .stage, .stages:hover .stage {background-image: linear-gradient(160.47deg,#398f93 11.94%,#fc9758 85.71%);}
-.stages.active .title, .stages:hover .title {color: #2e2e2e;}
-
-@media all and (max-width: 991px) {
-    .step li {padding: 10px;}
+/*! Оформление заказа ***/
+.orderStrageContent .coupons,
+.orderStrageContent .quick_order_payment {margin-bottom: 15px}
+.orderStrageContent .buttons .button:nth-child(2) {float: right}
+.orderStrageContent .payment {margin-bottom: 15px}
+.orderStrageContent .form-list .text,
+.orderStrageContent .registrations .text {text-transform: uppercase;margin-bottom: 8px}
+.orderStrageContent .registrations .text-italic {color: #b2b2b2;margin-bottom: 15px}
+.orderStrageContent .registrations .contactWantRegister input {margin: 0;vertical-align: middle}
+.orderStrageContent h3.title {margin-bottom: 15px}
+.orderStrageContent .delivery {margin-bottom: 15px}
+.stages-list {float: left;width: 100%;margin: 30px 0 20px 0;padding-top: 30px;border-top: 1px solid #eacd8e}
+.stages .stage {display: inline-block;width: 48px;height: 48px;line-height: 48px;background-color: #c1c1c1;text-align: center;margin-right: 15px;margin-bottom: 15px;color: #fff;font-size: 22px}
+.stages .title {display: inline-block;font-size: 20px;color: #b2b2b2;text-transform: uppercase}
+.stages.active .stage,
+.stages:hover .stage {background-image: linear-gradient(160.47deg,#398f93 11.94%,#fc9758 85.71%)}
+.stages.active .title,
+.stages:hover .title {color: #2e2e2e}
+@media all and (max-width:991px) {
+  .step li {padding: 10px}
 }
-@media all and (max-width: 767px) {
-    .step li {display: block;width: 100%;padding: 15px;}
-    .step li.step_done {border-bottom: 1px solid rgba(255, 255, 255, 0.2);}
+@media all and (max-width:767px) {
+  .step li {display: block;width: 100%;padding: 15px}
+  .step li.step_done {border-bottom: 1px solid rgba(255,255,255,.2)}
 }
-@media all and (max-width: 481px) {
-    .orderStrageContent .buttons .button {margin: 0 10px 10px 0;float: left;}
-    .orderStrageContent .buttons .button:nth-child(2) {float: left;margin: 0;}
+@media all and (max-width:481px) {
+  .orderStrageContent .buttons .button {margin: 0 10px 10px 0;float: left}
+  .orderStrageContent .buttons .button:nth-child(2) {float: left;margin: 0}
 }
