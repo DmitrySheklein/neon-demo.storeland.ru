@@ -182,7 +182,9 @@ function indexPage() {
       }      
     }
     // Установшка ширины .nav-splitter при загрузке
-    $('#news .tabs-headerList').find('.nav-splitter').css('width', $('#news .tabs-headerList .tabs-headerItem').first().outerWidth())
+    setTimeout(function(){
+      $('#news .tabs-headerList').find('.nav-splitter').css('width', $('#news .tabs-headerList .tabs-headerItem').first().outerWidth())  
+    }, 300);    
     // Клик по табам в блоке новости
     $('#news .tabs-headerList').on('click', '.tabs-headerLink', function(event){
       event.preventDefault()

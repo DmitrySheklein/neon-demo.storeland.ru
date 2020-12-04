@@ -80,7 +80,7 @@
   }
 }
 /* Табы товаров */
-#producttabs {margin-bottom: -10px;content-visibility: auto}
+#producttabs {margin-bottom: -10px;content-visibility: auto;padding-bottom: 50px;}
 #producttabs .products-container {display: none;width: 100%;}
 #producttabs .tab-content-actived {display: inline-block;}
 #producttabs .pdt-nav {display: flex;}
@@ -106,7 +106,7 @@
 
 /*** Новости ***/
 #news {
-  margin-bottom: 40px;
+  padding-bottom: 50px;  
   content-visibility: auto;
 }
 #news .preloader {
