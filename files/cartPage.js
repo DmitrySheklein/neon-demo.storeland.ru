@@ -380,7 +380,7 @@ function coupons() {
 // Регистрация и выбор доставки
 function OrderScripts() {
   $(function () {    
-    $('#selectTime, .mainSelect, .paymentSelect').styler();
+    $('#selectTime, .mainSelect, .zoneSelect select, .paymentSelect').styler();
 
     // Форма регистрации нового пользователя, при оформлении заказа
     $('.OrderShowPass').on('click', function () {

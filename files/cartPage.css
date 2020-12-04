@@ -73,6 +73,7 @@ github.com/t1m0n/air-datepicker
 .delivery .orderStageDeliveryListTable .cell3 {min-width: 160px}
 .delivery .orderStageDeliveryListTable input {cursor: pointer;vertical-align: middle;margin: 0}
 .delivery .mainSelect {font-size: 16px}
+.delivery .zoneSelect {margin-top: 10px;}
 .orderStageDeliveryDefaultPrice,
 .orderStageDeliveryZonePrice {margin-left: 10px;font-size: 18px;font-weight: 700}
 .payment .orderStagePayment {float: left;position: relative;width: 100%;margin: 0 0 15px 0}
