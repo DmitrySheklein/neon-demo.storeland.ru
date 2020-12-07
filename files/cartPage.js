@@ -47,6 +47,8 @@ function startOrder() {
   $('#page-title .title-tab').toggleClass('disabled');
   // Отключаем возможность клика по неактивной кнопке
   $('#page-title .title-tab.disabled').prop('disabled', true)
+  // Блок "С этим товаром покупают"
+  var $goodsCartRealted = $('.сart-related');
   // Отключаем возможность редактирования формы
   var cartTable = $('.cartTable');
   // открываем общий, глобальный блок
@@ -69,6 +71,7 @@ function startOrder() {
       $('.formfast-cart').hide();
       // Включаем возможность клика по неактивной кнопке
       $('#page-title .title-tab.disabled').prop('disabled', false)
+      $goodsCartRealted.hide();
       // скрываем блок с анимацией
       ajaxLoaderQuickOrder.hide();
       globalOrder.removeClass('loading')
@@ -91,6 +94,7 @@ function startOrder() {
           return;
         }
         $('.wrapper').removeClass('_overflow');
+        $goodsCartRealted.show();
         //Скрываем блок оформления заказа
         ajaxLoaderQuickOrder.hide();
         OrderAjaxBlock.hide();
