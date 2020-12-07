@@ -37,7 +37,7 @@
   .product-view .product-action {padding: 0}
 }
 .product-view .product-toolbar {padding-top: 0;margin-bottom: 15px;display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-box-align: center;-ms-flex-align: center;align-items: center}
-.product-view .product-neighbor {margin-left: auto}
+.product-view .product-neighbor {margin-left: auto;flex-shrink: 0;}
 .product-view .product-neighbor > div {display: inline-block;position: relative;vertical-align: middle}
 .product-view .product-neighbor > div > a {display: inline-block;color: #93a6b3;opacity: .7;font-size: 24px;width: 30px;line-height: 30px;text-align: center}
 .product-view .product-neighbor > div > a:hover {opacity: 1}

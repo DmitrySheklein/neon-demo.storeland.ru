@@ -1055,7 +1055,7 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .products-container .item._with-mod .actions .qty-wrap {display: none}
 .products-list .item._with-mod .actions .qty-wrap {display: block;visibility: hidden;opacity: 0}
 /*! Выбор модификации при добавлении в корзину ***/
-.fancybox-container._modification .product-view {max-width: 380px;padding: 30px;padding-top: 40px;overflow: visible;}
+.fancybox-container._modification .product-view {max-width: 380px;padding: 30px;padding-top: 40px;overflow: visible;border-radius: 5px;}
 .fancybox-container._modification .product-view .product-toolbar {padding-top: 0;}
 .fancybox-container._modification .product-view .block-bg {border:none;padding: 0;}
 .fancybox-container._modification .product-view .block-bg > .row {visibility: hidden;opacity: 0;margin: 0;}
@@ -1151,10 +1151,11 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .discount-box .content .desc .button {margin: 0 auto;}
 
 /*! Новости ***/
-.news-box  a {text-decoration: underline;}
-.news-box .news {border-bottom: 1px solid #dce4e9;margin-bottom: 20px;}
+.news-box .htmlDataBlock a {text-decoration: underline;}
+.news-box .news {border-bottom: 1px solid #f0f0f0;margin-bottom: 20px;}
 .news-box .news:last-child {margin-bottom: 0;}
 .news-box .news .title {margin-bottom: 10px;}
+.news-box .news .title a:hover {color: #f4605d;}
 .news-box .news-content p {margin-bottom: 0px;}
 .news-box .news-time {text-align: right;margin-bottom: 10px;}
 
