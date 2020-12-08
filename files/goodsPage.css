@@ -228,6 +228,3 @@
   .tab-content .delivery h4 {font-size: 16px}
   .goodsDataOpinionFormReset {width: auto}
 }
-@media all and (max-width:320px) {
-  .product-tabs .tabs .tabs-item {width: 50%;margin-right: 0}
-}
