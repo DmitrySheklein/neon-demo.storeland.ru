@@ -157,7 +157,7 @@
 .products-list .item .product-ico {display: block;width: 30px;height: 30px;line-height: 30px;margin: 0 5px;font-size: 15px;text-align: center;background-color: #fff;z-index: 1;transition: .1s all;}
 .products-list .item .product-ico.added,.products-list .item .product-ico:hover {color: #398f93}
 .products-list .item .product-ico.added {border-color: #398f93;}
-.products-list .item.empty .product-shop .actions .empty {display: inline-block;vertical-align: middle;height: 36px;line-height: 36px;padding: 0 17px;font-size: 14px;color: #333;background-color: #fff;border: 1px solid #dce4e9;cursor: default;}
+.products-list .item.empty .product-shop .actions .empty {flex-shrink: 0;max-width: 118px;width: 100%;text-align: center;display: inline-block;vertical-align: middle;height: 36px;line-height: 36px;padding: 0 5px;font-size: 14px;color: #2e2e2e;border: none;background-color: #f3f3f5;cursor: default;border-radius: 5px;}
 
 @media all and (max-width: 1199px) {
   .products-list .item .product-icons {-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;margin-top: -35px}
@@ -185,11 +185,15 @@
   .products-list .item .item-inner .goodsListForm {-ms-flex-wrap: wrap;flex-wrap: wrap}
   .products-list .item .product-image {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;width: 100%;height: auto;margin-bottom: 10px;margin-right: 0}
   .products-list .item .product-img {display: block;height: 70px}
-  .products-list .product-name {width: 100%;margin-bottom: 10px;text-align: center}
-  .products-list .product-name-content {margin-top: 5px;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center}
+  .products-list .item .product-name {max-width: 100%;width: 100%;margin-bottom: 10px;text-align: center}
+  .products-list .item .product-name-content {margin-top: 5px;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center}
   .products-list .item [class^=ico]:last-of-type {margin-right: 0}
   .products-list .item .ratings {margin-left: 10px}
   .products-list .item .product-shop {padding-right: 0;max-width: 100%}
   .products-list .item .product-shop .price-box {margin-left: auto;margin-right: auto;margin-bottom: 10px}
   .products-list .item .product-icons {-webkit-box-ordinal-group: 2;-ms-flex-order: 1;order: 1;position: static;margin: 0;-webkit-box-orient: horizontal;-webkit-box-direction: normal;-ms-flex-direction: row;flex-direction: row;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center}
+  .products-list .item.empty .product-shop .actions .empty {
+    padding: 0 20px;
+    max-width: 100%;
+  }
 }

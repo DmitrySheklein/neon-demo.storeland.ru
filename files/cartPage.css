@@ -41,6 +41,7 @@ github.com/t1m0n/air-datepicker
 .formfast .fields.deliveryConvenientTime {width: calc(50% - 7px);margin: 0}
 .formfast .quickform-select-convenient {font-size: 16px}
 #deliveryConvenientDate {font-family: 'Open Sans',sans-serif}
+#quickDeliveryCountry-styler {flex-wrap: wrap;}
 .formfast .contactWantRegister {margin-bottom: 10px}
 .formfast .contactRegisterNeedElement {margin-top: 10px}
 .formfast .input-box {position: relative}

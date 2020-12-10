@@ -191,7 +191,12 @@ function showPass(){
 $(function(){
   showPass()
 });
-
+// Галочка политики
+$(function () {
+  $('.pp-checkbox').on('change', function () {
+    $(this).closest('form').find('[type=submit]').toggleClass('_disabled')
+  })
+})
 // Основные функции
 function mainFunctions() {
   $(function(){

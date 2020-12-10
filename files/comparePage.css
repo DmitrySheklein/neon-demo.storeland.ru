@@ -7,11 +7,12 @@
 .CompareGoodsTable .CompareNavigation {float: left;margin: 0;padding: 0;list-style: none;list-style-position: inside}
 .CompareGoodsTable .CompareNavigation li {display: inline-block;vertical-align: middle}
 .CompareGoodsTable .CompareNavigation .next,
-.CompareGoodsTable .CompareNavigation .prev {font-size: 30px;vertical-align: middle;}
+.CompareGoodsTable .CompareNavigation .prev {font-size: 30px;vertical-align: middle;} 
 .CompareGoodsTableTbody tbody tr td.cell {text-align: left;width: 200px}
 .CompareGoodsTableTbody tbody tr td.vtop {vertical-align: top;overflow: auto}
 .CompareGoodsTableTbody .CompareCheckbox {margin: 0;vertical-align: middle}
 .CompareGoodsTableTbody .CompareGoodsTableTbodyComparisonLine .htmlDataBlock {text-align: left}
+.CompareGoodsTableTbody .compare-empty{display:none;width:fit-content;height:38px;line-height:36px;text-align:center;padding:0 10px;margin:0 auto;font-size:13px;border:none;color:#2e2e2e;background-color:#f3f3f5;cursor:default;border-radius:5px}
 @media all and (min-width: 1200px) {.CompareGoodsTableTbody.table-box {table-layout: fixed;}}
 @media all and (max-width: 768px) {.CompareGoodsTableFilter .button {margin-bottom: 5px;margin-left: 0;}}
 @media all and (max-width: 481px) {.CompareGoodsTable {-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center}}
@@ -25,4 +26,5 @@
 @media all and (max-width: 481px) {
   .CompareGoodsTableFilter {float: left;}
   .CompareGoodsTableFilter span {float: left;width: 100%;}
+  .CompareGoodsTableFilter .button {width: 100%;}
 }

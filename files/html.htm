@@ -360,8 +360,8 @@
                         </div>                      
                         <button type="submit" title="Отправить" class="callback-btn button button3">Отправить</button>
                         <div class="pp">
-                          <input type="checkbox" id="pp-check-callback" class="pp-checkbox checkbox-hidden" name="pp-check" required="" aria-required="true" checked>
-                          <label for="pp-check-callback"  class="pp-label checkbox-name">
+                          <input type="checkbox" id="pp-check-callback" class="pp-checkbox checkbox-hidden required" name="pp-check" required="" aria-required="true" checked>
+                          <label for="pp-check-callback"  class="pp-label checkbox-name required">
                           Я согласен на <a class="blue-link" href="#" data-fancybox="" data-src="#fancybox-pp">обработку персональных данных</a>
                           </label>
                         </div>
@@ -488,7 +488,12 @@
                   <div class="dropdown">
                     <div id="favorites-items" class="dropdown-content">
                       {% IF favorites_goods_empty %}
-                        <div class="empty">Ваш список Избранного пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> после <a href="{USER_REGISTER_URL}" title="Перейти к авторизации">авторизации</a>.</div>
+                        <div class="empty">
+                          Ваш список Избранного пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a>
+                          {% IFNOT CLIENT_IS_LOGIN %}
+                          после <a href="{USER_REGISTER_URL}" title="Перейти к авторизации">авторизации</a>.
+                          {% ENDIF %} 
+                        </div>
                         <ul class="favorites-items-list"></ul>
                       {% ELSE %}
                         <div class="empty" style="display:none">Ваш список Избранного пуст.<br/> Вы можете добавлять товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a> после <a href="{USER_REGISTER_URL}" title="Перейти к авторизации">авторизации</a>.</div>
@@ -766,7 +771,7 @@
           {% IFNOT catalog_full.HIDE %}
               <!-- Если нужны конкретные категории  -->
               <!-- {% IF catalog_full.NAME = Техника || catalog_full.NAME = Обувь %} -->
-              {% IF catalog_full.LEVEL = 0  && catalog_full.index < 8 %}
+              {% IF catalog_full.LEVEL = 0 %}
               <div class="item">
                 <div class="item-inner">
                   <div class="cat-image">

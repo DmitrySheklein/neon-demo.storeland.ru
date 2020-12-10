@@ -146,7 +146,7 @@
               {% ENDIF %}
             </td>
             <td>{% IF order_lines.GOODS_URL %}<a href="{order_lines.GOODS_URL}">{order_lines.NAME}</a>{% ELSE %}{order_lines.NAME}{% ENDIF %}</td> 
-            <td class="a-left" width="100"><span class="price-excl-tax"><span class="cart-price"><span>
+            <td class="a-left" width="130"><span class="price-excl-tax"><span class="cart-price"><span class="price {CURRENCY_CHAR_CODE}">
               <!-- Товарная позиция либо доставка -->
               {% IF order_lines.TYPE_ID=1 || order_lines.TYPE_ID=2 || order_lines.TYPE_ID=3 && order_lines.MEASURE_NAME!=% %}
                 {order_lines.LINE_PRICE | money}
@@ -156,7 +156,7 @@
               {%ENDIF%}
               </span></span></span>
             </td> 
-            <td class="a-center" width="50">
+            <td class="a-center" width="100">
               <!-- Товарная позиция -->
               {% IF order_lines.TYPE_ID=1 %}
                 {order_lines.QUANTITY} <span title="{order_lines.MEASURE_TITLE}">{order_lines.MEASURE_NAME}</span>
@@ -170,7 +170,7 @@
             </td> 
             <td class="a-left" width="100"> 
               <span class="price-excl-tax"> 
-              <span class="cart-price"><span>{order_lines.LINE_SUM | money}</span></span></span> 
+              <span class="cart-price"><span class="price {CURRENCY_CHAR_CODE}">{order_lines.LINE_SUM | money}</span></span></span> 
             </td> 
           </tr> 
         {% ENDFOR %}

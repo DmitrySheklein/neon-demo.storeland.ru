@@ -211,6 +211,7 @@
                     <label for="quickDeliveryCountry" {% IF SETTINGS_ORDER_FIELDS_COUNTRY=1 %}class="required"{% ENDIF %}>Страна{% IF SETTINGS_ORDER_FIELDS_COUNTRY=1 %}<em>*</em>{% ENDIF %}</label>
                     <div class="input-box">
                       <select id="quickDeliveryCountry" name="form[delivery][country_id]" class="{% IF SETTINGS_ORDER_FIELDS_COUNTRY=1 %}required{% ENDIF %}" style="float: none;">
+                        <option value=""></option>
                         {% FOR country_list %}
                           <option value="{country_list.ID}" {% IF country_list.ID=ORDER_FORM_DELIVERY_COUNTRY_ID %}selected="selected"{% ENDIF %}>
                             {country_list.NAME}

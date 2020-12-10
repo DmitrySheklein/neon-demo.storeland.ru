@@ -72,7 +72,7 @@ function indexPage() {
       }
     });  
     // Категории на главной
-    $("#categories-index .categories").owlCarousel({
+    $("#categories-index .owl-carousel").owlCarousel({
       loop: false,
       rewind: true,
       lazyLoad: false,
@@ -90,7 +90,7 @@ function indexPage() {
         370:{items:2,margin: 10},
         480:{items:2,margin: 10},
         991:{items:3,margin: 10},
-        1200:{items:5,margin: 10,mouseDrag: false}
+        1200:{items:5,margin: 10}
       }
     });  
     // Товары на главной

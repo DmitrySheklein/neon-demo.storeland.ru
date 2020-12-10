@@ -29,7 +29,9 @@ select:focus, textarea:focus {outline: 0;border-color: #2e2e2e;}
 .input:hover {border-color: #b1bfc8}
 .input:focus {border-color:#398f93;-webkit-box-shadow: inset 0 0 0 1px#398f93;box-shadow: inset 0 0 0 1px#398f93}
 .input.input--error,.input.invalidInput {border-color: #398f93}
+select.invalidInput + label,
 .input.invalidInput + label {display: block;color: #398f93;font-size: 12px;text-align: left;margin-top: 5px}
+select.invalidInput + label {margin-top: 0;margin-bottom: 5px;}
 
 .input::-webkit-input-placeholder {color: #b1bfc8}
 .input::-moz-placeholder {color: #b1bfc8}
@@ -936,7 +938,8 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .products-grid .item .product-shop .actions .add-cart.quick:hover {color: #398f93}
 .products-grid .item .product-shop {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1}
 .products-grid .item .product-shop .actions {margin-top: auto}
-.products-grid .item.empty .product-shop .actions .empty {display: inline-block;vertical-align: middle;width: 100%;height: 34px;line-height: 34px;text-align: center;padding: 0 17px;font-size: 14px;color: #2e2e2e;background-color: #f3f3f5;cursor: default;border-radius: 25px}
+.products-grid .item .product-shop .actions .qty-wrap {flex-shrink: 0;}
+.products-grid .item.empty .product-shop .actions .empty {display: inline-block;vertical-align: middle;width: 100%;height: 34px;line-height: 34px;text-align: center;padding: 0 17px;font-size: 14px;color: #2e2e2e;background-color: #f3f3f5;cursor: default;border-radius: 5px}
 .nav-splitter {position: absolute;z-index: 1;top: 100%;left: 0;width: auto;height: 2px;background-color: #398f93;-webkit-transition-delay: .15s;transition-delay: .15s;-webkit-transition: all .3s;transition: all .3s;border-radius: 25px}
 /*! Кнопки В корзину, избранное, сравнение, быстрый просмотр */
 .product-shop .actions .quickviewmod {max-width: 143px;flex-grow:1;overflow: hidden;position: relative;z-index: 2;border: 2px solid transparent;}
@@ -1002,10 +1005,13 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 /*! Категории на главной ***/
 .nojs #categories-index .item {width: calc(20% - 10px)}
 #categories-index .item {width: 100%;height: 100%}
-#categories-index .owl-stage-outer {overflow: visible}
-#categories-index .owl-stage {display: -webkit-box;display: -ms-flexbox;display: flex}
+/* #categories-index .owl-stage-outer {overflow: visible} */
+/* #categories-index .owl-stage {display: -webkit-box;display: -ms-flexbox;display: flex} */
+#categories-index .owl-item {-webkit-box-flex: 1;-ms-flex: 1 0 auto;flex: 1 0 auto}
 #categories-index .owl-item:hover {position: relative;z-index: 20}
+#categories-index .owl-item:not(.active){ display: none;}
 #categories-index .item .cat-image a img {width: auto;margin: auto}
+.categories.index {display: block;}
 /*! Категории ***/
 .toolbar + .categories {padding-top: 0;margin-bottom: 10px}
 .categories {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;text-align: center}
@@ -1125,7 +1131,7 @@ input.quantity, input.cartqty {display: inline-block;vertical-align: middle;widt
 .clientForm .form-list .fields > label {display: block;margin-bottom: 15px;text-align: left}
 /*! Личный кабинет (Избранное) ***/
 .account.cart-info .buttons .button {margin-right: 11px;margin-bottom:5px;}
-
+.account .favorites-empty{display:none;width:100%;height:38px;line-height:36px;text-align:center;padding:0 10px;margin:0;font-size:13px;border:none;color:#2e2e2e;background-color:#f3f3f5;cursor:default;border-radius:5px}
 /** Платежные системы на странице просмотра заказа **/
 .order-info .title {margin-bottom: 10px;}
 .order-info .paymentQiwi .tr2 .ceil1 {padding: 25px 0 25px;}
