@@ -2508,7 +2508,7 @@
               <!-- Если в тарифном плане подключен модуль фильтров по товарам -->
               {% IF TARIFF_FEATURE_GOODS_FILTERS && SHOW_GOODS_FILTERS %}
               <div class="block filters">
-                <h3 class="title _main"><span class="fal fa-filter"></span> Фильтры</h3>
+                <h3 class="title _main {% FOR filter_attr_list %}{% FOR values %}{% IF filter_attr_list.values.CHECKED %}_active{% ENDIF %}{% ENDFOR %}{% ENDFOR %} {% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %} _active{% ENDIF %}{% ENDFOR %}{% ENDFOR %}"><span class="fal fa-filter"></span> Фильтры</h3>
                 <div class="content">
                   <div class="content-title">Фильтры<button class="content-close-btn"><i class="fal fa-times"></i></button></div>
                   <!-- Форма поиска отправляет всегда на ту же страницу, на которой находится пользователь -->

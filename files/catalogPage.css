@@ -108,10 +108,12 @@
   .col-left .filters {padding-top: 0}
   .filters-price .layout-slider .input {max-width: 125px}
   .filters-price .layout-slider .price-separator {margin: 0 7px}
-  .col-left .filters > .title {color: #fff;background-color:#398f93;padding: 6px 20px;border-radius: 5px;;cursor: pointer}
+  .col-left .filters > .title {position: relative;color: #fff;background-color:#398f93;padding: 6px 20px;border-radius: 5px;;cursor: pointer}
   .col-left .filters > .title .fal {display: inline-block;vertical-align: middle}
+  .col-left .filters > .title._active::before{content:'';display:block;position:absolute;top:5px;left:5px;width:10px;height:10px;background:#f65e64;border-radius:50%}
   .col-left .page-sidebar .filters .content {width: 80%;position: fixed;right: -100%;top: 0;height: 100%;z-index: 50;background: #fff;padding: 15px;-webkit-transition: right .3s cubic-bezier(0,1,.63,1);transition: right .3s cubic-bezier(0,1,.63,1)}
-  #filters-form {overflow-x: auto;height: 100%;padding-right: 10px;padding-left: 10px;padding-bottom: 36px}
+  #filters-form {overflow-x: auto;height: 100%;padding-right: 0px;padding-left: 0px;padding-bottom: 36px}
+  #goods-filter-price-slider.noUi-target {padding: 0 10px;}
   .col-left .page-sidebar .filters .content._active {right: 0}
 }
 @media all and (max-width: 481px) {
