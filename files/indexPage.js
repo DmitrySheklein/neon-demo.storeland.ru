@@ -82,6 +82,9 @@ function indexPage() {
       smartSpeed: 500,
       touchDrag: true,
       pullDrag: true,
+      navContainer: '#categories-index .navigation',
+      navText: [, ],
+      navText: ["<i class='slideshow-nav fal fa-angle-left' aria-hidden='true'></i>", "<i class='slideshow-nav fal fa-angle-right' aria-hidden='true'></i>"],      
       responsiveClass: true,
       responsiveRefreshRate: 100,
       responsive: {

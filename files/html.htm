@@ -758,13 +758,15 @@
     {% IFNOT catalog_full_empty%}
     <div id="categories-index" class="section">
       <div class="container">
-        <div class="section-top-block">
-          <h3 class="section-title">
+        <div class="block-title">
+          <h2 class="title">
             Популярные категории
-          </h3>
+          </h2>
+          <div class="navigation"></div>
+          <!-- 
           <a href="/catalog" class="section-link button">
               Весь каталог
-          </a>
+          </a> -->
         </div>
         <div class="categories index owl-carousel owl-theme">
           {% FOR catalog_full%}
