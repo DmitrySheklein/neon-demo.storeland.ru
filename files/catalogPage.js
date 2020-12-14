@@ -120,8 +120,14 @@ function catalogFunctions(){
       $title.toggleClass('active').next('.layout-slider, .filter-inner').slideToggle();
     });
     
+    $('.block.catalog').on('click', '.title', function(e){
+      e.preventDefault();
+      var $title = $(this);
+      $title.toggleClass('_active');
+      $title.next().toggle();
+    });
     $('.block.filters, .block.viewed').on('click', '.title', function(){
-      if( getClientWidth() <= 991) {
+      if( getClientWidth() <= 991) {        
         var $title = $(this);
         
         $title.next('.content').addClass('_active');

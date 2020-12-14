@@ -17,6 +17,14 @@
 .col-left .block .content {padding: 0;overflow: hidden}
 .col-left .block .content ul {margin: 0;padding: 0;list-style: none;list-style-position: inside}
 .col-left .block.catalog > .title {display: none}
+@media(max-width: 991px){
+  .col-left .block.catalog > .content{display:none}
+  .col-left .block.catalog > .title{display:block;position:relative;padding:6px 20px;margin-bottom:0;border-radius:5px;cursor:pointer;border:1px solid #f2f2f2}
+  .col-left .block.catalog > .title._active{border-bottom:0}
+  .col-left .block.catalog .open-sub{display:block;position:absolute;right:5px;top:5px;padding:5px;background:#f8f8f9;cursor:pointer;font-family:"FontAwesome";font-size:18px;transform:rotate(-90deg)}
+  .col-left .block.catalog > .title._active .open-sub{transform:rotate(0deg)}
+  .col-left .block.catalog .open-sub:before{content:"\f107";display:block;width:16px;height:16px;line-height:16px;text-align:center}
+}
 .col-left .block.catalog {padding: 0;border-radius: 5px;background: #f8f8f9}
 .col-left .block.catalog .content ul li {position: relative;margin-bottom: -1px;}
 .col-left .block.catalog .content ul li:last-child {margin-bottom: 0;}
@@ -190,7 +198,7 @@
   .products-list .item .product-name {max-width: 100%;width: 100%;margin-bottom: 10px;text-align: center}
   .products-list .item .product-name-content {margin-top: 5px;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center}
   .products-list .item [class^=ico]:last-of-type {margin-right: 0}
-  .products-list .item .ratings {margin-left: 10px}
+  .products-list .item .ratings {margin-left: 0px}
   .products-list .item .product-shop {padding-right: 0;max-width: 100%}
   .products-list .item .product-shop .price-box {margin-left: auto;margin-right: auto;margin-bottom: 10px}
   .products-list .item .product-icons {-webkit-box-ordinal-group: 2;-ms-flex-order: 1;order: 1;position: static;margin: 0;-webkit-box-orient: horizontal;-webkit-box-direction: normal;-ms-flex-direction: row;flex-direction: row;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center}
