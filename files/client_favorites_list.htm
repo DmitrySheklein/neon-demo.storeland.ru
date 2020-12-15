@@ -21,7 +21,7 @@
         {% IFNOT favorites_goods_empty %}
           {% FOR favorites_goods %}
             <tr>
-              <td><div class="image"><a title="Перейти на страницу &laquo;{favorites_goods.NAME}&raquo;" href="{favorites_goods.URL}"><img class="goods-image-icon" src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=tourism{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" alt="{favorites_goods.NAME}"></a></div></td>
+              <td><div class="image"><a title="Перейти на страницу &laquo;{favorites_goods.NAME}&raquo;" href="{favorites_goods.URL}"><img class="goods-image-icon" src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" alt="{favorites_goods.NAME}"></a></div></td>
               <td class="name"><a title="Перейти на страницу &laquo;{favorites_goods.NAME}&raquo;" href="{favorites_goods.URL}">{favorites_goods.NAME}</a></td>
               <td width="150">
                 <span class="price {CURRENCY_CHAR_CODE}">{favorites_goods.MIN_PRICE_NOW | money_format}</span>

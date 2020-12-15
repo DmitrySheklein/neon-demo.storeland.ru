@@ -28,7 +28,7 @@
       <tbody>
         {% FOR cart_items %}
           <tr class="items" data-id="{cart_items.GOODS_MOD_ID}">
-            <td class="image"><a href="{cart_items.GOODS_URL}"><img class="goods-image-other" src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=techno{% ELSE %}{cart_items.GOODS_IMAGE_OTHER}{% ENDIF %}"></a></td> 
+            <td class="image"><a href="{cart_items.GOODS_URL}"><img class="goods-image-other" src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=neon{% ELSE %}{cart_items.GOODS_IMAGE_OTHER}{% ENDIF %}"></a></td> 
             <td class="name"> 
               <a href="{cart_items.GOODS_URL}">{cart_items.GOODS_NAME}</a>
               <!-- Если у товара есть отличительные свойства для модификации товара, допишем их к названию товара -->
@@ -246,7 +246,7 @@
                     </div>
                     <a href="{cart_related_goods.URL_MIN_PRICE_NOW | url_amp}"  class="product-img mouseHoverImgCarousel">
                       {% IF cart_related_goods.IMAGE_EMPTY %}
-                      <img class="lozad" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=assorti" alt="{cart_related_goods.NAME}" title="{cart_related_goods.NAME}"  itemprop="image">
+                      <img class="lozad" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=neon" alt="{cart_related_goods.NAME}" title="{cart_related_goods.NAME}"  itemprop="image">
                       {% ELSE %}
                         <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif"  data-src="{cart_related_goods.IMAGE_MEDIUM}" alt="{cart_related_goods.NAME}" title="{cart_related_goods.NAME}"  itemprop="image">
                         {% FOR images %}

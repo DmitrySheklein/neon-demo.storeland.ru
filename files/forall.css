@@ -88,7 +88,7 @@ body.compensate-for-scrollbar{overflow:hidden}.fancybox-active{height:auto}.fanc
 .rating-box .rating:before {display: none;font-family: "FontAwesome";content: "\f005\20\f005\20\f005\20\f005\20\f005";width: 95px;height: 14px;line-height: 14px;font-size: 14px;color: rgb(0 0 0 / 0);}
 .rating-cancel, .star-rating {display:block;float:left;width:16px;height:14px;text-indent:-999em;cursor:pointer;background:transparent;overflow:hidden}
 .rating-cancel, .rating-cancel a {background:url('{FORALL_STYLES_PATH}jquery-ui-stars/4.11/delete.gif') no-repeat 0 -16px}
-.star-rating, .star-rating a {background:url('{ASSETS_IMAGES_PATH}bkg_rating.png?design=tourism') repeat-x scroll 0 100% transparent}
+.star-rating, .star-rating a {background:url('{ASSETS_IMAGES_PATH}bkg_rating.png?design=neon') repeat-x scroll 0 100% transparent}
 .rating-cancel a, .star-rating a {display:block;width:14px;height:100%;background-position:0 0px;border:0;transition: none}
 .star-rating-on a {background-position:0 100%;}
 .star-rating-hover a {background-position:0 100%;}
