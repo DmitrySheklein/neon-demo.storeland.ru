@@ -946,7 +946,7 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
 .products-grid .item .product-shop {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1}
 .products-grid .item .product-shop .actions {margin-top: auto}
 .products-grid .item .product-shop .actions .qty-wrap {flex-shrink: 0;}
-.products-grid .item.empty .product-shop .actions .empty {display: inline-block;vertical-align: middle;width: 100%;height: 34px;line-height: 34px;text-align: center;padding: 0 17px;font-size: 14px;color: #2e2e2e;background-color: #f3f3f5;cursor: default;border-radius: 5px}
+.products-grid .item.empty .product-shop .actions .empty {display: inline-block;vertical-align: middle;width: 100%;height: 34px;line-height: 34px;text-align: center;padding: 0;font-size: 14px;color: #2e2e2e;background-color: #f3f3f5;cursor: default;border-radius: 5px}
 @media(max-width: 481px){
   .products-grid .item.empty .product-shop .actions .empty {padding: 0;}
 }
