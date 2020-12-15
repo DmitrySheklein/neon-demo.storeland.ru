@@ -49,6 +49,8 @@ function startOrder() {
   $('#page-title .title-tab.disabled').prop('disabled', true)
   // Блок "С этим товаром покупают"
   var $goodsCartRealted = $('.сart-related');
+  // Блок "Вы смотрели"
+  var $goodsViewed = $('#viewed');
   // Отключаем возможность редактирования формы
   var cartTable = $('.cartTable');
   // открываем общий, глобальный блок
@@ -72,6 +74,7 @@ function startOrder() {
       // Включаем возможность клика по неактивной кнопке
       $('#page-title .title-tab.disabled').prop('disabled', false)
       $goodsCartRealted.hide();
+      $goodsViewed.hide();
       // скрываем блок с анимацией
       ajaxLoaderQuickOrder.hide();
       globalOrder.removeClass('loading')
@@ -95,6 +98,7 @@ function startOrder() {
         }
         $('.wrapper').removeClass('_overflow');
         $goodsCartRealted.show();
+        $goodsViewed.show();
         //Скрываем блок оформления заказа
         ajaxLoaderQuickOrder.hide();
         OrderAjaxBlock.hide();
