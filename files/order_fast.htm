@@ -93,7 +93,13 @@
                 <div class="currentDeliveryDesc">
                   <div class="currentDeliveryPrice changer">
                     Стоимость доставки:
-                    <span class="orderStageDeliveryZonePrice"><span class="changeprice"></span> {CURRENCY_NAME}</span>
+                    <span class="orderStageDeliveryZonePrice">
+                      <span class="price {CURRENCY_CHAR_CODE}">
+                        <span>
+                          <span class="num changeprice"></span>
+                          <span>{CURRENCY_NAME}</span>
+                        </span>
+                    </span>
                   </div>
                   <div class="currentDeliveryDescription"></div>
                 </div>

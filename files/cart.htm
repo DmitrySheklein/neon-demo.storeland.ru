@@ -71,7 +71,7 @@
               <span class="title" data-name="{cart_discount.DISCOUNT_NAME}">Скидка:</span>
             </td>
             <td colspan="2" class="text-right">
-              <span class="price">{% IF cart_discount.IS_PERCENT %}{cart_discount.DISCOUNT_VALUE}%{% ELSE %}{cart_discount.DISCOUNT_VALUE | money_format}{% ENDIF %}</span>
+              <span class="price {CURRENCY_CHAR_CODE}">{% IF cart_discount.IS_PERCENT %}{cart_discount.DISCOUNT_VALUE}%{% ELSE %}{cart_discount.DISCOUNT_VALUE | money_format}{% ENDIF %}</span>
             </td>
           </tr>
         {% ENDIF %}
@@ -83,7 +83,7 @@
           </td>
           <td colspan="2" class="text-right">
             <span class="TotalSum">
-              <span class="price">
+              <span class="price {CURRENCY_CHAR_CODE}">
                 {% FOR cart_sum %}
                   {cart_sum.NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}
                 {% ENDFOR %}

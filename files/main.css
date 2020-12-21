@@ -163,6 +163,7 @@ label.invalidInput {color: #E80636;font-size: 90%;}
 .table-box.table-striped tr:nth-child(odd) {background-color: #f1f1f1}
 .table-box.table-striped td:first-child {border-right: 1px solid #dce4e9}
 .table-box.table-striped td {border: none;padding: 8px 15px;word-wrap: break-word;font-size: 14px}
+.table-box .price-excl-tax {white-space: nowrap;}
 /*! Настройки максимальных размеров генерируемых изображений */
 .goods-image-icon {max-width:{SETTINGS_GOODS_IMAGES_SIZE_ICON | divide("2")}px; max-height:{SETTINGS_GOODS_IMAGES_SIZE_ICON | divide("2")}px;} 
 .goods-image-icon-square {width:{SETTINGS_GOODS_IMAGES_SIZE_ICON}px;height:{SETTINGS_GOODS_IMAGES_SIZE_ICON}px;} 
