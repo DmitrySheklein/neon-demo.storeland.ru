@@ -94,8 +94,20 @@ function indexPage() {
         480:{items:2,margin: 10},
         991:{items:3,margin: 10},
         1200:{items:5,margin: 10}
+      },
+      onInitialized: changeNavBtn
+    }); 
+    function changeNavBtn(event){
+      var items = event.item.count;
+      var size = event.page.size;
+      var $nav = $(event.target).siblings('.block-title').find('.navigation');
+      
+      if (items > size){
+        $nav.show();
+      } else {
+        $nav.hide();
       }
-    });  
+    }     
     // Товары на главной
     if(goodsIndexTemplateView === 'tabs'){
       (function(element){
