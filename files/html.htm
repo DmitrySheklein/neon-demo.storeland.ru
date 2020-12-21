@@ -788,6 +788,7 @@
     
     <!-- Товары на главной, Новинки, Хиты -->
     <!-- Чтобы переключить вид с табов на карусель поменяйте 1 на 0 -->
+    <script>var goodsIndexTemplateView = '';</script>
     {% IF CAROUSEL_VIEW = 1 %}
       {% IF index_page_goods_empty=0 || index_page_new_goods_empty=0 || index_page_favorites_goods_empty=0  || index_page_sale_goods_empty=0 %}
         <script>var goodsIndexTemplateView = 'carousel';</script>
