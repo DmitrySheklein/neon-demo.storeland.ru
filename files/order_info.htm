@@ -14,7 +14,9 @@
       <tr>
         <td class="cell1"><span>Сумма заказа:</span></td>
         <td class="cell2">
-          {ORDER_SUM | money}
+          <span class="price {CURRENCY_CHAR_CODE}">
+            {ORDER_SUM | money}
+          </span>
           {% IF ORDER_SUM_WITHOUT_DISCONT != ORDER_SUM %}
             <br /><span style="color:#888888;"><s>{ORDER_SUM_WITHOUT_DISCONT | money("i")}</s> без учета скидки</span>
           {% ENDIF %}
