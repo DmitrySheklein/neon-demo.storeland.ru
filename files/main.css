@@ -624,19 +624,19 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   .header-catalogLink {position: relative;padding: 15px;padding-right: 44px;font-size: 15px;color: #2a3034;}
 }
 @media (min-width: 992px) {  
-  .header-subcatalogCol .header-subcatalogList,
-  .header-subcatalogItem + .header-subcatalogItem {margin-top: 10px}
+  .header-catalogMenu .sub {position:absolute;top:0;left:100%;padding:0;background-color:#fff;transition:transform .25s,-webkit-transform .25s;box-shadow:0 5px 40px rgba(61,77,95,.25);opacity: 0;visibility: hidden;}
   .header-catalogMenu .header-subcatalog {min-width: 208px;display: block!important;position: absolute;top: 0;left: 100%;padding: 0;background-color: #fff;opacity: 0;visibility: hidden;-webkit-transform: translate(-.5rem,0);transform: translate(-.5rem,0);-webkit-box-shadow: 0 5px 40px rgba(61,77,95,.25);box-shadow: 0 5px 40px rgba(61,77,95,.25);-webkit-transition: -webkit-transform .25s;transition: -webkit-transform .25s;transition: transform .25s;transition: transform .25s,-webkit-transform .25s}
   .header-subcatalog._visible {opacity: 1;visibility: visible;-webkit-transform: translate(0,0);transform: translate(0,0)}  
   .header-subcatalogBanner {float: right;width: 300px}
   .header-subcatalogGrid {margin-right: 300px}
   .header-subcatalogCol {margin-bottom: 0;padding-right: 0}
-  .header-catalogMenu {z-index: 1;width: 100%;-webkit-transform: translateY(0);transform: translateY(0);-webkit-transition: all .15s ease-in-out;transition: all .15s ease-in-out}
+  .header-catalogMenu {z-index: 1;width: auto;max-width:130%;-webkit-transform: translateY(0);transform: translateY(0);-webkit-transition: all .15s ease-in-out;transition: all .15s ease-in-out}
   .header-catalogMenu._visible:before {content: '';display: block;height: calc(100% + 50px);width: 100%;background: #ffffff08;position: absolute;bottom: 0;-webkit-box-shadow: 0 5px 40px rgb(61 77 95 / 15%);box-shadow: 0 5px 40px rgb(61 77 95 / 15%)}
   .header-catalogMenu,
   .header-loginFlyout {position: absolute;opacity: 0;visibility: hidden}
   .header-catalogMenu._visible {opacity: 1;visibility: visible;-webkit-transform: translateY(0);transform: translateY(0)}
   .header-catalogItem .header-secondArrow {-webkit-transform: rotate(-90deg);transform: rotate(-90deg);margin-left: auto}
+  .header-catalogItem .header-arrow {margin-left: 10px;}
   .header-catalogItem {position: relative}
   .header-catalogItem:hover .header-catalogArrow {color: #398f93;-webkit-transform: translateX(.3rem) rotate(-90deg);transform: translateX(.3rem) rotate(-90deg)}
   .header-subcatalog {width: auto}
@@ -645,7 +645,8 @@ a, .button, .button:hover, .remove, .navigation .prev, .navigation .next, .pages
   .header-catalogLink {line-height: 1.3;padding: 11px 20px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: justify;-ms-flex-pack: justify;justify-content: space-between}
   .header-subcatalogLink {display: block;padding: 11px 20px;white-space: nowrap;font-size: 15px;line-height: 1.3;color: #2a3034}
   .header-catalogMenu .header-subcatalog-third {list-style: none;padding: 0;margin: 0;display: block!important;position: absolute;top: 0;left: 100%;padding: 0;background-color: #fff;opacity: 0;visibility: hidden;-webkit-transform: translate(-.5rem,0);transform: translate(-.5rem,0);-webkit-box-shadow: 0 5px 40px rgba(61,77,95,.25);box-shadow: 0 5px 40px rgba(61,77,95,.25);-webkit-transition: -webkit-transform .25s;transition: -webkit-transform .25s;transition: transform .25s;transition: transform .25s,-webkit-transform .25s}
-  .header-catalogMenu .header-subcatalog-third .sub li {padding: 5px 0}
+  .header-catalogMenu .header-subcatalog-third li {padding: 0;position: relative}
+  .header-catalogMenu .header-subcatalog-third li.parent:hover > .sub{opacity:1;visibility:visible}
 }
 
 /*! Пункты меню*/
