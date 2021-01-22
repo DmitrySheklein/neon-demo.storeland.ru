@@ -120,7 +120,7 @@ function startOrder() {
 
 // Разделение поле адрес на Улица, Дом, Квартира
 function address() {
-  $('#quickform .button').on('click', function () {
+  $('#quickform').on('submit', function () {
     var $quickDeliveryAddress = $('#quickDeliveryAddress'),
       quickDeliveryAddressStreetValue = $('#quickDeliveryAddressStreet').val(),
       quickDeliveryAddressHomeValue = $('#quickDeliveryAddressHome').val(),
@@ -135,7 +135,7 @@ function address() {
         $quickDeliveryAddress.val(null);
       }
       $quickDeliveryAddress.val('Улица: ' + quickDeliveryAddressStreetValue + ', Дом/Корпус: ' + quickDeliveryAddressHomeValue + ', Квартира: ' + quickDeliveryAddressFlatValue);
-      $(this).submit();
+      
       return false;
     }
   });
@@ -696,7 +696,7 @@ function quickOrderScripts() {
 
 
     // Валидация формы на странице оформления заказа
-    $("#quickform").off('submit').on('submit', function () {
+    $("#quickform").on('submit', function () {
       // Если форма невалидна не отправляем её на сервер
       if (!$(this).valid()) {
         return false;
